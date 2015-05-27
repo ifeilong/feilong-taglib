@@ -17,7 +17,7 @@
 //
 //import org.w3c.dom.Node;
 //
-//import com.feilong.commons.core.xml.javaxXml.XmlConfigure;
+//import com.feilong.core.xml.javaxXml.XmlConfigure;
 //
 ///**
 // * 面包屑配置

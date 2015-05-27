@@ -17,9 +17,9 @@
 //
 //import javax.servlet.ServletContext;
 //
-//import com.feilong.commons.core.net.URIUtil;
-//import com.feilong.commons.core.util.Validator;
-//import com.feilong.commons.core.xml.javaxXml.XmlConfigure;
+//import com.feilong.core.net.URIUtil;
+//import com.feilong.core.util.Validator;
+//import com.feilong.core.xml.javaxXml.XmlConfigure;
 //
 ///**
 // * 模仿 asp.net 读取配置文件 web.cfg.xml

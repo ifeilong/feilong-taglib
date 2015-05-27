@@ -32,7 +32,7 @@
 	<category name="com.feilong.taglib.display.pager.PagerUtil">
 		<priority value="info" />
 	</category>
-	<category name="com.feilong.commons.core.net.URIUtil">
+	<category name="com.feilong.core.net.URIUtil">
 		<priority value="info" />
 	</category>
 

@@ -35,7 +35,7 @@
 	<category name="com.feilong.taglib.display.httpconcat.HttpConcatUtil">
 		<priority value="warn" />
 	</category>
-	<category name="com.feilong.commons.core.net.URIUtil">
+	<category name="com.feilong.core.net.URIUtil">
 		<priority value="info" />
 	</category>
 
