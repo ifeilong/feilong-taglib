@@ -52,21 +52,15 @@ public abstract class BaseHttpConcatTest{
         httpConcatParam1.setRoot("/js" + i + "/");
         httpConcatParam1.setHttpConcatSupport(true);
         List<String> itemSrcList = new ArrayList<String>();
-        itemSrcList.add("public/js/jquery-1.9.1.js");
         itemSrcList.add("public/js/common.js");
 
         itemSrcList.add("public/js/jquery.lazyload.min.js");
         itemSrcList.add("marketplace/js/item/searchItem.js");
-        itemSrcList.add("public/js/jquery-ui-1.10.3.custom.js");
-        itemSrcList.add("public/js/jquery-migrate-1.2.0.js");
-        itemSrcList.add("public/js/loxia2/jquery.loxiacore-2.js");
         itemSrcList.add("public/js/loxia2/jquery.loxia.locale_${request.getAttribute('locale')}.js");
-        itemSrcList.add("public/components/handlebars/js/handlebars-v1.1.2.js");
         itemSrcList.add("marketplace/js/marketplace.js");
         itemSrcList.add("public/js/ajax.extend.js");
 
         itemSrcList.add("public/js/jquery.jqzoom-core.js");
-        itemSrcList.add("public/js/jquery.json-2.4.js");
         itemSrcList.add("marketplace/js/item/memberFavorite.js");
         itemSrcList.add("marketplace/js/buyNow/addShoppingCart.js");
         itemSrcList.add("marketplace/messages/messageDetail_in_ID.js");
