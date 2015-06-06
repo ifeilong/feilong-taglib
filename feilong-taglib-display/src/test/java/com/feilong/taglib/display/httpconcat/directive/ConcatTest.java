@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.httpconcat.directive;
 
+import java.util.Map;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +41,8 @@ public class ConcatTest{
     @Test
     public void parseVMTemplateWithClasspathResourceLoader(){
         String templateInClassPath = "velocity/concat.vm";
-        String parseVMTemplate = VelocityUtil.parseTemplateWithClasspathResourceLoader(templateInClassPath, null);
+        Map<String, Object> map = null;
+        String parseVMTemplate = VelocityUtil.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
         log.info(parseVMTemplate);
     }
 }
