@@ -23,13 +23,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.configure.ResourceBundleUtil;
-import com.feilong.core.entity.JoinStringEntity;
 import com.feilong.core.log.Slf4jUtil;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.core.tools.json.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.core.util.ListUtil;
 import com.feilong.core.util.StringUtil;
+import com.feilong.core.util.ToStringConfig;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.directive.Concat;
@@ -303,7 +302,7 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
 
         // 去重,元素不重复
-        List<String> noRepeatitemList = ListUtil.removeDuplicate(itemSrcList);
+        List<String> noRepeatitemList = CollectionsUtil.removeDuplicate(itemSrcList);
 
         //**************************************************************
         if (Validator.isNullOrEmpty(noRepeatitemList)){
@@ -385,8 +384,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         }else{
             sb.append("??");
 
-            JoinStringEntity joinStringEntity = new JoinStringEntity(JoinStringEntity.DEFAULT_CONNECTOR);
-            sb.append(CollectionsUtil.toString(itemSrcList, joinStringEntity));
+            ToStringConfig toStringConfig = new ToStringConfig(ToStringConfig.DEFAULT_CONNECTOR);
+            sb.append(CollectionsUtil.toString(itemSrcList, toStringConfig));
         }
         appendVersion(version, sb);
 

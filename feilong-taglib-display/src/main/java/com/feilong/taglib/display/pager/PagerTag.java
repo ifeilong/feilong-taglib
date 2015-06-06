@@ -19,10 +19,10 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.core.entity.Pager;
 import com.feilong.core.io.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
