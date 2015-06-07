@@ -17,7 +17,6 @@ package com.feilong.taglib.display.httpconcat;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -72,7 +71,7 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             //			if (log.isInfoEnabled()){
             //				log.info("" + start);
             //			}
-            Map<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
+            HashMap<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
 
             for (int i = 0; i < j; i++){
 
