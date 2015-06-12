@@ -21,7 +21,7 @@ import java.util.List;
 import javax.servlet.jsp.JspException;
 
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -40,7 +40,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @deprecated 待整理
  */
 @Deprecated
-public class HttpConcatTag extends AbstractCommonTag{
+public class HttpConcatTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3447592871482978718L;

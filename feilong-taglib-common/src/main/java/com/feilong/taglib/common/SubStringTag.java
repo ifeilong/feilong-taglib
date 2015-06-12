@@ -16,14 +16,14 @@
 package com.feilong.taglib.common;
 
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 
 /**
  * 截取页面显示内容,超过长度用省略号表示.
  * 
  * @author 金鑫2009-9-29上午10:56:56
  */
-public class SubStringTag extends AbstractCommonTag{
+public class SubStringTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;

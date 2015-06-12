@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.Validator;
 import com.feilong.servlet.http.RequestUtil;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 import com.feilong.tools.velocity.VelocityUtil;
 
 /**
@@ -36,7 +36,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * 
  * @author 金鑫 2010-6-8 上午05:50:38
  */
-public class BreadCrumbTag extends AbstractCommonTag{
+public class BreadCrumbTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -8596553099620845748L;

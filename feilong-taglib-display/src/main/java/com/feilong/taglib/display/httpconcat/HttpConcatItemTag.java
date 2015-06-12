@@ -16,7 +16,7 @@
 package com.feilong.taglib.display.httpconcat;
 
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 
 /**
  * Tengine用的src.
@@ -26,7 +26,7 @@ import com.feilong.taglib.base.AbstractCommonTag;
  * @deprecated 待整理
  */
 @Deprecated
-public class HttpConcatItemTag extends AbstractCommonTag{
+public class HttpConcatItemTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4587653933261044593L;

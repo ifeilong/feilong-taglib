@@ -20,14 +20,14 @@ import java.util.Date;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 
 /**
  * 日期转换成中国特色日期.
  * 
  * @author 金鑫 2009-9-7上午11:49:48
  */
-public class ChineseTimeTag extends AbstractCommonTag{
+public class ChineseTimeTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;

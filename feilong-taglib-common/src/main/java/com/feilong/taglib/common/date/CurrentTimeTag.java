@@ -18,14 +18,14 @@ package com.feilong.taglib.common.date;
 import java.util.Date;
 
 import com.feilong.core.date.DateUtil;
-import com.feilong.taglib.base.AbstractCommonTag;
+import com.feilong.taglib.base.AbstractWriteContentTag;
 
 /**
  * 显示当前时间.
  *
  * @author 金鑫 2010-4-13 下午09:17:10
  */
-public class CurrentTimeTag extends AbstractCommonTag{
+public class CurrentTimeTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;

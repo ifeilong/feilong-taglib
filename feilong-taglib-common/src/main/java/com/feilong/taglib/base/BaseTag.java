@@ -23,27 +23,51 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.tagext.TagSupport;
 
 import com.feilong.core.io.UncheckedIOException;
 
 /**
- * 飞龙自定义标签的父类,所有飞龙自定义标签的基类,包含通用的方法.
+ * 自定义标签的父类,所有自定义标签的基类,包含通用的方法.
+ * 
+ * <h3>可以使用的方法:</h3>
+ * 
+ * <blockquote>
  * <ul>
- * <li>EVAL_BODY_AGAIN 对标签体循环处理</li>
- * <li>EVAL_PAGE (6)：处理标签后，继续处理JSP后面的内容</li>
- * <li>SKIP_PAGE(5)： 忽略标签后面的JSP内容</li>
- * <li>EVAL_BODY_BUFFERED(2) 表示需要处理标签体</li>
- * <li>EVAL_BODY_INCLUDE(1)将body的内容输出到存在的输出流中 表示需要处理标签体,但绕过setBodyContent()和doInitBody()方法</li>
- * <li>SKIP_BODY (0) ： 表示不用处理标签体，直接调用doEndTag()方法 跳过了开始和结束标签之间的代码。</li>
+ * <li>{@link #getHttpServletRequest()}</li>
+ * <li>{@link #getHttpServletResponse()}</li>
+ * <li>{@link #getHttpSession()}</li>
+ * <li>{@link #print(Object)}</li>
+ * <li>{@link #println(Object)}</li>
  * </ul>
- * TagSupport与BodyTagSupport的区别主要是标签处理类是否需要与标签体交互， <br>
- * 如果不需要交互的就用TagSupport，否则如果不需要交互就用BodyTagSupport。 <br>
+ * </blockquote>
+ * 
+ * <h3>关于Return Code:</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link javax.servlet.jsp.tagext.IterationTag#EVAL_BODY_AGAIN EVAL_BODY_AGAIN} 对标签体循环处理</li>
+ * <li>{@link javax.servlet.jsp.tagext.BodyTag#EVAL_BODY_BUFFERED EVAL_BODY_BUFFERED}(2) 表示需要处理标签体</li>
+ * <li>{@link javax.servlet.jsp.tagext.Tag#EVAL_PAGE EVAL_PAGE} (6)：处理标签后，继续处理JSP后面的内容</li>
+ * <li>{@link javax.servlet.jsp.tagext.Tag#SKIP_PAGE SKIP_PAGE}(5)： 忽略标签后面的JSP内容</li>
+ * <li>{@link javax.servlet.jsp.tagext.Tag#EVAL_BODY_INCLUDE EVAL_BODY_INCLUDE}(1)将body的内容输出到存在的输出流中
+ * 表示需要处理标签体,但绕过setBodyContent()和doInitBody()方法</li>
+ * <li>{@link javax.servlet.jsp.tagext.Tag#SKIP_BODY SKIP_BODY} (0) ： 表示不用处理标签体，直接调用doEndTag()方法 跳过了开始和结束标签之间的代码。</li>
+ * </ul>
+ * </blockquote>
+ * 
+ * <p>
+ * {@link TagSupport}与{@link BodyTagSupport}的区别,主要是标签处理类是否需要与标签体交互， 如果不需要交互的就用{@link TagSupport}，否则如果需要交互就用{@link BodyTagSupport}。 <br>
  * 交互就是标签处理类是否要读取标签体的内容和改变标签体返回的内容。<br>
- * <br>
- * 用TagSupport实现的标签，都可以用BodyTagSupport来实现，因为BodyTagSupport继承了TagSupport.
+ * </p>
+ * {@link BodyTagSupport}继承了{@link TagSupport}.
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
- * @version 1.0 2012-3-13 01:46
+ * @version 1.0.0 2012-3-13 01:46
+ * @version 1.2.1 2015-6-12 15:38
+ * @see javax.servlet.jsp.tagext.BodyTagSupport
+ * @see javax.servlet.jsp.tagext.TagSupport
+ * @since 1.0.0
  */
 public abstract class BaseTag extends BodyTagSupport{
 
@@ -53,8 +77,6 @@ public abstract class BaseTag extends BodyTagSupport{
     /**
      * 将文字输出到页面.
      *
-     * @author 金鑫
-     * @version 1.0 2010-5-5 下午03:27:25
      * @param object
      *            the object
      * @throws UncheckedIOException
@@ -72,8 +94,6 @@ public abstract class BaseTag extends BodyTagSupport{
     /**
      * 将文字输出到页面.
      *
-     * @author 金鑫
-     * @version 1.0 2010-5-5 下午03:53:12
      * @param object
      *            the object
      * @throws UncheckedIOException
@@ -88,20 +108,9 @@ public abstract class BaseTag extends BodyTagSupport{
         }
     }
 
-    // /**
-    // * 标签结束 javax.servlet.jsp.tagext.TagSupport.doEndTag() 默认 EVAL_PAGE
-    // */
-    // @Override
-    // public int doEndTag(){
-    // return EVAL_PAGE;// 处理标签后，继续处理JSP后面的内容
-    // }
-
-    // [start] 公用方法
     /**
      * 获得HttpServletRequest.
      *
-     * @author 金鑫
-     * @version 1.0 2010-2-3 下午01:59:09
      * @return the http servlet request
      */
     protected final HttpServletRequest getHttpServletRequest(){
@@ -111,7 +120,6 @@ public abstract class BaseTag extends BodyTagSupport{
     /**
      * 获得ServletRequest.
      *
-     * @version 1.0 2010-2-3 下午01:58:55
      * @return the servlet request
      */
     protected final ServletRequest getServletRequest(){
@@ -121,8 +129,6 @@ public abstract class BaseTag extends BodyTagSupport{
     /**
      * 获得 HttpSession.
      *
-     * @author 金鑫
-     * @version 1.0 2010-3-18 上午11:04:27
      * @return HttpSession
      */
     protected final HttpSession getHttpSession(){
@@ -132,12 +138,9 @@ public abstract class BaseTag extends BodyTagSupport{
     /**
      * 获得HttpServletResponse.
      *
-     * @author 金鑫
-     * @version 1.0 2010-3-15 下午06:25:18
      * @return the http servlet response
      */
     protected final HttpServletResponse getHttpServletResponse(){
         return (HttpServletResponse) pageContext.getResponse();
     }
-    // [end]
 }

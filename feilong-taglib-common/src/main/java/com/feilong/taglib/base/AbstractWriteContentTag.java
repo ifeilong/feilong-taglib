@@ -16,20 +16,19 @@
 package com.feilong.taglib.base;
 
 /**
- * 条件父类标签,需要条件控制的 例如logic equal请使用这个.
- * <p>
- * 用法:简单条件标签,仅需实现condition()方法即可.
- * </p>
+ * 输出内容的标签.
  *
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
- * @version 1.0.1 2009-11-7下午05:39:08
- * @version 1.2.1 2015年6月12日 下午5:03:38
- * @since 1.0.1
+ * @version 1.0.0 2009-5-2下午05:20:22
+ * @version 1.0.3 2012-3-13 上午1:59:22
+ * @version 1.2.1 2015年6月12日 下午3:33:05
+ * @see com.feilong.taglib.base.BaseTag
+ * @since 1.0.0
  */
-public abstract class AbstractConditionalTag extends BaseTag{
+public abstract class AbstractWriteContentTag extends BaseTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -7583054141845571177L;
+    private static final long serialVersionUID = 8215127553271356734L;
 
     /**
      * 标签开始.
@@ -38,16 +37,19 @@ public abstract class AbstractConditionalTag extends BaseTag{
      */
     @Override
     public int doStartTag(){
-        if (condition()){
-            return EVAL_BODY_INCLUDE;
-        }
+        // 开始执行的部分
+        print(this.writeContent());
+        // 开始:跳过了开始和结束标签之间的代码。
         return SKIP_BODY;
     }
 
+    // *******************************************************************
     /**
-     * 自定义条件.
+     * 标签体内容.
      *
-     * @return 条件满足,返回true,页面会EVAL_BODY_INCLUDE,否则SKIP_BODY
+     * @author 金鑫
+     * @version 1.0 2010-5-27 下午11:50:40
+     * @return the object
      */
-    protected abstract boolean condition();
+    protected abstract Object writeContent();
 }
