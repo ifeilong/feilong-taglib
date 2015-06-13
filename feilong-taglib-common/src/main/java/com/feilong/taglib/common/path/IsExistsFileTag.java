@@ -26,7 +26,9 @@ import com.feilong.taglib.base.AbstractConditionalTag;
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2011-7-4 下午01:58:31
  * @since 1.0
+ * @deprecated will optimization
  */
+@Deprecated
 public class IsExistsFileTag extends AbstractConditionalTag{
 
     /** The Constant serialVersionUID. */

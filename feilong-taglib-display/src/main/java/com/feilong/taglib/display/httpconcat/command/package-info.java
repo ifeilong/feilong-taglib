@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- *包含一些bean
+ *包含一些bean.
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a> 
  * @version 1.0 2014年5月5日 上午11:52:04  
  */

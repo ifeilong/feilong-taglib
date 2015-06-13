@@ -25,15 +25,22 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
- * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式<br>
+ * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.<br>
  * <br>
+ * <p>
  * 作用:遵循Yahoo!前端优化准则第一条：减少HTTP请求发送次数<br>
  * 这一功能可以组合Javascript 以及 Css文件<br>
- * 使用方法:<br>
- * a)以两个问号(??)激活combo<br>
- * b)多文件之间用半角逗号(,)分开<br>
- * c)用一个?来便是时间戳<br>
- * .
+ * </p>
+ * 
+ * <h3>使用方法:</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>以两个问号(??)激活combo</li>
+ * <li>多文件之间用半角逗号(,)分开</li>
+ * <li>用一个?来便是时间戳</li>
+ * </ul>
+ * </blockquote>
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0 2014年5月4日 下午11:45:20
@@ -52,7 +59,7 @@ public class HttpConcatTag extends AbstractWriteContentTag{
     private String            version;
 
     /**
-     * 根目录<br>
+     * 根目录.<br>
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
      */
     private String            root;
@@ -171,5 +178,4 @@ public class HttpConcatTag extends AbstractWriteContentTag{
     public void setDomain(String domain){
         this.domain = domain;
     }
-
 }

@@ -24,7 +24,9 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
  * 显示当前时间.
  *
  * @author 金鑫 2010-4-13 下午09:17:10
+ * @deprecated will optimization
  */
+@Deprecated
 public class CurrentTimeTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */

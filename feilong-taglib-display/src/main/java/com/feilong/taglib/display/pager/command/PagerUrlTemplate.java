@@ -22,7 +22,7 @@ import java.io.Serializable;
  * 
  * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
  * @version 1.0.5 2014年5月7日 下午1:01:31 模板链接单独配置
- * @since 1.0.6
+ * @since 1.0.5
  */
 public class PagerUrlTemplate implements Serializable{
 

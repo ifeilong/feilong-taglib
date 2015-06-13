@@ -44,8 +44,6 @@ import com.feilong.tools.security.oneway.MD5Util;
  * 
  * <h3>全局合并开关</h3>
  * 
- * 
- * 
  * @author <a href="mailto:venusdrogon@163.com">feilong</a>
  * @version 1.0.7 2014年5月19日 下午2:50:43
  * @see HttpConcatTag
