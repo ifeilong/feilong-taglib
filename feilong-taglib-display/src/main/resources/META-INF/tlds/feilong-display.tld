@@ -75,7 +75,7 @@
 		<!-- optional -->
 		<attribute>
 			<name>pageSize</name>
-			<required>true</required>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>每一页显示多少个数据,默认20</description>
 		</attribute>
