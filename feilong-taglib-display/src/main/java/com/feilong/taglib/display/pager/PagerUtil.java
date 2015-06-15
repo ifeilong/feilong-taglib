@@ -523,7 +523,7 @@ public final class PagerUtil{
      * @since 1.0.0
      */
     private static final int[] getStartAndEndIteratorIndexs(int allPageNo,int currentPageNo,PagerParams pagerParams){
-        int maxIndexPages = pagerParams.getMaxIndexPages();
+        Integer maxIndexPages = pagerParams.getMaxIndexPages();
 
         // 最多显示多少个导航页码
         maxIndexPages = getAutoMaxIndexPages(allPageNo, maxIndexPages);
