@@ -210,7 +210,7 @@ public final class PagerUtil{
                 if (log.isDebugEnabled()){
                     log.debug("vmParamMap,will use for parse: {}:{}", vmPath, JsonUtil.format(vmParamMap));
                 }
-                String content = VelocityUtil.parseTemplateWithClasspathResourceLoader(vmPath, vmParamMap);
+                String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(vmPath, vmParamMap);
 
                 //********************设置cache***********************************************
                 if (cacheEnable){

@@ -78,7 +78,7 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
             contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
             contextKeyValues.put("connector", connector);
             contextKeyValues.put("request", request);
-            String siteMapString = VelocityUtil.parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
+            String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
 
             log.debug("siteMapString is:{}", siteMapString);
             if (Validator.isNullOrEmpty(siteMapString)){

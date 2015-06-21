@@ -42,7 +42,7 @@ public class ConcatTest{
     public void parseVMTemplateWithClasspathResourceLoader(){
         String templateInClassPath = "velocity/concat.vm";
         Map<String, Object> map = null;
-        String parseVMTemplate = VelocityUtil.parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
+        String parseVMTemplate = new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
         log.info(parseVMTemplate);
     }
 }

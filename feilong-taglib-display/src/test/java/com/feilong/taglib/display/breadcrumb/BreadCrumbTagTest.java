@@ -103,7 +103,7 @@ public class BreadCrumbTagTest{
         Map<String, Object> contextKeyValues = new HashMap<String, Object>();
         contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         contextKeyValues.put("connector", ">");
-        String siteMapString = VelocityUtil.parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
+        String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
         log.info(siteMapString);
     }
 }
