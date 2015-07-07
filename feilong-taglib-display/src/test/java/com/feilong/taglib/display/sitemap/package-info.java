@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
  但是，我们会使用Sitemap中的数据来了解网站的结构等信息，这样可以帮助我们改进抓取策略，并在日后能更好地对网站进行抓取。
 
  此外，Sitemap 与搜索排名没有关系。 
- * @author <a href="mailto:venusdrogon@163.com">feilong</a> 
+ * @author feilong 
  * @version 1.0.8 2014年7月22日 下午6:23:37 
  * @since 1.0.8
  */

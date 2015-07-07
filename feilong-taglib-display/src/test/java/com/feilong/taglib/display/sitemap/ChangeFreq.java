@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ package com.feilong.taglib.display.sitemap;
  * 也可能爬取标识为 yearly的页面 高于这个频率 <br>
  * 爬虫可能会定期爬取标识为 never的页面,so that they can handle unexpected changes to those pages.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Jun 26, 2014 4:43:10 PM
  */
 public enum ChangeFreq{

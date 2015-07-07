@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import com.feilong.taglib.base.AbstractConditionalTag;
  * <li>要么设置 beginDateString+endDateString+pattern</li>
  * </ul>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2010-2-9 下午03:37:51
  * @version 1.1 Oct 31, 2012 4:06:19 PM
  */

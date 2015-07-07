@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import java.util.List;
  * <li>{@link #getOriginatingNextPageNo()} 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到)</li>
  * </ul>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2009-9-2 下午02:24:44
  * @version 1.0.1 2012-3-16 01:01 将查询参数 删除,保留分页相关参数
  * @version 1.0.5 2014-5-3 14:22 新增 {@link #maxShowPageNo} 参数

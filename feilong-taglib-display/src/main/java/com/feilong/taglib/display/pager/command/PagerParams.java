@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import com.feilong.taglib.display.pager.PagerUtil;
  * 方法参数.<br>
  * 用于{@link PagerUtil#getPagerContent(PagerParams)}参数封装
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Mar 9, 2013 1:14:35 AM
  */
 public class PagerParams implements Serializable{

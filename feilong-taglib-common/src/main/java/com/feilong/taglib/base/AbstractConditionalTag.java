@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ package com.feilong.taglib.base;
  * 用法:简单条件标签,仅需实现condition()方法即可.
  * </p>
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.1 2009-11-7下午05:39:08
  * @version 1.2.1 2015年6月12日 下午5:03:38
  * @since 1.0.1

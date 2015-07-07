@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.LinkedHashMap;
 /**
  * PagerVMParam 可以在 vm中 取到的值.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 Mar 9, 2013 1:14:35 AM
  * @version 1.0.5 2014-5-7 13:26
  * @version 1.0.6 2014-5-7 13:50

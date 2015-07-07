@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * 该类主要是将url相关数据转成vm需要的数据,解析成字符串返回.
  * </p>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2010-5-26 下午11:50:10
  * @version 1.0.5 2014-5-4 19:36
  * @see PagerConstants

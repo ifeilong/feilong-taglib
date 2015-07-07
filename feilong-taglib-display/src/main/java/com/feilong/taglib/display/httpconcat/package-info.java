@@ -17,7 +17,7 @@
  * b)多文件之间用半角逗号(,)分开<br>
  * c)用一个?来便是时间戳<br>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * 
  * @since 1.0.5
  * @version 1.0.5 2014-5-5 13:41

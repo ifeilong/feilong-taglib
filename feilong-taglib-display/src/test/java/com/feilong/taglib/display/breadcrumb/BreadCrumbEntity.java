@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.io.Serializable;
  * 飞龙面包屑所需要的字段 封装<br>
  * 其中泛型中的T 是 id 主键的类型,可以是Number String 或者其他类型.
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0 2012-2-16 下午12:55:43
  * @param <PK>
  *            the generic type

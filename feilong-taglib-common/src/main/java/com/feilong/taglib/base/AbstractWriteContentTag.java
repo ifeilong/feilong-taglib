@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.feilong.taglib.base;
 /**
  * 输出内容的标签.
  *
- * @author <a href="mailto:venusdrogon@163.com">feilong</a>
+ * @author feilong
  * @version 1.0.0 2009-5-2下午05:20:22
  * @version 1.0.3 2012-3-13 上午1:59:22
  * @version 1.2.1 2015年6月12日 下午3:33:05

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 feilong (venusdrogon@163.com)
+ * Copyright (C) 2008 feilong
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * }
  * </pre>
  * 
- * @author <a href="mailto:venusdrogon@163.com">金鑫</a>
+ * @author feilong
  * @version 1.0.0 2010-2-3 下午01:03:14
  * @version 1.0.5 May 3, 2014 1:44:08 PM
  * @since 1.0.0
