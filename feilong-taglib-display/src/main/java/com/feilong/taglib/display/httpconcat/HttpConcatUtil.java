@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.configure.ResourceBundleUtil;
 import com.feilong.core.log.Slf4jUtil;
 import com.feilong.core.text.MessageFormatUtil;
-import com.feilong.core.tools.json.JsonUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.StringUtil;
 import com.feilong.core.util.ToStringConfig;
