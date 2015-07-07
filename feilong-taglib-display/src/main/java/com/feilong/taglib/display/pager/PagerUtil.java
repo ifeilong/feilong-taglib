@@ -150,16 +150,13 @@ public final class PagerUtil{
      * 当vm模板内容更改,需要清理缓存,由于pagerCache 是基于JVM内存级的,因此重启应用即会生效
      * </p>
      * </blockquote>
-     * 
+     *
      * @param pagerParams
      *            构造分页需要的请求参数
      * @return if {@link PagerParams#getTotalCount()}{@code <=0} return "" <br>
      *         生成分页html代码
-     * 
-     * @throws NullPointerException
-     *             if isNullOrEmpty(pagerParams)
      */
-    public static final String getPagerContent(PagerParams pagerParams) throws NullPointerException{
+    public static final String getPagerContent(PagerParams pagerParams){
 
         if (Validator.isNullOrEmpty(pagerParams)){
             throw new NullPointerException("pagerParams can't be null/empty!");
