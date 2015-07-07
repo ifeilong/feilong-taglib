@@ -38,8 +38,8 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  */
 public class HttpConcatUtilTest extends BaseHttpConcatTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(HttpConcatUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatUtilTest.class);
 
     /**
      * Test method for
@@ -50,7 +50,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
     public final void testGetWriteContent(){
         HttpConcatParam httpConcatParam = getHttpConcatParam();
         String writeContent = HttpConcatUtil.getWriteContent(httpConcatParam);
-        log.info(writeContent);
+        LOGGER.info(writeContent);
     }
 
     /**
@@ -76,7 +76,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         for (Integer j : list){
             Date beginDate = new Date();
             for (int i = 0; i < j; ++i){
-                //log.info(i);
+                //LOGGER.info(i);
                 HttpConcatParam httpConcatParam = getHttpConcatParamByI(null);
                 HttpConcatUtil.getWriteContent(httpConcatParam);
                 //				httpConcatParam = null;
@@ -85,7 +85,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
             Date endDate = new Date();
             map.put(j, DateExtensionUtil.getIntervalForView(beginDate, endDate));
         }
-        log.info(JsonUtil.format(map));
+        LOGGER.info(JsonUtil.format(map));
     }
 
     /**
@@ -100,6 +100,6 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         httpConcatParam.setHttpConcatSupport(true);
         httpConcatParam.setItemSrcList(null);
         httpConcatParam.setVersion("20140517");
-        log.info(HttpConcatUtil.getWriteContent(httpConcatParam));
+        LOGGER.info(HttpConcatUtil.getWriteContent(httpConcatParam));
     }
 }

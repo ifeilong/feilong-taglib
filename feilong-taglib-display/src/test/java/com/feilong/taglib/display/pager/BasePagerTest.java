@@ -58,7 +58,7 @@ public abstract class BasePagerTest{
         String pageParamName = "pageNo";
         String vmPath = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
-        // log.debug("===================================================");
+        // LOGGER.debug("===================================================");
 
         PagerParams pagerParams = new PagerParams(count, pageUrl);
         pagerParams.setCurrentPageNo(currentPageNo);

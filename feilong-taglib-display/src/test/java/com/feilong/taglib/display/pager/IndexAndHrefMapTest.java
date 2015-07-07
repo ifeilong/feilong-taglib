@@ -38,8 +38,8 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  */
 public class IndexAndHrefMapTest extends BasePagerTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(IndexAndHrefMapTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexAndHrefMapTest.class);
 
     /**
      * Gets the all index and href map.
@@ -73,8 +73,8 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             set.add(i);
         }
         PagerParams pagerParams = getPagerParams();
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(pagerParams));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(pagerParams));
         }
 
         for (int j = 0; j < z; ++j){
@@ -84,6 +84,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
         }
 
         Date endDate = new Date();
-        log.info("{},time:{}", z, DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{},time:{}", z, DateUtil.getIntervalTime(beginDate, endDate));
     }
 }

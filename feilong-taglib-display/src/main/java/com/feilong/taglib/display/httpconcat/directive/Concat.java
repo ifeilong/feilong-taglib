@@ -148,8 +148,8 @@ import com.feilong.tools.velocity.directive.AbstractDirective;
  */
 public final class Concat extends AbstractDirective{
 
-    /** The Constant log. */
-    private static final Logger log            = LoggerFactory.getLogger(Concat.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER            = LoggerFactory.getLogger(Concat.class);
 
     // **************************************************************
     // 由于继承 字段是不会被覆盖的,所以下面的 两个方法 必须每个实现类重写
@@ -172,7 +172,7 @@ public final class Concat extends AbstractDirective{
 
         HttpConcatParam httpConcatParam = getHttpConcatParam(internalContextAdapter, node);
         if (null == httpConcatParam){
-            log.warn("httpConcatParam is isNullOrEmpty,will not concat,just return");
+            LOGGER.warn("httpConcatParam is isNullOrEmpty,will not concat,just return");
             return true;
         }
 
@@ -198,7 +198,7 @@ public final class Concat extends AbstractDirective{
 
         // 如果文字 isNullOrEmpty 那么仅仅 log warn
         if (Validator.isNullOrEmpty(blockContent)){
-            log.warn("blockContent is isNullOrEmpty...,you should write source list between #{} and #end", DIRECTIVE_NAME);
+            LOGGER.warn("blockContent is isNullOrEmpty...,you should write source list between #{} and #end", DIRECTIVE_NAME);
             return null;
         }
         // **********************parse params******************************************************
@@ -314,8 +314,8 @@ public final class Concat extends AbstractDirective{
      */
     @Override
     public String getName(){
-        if (log.isDebugEnabled()){
-            log.debug("DIRECTIVE_NAME:[{}]", DIRECTIVE_NAME);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("DIRECTIVE_NAME:[{}]", DIRECTIVE_NAME);
         }
         return DIRECTIVE_NAME;
     }
@@ -327,8 +327,8 @@ public final class Concat extends AbstractDirective{
      */
     @Override
     public int getType(){
-        if (log.isDebugEnabled()){
-            log.debug("DIRECTIVE_TYPE:[{}]", DIRECTIVE_TYPE);
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("DIRECTIVE_TYPE:[{}]", DIRECTIVE_TYPE);
         }
         return DIRECTIVE_TYPE;
     }

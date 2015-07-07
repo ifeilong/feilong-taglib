@@ -81,16 +81,16 @@ public class IsInTimeTag extends AbstractConditionalTag{
             flag = DateUtil.isInTime(_date, beginDateString, endDateString, pattern);
         }
 
-        // if (log.isDebugEnabled()){
+        // if (LOGGER.isDebugEnabled()){
         // Enumeration<String> values = getValues();
         //
         // while (values.hasMoreElements()){
         // String value = values.nextElement();
-        // log.debug(value);
+        // LOGGER.debug(value);
         // }
         // // TagData
         // // Object[] args = {};
-        // // log.debug("the param _date:{}", args);
+        // // LOGGER.debug("the param _date:{}", args);
         // }
         return flag;
     }

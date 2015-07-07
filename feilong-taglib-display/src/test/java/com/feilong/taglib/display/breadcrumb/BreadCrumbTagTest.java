@@ -34,8 +34,8 @@ import com.feilong.tools.velocity.VelocityUtil;
  */
 public class BreadCrumbTagTest{
 
-    /** The Constant log. */
-    private static final Logger                   log             = LoggerFactory.getLogger(BreadCrumbTagTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger                   LOGGER          = LoggerFactory.getLogger(BreadCrumbTagTest.class);
 
     /** The site map entities. */
     private static List<BreadCrumbEntity<Number>> siteMapEntities = new ArrayList<BreadCrumbEntity<Number>>();
@@ -69,13 +69,13 @@ public class BreadCrumbTagTest{
         String path = "/test8.htm";
         BreadCrumbTag siteMapTag = new BreadCrumbTag();
         List<BreadCrumbEntity<Number>> allParentSiteMapEntityList = siteMapTag.getAllParentSiteMapEntityList(path, siteMapEntities);
-        log.info("show");
+        LOGGER.info("show");
         if (null != allParentSiteMapEntityList){
             for (BreadCrumbEntity<Number> sme : allParentSiteMapEntityList){
-                log.info(sme.getName());
+                LOGGER.info(sme.getName());
             }
         }else{
-            log.info("allParentSiteMapEntityList is null/empty");
+            LOGGER.info("allParentSiteMapEntityList is null/empty");
         }
     }
 
@@ -88,8 +88,8 @@ public class BreadCrumbTagTest{
         String path = "/test8.htm";
         BreadCrumbTag siteMapTag = new BreadCrumbTag();
         BreadCrumbEntity<Number> siteMapEntity = siteMapTag.getSiteMapEntityByPath(path, siteMapEntities);
-        log.info(siteMapEntity.getParentId() + "");
-        log.info(siteMapEntity.getName());
+        LOGGER.info(siteMapEntity.getParentId() + "");
+        LOGGER.info(siteMapEntity.getName());
     }
 
     /**
@@ -104,6 +104,6 @@ public class BreadCrumbTagTest{
         contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         contextKeyValues.put("connector", ">");
         String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
-        log.info(siteMapString);
+        LOGGER.info(siteMapString);
     }
 }

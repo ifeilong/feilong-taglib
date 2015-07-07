@@ -29,8 +29,8 @@ import com.feilong.core.tools.json.JsonUtil;
  */
 public class PagerTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PagerTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerTest.class);
 
     /**
      * Test.
@@ -39,8 +39,8 @@ public class PagerTest{
     public final void test(){
         Pager pager = new Pager(2, 10, 10000);
         pager.setMaxShowPageNo(-2);
-        if (log.isInfoEnabled()){
-            log.info(JsonUtil.format(pager));
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(JsonUtil.format(pager));
         }
     }
 }

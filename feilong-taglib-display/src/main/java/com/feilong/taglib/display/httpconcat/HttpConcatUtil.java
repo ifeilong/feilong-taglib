@@ -55,8 +55,8 @@ import com.feilong.tools.security.oneway.MD5Util;
 //XXX 丰富 JavaDOC
 public final class HttpConcatUtil implements HttpConcatConstants{
 
-    /** The Constant log. */
-    private static final Logger                       log                    = LoggerFactory.getLogger(HttpConcatUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger                       LOGGER                 = LoggerFactory.getLogger(HttpConcatUtil.class);
 
     /** The Constant TEMPLATE_CSS. */
     private static final String                       TEMPLATE_CSS;
@@ -109,7 +109,7 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         GLOBAL_HTTP_CONCAT_SUPPORT = ResourceBundleUtil.getValue(CONFIG_FILE, KEY_HTTPCONCAT_SUPPORT, Boolean.class);
 
         if (Validator.isNullOrEmpty(GLOBAL_HTTP_CONCAT_SUPPORT)){
-            log.warn(
+            LOGGER.warn(
                             "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]",
                             KEY_HTTPCONCAT_SUPPORT,
                             CONFIG_FILE);
@@ -152,14 +152,14 @@ public final class HttpConcatUtil implements HttpConcatConstants{
             throw new NullPointerException("the httpConcatParam is null or empty!");
         }
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(httpConcatParam));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(httpConcatParam));
         }
 
         // 判断item list
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
         if (Validator.isNullOrEmpty(itemSrcList)){
-            log.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return null");
+            LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return null");
             return null;
         }
 
@@ -176,15 +176,15 @@ public final class HttpConcatUtil implements HttpConcatConstants{
             String content = cache.get(httpConcatParam);
             //包含
             if (null != content){
-                if (log.isInfoEnabled()){
-                    log.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
+                if (LOGGER.isInfoEnabled()){
+                    LOGGER.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
                 }
                 return content;
             }else{
                 //超出cache 数量
                 boolean outOfCacheItemSizeLimit = (cacheSize >= DEFAULT_CACHESIZELIMIT);
                 if (outOfCacheItemSizeLimit){
-                    log.warn(
+                    LOGGER.warn(
                                     "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
                                     cacheKeyHashCode,
                                     cacheSize,
@@ -194,8 +194,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
                     isWriteCache = false;
                 }else{
 
-                    if (log.isInfoEnabled()){
-                        log.info(
+                    if (LOGGER.isInfoEnabled()){
+                        LOGGER.info(
                                         "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
                                         cacheKeyHashCode,
                                         cacheSize);
@@ -239,18 +239,18 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         }
 
         // **************************log***************************************************
-        if (log.isDebugEnabled()){
-            log.debug("returnValue:[{}],length:[{}]", content, content.length());
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
         }
         //********************设置cache***********************************************
         if (isWriteCache){
             cache.put(httpConcatParam, (null == content) ? "" : content);
-            if (log.isInfoEnabled()){
-                log.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), cache.size());
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), cache.size());
             }
         }else{
             if (DEFAULT_CACHEENABLE){
-                log.warn(
+                LOGGER.warn(
                                 "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache",
                                 cacheKeyHashCode,
                                 DEFAULT_CACHEENABLE,
@@ -304,14 +304,14 @@ public final class HttpConcatUtil implements HttpConcatConstants{
 
         //**************************************************************
         if (Validator.isNullOrEmpty(noRepeatitemList)){
-            log.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
+            LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
             return null;
         }
         int noRepeatitemListSize = noRepeatitemList.size();
         int itemSrcListSize = itemSrcList.size();
 
         if (noRepeatitemListSize != itemSrcListSize){
-            log.warn(
+            LOGGER.warn(
                             "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}",
                             noRepeatitemListSize,
                             itemSrcListSize,
@@ -328,8 +328,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
 
         // *******************************************************************
-        if (log.isDebugEnabled()){
-            log.debug("standardHttpConcatParam:{}", JsonUtil.format(standardHttpConcatParam));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("standardHttpConcatParam:{}", JsonUtil.format(standardHttpConcatParam));
         }
         return standardHttpConcatParam;
 
@@ -346,8 +346,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
      */
     public static String createVersion(String origin){
         String version = MD5Util.encode(origin);
-        if (log.isInfoEnabled()){
-            log.info("origin:[{}],version:[{}]", origin, version);
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("origin:[{}],version:[{}]", origin, version);
         }
         return version;
     }
@@ -376,8 +376,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         // 只有一条 输出原生字符串
         if (size == 1){
             sb.append(itemSrcList.get(0));
-            if (log.isDebugEnabled()){
-                log.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
             }
         }else{
             sb.append("??");
@@ -419,8 +419,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
     // */
     // private static String handleResult(StringBuilder sb){
     // String string = sb.toString();
-    // if (log.isDebugEnabled()){
-    // log.debug("the param sb:{}", sb);
+    // if (LOGGER.isDebugEnabled()){
+    // LOGGER.debug("the param sb:{}", sb);
     // }
     // // return string.replace("//", "/");
     // return string;
@@ -439,8 +439,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
             sb.append("?");
             sb.append(version);
         }else{
-            if (log.isDebugEnabled()){
-                log.debug("the param version isNullOrEmpty,we suggest you to set version value");
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("the param version isNullOrEmpty,we suggest you to set version value");
             }
         }
     }

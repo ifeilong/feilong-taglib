@@ -27,8 +27,8 @@ import org.slf4j.LoggerFactory;
  */
 public class PagerTagTest{
 
-    /** The Constant log. */
-    private static final Logger log      = LoggerFactory.getLogger(PagerTagTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER      = LoggerFactory.getLogger(PagerTagTest.class);
 
     /** The pager tag. */
     private PagerTag            pagerTag = new PagerTag();
@@ -40,6 +40,6 @@ public class PagerTagTest{
      */
     @Test
     public void testWriteContent(){
-        log.info(pagerTag.writeContent());
+        LOGGER.info(pagerTag.writeContent());
     }
 }

@@ -35,8 +35,8 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  */
 public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(HttpConcatCacheMemoryTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatCacheMemoryTest.class);
 
     /**
      * Name.
@@ -68,8 +68,8 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             System.gc();
             long start = Runtime.getRuntime().freeMemory();
 
-            //			if (log.isInfoEnabled()){
-            //				log.info("" + start);
+            //			if (LOGGER.isInfoEnabled()){
+            //				LOGGER.info("" + start);
             //			}
             HashMap<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
 
@@ -81,22 +81,22 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             // 快要计算的时,再清理一次
             System.gc();
             long end = Runtime.getRuntime().freeMemory();
-            //			if (log.isInfoEnabled()){
-            //				log.info("" + end);
+            //			if (LOGGER.isInfoEnabled()){
+            //				LOGGER.info("" + end);
             //			}
             //对象占内存:
             //map1.put(j, FileUtil.formatSize((end - start)));
 
-            log.info(j + " size cache占用 内存 :" + FileUtil.formatSize((end - start)));
+            LOGGER.info(j + " size cache占用 内存 :" + FileUtil.formatSize((end - start)));
 
             int size = ObjectUtil.size(map);
-            log.info("Data Size: " + size + "--->" + FileUtil.formatSize(size));
+            LOGGER.info("Data Size: " + size + "--->" + FileUtil.formatSize(size));
 
             //map1.put(j, end - start);
         }
 
-        //		if (log.isInfoEnabled()){
-        //			log.info(JsonUtil.format(map1));
+        //		if (LOGGER.isInfoEnabled()){
+        //			LOGGER.info(JsonUtil.format(map1));
         //		}
     }
 

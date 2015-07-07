@@ -37,8 +37,8 @@ import com.feilong.taglib.base.BaseTagTEL;
  */
 public class PagerTagExtraInfo extends BaseTagTEL{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PagerTagExtraInfo.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerTagExtraInfo.class);
 
     /*
      * (non-Javadoc)
@@ -51,10 +51,10 @@ public class PagerTagExtraInfo extends BaseTagTEL{
     // If isValid() returns false, a generic ValidationMessage[] is returned indicating isValid() returned false.
     public ValidationMessage[] validate(TagData tagData){
 
-        if (log.isDebugEnabled()){
-            log.debug(JsonUtil.format(tagData));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(JsonUtil.format(tagData));
             Map<String, Object> map = toMap(tagData);
-            log.debug(JsonUtil.format(map));
+            LOGGER.debug(JsonUtil.format(map));
         }
 
         // Object count = tagData.getAttribute("maxElements");
@@ -67,7 +67,7 @@ public class PagerTagExtraInfo extends BaseTagTEL{
         // Object allPageNo = tagData.getAttribute("allPageNo");
         // Object pageParamName = tagData.getAttribute("pageParamName");
         // // if (maxElements < 0){
-        // // log.debug("the param maxElements:{},must >=0", maxElements);
+        // // LOGGER.debug("the param maxElements:{},must >=0", maxElements);
         // // return false;
         // // }
         // // Object maxIndexPages = tagData.getAttribute("maxIndexPages");

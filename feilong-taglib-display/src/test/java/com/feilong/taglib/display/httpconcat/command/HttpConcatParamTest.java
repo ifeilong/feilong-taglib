@@ -33,8 +33,8 @@ import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
  */
 public class HttpConcatParamTest extends BaseHttpConcatTest{
 
-    /** The Constant log. */
-    private static final Logger log    = LoggerFactory.getLogger(HttpConcatParamTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER    = LoggerFactory.getLogger(HttpConcatParamTest.class);
 
     /** The domain. */
     String                      domain = "http://www.feilong.com";
@@ -46,10 +46,10 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
     public final void testHashCode(){
         HttpConcatParam t = new HttpConcatParam();
 
-        if (log.isInfoEnabled()){
-            log.info("" + t.hashCode());
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("" + t.hashCode());
             t.setDomain(domain);
-            log.info("" + t.hashCode());
+            LOGGER.info("" + t.hashCode());
         }
     }
 
@@ -62,7 +62,7 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
 
         HttpConcatParam pagerParams2 = new HttpConcatParam();
 
-        if (log.isInfoEnabled()){
+        if (LOGGER.isInfoEnabled()){
             Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
             Assert.assertEquals(false, pagerParams1.equals(null));
             Assert.assertEquals(true, pagerParams1.equals(pagerParams2));

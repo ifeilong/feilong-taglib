@@ -34,8 +34,8 @@ import com.feilong.test.User;
  */
 public class PagerCacheMemoryTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PagerCacheMemoryTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerCacheMemoryTest.class);
 
     /**
      * Name.
@@ -73,6 +73,6 @@ public class PagerCacheMemoryTest{
         // 快要计算的时,再清理一次
         System.gc();
         long end = Runtime.getRuntime().freeMemory();
-        log.info("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
+        LOGGER.info("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
     }
 }

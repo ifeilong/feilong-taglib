@@ -31,8 +31,8 @@ import com.feilong.core.io.CharsetType;
  */
 public class PagerParamsTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PagerParamsTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerParamsTest.class);
 
     /**
      * Test method for {@link com.feilong.taglib.display.pager.command.PagerParams#hashCode()}.
@@ -41,10 +41,10 @@ public class PagerParamsTest{
     public final void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
-        if (log.isInfoEnabled()){
-            log.info("" + pagerParams1.hashCode());
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("" + pagerParams1.hashCode());
             pagerParams1.setCharsetType(null);
-            log.info("" + pagerParams1.hashCode());
+            LOGGER.info("" + pagerParams1.hashCode());
         }
     }
 
@@ -57,7 +57,7 @@ public class PagerParamsTest{
         PagerParams pagerParams1 = new PagerParams(0, "a");
         PagerParams pagerParams2 = new PagerParams(0, "a");
 
-        if (log.isInfoEnabled()){
+        if (LOGGER.isInfoEnabled()){
             Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
             Assert.assertEquals(false, pagerParams1.equals(null));
             Assert.assertEquals(true, pagerParams1.equals(pagerParams2));

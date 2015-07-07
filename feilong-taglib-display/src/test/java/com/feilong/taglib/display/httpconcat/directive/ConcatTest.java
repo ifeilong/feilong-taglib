@@ -32,8 +32,8 @@ import com.feilong.tools.velocity.VelocityUtil;
  */
 public class ConcatTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(ConcatTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConcatTest.class);
 
     /**
      * Parses the vm template with classpath resource loader.
@@ -43,6 +43,6 @@ public class ConcatTest{
         String templateInClassPath = "velocity/concat.vm";
         Map<String, Object> map = null;
         String parseVMTemplate = new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, map);
-        log.info(parseVMTemplate);
+        LOGGER.info(parseVMTemplate);
     }
 }

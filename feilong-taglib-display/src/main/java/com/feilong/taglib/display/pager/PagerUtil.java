@@ -57,8 +57,8 @@ import com.feilong.tools.velocity.VelocityUtil;
  */
 public final class PagerUtil{
 
-    /** The Constant log. */
-    private static final Logger                   log                 = LoggerFactory.getLogger(PagerUtil.class);
+    /** The Constant LOGGER. */
+    private static final Logger                   LOGGER              = LoggerFactory.getLogger(PagerUtil.class);
 
     /**
      * vm里面 pagerVMParam变量名称 <code>{@value}</code>,在vm里面,你可以使用 ${pagerVMParam.xxx} 来获取数据
@@ -100,7 +100,7 @@ public final class PagerUtil{
      * <blockquote>
      * <p>
      * 内部会分别对入参 {@link PagerParams} 和构造vm参数,记录<b>debug</b>级别的log,<br>
-     * 如果不需要care这部分log,可以在log.xml中配置:
+     * 如果不需要care这部分log,可以在LOGGER.xml中配置:
      * 
      * <pre>
      * {@code
@@ -165,25 +165,25 @@ public final class PagerUtil{
             throw new NullPointerException("pagerParams can't be null/empty!");
         }
 
-        if (log.isDebugEnabled()){
-            log.debug("input pagerParams info:{}", JsonUtil.format(pagerParams));
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("input pagerParams info:{}", JsonUtil.format(pagerParams));
         }
 
         //*************************************************************************************
         //缓存
         if (cacheEnable){
-            if (log.isDebugEnabled()){
-                log.debug("pagerCache.size:{}", cache.size());
+            if (LOGGER.isDebugEnabled()){
+                LOGGER.debug("pagerCache.size:{}", cache.size());
             }
             if (cache.containsKey(pagerParams)){
-                if (log.isInfoEnabled()){
-                    log.info("hashcode:[{}],get pager info from pagerCache", pagerParams.hashCode());
+                if (LOGGER.isInfoEnabled()){
+                    LOGGER.info("hashcode:[{}],get pager info from pagerCache", pagerParams.hashCode());
                 }
                 String content = cache.get(pagerParams);
                 return content;
             }else{
-                if (log.isInfoEnabled()){
-                    log.info("hashcode:[{}],pagerCache not contains pagerParams,will do parse", pagerParams.hashCode());
+                if (LOGGER.isInfoEnabled()){
+                    LOGGER.info("hashcode:[{}],pagerCache not contains pagerParams,will do parse", pagerParams.hashCode());
                 }
             }
         }
@@ -207,8 +207,8 @@ public final class PagerUtil{
                 vmParamMap.put(VM_KEY_I18NMAP, i18nMap);
 
                 String vmPath = pagerParams.getVmPath();
-                if (log.isDebugEnabled()){
-                    log.debug("vmParamMap,will use for parse: {}:{}", vmPath, JsonUtil.format(vmParamMap));
+                if (LOGGER.isDebugEnabled()){
+                    LOGGER.debug("vmParamMap,will use for parse: {}:{}", vmPath, JsonUtil.format(vmParamMap));
                 }
                 String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(vmPath, vmParamMap);
 
@@ -222,8 +222,8 @@ public final class PagerUtil{
             return "";
         }
 
-        if (log.isInfoEnabled()){
-            log.info("the param totalCount:{} not >0", totalCount);
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("the param totalCount:{} not >0", totalCount);
         }
         // 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         return "";
@@ -249,7 +249,7 @@ public final class PagerUtil{
             currentPageNo = ObjectUtil.toInteger(RequestUtil.getParameter(request, pageParamName));
         }catch (Exception e){
             // 抛出异常, 但是不给 currentPageNo 赋值
-            log.error(e.getClass().getName(), e);
+            LOGGER.error(e.getClass().getName(), e);
         }
 
         // 不是空 直接返回
@@ -456,7 +456,7 @@ public final class PagerUtil{
         URI uri = URIUtil.create(pageUrl, charsetType);
 
         if (null == uri){
-            log.error("pageUrl:{} can not create to uri,charsetType:{}", pageUrl, charsetType);
+            LOGGER.error("pageUrl:{} can not create to uri,charsetType:{}", pageUrl, charsetType);
             return null;
         }
 

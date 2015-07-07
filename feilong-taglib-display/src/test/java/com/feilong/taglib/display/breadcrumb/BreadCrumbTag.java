@@ -41,8 +41,8 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -8596553099620845748L;
 
-    /** The Constant log. */
-    private static final Logger            log              = LoggerFactory.getLogger(BreadCrumbTag.class);
+    /** The Constant LOGGER. */
+    private static final Logger            LOGGER           = LoggerFactory.getLogger(BreadCrumbTag.class);
 
     /** 连接符,默认>. */
     private String                         connector        = ">";
@@ -63,14 +63,14 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
             // SiteMapConfigure siteMapConfigure = new SiteMapConfigure(xmlString);
             // return siteMapConfigure.getSiteMapContent("index.jsp");
             HttpServletRequest request = getHttpServletRequest();
-            log.info("request.getRequestURI():{}", request.getRequestURI());
-            if (log.isDebugEnabled()){
+            LOGGER.info("request.getRequestURI():{}", request.getRequestURI());
+            if (LOGGER.isDebugEnabled()){
                 // UrlPathHelperUtil.showProperties(request);
             }
             // if (Validator.isNull(currentPath)){
             String currentPath = RequestUtil.getOriginatingServletPath(request);
             // }
-            log.info("urlPathHelper.getLookupPathForRequest(request):{}", currentPath);
+            LOGGER.info("urlPathHelper.getLookupPathForRequest(request):{}", currentPath);
 
             Object allParentSiteMapEntityList = getAllParentSiteMapEntityList(currentPath, siteMapEntityList);
 
@@ -80,13 +80,13 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
             contextKeyValues.put("request", request);
             String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
 
-            log.debug("siteMapString is:{}", siteMapString);
+            LOGGER.debug("siteMapString is:{}", siteMapString);
             if (Validator.isNullOrEmpty(siteMapString)){
                 return "";
             }
             return siteMapString;
         }
-        log.warn("siteMapEntityList is null");
+        LOGGER.warn("siteMapEntityList is null");
         return "";
     }
 
@@ -102,7 +102,7 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
      * @return the all parent site map entity list
      */
     public <T> List<BreadCrumbEntity<T>> getAllParentSiteMapEntityList(String currentPath,List<BreadCrumbEntity<T>> siteMapEntities){
-        log.info("currentPath:{}", currentPath);
+        LOGGER.info("currentPath:{}", currentPath);
         BreadCrumbEntity<T> siteMapEntity_in = getSiteMapEntityByPath(currentPath, siteMapEntities);
         return getAllParentSiteMapEntityList(siteMapEntity_in, siteMapEntities);
     }
@@ -127,15 +127,15 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
         // 每次成一个新的
         List<BreadCrumbEntity<T>> allParentSiteMapEntityList = new ArrayList<BreadCrumbEntity<T>>();
         constructParentSiteMapEntityList(siteMapEntity_in, siteMapEntities, allParentSiteMapEntityList);
-        log.info("before Collections.reverse,allParentSiteMapEntityList size:{}", allParentSiteMapEntityList.size());
+        LOGGER.info("before Collections.reverse,allParentSiteMapEntityList size:{}", allParentSiteMapEntityList.size());
         // for (SiteMapEntity sme : allParentSiteMapEntityList){
-        // log.info(sme.getName());
+        // LOGGER.info(sme.getName());
         // }
         // 反转
         Collections.reverse(allParentSiteMapEntityList);
-        // log.info("after Collections.reverse");
+        // LOGGER.info("after Collections.reverse");
         // for (SiteMapEntity sme : allParentSiteMapEntityList){
-        // log.info(sme.getName());
+        // LOGGER.info(sme.getName());
         // }
         return allParentSiteMapEntityList;
     }
@@ -167,7 +167,7 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
         for (BreadCrumbEntity<T> loopSiteMapEntity : siteMapEntities){
             // 当前的id和传入的siteMapEntity equals
             if (loopSiteMapEntity.getId().equals(parentId)){
-                log.info("loopSiteMapEntity.getId():{},siteMapEntity_in.getParentId():{}", loopSiteMapEntity.getId(), parentId);
+                LOGGER.info("loopSiteMapEntity.getId():{},siteMapEntity_in.getParentId():{}", loopSiteMapEntity.getId(), parentId);
                 siteMapEntity_parent = loopSiteMapEntity;
                 break;
             }
@@ -200,7 +200,7 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
             }
         }
         if (!flag){
-            log.warn("currentPath is :{},can't find match BreadCrumbEntity", currentPath);
+            LOGGER.warn("currentPath is :{},can't find match BreadCrumbEntity", currentPath);
         }
         return siteMapEntity_return;
     }

@@ -38,8 +38,8 @@ import com.feilong.tools.velocity.VelocityUtil;
  */
 public class SiteMapURLTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(Test.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
 
     /**
      * Test.
@@ -94,8 +94,8 @@ public class SiteMapURLTest{
         //xstre
         String filePath = SystemUtils.USER_HOME + "/feilong/sitemap.xml";
 
-        if (log.isInfoEnabled()){
-            log.info(aString);
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(aString);
         }
         //		Document document = Dom4jUtil.getDocument(filePath);
         //		

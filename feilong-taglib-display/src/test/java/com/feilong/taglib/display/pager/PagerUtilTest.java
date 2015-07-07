@@ -36,8 +36,8 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  */
 public class PagerUtilTest extends BasePagerTest{
 
-    /** The Constant log. */
-    private static final Logger log = LoggerFactory.getLogger(PagerUtilTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerUtilTest.class);
 
     /**
      * Test get pager content.
@@ -56,13 +56,13 @@ public class PagerUtilTest extends BasePagerTest{
         //		j = 80000;
         j = 80000;
         for (int i = 0; i < j; ++i){
-            // log.debug("===================================================");
+            // LOGGER.debug("===================================================");
             testGetPagerContent();
-            // log.info("the param content:\n\n{}", content);
-            // log.debug("{} ", i);
+            // LOGGER.info("the param content:\n\n{}", content);
+            // LOGGER.debug("{} ", i);
         }
         Date endDate = new Date();
-        log.info("{}次\t{}", j, DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{}次\t{}", j, DateUtil.getIntervalTime(beginDate, endDate));
     }
 
     /**
@@ -77,7 +77,7 @@ public class PagerUtilTest extends BasePagerTest{
 
         String content = PagerUtil.getPagerContent(pagerParams);
 
-        //log.info("the param content:\n\n{}", content);
+        //LOGGER.info("the param content:\n\n{}", content);
 
         if (false){
             String filePath = "F://pagerTest.html";
