@@ -15,7 +15,7 @@
  */
 package com.feilong.taglib.common;
 
-import com.feilong.core.util.ListUtil;
+import com.feilong.core.util.CollectionsUtil;
 import com.feilong.taglib.base.AbstractConditionalTag;
 
 /**
@@ -41,7 +41,7 @@ public class IsContainTag extends AbstractConditionalTag{
      */
     @Override
     public boolean condition(){
-        return ListUtil.isContainTag(collection, value);
+        return CollectionsUtil.isContainTag(collection, value);
     }
 
     /**
