@@ -25,7 +25,7 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 /**
  * 日期转换成中国特色日期.
  * 
- * @author 金鑫 2009-9-7上午11:49:48
+ * @version 2009-9-7上午11:49:48
  * @deprecated will optimization
  */
 @Deprecated

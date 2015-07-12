@@ -24,7 +24,7 @@
 ///**
 // * 模仿 asp.net 读取配置文件 web.cfg.xml
 // * 
-// * @author 金鑫 2010-6-8 上午05:39:10
+// * @version 2010-6-8 上午05:39:10
 // */
 //public class ConfigurationManager{
 //

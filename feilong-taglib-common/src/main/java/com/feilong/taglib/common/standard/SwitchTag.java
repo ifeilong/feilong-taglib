@@ -20,7 +20,7 @@ import com.feilong.taglib.base.BaseTag;
 /**
  * 飞龙switch标签.
  *
- * @author 金鑫 2010-3-19 上午10:48:32
+ * @version 2010-3-19 上午10:48:32
  */
 public class SwitchTag extends BaseTag{
 
@@ -38,7 +38,9 @@ public class SwitchTag extends BaseTag{
      * 
      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
     @Override
@@ -51,8 +53,6 @@ public class SwitchTag extends BaseTag{
     /**
      * 该方法有子标签调用，表示是否可以执行自身的标签。.
      *
-     * @author 金鑫
-     * @version 1.0 2010-3-19 上午11:46:29
      * @return 该方法有子标签调用，表示是否可以执行自身的标签。
      */
     public synchronized boolean isExecuteTag(){
@@ -61,9 +61,6 @@ public class SwitchTag extends BaseTag{
 
     /**
      * 标记执行了.
-     *
-     * @author 金鑫
-     * @version 1.0 2010-3-19 上午11:46:43
      */
     public synchronized void setExecuteTag(){
         flag = true;
@@ -74,7 +71,9 @@ public class SwitchTag extends BaseTag{
      * 
      * @see javax.servlet.jsp.tagext.TagSupport#release()
      */
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see javax.servlet.jsp.tagext.BodyTagSupport#release()
      */
     @Override

@@ -47,8 +47,6 @@ public abstract class AbstractWriteContentTag extends BaseTag{
     /**
      * 标签体内容.
      *
-     * @author 金鑫
-     * @version 1.0 2010-5-27 下午11:50:40
      * @return the object
      */
     protected abstract Object writeContent();

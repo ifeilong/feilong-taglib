@@ -21,7 +21,7 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 /**
  * 截取页面显示内容,超过长度用省略号表示.
  * 
- * @author 金鑫2009-9-29上午10:56:56
+ * @version 2009-9-29上午10:56:56
  * @deprecated will optimization
  */
 @Deprecated

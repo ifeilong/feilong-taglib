@@ -22,14 +22,16 @@ import com.feilong.taglib.base.BaseTag;
 /**
  * default标签 配合switch标签使用.
  *
- * @author 金鑫 2010年3月19日 11:24:28
+ * @version 2010年3月19日 11:24:28
  */
 public class SwitchDefaultTag extends BaseTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see javax.servlet.jsp.tagext.BodyTagSupport#doStartTag()
      */
     @Override

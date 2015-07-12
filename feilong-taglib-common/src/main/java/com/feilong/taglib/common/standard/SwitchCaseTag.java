@@ -22,7 +22,7 @@ import com.feilong.taglib.base.BaseTag;
 /**
  * case标签 配合switch标签使用.
  * 
- * @author 金鑫 2010-3-19 上午11:18:06
+ * @version 2010-3-19 上午11:18:06
  */
 public class SwitchCaseTag extends BaseTag{
 

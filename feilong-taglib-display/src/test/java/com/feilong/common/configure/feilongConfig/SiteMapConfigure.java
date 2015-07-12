@@ -22,7 +22,7 @@
 ///**
 // * 面包屑配置
 // * 
-// * @author 金鑫 2010-6-17 上午09:45:51
+// * @version 2010-6-17 上午09:45:51
 // */
 //@Deprecated
 //public class SiteMapConfigure{

@@ -34,7 +34,7 @@ import com.feilong.tools.velocity.VelocityUtil;
 /**
  * 飞龙面包屑标签.
  * 
- * @author 金鑫 2010-6-8 上午05:50:38
+ * @version 2010-6-8 上午05:50:38
  */
 public class BreadCrumbTag extends AbstractWriteContentTag{
 
