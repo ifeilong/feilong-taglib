@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.breadcrumb;
+package com.feilong.taglib.display.breadcrumb.command;
 
 import java.io.Serializable;
 
 /**
- * 飞龙面包屑所需要的字段 封装<br>
- * 其中泛型中的T 是 id 主键的类型,可以是Number String 或者其他类型.
+ * 飞龙面包屑所需要的字段 封装.
  * 
+ * <p>
+ * 其中泛型中的T 是 id 主键的类型,可以是Number String 或者其他类型.
+ * </p>
+ *
  * @author feilong
  * @version 1.0 2012-2-16 下午12:55:43
  * @param <PK>
@@ -40,8 +43,8 @@ public class BreadCrumbEntity<PK> implements Serializable{
     /** title. */
     private String            title;
 
-    /** 匹配的路径. */
-    private String            requestMapping;
+    /** 匹配的路径,可以是相对路径或者绝对路径. */
+    private String            path;
 
     /** parent id ,可以是Number String 或者其他类型.. */
     private PK                parentId;
@@ -62,17 +65,17 @@ public class BreadCrumbEntity<PK> implements Serializable{
      *            the name
      * @param title
      *            the title
-     * @param requestMapping
+     * @param path
      *            the request mapping
      * @param parentId
      *            the parent id
      */
-    public BreadCrumbEntity(PK id, String name, String title, String requestMapping, PK parentId){
+    public BreadCrumbEntity(PK id, String name, String title, String path, PK parentId){
         super();
         this.id = id;
         this.name = name;
         this.title = title;
-        this.requestMapping = requestMapping;
+        this.path = path;
         this.parentId = parentId;
     }
 
@@ -119,18 +122,18 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * 
      * @return the requestMapping
      */
-    public String getRequestMapping(){
-        return requestMapping;
+    public String getPath(){
+        return path;
     }
 
     /**
      * Sets the 匹配的路径.
      * 
-     * @param requestMapping
+     * @param path
      *            the requestMapping to set
      */
-    public void setRequestMapping(String requestMapping){
-        this.requestMapping = requestMapping;
+    public void setPath(String path){
+        this.path = path;
     }
 
     /**

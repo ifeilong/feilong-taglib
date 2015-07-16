@@ -183,4 +183,61 @@
 			<description>css/js的src</description>
 		</attribute>
 	</tag>
+
+
+	<!-- **********************面包屑导航*********************************** -->
+	<tag>
+		<name>breadCrumb</name>
+		<tag-class>com.feilong.taglib.display.breadcrumb.BreadCrumbTag</tag-class>
+		<body-content>empty</body-content>
+
+		<description>面包屑导航</description>
+
+		<attribute>
+			<name>breadCrumbEntityList</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[
+					数据源,用户所有可以访问的菜单url List
+				]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>connector</name>
+			<description></description>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[
+					面包屑导航的连接符,默认">"
+				]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>urlPrefix</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[
+					url前缀
+				]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>vmPath</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[
+					vm的路径
+				]]>
+			</description>
+		</attribute>
+	</tag>
 </taglib>
