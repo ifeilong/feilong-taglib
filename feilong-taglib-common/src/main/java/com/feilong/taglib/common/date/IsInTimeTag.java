@@ -21,8 +21,11 @@ import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.base.AbstractConditionalTag;
 
 /**
- * 判断一个日期,是否在一个时间区间内.<br>
+ * 判断一个日期,是否在一个时间区间内.
+ * 
+ * <p>
  * 注:
+ * </p>
  * <ul>
  * <li>要么设置 beginDate+endDate</li>
  * <li>要么设置 beginDateString+endDateString+pattern</li>
@@ -64,35 +67,18 @@ public class IsInTimeTag extends AbstractConditionalTag{
      */
     @Override
     public boolean condition(){
-        // 不用 直接使用 date ，全局变量 一旦赋值 不会变化
+        // 不能直接使用 date ，全局变量 一旦赋值 不会变化
         Date _date = null;
         if (null == date){
             _date = new Date();
         }else{
             _date = date;
         }
-
         // *********************************************************************
-        boolean flag = true;
         if (null != beginDate){
-
-            flag = DateUtil.isInTime(_date, beginDate, endDate);
-        }else{
-            flag = DateUtil.isInTime(_date, beginDateString, endDateString, pattern);
+            return DateUtil.isInTime(_date, beginDate, endDate);
         }
-
-        // if (LOGGER.isDebugEnabled()){
-        // Enumeration<String> values = getValues();
-        //
-        // while (values.hasMoreElements()){
-        // String value = values.nextElement();
-        // LOGGER.debug(value);
-        // }
-        // // TagData
-        // // Object[] args = {};
-        // // LOGGER.debug("the param _date:{}", args);
-        // }
-        return flag;
+        return DateUtil.isInTime(_date, beginDateString, endDateString, pattern);
     }
 
     /**
@@ -154,5 +140,4 @@ public class IsInTimeTag extends AbstractConditionalTag{
     public void setPattern(String pattern){
         this.pattern = pattern;
     }
-
 }

@@ -22,7 +22,7 @@ import com.feilong.taglib.base.AbstractConditionalTag;
  * 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中).
  *
  * @author feilong
- * @version 1.0 Jan 4, 2013 1:33:02 PM
+ * @version 1.0.0 Jan 4, 2013 1:33:02 PM
  */
 public class isNotContainTag extends AbstractConditionalTag{
 
