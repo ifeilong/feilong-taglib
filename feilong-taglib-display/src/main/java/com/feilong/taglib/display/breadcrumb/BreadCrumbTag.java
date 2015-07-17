@@ -16,18 +16,12 @@
 package com.feilong.taglib.display.breadcrumb;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.Validator;
-import com.feilong.servlet.http.RequestUtil;
-import com.feilong.servlet.http.entity.RequestLogSwitch;
 import com.feilong.taglib.base.AbstractWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
@@ -68,15 +62,6 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
      */
     @Override
     protected Object writeContent(){
-        HttpServletRequest request = getHttpServletRequest();
-
-        if (LOGGER.isDebugEnabled()){
-            RequestLogSwitch requestLogSwitch = new RequestLogSwitch();
-            Map<String, Object> requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
-            LOGGER.debug(JsonUtil.format(requestInfoMapForLog));
-        }
-
-        //*****************************************************************
         List<BreadCrumbEntity<Object>> breadCrumbEntityList = constructBreadCrumbEntityList();
 
         if (Validator.isNullOrEmpty(breadCrumbEntityList)){

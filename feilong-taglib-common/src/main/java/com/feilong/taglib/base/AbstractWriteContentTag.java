@@ -16,11 +16,17 @@
 package com.feilong.taglib.base;
 
 import java.util.Date;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.servlet.http.RequestUtil;
+import com.feilong.servlet.http.entity.RequestLogSwitch;
 
 /**
  * 输出内容的标签.
@@ -50,8 +56,17 @@ public abstract class AbstractWriteContentTag extends BaseTag{
     public int doStartTag(){
         Date beginDate = new Date();
 
+        HttpServletRequest request = getHttpServletRequest();
+
+        if (LOGGER.isDebugEnabled()){
+            RequestLogSwitch requestLogSwitch = new RequestLogSwitch();
+            Map<String, Object> requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
+            LOGGER.debug("request info:{}", JsonUtil.format(requestInfoMapForLog));
+        }
+
         // 开始执行的部分
-        print(this.writeContent());
+        Object writeContent = this.writeContent();
+        print(writeContent);
 
         Date endDate = new Date();
         LOGGER.info(
