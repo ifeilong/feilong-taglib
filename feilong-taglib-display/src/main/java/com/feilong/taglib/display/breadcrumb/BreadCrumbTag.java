@@ -20,10 +20,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.core.util.Validator;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
 import com.feilong.taglib.base.AbstractWriteContentTag;
@@ -33,9 +35,12 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 
 /**
  * 飞龙面包屑标签.
- * 
- * @version 2010-6-8 上午05:50:38
+ *
+ * @author feilong
+ * @version 1.0.0 2010-6-8 上午05:50:38
+ * @version 1.2.2 2015年7月17日 上午12:09:08
  */
+//TODO ADD javadoc
 public class BreadCrumbTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
@@ -43,9 +48,6 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
 
     /** The Constant LOGGER. */
     private static final Logger            LOGGER           = LoggerFactory.getLogger(BreadCrumbTag.class);
-
-    /** vm的路径. */
-    private String                         vmPath;
 
     /** breadCrumbEntityList,用户所有可以访问的菜单url List,不要求已经排完序. */
     private List<BreadCrumbEntity<Object>> breadCrumbEntityList;
@@ -55,6 +57,9 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
 
     /** 连接符,默认>. */
     private String                         connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
+
+    /** vm的路径. */
+    private String                         vmPath           = BreadCrumbConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /**
      * 实现自定义站点地图数据提供程序的途径.
@@ -67,21 +72,43 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
 
         if (LOGGER.isDebugEnabled()){
             RequestLogSwitch requestLogSwitch = new RequestLogSwitch();
-            requestLogSwitch.setShowIncludeInfos(true);
-            requestLogSwitch.setShowForwardInfos(true);
             Map<String, Object> requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
             LOGGER.debug(JsonUtil.format(requestInfoMapForLog));
         }
 
         //*****************************************************************
+        List<BreadCrumbEntity<Object>> breadCrumbEntityList = constructBreadCrumbEntityList();
+
+        if (Validator.isNullOrEmpty(breadCrumbEntityList)){
+            LOGGER.info("breadCrumbEntityList is NullOrEmpty!!");
+            return StringUtils.EMPTY;
+        }
 
         BreadCrumbParams breadCrumbParams = new BreadCrumbParams();
         breadCrumbParams.setBreadCrumbEntityList(breadCrumbEntityList);
         breadCrumbParams.setConnector(connector);
         breadCrumbParams.setVmPath(vmPath);
         breadCrumbParams.setUrlPrefix(urlPrefix);
-
         return BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams);
+    }
+
+    /**
+     * Construct bread crumb entity list.
+     *
+     * @return the list< bread crumb entity< object>>
+     */
+    protected List<BreadCrumbEntity<Object>> constructBreadCrumbEntityList(){
+        return breadCrumbEntityList;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.taglib.base.AbstractWriteContentTag#useTimeLog()
+     */
+    @Override
+    protected String useTimeLog(){
+        return super.useTimeLog();
     }
 
     /**
