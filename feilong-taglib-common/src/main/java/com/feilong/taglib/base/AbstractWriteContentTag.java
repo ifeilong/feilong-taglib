@@ -15,6 +15,13 @@
  */
 package com.feilong.taglib.base;
 
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.core.date.DateExtensionUtil;
+
 /**
  * 输出内容的标签.
  *
@@ -22,13 +29,17 @@ package com.feilong.taglib.base;
  * @version 1.0.0 2009-5-2下午05:20:22
  * @version 1.0.3 2012-3-13 上午1:59:22
  * @version 1.2.1 2015年6月12日 下午3:33:05
+ * @version 1.2.2 2015-7-17 00:24 add time monitor
  * @see com.feilong.taglib.base.BaseTag
  * @since 1.0.0
  */
 public abstract class AbstractWriteContentTag extends BaseTag{
 
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractWriteContentTag.class);
+
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 8215127553271356734L;
+    private static final long   serialVersionUID = 8215127553271356734L;
 
     /**
      * 标签开始.
@@ -37,10 +48,29 @@ public abstract class AbstractWriteContentTag extends BaseTag{
      */
     @Override
     public int doStartTag(){
+        Date beginDate = new Date();
+
         // 开始执行的部分
         print(this.writeContent());
+
+        Date endDate = new Date();
+        LOGGER.info(
+                        "{},{},use time:[{}]",
+                        getClass().getSimpleName(),
+                        useTimeLog(),
+                        DateExtensionUtil.getIntervalForView(beginDate, endDate));
+
         // 开始:跳过了开始和结束标签之间的代码。
         return SKIP_BODY;
+    }
+
+    /**
+     * 耗时时间.
+     *
+     * @return the string
+     */
+    protected String useTimeLog(){
+        return "";
     }
 
     // *******************************************************************

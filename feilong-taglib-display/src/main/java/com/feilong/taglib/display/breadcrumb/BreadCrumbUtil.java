@@ -121,7 +121,7 @@ public class BreadCrumbUtil{
         contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
         String siteMapString = VELOCITY_UTIL.parseTemplateWithClasspathResourceLoader(breadCrumbParams.getVmPath(), contextKeyValues);
-        LOGGER.debug("siteMapString is:{}", siteMapString);
+        LOGGER.debug("siteMapString is:[{}]", siteMapString);
         return siteMapString;
     }
 
