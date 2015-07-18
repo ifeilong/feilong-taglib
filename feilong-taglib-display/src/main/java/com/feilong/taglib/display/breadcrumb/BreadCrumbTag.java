@@ -62,15 +62,15 @@ public class BreadCrumbTag extends AbstractWriteContentTag{
      */
     @Override
     protected Object writeContent(){
-        List<BreadCrumbEntity<Object>> breadCrumbEntityList = constructBreadCrumbEntityList();
+        List<BreadCrumbEntity<Object>> _breadCrumbEntityList = constructBreadCrumbEntityList();
 
-        if (Validator.isNullOrEmpty(breadCrumbEntityList)){
+        if (Validator.isNullOrEmpty(_breadCrumbEntityList)){
             LOGGER.info("breadCrumbEntityList is NullOrEmpty!!");
             return StringUtils.EMPTY;
         }
 
         BreadCrumbParams breadCrumbParams = new BreadCrumbParams();
-        breadCrumbParams.setBreadCrumbEntityList(breadCrumbEntityList);
+        breadCrumbParams.setBreadCrumbEntityList(_breadCrumbEntityList);
         breadCrumbParams.setConnector(connector);
         breadCrumbParams.setVmPath(vmPath);
         breadCrumbParams.setUrlPrefix(urlPrefix);
