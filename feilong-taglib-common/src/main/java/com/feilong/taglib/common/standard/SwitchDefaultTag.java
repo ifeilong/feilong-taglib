@@ -27,7 +27,7 @@ import com.feilong.taglib.base.BaseTag;
 public class SwitchDefaultTag extends BaseTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2060498322554737326L;
 
     /*
      * (non-Javadoc)

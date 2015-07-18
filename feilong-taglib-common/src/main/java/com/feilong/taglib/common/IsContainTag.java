@@ -27,7 +27,7 @@ import com.feilong.taglib.base.AbstractConditionalTag;
 public class IsContainTag extends AbstractConditionalTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 472866723265315380L;
 
     /** 一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator. */
     private Object            collection       = null;

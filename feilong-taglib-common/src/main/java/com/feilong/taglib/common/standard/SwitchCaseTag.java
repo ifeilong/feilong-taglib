@@ -27,7 +27,7 @@ import com.feilong.taglib.base.BaseTag;
 public class SwitchCaseTag extends BaseTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3112940241411917867L;
 
     /** 值. */
     private String            value;
