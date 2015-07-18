@@ -32,7 +32,7 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 public class ChineseTimeTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8891262856276401129L;
 
     /** 日期. */
     private Date              date             = null;

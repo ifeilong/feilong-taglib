@@ -30,7 +30,7 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 public class CurrentTimeTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1256370889826644396L;
 
     /** 显示模式. */
     private String            pattern          = "yyyy-MM-dd";

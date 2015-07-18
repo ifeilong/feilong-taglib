@@ -28,7 +28,7 @@ import com.feilong.taglib.base.AbstractWriteContentTag;
 public class SubStringTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -7124739051743887808L;
 
     /** 需要被截取的内容. */
     private String            content;

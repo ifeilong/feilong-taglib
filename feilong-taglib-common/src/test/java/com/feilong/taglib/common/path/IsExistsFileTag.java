@@ -32,7 +32,7 @@ import com.feilong.taglib.base.AbstractConditionalTag;
 public class IsExistsFileTag extends AbstractConditionalTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8682905226814106827L;
 
     /**
      * 文件路径,<br>
