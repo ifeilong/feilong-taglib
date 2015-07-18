@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
+import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import com.feilong.core.io.UncheckedIOException;
 
@@ -69,7 +70,7 @@ import com.feilong.core.io.UncheckedIOException;
  * @see javax.servlet.jsp.tagext.TagSupport
  * @since 1.0.0
  */
-public abstract class BaseTag extends BodyTagSupport{
+public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -5494214419937813707L;
@@ -142,5 +143,25 @@ public abstract class BaseTag extends BodyTagSupport{
      */
     protected final HttpServletResponse getHttpServletResponse(){
         return (HttpServletResponse) pageContext.getResponse();
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.servlet.jsp.tagext.TryCatchFinally#doCatch(java.lang.Throwable)
+     */
+    @Override
+    public void doCatch(Throwable t) throws Throwable{
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.servlet.jsp.tagext.TryCatchFinally#doFinally()
+     */
+    @Override
+    public void doFinally(){
+
     }
 }
