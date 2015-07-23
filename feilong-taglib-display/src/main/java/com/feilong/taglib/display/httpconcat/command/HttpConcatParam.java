@@ -204,7 +204,7 @@ public final class HttpConcatParam implements Serializable{
 
         String[] itemSrcArray = null;
         if (null != this.itemSrcList){
-            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList);
+            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList, String.class);
         }
 
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);
@@ -246,12 +246,12 @@ public final class HttpConcatParam implements Serializable{
 
         String[] itemSrcArray = null;
         if (null != this.itemSrcList){
-            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList);
+            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList, String.class);
         }
 
         String[] itemSrcArray2 = null;
         if (null != t.getItemSrcList()){
-            itemSrcArray2 = CollectionsUtil.toArray(t.getItemSrcList());
+            itemSrcArray2 = CollectionsUtil.toArray(t.getItemSrcList(), String.class);
         }
 
         return equalsBuilder //
