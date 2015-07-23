@@ -187,7 +187,7 @@
 			<rtexprvalue>true</rtexprvalue>
 			<description>
 				<![CDATA[
-					The domain
+					域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}
 				]]>
 			</description>
 		</attribute>

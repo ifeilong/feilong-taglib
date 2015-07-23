@@ -60,7 +60,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
         if (LOGGER.isDebugEnabled()){
             RequestLogSwitch requestLogSwitch = new RequestLogSwitch();
             Map<String, Object> requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
-            LOGGER.debug("request info:{}", JsonUtil.format(requestInfoMapForLog));
+            LOGGER.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog));
         }
 
         // 开始执行的部分

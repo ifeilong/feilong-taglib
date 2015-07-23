@@ -17,6 +17,8 @@ package com.feilong.taglib.display.httpconcat;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.lang.ObjectUtil;
@@ -66,7 +68,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
      */
     private String            root;
 
-    /** The domain. */
+    /** 域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}. */
     private String            domain;
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
@@ -92,6 +94,9 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
         List<String> itemSrcList = HttpConcatUtil.toItemSrcList(bodyContentSrc);
         if (Validator.isNullOrEmpty(itemSrcList)){
             return StringUtils.EMPTY;
+        }
+        if (Validator.isNullOrEmpty(domain)){
+            domain = getHttpServletRequest().getContextPath();
         }
 
         HttpConcatParam httpConcatParam = new HttpConcatParam();
@@ -140,7 +145,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     }
 
     /**
-     * 设置 the domain.
+     * 域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}.
      *
      * @param domain
      *            the domain to set
