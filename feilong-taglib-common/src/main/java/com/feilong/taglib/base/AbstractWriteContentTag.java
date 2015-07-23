@@ -39,25 +39,14 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * @see com.feilong.taglib.base.BaseTag
  * @since 1.0.0
  */
-public abstract class AbstractWriteContentTag extends BaseTag{
+//默认修饰符号 限制访问
+abstract class AbstractWriteContentTag extends BaseTag{
 
     /** The Constant log. */
     private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractWriteContentTag.class);
 
     /** The Constant serialVersionUID. */
     private static final long   serialVersionUID = 8215127553271356734L;
-
-    /**
-     * 标签开始.
-     *
-     * @return the int
-     */
-    @Override
-    public int doStartTag(){
-        execute();
-        // 开始:跳过了开始和结束标签之间的代码。
-        return SKIP_BODY;
-    }
 
     /**
      * Execute.
