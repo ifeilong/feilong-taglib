@@ -17,13 +17,11 @@ package com.feilong.taglib.display.httpconcat;
 
 import java.util.List;
 
-import javax.servlet.jsp.JspException;
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractWriteContentTag;
+import com.feilong.taglib.base.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -49,7 +47,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @version 1.2.2 2015年7月23日 下午8:50:08
  * @since 1.0.2
  */
-public class HttpConcatTag extends AbstractWriteContentTag{
+public class HttpConcatTag extends AbstractEndWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID  = -3447592871482978718L;
@@ -73,28 +71,6 @@ public class HttpConcatTag extends AbstractWriteContentTag{
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
     private Boolean           httpConcatSupport = null;
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.taglib.base.AbstractCommonTag#doStartTag()
-     */
-    @Override
-    public int doStartTag(){
-        //Request the creation of new buffer, a BodyContent on which to evaluate the body of this tag. Returned from doStartTag when it implements BodyTag. This is an illegal return value for doStartTag when the class does not implement BodyTag.
-        return EVAL_BODY_BUFFERED;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
-     */
-    @Override
-    public int doEndTag() throws JspException{
-        execute();
-        return EVAL_PAGE;
-    }
 
     // ***********************************************************************************
     /*

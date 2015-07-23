@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.core.io.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
-import com.feilong.taglib.base.AbstractWriteContentTag;
+import com.feilong.taglib.base.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
@@ -74,7 +74,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * @version 1.0.5 May 3, 2014 1:44:08 PM
  * @since 1.0.0
  */
-public class PagerTag extends AbstractWriteContentTag{
+public class PagerTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID       = -3523064037264688170L;

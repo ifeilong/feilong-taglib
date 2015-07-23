@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.Validator;
-import com.feilong.taglib.base.AbstractWriteContentTag;
+import com.feilong.taglib.base.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
@@ -35,7 +35,7 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * @version 1.2.2 2015年7月17日 上午12:09:08
  */
 //TODO ADD javadoc
-public class BreadCrumbTag extends AbstractWriteContentTag{
+public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -8596553099620845748L;
