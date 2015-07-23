@@ -104,7 +104,7 @@ public final class HttpConcatUtil implements HttpConcatConstants{
      */
     //TODO change to ConcurrentHashMap
     //这里对 线程安全的要求不高, 仅仅是 插入和读取的操作,即时出了线程安全问题, 重新解析js/css 标签代码 并加载 即可
-    private static final Map<HttpConcatParam, String> cache                  = new HashMap<HttpConcatParam, String>();
+    private static final Map<HttpConcatParam, String> CACHE                  = new HashMap<HttpConcatParam, String>();
 
     // XXX 支持多变量
     static{
@@ -173,9 +173,9 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         //缓存
         if (DEFAULT_CACHEENABLE){
             //返回此映射中的键-值映射关系数。如果该映射包含的元素大于 Integer.MAX_VALUE，则返回 Integer.MAX_VALUE。 
-            int cacheSize = cache.size();
+            int cacheSize = CACHE.size();
 
-            String content = cache.get(httpConcatParam);
+            String content = CACHE.get(httpConcatParam);
             //包含
             if (null != content){
                 if (LOGGER.isInfoEnabled()){
@@ -246,9 +246,9 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         }
         //********************设置cache***********************************************
         if (isWriteCache){
-            cache.put(httpConcatParam, (null == content) ? "" : content);
+            CACHE.put(httpConcatParam, (null == content) ? "" : content);
             if (LOGGER.isInfoEnabled()){
-                LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), cache.size());
+                LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
             }
         }else{
             if (DEFAULT_CACHEENABLE){
