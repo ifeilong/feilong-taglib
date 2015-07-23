@@ -52,15 +52,17 @@ public class HttpConcatTag extends AbstractWriteContentTag{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3447592871482978718L;
 
-    /** 类型css/js. */
+    /** 类型,是 css 还是 js. */
     private String            type;
 
     /** 版本号. */
     private String            version;
 
     /**
-     * 根目录.<br>
+     * 根目录.
+     * <p>
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
+     * </p>
      */
     private String            root;
 
