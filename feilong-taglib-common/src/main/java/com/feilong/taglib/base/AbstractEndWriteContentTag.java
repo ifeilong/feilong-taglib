@@ -21,8 +21,8 @@ import javax.servlet.jsp.JspException;
  * end 输出.
  *
  * @author feilong
- * @version 1.2.2 2015年7月23日 下午9:03:41
- * @since 1.2.2
+ * @version 1.2.3 2015年7月23日 下午9:03:41
+ * @since 1.2.3
  */
 public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag{
 
