@@ -53,12 +53,12 @@ Reduce development, Release ideas
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-common</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-display</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2</version>
 			</dependency>
 			....
 		</dependencies>
