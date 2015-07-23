@@ -33,7 +33,6 @@ import com.feilong.core.util.StringUtil;
 import com.feilong.core.util.ToStringConfig;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-import com.feilong.taglib.display.httpconcat.directive.Concat;
 import com.feilong.tools.security.oneway.MD5Util;
 
 /**
@@ -49,7 +48,6 @@ import com.feilong.tools.security.oneway.MD5Util;
  * @author feilong
  * @version 1.0.7 2014年5月19日 下午2:50:43
  * @see HttpConcatTag
- * @see Concat
  * @see HttpConcatConstants
  * @see HttpConcatParam
  * @since 1.0.7
