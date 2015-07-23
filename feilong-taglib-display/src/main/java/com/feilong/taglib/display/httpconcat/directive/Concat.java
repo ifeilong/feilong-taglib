@@ -18,7 +18,6 @@ package com.feilong.taglib.display.httpconcat.directive;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.velocity.context.InternalContextAdapter;
@@ -149,16 +148,16 @@ import com.feilong.tools.velocity.directive.AbstractDirective;
 public final class Concat extends AbstractDirective{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER            = LoggerFactory.getLogger(Concat.class);
+    private static final Logger LOGGER         = LoggerFactory.getLogger(Concat.class);
 
     // **************************************************************
     // 由于继承 字段是不会被覆盖的,所以下面的 两个方法 必须每个实现类重写
     // ****************************************************************
     /** 自定义标签名称. */
-    private String              DIRECTIVE_NAME = "concat";
+    private final String        DIRECTIVE_NAME = "concat";
 
     /** 自定义标签类型. */
-    private int                 DIRECTIVE_TYPE = BLOCK;
+    private final int           DIRECTIVE_TYPE = BLOCK;
 
     /*
      * (non-Javadoc)
@@ -244,7 +243,10 @@ public final class Concat extends AbstractDirective{
 
         // *******************************************************************************************
         // 转成item src list
-        List<String> itemSrcList = toItemSrcList(blockContent);
+        List<String> itemSrcList = HttpConcatUtil.toItemSrcList(blockContent);
+        if (Validator.isNullOrEmpty(itemSrcList)){
+            return null;
+        }
 
         HttpConcatParam httpConcatParam = new HttpConcatParam();
 
@@ -278,32 +280,6 @@ public final class Concat extends AbstractDirective{
 
         String blockContent = stringWriter.toString();
         return blockContent;
-    }
-
-    // ***************************************************************
-
-    /**
-     * 获得 items array.
-     * 
-     * @param blockContent
-     *            内容,目前 以 \n 分隔
-     * @return the items array
-     */
-    private List<String> toItemSrcList(String blockContent){
-        String regex = "\n";
-        String[] items = blockContent.trim().split(regex);
-        int length = items.length;
-
-        List<String> list = new ArrayList<String>(length);
-        for (int i = 0; i < length; ++i){
-            String item = items[i];
-            // 忽视空行
-            if (Validator.isNotNullOrEmpty(item)){
-                // 去除空格
-                list.add(item.trim());
-            }
-        }
-        return list;
     }
 
     // ***************************************************************

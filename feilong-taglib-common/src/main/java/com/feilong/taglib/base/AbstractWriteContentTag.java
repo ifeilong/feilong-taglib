@@ -54,6 +54,15 @@ public abstract class AbstractWriteContentTag extends BaseTag{
      */
     @Override
     public int doStartTag(){
+        execute();
+        // 开始:跳过了开始和结束标签之间的代码。
+        return SKIP_BODY;
+    }
+
+    /**
+     * Execute.
+     */
+    protected void execute(){
         Date beginDate = new Date();
 
         HttpServletRequest request = getHttpServletRequest();
@@ -74,9 +83,6 @@ public abstract class AbstractWriteContentTag extends BaseTag{
                         getClass().getSimpleName(),
                         useTimeLog(),
                         DateExtensionUtil.getIntervalForView(beginDate, endDate));
-
-        // 开始:跳过了开始和结束标签之间的代码。
-        return SKIP_BODY;
     }
 
     /**

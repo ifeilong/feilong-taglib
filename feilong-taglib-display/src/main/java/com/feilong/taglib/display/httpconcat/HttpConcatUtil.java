@@ -15,10 +15,12 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -138,7 +140,7 @@ public final class HttpConcatUtil implements HttpConcatConstants{
      * @param httpConcatParam
      *            the http concat param
      * @return <ul>
-     *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,return null</li>
+     *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,return {@link StringUtils#EMPTY}</li>
      *         <li>如果支持 concat,那么生成concat字符串</li>
      *         <li>如果不支持 concat,那么生成多行js/css 原生的字符串</li>
      *         </ul>
@@ -159,8 +161,8 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         // 判断item list
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
         if (Validator.isNullOrEmpty(itemSrcList)){
-            LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return null");
-            return null;
+            LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
+            return StringUtils.EMPTY;
         }
 
         //是否使用cache
@@ -411,21 +413,6 @@ public final class HttpConcatUtil implements HttpConcatConstants{
         return sb.toString();
     }
 
-    // /**
-    // * 加工结果
-    // *
-    // * @param sb
-    // * @return
-    // */
-    // private static String handleResult(StringBuilder sb){
-    // String string = sb.toString();
-    // if (LOGGER.isDebugEnabled()){
-    // LOGGER.debug("the param sb:{}", sb);
-    // }
-    // // return string.replace("//", "/");
-    // return string;
-    // }
-
     /**
      * Append version.
      * 
@@ -443,6 +430,30 @@ public final class HttpConcatUtil implements HttpConcatConstants{
                 LOGGER.debug("the param version isNullOrEmpty,we suggest you to set version value");
             }
         }
+    }
+
+    /**
+     * 获得 items array.
+     * 
+     * @param blockContent
+     *            内容,目前 以 \n 分隔
+     * @return the items array
+     */
+    public static List<String> toItemSrcList(String blockContent){
+        String regex = "\n";
+        String[] items = blockContent.trim().split(regex);
+        int length = items.length;
+
+        List<String> list = new ArrayList<String>(length);
+        for (int i = 0; i < length; ++i){
+            String item = items[i];
+            // 忽视空行
+            if (Validator.isNotNullOrEmpty(item)){
+                // 去除空格
+                list.add(item.trim());
+            }
+        }
+        return list;
     }
 
     // *****************************************************************************

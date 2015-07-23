@@ -15,11 +15,13 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.base.AbstractWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
@@ -43,14 +45,14 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0 2014年5月4日 下午11:45:20
- * @deprecated 待整理
+ * @version 1.0.2 2014年5月4日 下午11:45:20
+ * @version 1.2.2 2015年7月23日 下午8:50:08
+ * @since 1.0.2
  */
-@Deprecated
 public class HttpConcatTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3447592871482978718L;
+    private static final long serialVersionUID  = -3447592871482978718L;
 
     /** 类型,是 css 还是 js. */
     private String            type;
@@ -69,6 +71,31 @@ public class HttpConcatTag extends AbstractWriteContentTag{
     /** The domain. */
     private String            domain;
 
+    /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
+    private Boolean           httpConcatSupport = null;
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.taglib.base.AbstractCommonTag#doStartTag()
+     */
+    @Override
+    public int doStartTag(){
+        //Request the creation of new buffer, a BodyContent on which to evaluate the body of this tag. Returned from doStartTag when it implements BodyTag. This is an illegal return value for doStartTag when the class does not implement BodyTag.
+        return EVAL_BODY_BUFFERED;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
+     */
+    @Override
+    public int doEndTag() throws JspException{
+        execute();
+        return EVAL_PAGE;
+    }
+
     // ***********************************************************************************
     /*
      * (non-Javadoc)
@@ -78,13 +105,18 @@ public class HttpConcatTag extends AbstractWriteContentTag{
     @Override
     protected Object writeContent(){
         String bodyContentSrc = bodyContent.getString();
-        bodyContentSrc = bodyContentSrc.replaceAll("[\r\n\\s]", "");
-
-        if (Validator.isNullOrEmpty(bodyContentSrc) || Validator.isNullOrEmpty(type)){
-            return "";
+        if (Validator.isNullOrEmpty(ObjectUtil.trim(bodyContentSrc))){
+            return StringUtils.EMPTY;
         }
 
-        List<String> itemSrcList = getItemSrcList(bodyContentSrc, new ArrayList<String>());
+        if (Validator.isNullOrEmpty(type)){
+            return StringUtils.EMPTY;
+        }
+
+        List<String> itemSrcList = HttpConcatUtil.toItemSrcList(bodyContentSrc);
+        if (Validator.isNullOrEmpty(itemSrcList)){
+            return StringUtils.EMPTY;
+        }
 
         HttpConcatParam httpConcatParam = new HttpConcatParam();
         httpConcatParam.setDomain(domain);
@@ -92,52 +124,12 @@ public class HttpConcatTag extends AbstractWriteContentTag{
         httpConcatParam.setType(type);
         httpConcatParam.setVersion(version);
         httpConcatParam.setItemSrcList(itemSrcList);
+        httpConcatParam.setHttpConcatSupport(httpConcatSupport);
 
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
 
-    /**
-     * 递归获取bodyContent中的TengineFile.
-     * 
-     * @param bodyContentSrc
-     *            the body content
-     * @param fileList
-     *            the file list
-     * @return the file list
-     */
-    private List<String> getItemSrcList(String bodyContentSrc,List<String> fileList){
-        int begin = bodyContentSrc.indexOf(HttpConcatItemTag.BEGIN_TAG);
-        int end = bodyContentSrc.indexOf(HttpConcatItemTag.END_TAG);
-        if (begin < 0 || end < 0){
-            return fileList;
-        }
-        fileList.add(bodyContentSrc.substring(begin + HttpConcatItemTag.BEGIN_TAG.length(), end));
-        return getItemSrcList(bodyContentSrc.substring(end + HttpConcatItemTag.END_TAG.length()), fileList);
-    }
-
-    // ******************************************************************************
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
-     */
-    @Override
-    public int doEndTag() throws JspException{
-        print(this.writeContent());
-        return EVAL_PAGE;
-    }
-
     // **************************************************************************
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.taglib.base.AbstractCommonTag#doStartTag()
-     */
-    @Override
-    public int doStartTag(){
-        return EVAL_BODY_BUFFERED;
-    }
 
     /**
      * Sets the 类型css/js.
@@ -179,5 +171,15 @@ public class HttpConcatTag extends AbstractWriteContentTag{
      */
     public void setDomain(String domain){
         this.domain = domain;
+    }
+
+    /**
+     * 设置 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量).
+     *
+     * @param httpConcatSupport
+     *            the httpConcatSupport to set
+     */
+    public void setHttpConcatSupport(Boolean httpConcatSupport){
+        this.httpConcatSupport = httpConcatSupport;
     }
 }
