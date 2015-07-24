@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.configure.ResourceBundleUtil;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.Validator;
@@ -243,7 +243,7 @@ public final class PagerUtil{
         Integer currentPageNo = null;
 
         try{
-            currentPageNo = ObjectUtil.toInteger(RequestUtil.getParameter(request, pageParamName));
+            currentPageNo = ConvertUtil.toInteger(RequestUtil.getParameter(request, pageParamName));
         }catch (Exception e){
             // 抛出异常, 但是不给 currentPageNo 赋值
             LOGGER.error(e.getClass().getName(), e);

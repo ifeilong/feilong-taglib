@@ -53,7 +53,7 @@ import com.feilong.tools.security.oneway.MD5Util;
  * @since 1.0.7
  */
 //XXX 丰富 JavaDOC
-public final class HttpConcatUtil implements HttpConcatConstants{
+public final class HttpConcatUtil{
 
     /** The Constant LOGGER. */
     private static final Logger                       LOGGER                 = LoggerFactory.getLogger(HttpConcatUtil.class);
@@ -106,28 +106,35 @@ public final class HttpConcatUtil implements HttpConcatConstants{
 
     // XXX 支持多变量
     static{
-        GLOBAL_HTTP_CONCAT_SUPPORT = ResourceBundleUtil.getValue(CONFIG_FILE, KEY_HTTPCONCAT_SUPPORT, Boolean.class);
+        GLOBAL_HTTP_CONCAT_SUPPORT = ResourceBundleUtil.getValue(
+                        HttpConcatConstants.CONFIG_FILE,
+                        HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
+                        Boolean.class);
 
         if (Validator.isNullOrEmpty(GLOBAL_HTTP_CONCAT_SUPPORT)){
             LOGGER.warn(
                             "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]",
-                            KEY_HTTPCONCAT_SUPPORT,
-                            CONFIG_FILE);
+                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
+                            HttpConcatConstants.CONFIG_FILE);
         }
-    }
 
-    // 加载模板
-    static{
-        TEMPLATE_CSS = ResourceBundleUtil.getValue(CONFIG_FILE, KEY_TEMPLATE_CSS);
-        TEMPLATE_JS = ResourceBundleUtil.getValue(CONFIG_FILE, KEY_TEMPLATE_JS);
+        // 加载模板
+        TEMPLATE_CSS = ResourceBundleUtil.getValue(HttpConcatConstants.CONFIG_FILE, HttpConcatConstants.KEY_TEMPLATE_CSS);
+        TEMPLATE_JS = ResourceBundleUtil.getValue(HttpConcatConstants.CONFIG_FILE, HttpConcatConstants.KEY_TEMPLATE_JS);
         if (Validator.isNullOrEmpty(TEMPLATE_CSS)){
             String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, KEY_HTTPCONCAT_SUPPORT, CONFIG_FILE));
+            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
+                            messagePattern,
+                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
+                            HttpConcatConstants.CONFIG_FILE));
 
         }
         if (Validator.isNullOrEmpty(TEMPLATE_JS)){
             String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(messagePattern, KEY_HTTPCONCAT_SUPPORT, CONFIG_FILE));
+            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
+                            messagePattern,
+                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
+                            HttpConcatConstants.CONFIG_FILE));
         }
     }
 
@@ -467,9 +474,9 @@ public final class HttpConcatUtil implements HttpConcatConstants{
      *             type not css and not js
      */
     private static String getTemplate(String type) throws UnsupportedOperationException{
-        if (TYPE_CSS.equalsIgnoreCase(type)){
+        if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
             return TEMPLATE_CSS;
-        }else if (TYPE_JS.equalsIgnoreCase(type)){
+        }else if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
             return TEMPLATE_JS;
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");

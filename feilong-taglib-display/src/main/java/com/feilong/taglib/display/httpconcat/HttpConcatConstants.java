@@ -22,28 +22,28 @@ package com.feilong.taglib.display.httpconcat;
  * @version 1.0.7 2014年5月15日 下午2:48:45
  * @since 1.0.7
  */
-public interface HttpConcatConstants{
+public class HttpConcatConstants{
 
     /** 配置文件 <code>{@value}</code>. */
-    String CONFIG_FILE            = "config/httpconcat";
+    public static final String CONFIG_FILE            = "config/httpconcat";
 
     //**************************************************************
     /** css <code>{@value}</code>. */
-    String TYPE_CSS               = "css";
+    public static final String TYPE_CSS               = "css";
 
     /** js <code>{@value}</code>. */
-    String TYPE_JS                = "js";
+    public static final String TYPE_JS                = "js";
 
     //**************************************************************
 
     /** <code>{@value}</code>. */
-    String KEY_HTTPCONCAT_SUPPORT = "httpconcatSupport";
+    public static final String KEY_HTTPCONCAT_SUPPORT = "httpconcatSupport";
 
     //**************************************************************
 
     /** <code>{@value}</code>. */
-    String KEY_TEMPLATE_CSS       = "template.css";
+    public static final String KEY_TEMPLATE_CSS       = "template.css";
 
     /** <code>{@value}</code>. */
-    String KEY_TEMPLATE_JS        = "template.js";
+    public static final String KEY_TEMPLATE_JS        = "template.js";
 }
