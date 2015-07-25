@@ -36,7 +36,7 @@ import com.feilong.servlet.http.entity.RequestLogSwitch;
  * @version 1.0.3 2012-3-13 上午1:59:22
  * @version 1.2.1 2015年6月12日 下午3:33:05
  * @version 1.2.2 2015-7-17 00:24 add time monitor
- * @version 1.2.3 2015-7-23 21:21 update Access Modifier to default
+ * @version 1.3.0 2015-7-23 21:21 update Access Modifier to default
  * @see com.feilong.taglib.base.BaseTag
  * @since 1.0.0
  */
