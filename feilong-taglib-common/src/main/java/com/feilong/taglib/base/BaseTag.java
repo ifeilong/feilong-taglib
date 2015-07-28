@@ -80,10 +80,8 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      *
      * @param object
      *            the object
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      */
-    protected void print(Object object) throws UncheckedIOException{
+    protected void print(Object object){
         JspWriter jspWriter = pageContext.getOut();
         try{
             jspWriter.print(object);
@@ -97,10 +95,8 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      *
      * @param object
      *            the object
-     * @throws UncheckedIOException
-     *             the unchecked io exception
      */
-    protected void println(Object object) throws UncheckedIOException{
+    protected void println(Object object){
         JspWriter jspWriter = pageContext.getOut();
         try{
             jspWriter.println(object.toString());

@@ -24,7 +24,7 @@ import com.feilong.taglib.base.AbstractConditionalTag;
  * @author feilong
  * @version 1.0.0 Jan 4, 2013 1:33:02 PM
  */
-public class isNotContainTag extends AbstractConditionalTag{
+public class IsNotContainTag extends AbstractConditionalTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 8239319419199818297L;
