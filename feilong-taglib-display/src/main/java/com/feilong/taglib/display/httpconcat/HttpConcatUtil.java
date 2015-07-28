@@ -141,7 +141,7 @@ public final class HttpConcatUtil{
     // *****************************************************************************
     /**
      * 获得解析的内容.
-     * 
+     *
      * @param httpConcatParam
      *            the http concat param
      * @return <ul>
@@ -149,12 +149,8 @@ public final class HttpConcatUtil{
      *         <li>如果支持 concat,那么生成concat字符串</li>
      *         <li>如果不支持 concat,那么生成多行js/css 原生的字符串</li>
      *         </ul>
-     * @throws NullPointerException
-     *             if isNullOrEmpty(httpConcatParam)
-     * @throws UnsupportedOperationException
-     *             if httpConcatParam.getType() 不是 js或者css
      */
-    public static String getWriteContent(HttpConcatParam httpConcatParam) throws NullPointerException,UnsupportedOperationException{
+    public static String getWriteContent(HttpConcatParam httpConcatParam){
         if (Validator.isNullOrEmpty(httpConcatParam)){
             throw new NullPointerException("the httpConcatParam is null or empty!");
         }
@@ -465,15 +461,13 @@ public final class HttpConcatUtil{
 
     /**
      * 不同的type不同的模板.
-     * 
+     *
      * @param type
      *            类型 {@link HttpConcatConstants#TYPE_CSS} 以及{@link HttpConcatConstants#TYPE_JS}
      * @return 目前仅支持 {@link HttpConcatConstants#TYPE_CSS} 以及{@link HttpConcatConstants#TYPE_JS},其余不支持,会抛出
      *         {@link UnsupportedOperationException}
-     * @throws UnsupportedOperationException
-     *             type not css and not js
      */
-    private static String getTemplate(String type) throws UnsupportedOperationException{
+    private static String getTemplate(String type){
         if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
             return TEMPLATE_CSS;
         }else if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
