@@ -62,10 +62,10 @@ public class PagerParamsTest{
             Assert.assertEquals(false, pagerParams1.equals(null));
             Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            pagerParams2.setCharsetType(CharsetType.GB18030);
+            pagerParams2.setCharsetType(CharsetType.UTF8);
             Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
 
-            pagerParams1.setCharsetType(CharsetType.GB18030);
+            pagerParams1.setCharsetType(CharsetType.UTF8);
             Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
             pagerParams1.setCharsetType(null);
