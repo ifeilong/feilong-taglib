@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URIUtil;
+import com.feilong.core.net.URLUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.Validator;
@@ -147,7 +148,7 @@ public class BreadCrumbUtil{
                 if (URIUtil.isAbsolutePath(path)){
                     //nothing to do 
                 }else{
-                    URL context = URIUtil.getUrl(urlPrefix);
+                    URL context = URLUtil.newURL(urlPrefix);
                     String unionUrl = URIUtil.getUnionUrl(context, path);
                     breadCrumbEntity.setPath(unionUrl);
                 }

@@ -25,6 +25,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -216,14 +217,14 @@ public final class PagerUtil{
                 //************************************************************************
                 return content;
             }
-            return "";
+            return StringUtils.EMPTY;
         }
 
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("the param totalCount:{} not >0", totalCount);
         }
         // 如果总数不>0 则直接返回 empty,页面分页地方显示空白
-        return "";
+        return StringUtils.EMPTY;
     }
 
     /**

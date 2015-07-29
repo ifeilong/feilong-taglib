@@ -1,4 +1,5 @@
 package com.feilong.taglib.display;
+
 ///**
 // * Copyright (c) 2008-2014 FeiLong, Inc. All Rights Reserved.
 // * <p>
@@ -68,6 +69,7 @@ package com.feilong.taglib.display;
 ////			stringBuilder.append(HTMLSpan.createSpan(htmlSpanEntity));
 ////			return stringBuilder.toString();
 //		}
-//		return "";
+//		return StringUtils.EMPTY;
 //	}
 //}
+
