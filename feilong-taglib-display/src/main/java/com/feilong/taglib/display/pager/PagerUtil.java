@@ -482,7 +482,7 @@ public final class PagerUtil{
 
             // XXX 可以优化成先出模板链接,然后每个替换, 这样性能要比 循环解析url要快
             // 循环里面不再加码,避免浪费性能 上面路径before已经经过编码了
-            templateEncodedUrl = URIUtil.getEncodedUrlByArrayValueMap(before, map, null);
+            templateEncodedUrl = ParamUtil.addParameterArrayValueMap(before, map, null);
         }
 
         for (Integer index : indexSet){
@@ -493,7 +493,7 @@ public final class PagerUtil{
             }else{
                 // 构建一个数组，完全覆盖pageParamName
                 map.put(pageParamName, new String[] { "" + index });
-                encodedUrl = URIUtil.getEncodedUrlByArrayValueMap(before, map, null);
+                encodedUrl = ParamUtil.addParameterArrayValueMap(before, map, null);
             }
             returnMap.put(index, encodedUrl);
         }
