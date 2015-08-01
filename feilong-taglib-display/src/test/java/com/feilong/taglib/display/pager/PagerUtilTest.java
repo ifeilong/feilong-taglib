@@ -22,10 +22,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.awt.DesktopUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.io.CharsetType;
 import com.feilong.core.io.IOWriteUtil;
+import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
 /**
