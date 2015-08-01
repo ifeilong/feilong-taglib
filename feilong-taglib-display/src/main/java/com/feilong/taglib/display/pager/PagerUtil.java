@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.configure.ResourceBundleUtil;
+import com.feilong.core.net.ParamUtil;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.Validator;
@@ -241,22 +242,15 @@ public final class PagerUtil{
      */
     public static final Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
         // /s/s-t-b-f-a-cBlack-s-f-p-gHeat+Gear-e-i-o.htm?keyword=&pageNo=%uFF1B
-        Integer currentPageNo = null;
-
+        String pageNoString = RequestUtil.getParameter(request, pageParamName);
         try{
-            currentPageNo = ConvertUtil.toInteger(RequestUtil.getParameter(request, pageParamName));
+            Integer pageNo = ConvertUtil.toInteger(pageNoString);
+            return null == pageNo ? 1 : pageNo;
         }catch (Exception e){
             // 抛出异常, 但是不给 currentPageNo 赋值
             LOGGER.error(e.getClass().getName(), e);
         }
-
-        // 不是空 直接返回
-        if (null != currentPageNo){
-            return currentPageNo;
-        }
-
-        // 不带这个参数 或者转换异常 返回1
-        return 1;
+        return 1; // 不带这个参数 或者转换异常 返回1
     }
 
     // *****************************private************************************************************
@@ -415,8 +409,11 @@ public final class PagerUtil{
     }
 
     /**
-     * 解析参数中的当前页面<br>
+     * 解析参数中的当前页面.
+     * 
+     * <p>
      * 对于<1的情况做 返回1特殊处理.
+     * </p>
      * 
      * @param pagerParams
      *            the pager params
@@ -426,17 +423,16 @@ public final class PagerUtil{
      */
     private static final int getCurrentPageNo(PagerParams pagerParams){
         int currentPageNo = pagerParams.getCurrentPageNo();
-
         // 解决可能出现界面上 负数的情况
-        if (currentPageNo < 1){
-            currentPageNo = 1;
-        }
-        return currentPageNo;
+        return currentPageNo < 1 ? 1 : currentPageNo;
     }
 
     /**
-     * 获得所有页码的连接<br>
+     * 获得所有页码的连接.
+     * 
+     * <p>
      * 注:(key={@link #DEFAULT_TEMPLATE_PAGE_NO} 为模板链接,可用户前端解析 {@link PagerVMParam#getHrefUrlTemplate()}.
+     * </p>
      * 
      * @param pagerParams
      *            the pager params
@@ -459,22 +455,18 @@ public final class PagerUtil{
         }
 
         String url = uri.toString();
-        String before = URIUtil.getBeforePath(url);
+        String before = URIUtil.getFullPathWithoutQueryString(url);
 
         // ***********************************************************************
         // getQuery() 返回此 URI 的已解码的查询组成部分。
         // getRawQuery() 返回此 URI 的原始查询组成部分。 URI 的查询组成部分（如果定义了）只包含合法的 URI 字符。
-        String query = uri.getRawQuery();
+        String queryString = uri.getRawQuery();
 
         // ***********************************************************************
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
-        // 传入的url不带参数的情况
-        if (Validator.isNullOrEmpty(query)){
-            // nothing to do
-        }else{
-
+        if (Validator.isNotNullOrEmpty(queryString)){
             // 先返回 安全的 参数 ,避免循环里面 浪费性能
-            Map<String, String[]> originalMap = URIUtil.parseQueryToArrayMap(query, charsetType);
+            Map<String, String[]> originalMap = ParamUtil.parseQueryStringToArrayValueMap(queryString, charsetType);
             map.putAll(originalMap);
         }
 
@@ -488,9 +480,9 @@ public final class PagerUtil{
             map.put(pageParamName, new String[] { "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO });
             target = pageParamName + "=" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 
-            //  可以优化 优化成先出 模板链接,然后每个替换, 这样性能要比 循环解析url要快
-            // 循环里面不再加码,避免 浪费性能 上面路径before已经经过编码了
-            templateEncodedUrl = URIUtil.getEncodedUrlByArrayMap(before, map, null);
+            // XXX 可以优化成先出模板链接,然后每个替换, 这样性能要比 循环解析url要快
+            // 循环里面不再加码,避免浪费性能 上面路径before已经经过编码了
+            templateEncodedUrl = URIUtil.getEncodedUrlByArrayValueMap(before, map, null);
         }
 
         for (Integer index : indexSet){
@@ -501,7 +493,7 @@ public final class PagerUtil{
             }else{
                 // 构建一个数组，完全覆盖pageParamName
                 map.put(pageParamName, new String[] { "" + index });
-                encodedUrl = URIUtil.getEncodedUrlByArrayMap(before, map, null);
+                encodedUrl = URIUtil.getEncodedUrlByArrayValueMap(before, map, null);
             }
             returnMap.put(index, encodedUrl);
         }
@@ -559,15 +551,17 @@ public final class PagerUtil{
     }
 
     /**
-     * 获得分页最大显示的分页码<br>
+     * 获得分页最大显示的分页码.
+     * 
+     * <p>
      * 如果maxIndexPages 是0或者null,那么根据allpageNo,采用自动调节长度功能<br>
-     * 因为,如果页码大于1000的时候, 如果还是10页码的显示(1001,1002,1003,1004,1005,1006,1007,1008,1009,1010) 显示上面会很长 ,会打乱页面布局 <br>
+     * 因为,如果页码大于1000的时候, 如果还是10页码的显示(1001,1002,1003,1004,1005,1006,1007,1008,1009,1010) 显示上面会很长 ,会打乱页面布局
+     * </p>
      * <ul>
      * <li>当大于1000的页码 显示6个 即 1001,1002,1003,1004,1005,1006 类似于这样的</li>
      * <li>当大于100的页码 显示8个 即 101,102,103,104,105,106,107,108 类似于这样的</li>
      * <li>其余,默认显示10条</li>
      * </ul>
-     * .
      * 
      * @param allPageNo
      *            分页总总页数

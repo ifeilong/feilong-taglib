@@ -141,17 +141,17 @@ public class BreadCrumbUtil{
                     String urlPrefix){
         if (Validator.isNullOrEmpty(urlPrefix)){
             return currentBreadCrumbEntityTreeList;
-        }else{
-            for (BreadCrumbEntity<Object> breadCrumbEntity : currentBreadCrumbEntityTreeList){
-                String path = breadCrumbEntity.getPath();
+        }
 
-                if (URIUtil.isAbsolutePath(path)){
-                    //nothing to do 
-                }else{
-                    URL context = URLUtil.newURL(urlPrefix);
-                    String unionUrl = URIUtil.getUnionUrl(context, path);
-                    breadCrumbEntity.setPath(unionUrl);
-                }
+        for (BreadCrumbEntity<Object> breadCrumbEntity : currentBreadCrumbEntityTreeList){
+            String path = breadCrumbEntity.getPath();
+
+            if (URIUtil.isAbsolutePath(path)){
+                //nothing to do 
+            }else{
+                URL context = URLUtil.newURL(urlPrefix);
+                String unionUrl = URLUtil.getUnionUrl(context, path);
+                breadCrumbEntity.setPath(unionUrl);
             }
         }
         return currentBreadCrumbEntityTreeList;
