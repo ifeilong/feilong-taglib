@@ -466,7 +466,7 @@ public final class PagerUtil{
         Map<String, String[]> map = new LinkedHashMap<String, String[]>();
         if (Validator.isNotNullOrEmpty(queryString)){
             // 先返回 安全的 参数 ,避免循环里面 浪费性能
-            Map<String, String[]> originalMap = ParamUtil.parseQueryStringToArrayValueMap(queryString, charsetType);
+            Map<String, String[]> originalMap = ParamUtil.toSafeArrayValueMap(queryString, charsetType);
             map.putAll(originalMap);
         }
 
