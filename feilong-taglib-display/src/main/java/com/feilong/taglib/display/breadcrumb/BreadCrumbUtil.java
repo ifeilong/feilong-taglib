@@ -56,7 +56,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * <blockquote>
  * <p>
  * 如果 {@link BreadCrumbEntity#getPath()} 是绝对路径,那么是不会拼接{@code BreadCrumbParams#getUrlPrefix()}的,<br>
- * 如果 {@link BreadCrumbEntity#getPath()} 不是绝对路径,那么会调用 {@link URIUtil#getUnionUrl(URL, String)} 进行union
+ * 如果 {@link BreadCrumbEntity#getPath()} 不是绝对路径,那么会调用 {@link URLUtil#getUnionUrl(URL, String)} 进行union
  * </p>
  * </blockquote>
  *
