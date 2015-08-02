@@ -24,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.configure.ResourceBundleUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.lang.entity.ToStringConfig;
 import com.feilong.core.log.Slf4jUtil;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.security.oneway.MD5Util;
