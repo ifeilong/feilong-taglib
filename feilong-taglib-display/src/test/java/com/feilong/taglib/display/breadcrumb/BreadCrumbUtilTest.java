@@ -70,9 +70,7 @@ public class BreadCrumbUtilTest{
 
         Collections.sort(list, new BreadCrumbEntityComparator());
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(list));
-        }
+        LOGGER.debug(JsonUtil.format(list));
     }
 
     @Test

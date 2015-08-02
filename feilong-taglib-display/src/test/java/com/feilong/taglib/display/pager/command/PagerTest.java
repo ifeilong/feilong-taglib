@@ -39,8 +39,6 @@ public class PagerTest{
     public final void test(){
         Pager pager = new Pager(2, 10, 10000);
         pager.setMaxShowPageNo(-2);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(pager));
-        }
+        LOGGER.info(JsonUtil.format(pager));
     }
 }

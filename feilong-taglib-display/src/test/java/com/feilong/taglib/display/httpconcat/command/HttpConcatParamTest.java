@@ -34,7 +34,7 @@ import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
 public class HttpConcatParamTest extends BaseHttpConcatTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER    = LoggerFactory.getLogger(HttpConcatParamTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatParamTest.class);
 
     /** The domain. */
     String                      domain = "http://www.feilong.com";
@@ -46,11 +46,9 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
     public final void testHashCode(){
         HttpConcatParam t = new HttpConcatParam();
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("" + t.hashCode());
-            t.setDomain(domain);
-            LOGGER.info("" + t.hashCode());
-        }
+        LOGGER.info("" + t.hashCode());
+        t.setDomain(domain);
+        LOGGER.info("" + t.hashCode());
     }
 
     /**
@@ -62,30 +60,28 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
 
         HttpConcatParam pagerParams2 = new HttpConcatParam();
 
-        if (LOGGER.isInfoEnabled()){
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
-            Assert.assertEquals(false, pagerParams1.equals(null));
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
+        Assert.assertEquals(false, pagerParams1.equals(null));
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            pagerParams2.setDomain(domain);
-            Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        pagerParams2.setDomain(domain);
+        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
 
-            pagerParams1.setDomain(domain);
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        pagerParams1.setDomain(domain);
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            ArrayList<String> itemSrcList = new ArrayList<String>();
-            itemSrcList.add("1.js");
-            pagerParams1.setItemSrcList(itemSrcList);
-            Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        ArrayList<String> itemSrcList = new ArrayList<String>();
+        itemSrcList.add("1.js");
+        pagerParams1.setItemSrcList(itemSrcList);
+        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
 
-            itemSrcList = new ArrayList<String>();
-            itemSrcList.add("1.js");
-            pagerParams2.setItemSrcList(itemSrcList);
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        itemSrcList = new ArrayList<String>();
+        itemSrcList.add("1.js");
+        pagerParams2.setItemSrcList(itemSrcList);
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            pagerParams1.setDomain(null);
-            Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
-        }
+        pagerParams1.setDomain(null);
+        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
     }
 
     /**

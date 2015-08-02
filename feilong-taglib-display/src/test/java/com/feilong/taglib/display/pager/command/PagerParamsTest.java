@@ -41,11 +41,9 @@ public class PagerParamsTest{
     public final void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("" + pagerParams1.hashCode());
-            pagerParams1.setCharsetType(null);
-            LOGGER.info("" + pagerParams1.hashCode());
-        }
+        LOGGER.info("" + pagerParams1.hashCode());
+        pagerParams1.setCharsetType(null);
+        LOGGER.info("" + pagerParams1.hashCode());
     }
 
     /**
@@ -57,22 +55,20 @@ public class PagerParamsTest{
         PagerParams pagerParams1 = new PagerParams(0, "a");
         PagerParams pagerParams2 = new PagerParams(0, "a");
 
-        if (LOGGER.isInfoEnabled()){
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
-            Assert.assertEquals(false, pagerParams1.equals(null));
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
+        Assert.assertEquals(false, pagerParams1.equals(null));
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            pagerParams2.setCharsetType(CharsetType.UTF8);
-            Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        pagerParams2.setCharsetType(CharsetType.UTF8);
+        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
 
-            pagerParams1.setCharsetType(CharsetType.UTF8);
-            Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        pagerParams1.setCharsetType(CharsetType.UTF8);
+        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
 
-            pagerParams1.setCharsetType(null);
-            Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
-            Assert.assertEquals(false, (null instanceof PagerParams));
-            Assert.assertEquals(true, (pagerParams1 instanceof PagerParams));
-            Assert.assertEquals(false, (null instanceof Object));
-        }
+        pagerParams1.setCharsetType(null);
+        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        Assert.assertEquals(false, (null instanceof PagerParams));
+        Assert.assertEquals(true, (pagerParams1 instanceof PagerParams));
+        Assert.assertEquals(false, (null instanceof Object));
     }
 }

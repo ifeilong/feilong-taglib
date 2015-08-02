@@ -68,9 +68,6 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             System.gc();
             long start = Runtime.getRuntime().freeMemory();
 
-            //			if (LOGGER.isInfoEnabled()){
-            //				LOGGER.info("" + start);
-            //			}
             HashMap<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
 
             for (int i = 0; i < j; i++){
@@ -81,9 +78,6 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             // 快要计算的时,再清理一次
             System.gc();
             long end = Runtime.getRuntime().freeMemory();
-            //			if (LOGGER.isInfoEnabled()){
-            //				LOGGER.info("" + end);
-            //			}
             //对象占内存:
             //map1.put(j, FileUtil.formatSize((end - start)));
 
@@ -95,9 +89,6 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
             //map1.put(j, end - start);
         }
 
-        //		if (LOGGER.isInfoEnabled()){
-        //			LOGGER.info(JsonUtil.format(map1));
-        //		}
     }
 
     /**

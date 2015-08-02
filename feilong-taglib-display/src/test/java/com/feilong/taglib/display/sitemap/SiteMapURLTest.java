@@ -94,9 +94,6 @@ public class SiteMapURLTest{
         //xstre
         String filePath = SystemUtils.USER_HOME + "/feilong/sitemap.xml";
 
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(aString);
-        }
         //		Document document = Dom4jUtil.getDocument(filePath);
         //		
         //		//document.

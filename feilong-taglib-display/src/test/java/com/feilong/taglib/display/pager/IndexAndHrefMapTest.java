@@ -73,9 +73,7 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             set.add(i);
         }
         PagerParams pagerParams = getPagerParams();
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info(JsonUtil.format(pagerParams));
-        }
+        LOGGER.info(JsonUtil.format(pagerParams));
 
         for (int j = 0; j < z; ++j){
             //@SuppressWarnings({ "unchecked", "unused" })
