@@ -38,7 +38,7 @@ public class BreadCrumbParams<PK> implements Serializable{
     /** The current path. */
     private String                     currentPath;
 
-    /** url前缀, 用来拼接 {@link BreadCrumbEntity#requestMapping}. */
+    /** url前缀, 用来拼接 {@link BreadCrumbEntity#path}. */
     private String                     urlPrefix;
 
     /** The connector. */
@@ -124,7 +124,7 @@ public class BreadCrumbParams<PK> implements Serializable{
     }
 
     /**
-     * 获得 url前缀, 用来拼接 {@link BreadCrumbEntity#requestMapping}.
+     * 获得 url前缀, 用来拼接 {@link BreadCrumbEntity#path}.
      *
      * @return the urlPrefix
      */
@@ -133,7 +133,7 @@ public class BreadCrumbParams<PK> implements Serializable{
     }
 
     /**
-     * 设置 url前缀, 用来拼接 {@link BreadCrumbEntity#requestMapping}.
+     * 设置 url前缀, 用来拼接 {@link BreadCrumbEntity#path}.
      *
      * @param urlPrefix
      *            the urlPrefix to set

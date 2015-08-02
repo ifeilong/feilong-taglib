@@ -73,6 +73,9 @@ public class BreadCrumbUtilTest{
         LOGGER.debug(JsonUtil.format(list));
     }
 
+    /**
+     * Test get bread crumb content.
+     */
     @Test
     public void testGetBreadCrumbContent(){
         List<BreadCrumbEntity<Number>> list = new ArrayList<BreadCrumbEntity<Number>>();
