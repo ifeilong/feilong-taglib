@@ -19,15 +19,15 @@ import com.feilong.core.util.CollectionsUtil;
 import com.feilong.taglib.base.AbstractConditionalTag;
 
 /**
- * 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中).
+ * 判断一个值是否在一个集合(或者可以被转成Iterator)当中.
  *
  * @author feilong
- * @version 1.0.0 Jan 4, 2013 1:33:02 PM
+ * @version 1.0.0 2010-7-5 下午01:16:43
  */
-public class IsNotContainTag extends AbstractConditionalTag{
+public class IsContainsTag extends AbstractConditionalTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 8239319419199818297L;
+    private static final long serialVersionUID = 472866723265315380L;
 
     /** 一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator. */
     private Object            collection       = null;
@@ -42,7 +42,7 @@ public class IsNotContainTag extends AbstractConditionalTag{
      */
     @Override
     public boolean condition(){
-        return !CollectionsUtil.isContainTag(collection, value);
+        return CollectionsUtil.containsTag(collection, value);
     }
 
     /**
