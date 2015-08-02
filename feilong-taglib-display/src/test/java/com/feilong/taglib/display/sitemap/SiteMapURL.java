@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
-import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.CharsetType;
 import com.feilong.core.util.Validator;
 
 /**

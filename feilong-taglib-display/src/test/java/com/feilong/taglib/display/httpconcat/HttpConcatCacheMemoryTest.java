@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.FileUtil;
-import com.feilong.core.lang.ObjectUtil;
+import com.feilong.core.io.SerializableUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -83,7 +83,7 @@ public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
 
             LOGGER.info(j + " size cache占用 内存 :" + FileUtil.formatSize((end - start)));
 
-            int size = ObjectUtil.size(map);
+            int size = SerializableUtil.size(map);
             LOGGER.info("Data Size: " + size + "--->" + FileUtil.formatSize(size));
 
             //map1.put(j, end - start);

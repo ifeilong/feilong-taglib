@@ -21,7 +21,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.feilong.core.io.CharsetType;
+import com.feilong.core.lang.CharsetType;
 import com.feilong.taglib.display.pager.PagerUtil;
 
 /**
