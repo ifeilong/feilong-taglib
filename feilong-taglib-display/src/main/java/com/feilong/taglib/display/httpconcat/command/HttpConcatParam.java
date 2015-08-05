@@ -21,7 +21,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.bean.ConvertUtil;
 
 /**
  * 封装解析http concat 用到的参数.
@@ -204,7 +204,7 @@ public final class HttpConcatParam implements Serializable{
 
         String[] itemSrcArray = null;
         if (null != this.itemSrcList){
-            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList, String.class);
+            itemSrcArray = ConvertUtil.toArray(this.itemSrcList, String.class);
         }
 
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);
@@ -246,12 +246,12 @@ public final class HttpConcatParam implements Serializable{
 
         String[] itemSrcArray = null;
         if (null != this.itemSrcList){
-            itemSrcArray = CollectionsUtil.toArray(this.itemSrcList, String.class);
+            itemSrcArray = ConvertUtil.toArray(this.itemSrcList, String.class);
         }
 
         String[] itemSrcArray2 = null;
         if (null != t.getItemSrcList()){
-            itemSrcArray2 = CollectionsUtil.toArray(t.getItemSrcList(), String.class);
+            itemSrcArray2 = ConvertUtil.toArray(t.getItemSrcList(), String.class);
         }
 
         return equalsBuilder //
