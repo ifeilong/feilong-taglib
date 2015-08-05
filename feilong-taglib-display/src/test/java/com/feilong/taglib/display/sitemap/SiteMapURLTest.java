@@ -24,8 +24,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.core.io.IOWriteUtil;
 import com.feilong.tools.velocity.VelocityUtil;
@@ -37,9 +35,6 @@ import com.feilong.tools.velocity.VelocityUtil;
  * @version 1.0 Jun 26, 2014 4:09:19 PM
  */
 public class SiteMapURLTest{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
 
     /**
      * Test.
