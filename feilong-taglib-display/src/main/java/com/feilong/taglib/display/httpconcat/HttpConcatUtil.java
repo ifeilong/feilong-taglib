@@ -387,7 +387,7 @@ public final class HttpConcatUtil{
             sb.append("??");
 
             ToStringConfig toStringConfig = new ToStringConfig(ToStringConfig.DEFAULT_CONNECTOR);
-            sb.append(ConvertUtil.toString(itemSrcList, toStringConfig));
+            sb.append(ConvertUtil.toString(toStringConfig, itemSrcList));
         }
         appendVersion(version, sb);
 
