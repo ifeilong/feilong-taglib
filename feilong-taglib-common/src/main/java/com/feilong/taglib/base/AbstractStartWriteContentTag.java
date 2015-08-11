@@ -15,6 +15,14 @@
  */
 package com.feilong.taglib.base;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.servlet.http.RequestUtil;
+import com.feilong.servlet.http.builder.RequestLogSwitch;
+
 /**
  * start输出.
  *
@@ -25,7 +33,10 @@ package com.feilong.taglib.base;
 public abstract class AbstractStartWriteContentTag extends AbstractWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 20290570902030061L;
+    private static final long   serialVersionUID = 20290570902030061L;
+
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractStartWriteContentTag.class);
 
     /**
      * 标签开始.
@@ -34,7 +45,18 @@ public abstract class AbstractStartWriteContentTag extends AbstractWriteContentT
      */
     @Override
     public int doStartTag(){
-        execute();
+        try{
+            execute();
+        }catch (Exception e){
+            //XXX 默认处理异常,让页面正常执行,但是以错误log显示
+            String formatMessage = Slf4jUtil.formatMessage(
+                            "request info:{},tag is:[{}]",
+                            JsonUtil.format(RequestUtil.getRequestInfoMapForLog(
+                                            getHttpServletRequest(),
+                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
+                            getClass().getSimpleName());
+            LOGGER.error(formatMessage, e);
+        }
         // 开始:跳过了开始和结束标签之间的代码。
         return SKIP_BODY;
     }

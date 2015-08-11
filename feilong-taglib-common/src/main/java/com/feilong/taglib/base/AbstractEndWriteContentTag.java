@@ -17,6 +17,14 @@ package com.feilong.taglib.base;
 
 import javax.servlet.jsp.JspException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.servlet.http.RequestUtil;
+import com.feilong.servlet.http.builder.RequestLogSwitch;
+
 /**
  * end 输出.
  *
@@ -26,7 +34,10 @@ import javax.servlet.jsp.JspException;
  */
 public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag{
 
-    private static final long serialVersionUID = -3979342234682529223L;
+    private static final long   serialVersionUID = -3979342234682529223L;
+
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractEndWriteContentTag.class);
 
     /*
      * (non-Javadoc)
@@ -46,7 +57,18 @@ public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag
      */
     @Override
     public int doEndTag() throws JspException{
-        execute();
+        try{
+            execute();
+        }catch (Exception e){
+            //XXX 默认处理异常,让页面正常执行,但是以错误log显示
+            String formatMessage = Slf4jUtil.formatMessage(
+                            "request info:{},tag is:[{}]",
+                            JsonUtil.format(RequestUtil.getRequestInfoMapForLog(
+                                            getHttpServletRequest(),
+                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
+                            getClass().getSimpleName());
+            LOGGER.error(formatMessage, e);
+        }
         return EVAL_PAGE;
     }
 }
