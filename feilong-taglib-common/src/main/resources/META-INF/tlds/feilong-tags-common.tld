@@ -57,7 +57,7 @@
 
 	<!-- 判断一个值是否在一个集合当中 -->
 	<tag>
-		<name>isContain</name>
+		<name>isContains</name>
 		<tag-class>com.feilong.taglib.common.IsContainsTag</tag-class>
 		<description>判断一个值是否在一个集合当中</description>
 		<body-content>JSP</body-content>
@@ -77,7 +77,7 @@
 
 	<!-- 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中) -->
 	<tag>
-		<name>isNotContain</name>
+		<name>isNotContains</name>
 		<tag-class>com.feilong.taglib.common.IsNotContainsTag</tag-class>
 		<description>判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中)</description>
 		<body-content>JSP</body-content>
