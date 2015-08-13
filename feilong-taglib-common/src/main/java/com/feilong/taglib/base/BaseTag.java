@@ -26,6 +26,9 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.io.UncheckedIOException;
 
 /**
@@ -73,7 +76,10 @@ import com.feilong.core.io.UncheckedIOException;
 public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -5494214419937813707L;
+    private static final long   serialVersionUID = -5494214419937813707L;
+
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(BaseTag.class);
 
     /**
      * 将文字输出到页面.
@@ -148,7 +154,7 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      */
     @Override
     public void doCatch(Throwable t) throws Throwable{
-
+        LOGGER.error("[" + getClass().getSimpleName() + "]", t);
     }
 
     /*

@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.base.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
@@ -83,7 +82,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     @Override
     protected Object writeContent(){
         String bodyContentSrc = bodyContent.getString();
-        if (Validator.isNullOrEmpty(ObjectUtil.trim(bodyContentSrc))){
+        if (Validator.isNullOrEmpty(bodyContentSrc)){
             return StringUtils.EMPTY;
         }
 

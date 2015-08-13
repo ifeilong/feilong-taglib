@@ -107,6 +107,7 @@ public final class HttpConcatUtil{
 
     // XXX 支持多变量
     static{
+        LOGGER.info("begin init [{}]", HttpConcatUtil.class.getSimpleName());
         GLOBAL_HTTP_CONCAT_SUPPORT = ResourceBundleUtil.getValue(
                         HttpConcatConstants.CONFIG_FILE,
                         HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
@@ -137,6 +138,7 @@ public final class HttpConcatUtil{
                             HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
                             HttpConcatConstants.CONFIG_FILE));
         }
+        LOGGER.info("end init [{}]", HttpConcatUtil.class.getSimpleName());
     }
 
     // *****************************************************************************
@@ -145,7 +147,8 @@ public final class HttpConcatUtil{
      *
      * @param httpConcatParam
      *            the http concat param
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,return {@link StringUtils#EMPTY}</li>
      *         <li>如果支持 concat,那么生成concat字符串</li>
      *         <li>如果不支持 concat,那么生成多行js/css 原生的字符串</li>
