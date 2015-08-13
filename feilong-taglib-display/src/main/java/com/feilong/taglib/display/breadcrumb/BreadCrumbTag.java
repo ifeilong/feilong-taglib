@@ -65,7 +65,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
         List<BreadCrumbEntity<Object>> _breadCrumbEntityList = constructBreadCrumbEntityList();
 
         if (Validator.isNullOrEmpty(_breadCrumbEntityList)){
-            LOGGER.info("breadCrumbEntityList is NullOrEmpty!!");
+            LOGGER.warn("breadCrumbEntityList is NullOrEmpty!!,return empty!!");
             return StringUtils.EMPTY;
         }
 
