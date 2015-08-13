@@ -36,14 +36,19 @@ public class PagerParams implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7310948528499709685L;
 
-    /** 分页的 基础 url. */
-    private String            pageUrl;
-
     /** 总数据条数. */
     private Integer           totalCount;
 
+    /** 每页显示多少条. */
+    private Integer           pageSize         = PagerConstants.DEFAULT_PAGESIZE;
+
     /** 当前第几页. */
     private Integer           currentPageNo;
+
+    //******************************************************************************
+
+    /** 分页的 基础 url. */
+    private String            pageUrl;
 
     /**
      * 最大 分页码数量.
@@ -52,9 +57,6 @@ public class PagerParams implements Serializable{
      */
     @Deprecated
     private Integer           maxIndexPages;
-
-    /** 每页显示多少条. */
-    private Integer           pageSize         = PagerConstants.DEFAULT_PAGESIZE;
 
     /** 皮肤:可选. */
     private String            skin             = PagerConstants.DEFAULT_SKIN;
