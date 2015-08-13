@@ -138,7 +138,12 @@ public final class HttpConcatUtil{
                             HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
                             HttpConcatConstants.CONFIG_FILE));
         }
-        LOGGER.info("end init [{}]", HttpConcatUtil.class.getSimpleName());
+        LOGGER.info(
+                        "end init [{}],GLOBAL_HTTP_CONCAT_SUPPORT:[{}],TEMPLATE_CSS:[{}],TEMPLATE_JS:[{}]",
+                        HttpConcatUtil.class.getSimpleName(),
+                        GLOBAL_HTTP_CONCAT_SUPPORT,
+                        TEMPLATE_CSS,
+                        TEMPLATE_JS);
     }
 
     // *****************************************************************************
