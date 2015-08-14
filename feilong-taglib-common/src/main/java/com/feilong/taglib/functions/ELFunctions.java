@@ -77,6 +77,7 @@ public final class ELFunctions{
      * @return true, if successful
      * @see ConvertUtil#toIterator(Object)
      * @see CollectionsUtil#contains(Iterator, Object)
+     * @see org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)
      */
     public static boolean contains(Object collection,Object value){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
