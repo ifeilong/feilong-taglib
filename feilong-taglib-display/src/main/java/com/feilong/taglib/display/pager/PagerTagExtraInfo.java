@@ -25,17 +25,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.taglib.base.BaseTagTEL;
+import com.feilong.taglib.base.BaseTagExtraInfo;
 
 /**
- * TagExtraInfo can be used to <br>
- * 1. Define Scripting Variables. <br>
- * 2. Validation.
- * 
+ * The Class PagerTagExtraInfo.
+ *
  * @author feilong
- * @version 1.0 2012-3-13 上午12:50:50
+ * @version 1.0.3 2012-3-13 上午12:50:50
  */
-public class PagerTagExtraInfo extends BaseTagTEL{
+public class PagerTagExtraInfo extends BaseTagExtraInfo{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerTagExtraInfo.class);
@@ -53,7 +51,7 @@ public class PagerTagExtraInfo extends BaseTagTEL{
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(JsonUtil.format(tagData));
-            Map<String, Object> map = toMap(tagData);
+            Map<String, Object> map = getTagDataAttributeMap(tagData);
             LOGGER.debug(JsonUtil.format(map));
         }
 

@@ -23,21 +23,32 @@ import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
 
 /**
- * The Class BaseTagTEL.
+ * The Class BaseTagExtraInfo.
  * 
+ * <p>
+ * TagExtraInfo can be used to:
+ * </p>
+ * 
+ * <ol>
+ * <li>Define Scripting Variables</li>
+ * <li>Validation</li>
+ * </ol>
+ *
  * @author feilong
- * @version 1.0 2012-3-13 上午1:35:28
+ * @version 1.0.3 2012-3-13 上午1:35:28
+ * @see javax.servlet.jsp.tagext.TagExtraInfo
  */
-public abstract class BaseTagTEL extends TagExtraInfo{
+public abstract class BaseTagExtraInfo extends TagExtraInfo{
 
     /**
-     * 显示 tagData 里面的信息 一般用于 debug.
+     * 显示 {@link javax.servlet.jsp.tagext.TagData}里面的信息,一般用于 debug.
      *
      * @param tagData
      *            the tag data
      * @return the map< string, object>
+     * @see javax.servlet.jsp.tagext.TagData#getAttributes()
      */
-    protected Map<String, Object> toMap(TagData tagData){
+    protected Map<String, Object> getTagDataAttributeMap(TagData tagData){
         Map<String, Object> map = new HashMap<String, Object>();
         Enumeration<String> attributes = tagData.getAttributes();
         while (attributes.hasMoreElements()){
