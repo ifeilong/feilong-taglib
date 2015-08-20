@@ -37,8 +37,14 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
  * @author feilong
  * @version 1.0.3 2012-3-13 上午1:35:28
  * @see javax.servlet.jsp.tagext.TagExtraInfo
+ * 
+ * @see org.apache.taglibs.standard.tei.DeclareTEI
+ * @see org.apache.taglibs.standard.tei.ForEachTEI
+ * @see org.apache.taglibs.standard.tei.ImportTEI
+ * @see org.apache.taglibs.standard.tei.XmlParseTEI
+ * @see org.apache.taglibs.standard.tei.XmlTransformTEI
  */
-public abstract class BaseTagExtraInfo extends TagExtraInfo{
+public abstract class BaseTEI extends TagExtraInfo{
 
     /**
      * 显示 {@link javax.servlet.jsp.tagext.TagData}里面的信息,一般用于 debug.
@@ -47,6 +53,7 @@ public abstract class BaseTagExtraInfo extends TagExtraInfo{
      *            the tag data
      * @return the map< string, object>
      * @see javax.servlet.jsp.tagext.TagData#getAttributes()
+     * @since 1.4.0
      */
     protected Map<String, Object> getTagDataAttributeMap(TagData tagData){
         Map<String, Object> map = new HashMap<String, Object>();

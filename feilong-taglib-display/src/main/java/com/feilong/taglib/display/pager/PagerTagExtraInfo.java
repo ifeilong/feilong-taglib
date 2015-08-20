@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.taglib.base.BaseTagExtraInfo;
+import com.feilong.taglib.base.BaseTEI;
 
 /**
  * The Class PagerTagExtraInfo.
@@ -33,7 +33,7 @@ import com.feilong.taglib.base.BaseTagExtraInfo;
  * @author feilong
  * @version 1.0.3 2012-3-13 上午12:50:50
  */
-public class PagerTagExtraInfo extends BaseTagExtraInfo{
+public class PagerTagExtraInfo extends BaseTEI{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerTagExtraInfo.class);
