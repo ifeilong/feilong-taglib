@@ -47,7 +47,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     private List<BreadCrumbEntity<Object>> breadCrumbEntityList;
 
     /** url前缀, 用来拼接 {@link BreadCrumbEntity#getPath()},可以不设置,那么原样输出{@link BreadCrumbEntity#getPath()}. */
-    private String                         urlPrefix;
+    private String                         urlPrefix        = StringUtils.EMPTY;
 
     /** 连接符,默认>. */
     private String                         connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
@@ -134,5 +134,32 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
      */
     public void setUrlPrefix(String urlPrefix){
         this.urlPrefix = urlPrefix;
+    }
+
+    /**
+     * 获得 url前缀, 用来拼接 {@link BreadCrumbEntity#getPath()},可以不设置,那么原样输出{@link BreadCrumbEntity#getPath()}.
+     *
+     * @return the urlPrefix
+     */
+    public String getUrlPrefix(){
+        return urlPrefix;
+    }
+
+    /**
+     * 获得 连接符,默认>.
+     *
+     * @return the connector
+     */
+    public String getConnector(){
+        return connector;
+    }
+
+    /**
+     * 获得 vm的路径.
+     *
+     * @return the vmPath
+     */
+    public String getVmPath(){
+        return vmPath;
     }
 }
