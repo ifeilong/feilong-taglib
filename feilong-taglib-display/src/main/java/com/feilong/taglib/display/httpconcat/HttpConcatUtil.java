@@ -192,26 +192,26 @@ public final class HttpConcatUtil{
                     LOGGER.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
                 }
                 return content;
+            }
+
+            //超出cache 数量
+            boolean outOfCacheItemSizeLimit = (cacheSize >= DEFAULT_CACHESIZELIMIT);
+            if (outOfCacheItemSizeLimit){
+                LOGGER.warn(
+                                "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
+                                cacheKeyHashCode,
+                                cacheSize,
+                                DEFAULT_CACHESIZELIMIT);
+
+                //超过,那么就不记录cache
+                isWriteCache = false;
             }else{
-                //超出cache 数量
-                boolean outOfCacheItemSizeLimit = (cacheSize >= DEFAULT_CACHESIZELIMIT);
-                if (outOfCacheItemSizeLimit){
-                    LOGGER.warn(
-                                    "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
+
+                if (LOGGER.isInfoEnabled()){
+                    LOGGER.info(
+                                    "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
                                     cacheKeyHashCode,
-                                    cacheSize,
-                                    DEFAULT_CACHESIZELIMIT);
-
-                    //超过,那么就不记录cache
-                    isWriteCache = false;
-                }else{
-
-                    if (LOGGER.isInfoEnabled()){
-                        LOGGER.info(
-                                        "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
-                                        cacheKeyHashCode,
-                                        cacheSize);
-                    }
+                                    cacheSize);
                 }
             }
         }

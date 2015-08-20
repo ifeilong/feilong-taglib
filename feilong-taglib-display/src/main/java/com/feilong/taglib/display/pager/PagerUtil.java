@@ -180,10 +180,9 @@ public final class PagerUtil{
                 }
                 String content = cache.get(pagerParams);
                 return content;
-            }else{
-                if (LOGGER.isInfoEnabled()){
-                    LOGGER.info("hashcode:[{}],pagerCache not contains pagerParams,will do parse", pagerParams.hashCode());
-                }
+            }
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("hashcode:[{}],pagerCache not contains pagerParams,will do parse", pagerParams.hashCode());
             }
         }
         //*************************************************************************************
