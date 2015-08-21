@@ -22,14 +22,19 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.feilong.core.lang.CharsetType;
-import com.feilong.taglib.display.pager.PagerUtil;
+import com.feilong.taglib.display.pager.PagerBuilder;
 
 /**
- * 方法参数.<br>
- * 用于{@link PagerUtil#getPagerContent(PagerParams)}参数封装
+ * 方法参数.
+ * 
+ * <p>
+ * 用于{@link PagerBuilder#buildPagerContent(PagerParams)}参数封装
+ * </p>
  * 
  * @author feilong
- * @version 1.0 Mar 9, 2013 1:14:35 AM
+ * @version 1.0.3 Mar 9, 2013 1:14:35 AM
+ * 
+ * @see PagerVMParam
  */
 public class PagerParams implements Serializable{
 
@@ -44,6 +49,13 @@ public class PagerParams implements Serializable{
 
     /** 当前第几页. */
     private Integer           currentPageNo;
+
+    /**
+     * The pager type.
+     * 
+     * @since 1.4.0
+     * */
+    private PagerType         pagerType        = PagerType.REDIRECT;
 
     //******************************************************************************
 
@@ -75,7 +87,7 @@ public class PagerParams implements Serializable{
      * 
      * @since 1.0.5
      */
-    private Integer           maxShowPageNo    = Pager.DEFAULT_LIMITED_MAX_PAGENO;
+    private Integer           maxShowPageNo    = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
      * 编码集.
@@ -106,6 +118,20 @@ public class PagerParams implements Serializable{
     public PagerParams(Integer totalCount, String pageUrl){
         this.totalCount = totalCount;
         this.pageUrl = pageUrl;
+    }
+
+    /**
+     * The Constructor.
+     *
+     * @param totalCount
+     *            the total count
+     * @param pagerType
+     *            the pager type
+     */
+    public PagerParams(Integer totalCount, PagerType pagerType){
+        super();
+        this.totalCount = totalCount;
+        this.pagerType = pagerType;
     }
 
     /**
@@ -344,6 +370,25 @@ public class PagerParams implements Serializable{
         this.debugIsNotParseVM = debugIsNotParseVM;
     }
 
+    /**
+     * 设置 the pager type.
+     *
+     * @param pagerType
+     *            the pagerType to set
+     */
+    public void setPagerType(PagerType pagerType){
+        this.pagerType = pagerType;
+    }
+
+    /**
+     * 获得 the pager type.
+     *
+     * @return the pagerType
+     */
+    public PagerType getPagerType(){
+        return pagerType;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -390,6 +435,7 @@ public class PagerParams implements Serializable{
                         .append(maxShowPageNo)//
                         .append(pageSize)//
                         .append(totalCount)//
+                        .append(pagerType)//
                         .toHashCode();
     }
 
@@ -433,6 +479,7 @@ public class PagerParams implements Serializable{
                         .append(this.maxShowPageNo, pagerParams.getMaxShowPageNo())//
                         .append(this.pageSize, pagerParams.getPageSize())//
                         .append(this.totalCount, pagerParams.getTotalCount())//
+                        .append(this.pagerType, pagerParams.getPagerType())//
                         .isEquals();
     }
 

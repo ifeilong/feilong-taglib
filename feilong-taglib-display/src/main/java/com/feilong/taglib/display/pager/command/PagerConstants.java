@@ -55,4 +55,21 @@ public final class PagerConstants{
      */
     // XXX 可修改为 可传递参数
     public static final int     DEFAULT_TEMPLATE_PAGE_NO               = -88888888;
+
+    /** 最多显示分页码 <code>{@value}</code>. */
+    public static final int     DEFAULT_LIMITED_MAX_PAGENO             = -1;
+
+    // ******************************************************************************
+    /**
+     * vm里面 pagerVMParam变量名称 <code>{@value}</code>,在vm里面,你可以使用 ${pagerVMParam.xxx} 来获取数据.
+     */
+    public static final String  VM_KEY_PAGERVMPARAM                    = "pagerVMParam";
+
+    /**
+     * vm里面i18n变量名称 <code>{@value}</code>,在vm里面,你可以使用 ${i18nMap.xxx} 来获取数据.
+     */
+    public static final String  VM_KEY_I18NMAP                         = "i18nMap";
+
+    /** 国际化配置文件<code>{@value}</code>. */
+    public static final String  I18N_FEILONG_PAGER                     = "messages/feilong-pager";
 }

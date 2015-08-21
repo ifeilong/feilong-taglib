@@ -22,17 +22,16 @@ import java.util.LinkedHashMap;
  * PagerVMParam 可以在 vm中 取到的值.
  * 
  * @author feilong
- * @version 1.0 Mar 9, 2013 1:14:35 AM
+ * @version 1.0.2 Mar 9, 2013 1:14:35 AM
  * @version 1.0.5 2014-5-7 13:26
  * @version 1.0.6 2014-5-7 13:50
+ * 
+ * @see PagerParams
  */
 public class PagerVMParam implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -6666715430016900907L;
-
-    /** 设置的皮肤. */
-    private String                         skin;
 
     /** 总行数，总结果数. */
     private Integer                        totalCount;
@@ -44,12 +43,29 @@ public class PagerVMParam implements Serializable{
     private Integer                        allPageNo;
 
     /**
-     * 最多显示页数,(如果不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。.
+     * 上一页页码.
+     * 
+     * @since 1.4.0
+     * */
+    private Integer                        prePageNo;
+
+    /**
+     * 下一页页码.
+     * 
+     * @since 1.4.0
+     * */
+    private Integer                        nextPageNo;
+
+    //********************************************************************************************
+
+    /**
+     * 分页参数名称 .
+     * 
+     * @since 1.0.6
      */
-    private Integer                        maxShowPageNo;
+    private String                         pageParamName;
+
+    //**********************************************************************************************
 
     /** 上一页链接. */
     private String                         preUrl;
@@ -63,6 +79,8 @@ public class PagerVMParam implements Serializable{
     /** 最后一页的链接. */
     private String                         lastUrl;
 
+    //**********************************************************************************************
+
     /** 开始迭代索引编号. */
     private Integer                        startIteratorIndex;
 
@@ -75,12 +93,27 @@ public class PagerVMParam implements Serializable{
     /** The pager url template. */
     private PagerUrlTemplate               pagerUrlTemplate;
 
+    //************************************************************************************************
+
     /**
-     * 分页参数名称 .
+     * The pager type.
      * 
-     * @since 1.0.6
+     * @since 1.4.0
+     * */
+    private PagerType                      pagerType        = PagerType.REDIRECT;
+
+    /** 设置的皮肤. */
+    private String                         skin;
+
+    /**
+     * 最多显示页数,(如果不设置,默认显示所有页数).
+     * <p>
+     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
+     * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
+     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * </p>
      */
-    private String                         pageParamName;
+    private Integer                        maxShowPageNo;
 
     /**
      * Gets the 设置的皮肤.
@@ -159,10 +192,12 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Gets the 最多显示页数,(如果不设置,默认显示所有页数)<br>
+     * 最多显示页数,(如果不设置,默认显示所有页数).
+     * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
      * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。.
+     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * </p>
      * 
      * @return the maxShowPageNo
      */
@@ -171,10 +206,12 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Sets the 最多显示页数,(如果不设置,默认显示所有页数)<br>
+     * 最多显示页数,(如果不设置,默认显示所有页数).
+     * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
      * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。.
+     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * </p>
      * 
      * @param maxShowPageNo
      *            the maxShowPageNo to set
@@ -356,4 +393,64 @@ public class PagerVMParam implements Serializable{
         this.pageParamName = pageParamName;
     }
 
+    /**
+     * 获得 the pager type.
+     *
+     * @return the pagerType
+     */
+    public PagerType getPagerType(){
+        return pagerType;
+    }
+
+    /**
+     * 设置 the pager type.
+     *
+     * @param pagerType
+     *            the pagerType to set
+     */
+    public void setPagerType(PagerType pagerType){
+        this.pagerType = pagerType;
+    }
+
+    /**
+     * 获得 上一页页码.
+     *
+     * @return the prePageNo
+     * @since 1.4.0
+     */
+    public Integer getPrePageNo(){
+        return prePageNo;
+    }
+
+    /**
+     * 设置 上一页页码.
+     *
+     * @param prePageNo
+     *            the prePageNo to set
+     * @since 1.4.0
+     */
+    public void setPrePageNo(Integer prePageNo){
+        this.prePageNo = prePageNo;
+    }
+
+    /**
+     * 获得 下一页页码.
+     *
+     * @return the nextPageNo
+     * @since 1.4.0
+     */
+    public Integer getNextPageNo(){
+        return nextPageNo;
+    }
+
+    /**
+     * 设置 下一页页码.
+     *
+     * @param nextPageNo
+     *            the nextPageNo to set
+     * @since 1.4.0
+     */
+    public void setNextPageNo(Integer nextPageNo){
+        this.nextPageNo = nextPageNo;
+    }
 }

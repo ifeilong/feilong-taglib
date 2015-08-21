@@ -30,7 +30,7 @@
 		<priority value="debug" />
 	</category>
 	<category name="com.feilong.taglib.display.pager.PagerUtil">
-		<priority value="warn" />
+		<priority value="debug" />
 	</category>
 	<category name="com.feilong.taglib.display.httpconcat.HttpConcatUtil">
 		<priority value="warn" />

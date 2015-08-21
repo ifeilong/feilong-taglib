@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.feilong.core.lang.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.base.AbstractStartWriteContentTag;
-import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
@@ -115,7 +114,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * 
      * @since 1.0.5
      */
-    private Integer           maxShowPageNo          = Pager.DEFAULT_LIMITED_MAX_PAGENO;
+    private Integer           maxShowPageNo          = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
      * 国际化语言 .
@@ -152,7 +151,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
 
         // **********************************************************************
         // 当前页码
-        int currentPageNo = PagerUtil.getCurrentPageNo(request, pageParamName);
+        int currentPageNo = PagerHelper.getCurrentPageNo(request, pageParamName);
         // 当前全路径
         String pageUrl = RequestUtil.getRequestFullURL(request, charsetType);
 
@@ -174,7 +173,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
         boolean debugIsNotParseVM = PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
         pagerParams.setDebugIsNotParseVM(debugIsNotParseVM);
 
-        String html = PagerUtil.getPagerContent(pagerParams);
+        String html = PagerBuilder.buildPagerContent(pagerParams);
         // 解析之后的变量设置在 pageContext作用域中
         pageContext.setAttribute(pagerHtmlAttributeName, html);
         return html;

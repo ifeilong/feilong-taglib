@@ -26,13 +26,34 @@ import java.util.List;
  * </p>
  * 通过简单的构造方法示例, 你可以得到下面的数据:
  * 
- * <ul>
- * <li>{@link #getAllPageNo()} 得到总页码</li>
- * <li>{@link #getOriginatingAllPageNo()} 获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的,(通过这个值 可以实现一些特殊的功能,一般用不到)</li>
- * <li>{@link #getPrePageNo()} 得到上一页页码</li>
- * <li>{@link #getNextPageNo()} 得到下一页页码</li>
- * <li>{@link #getOriginatingNextPageNo()} 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到)</li>
- * </ul>
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4">
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link #getAllPageNo()}</td>
+ * <td>得到总页码</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link #getOriginatingAllPageNo()}</td>
+ * <td>获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的,(通过这个值 可以实现一些特殊的功能,一般用不到)</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link #getPrePageNo()}</td>
+ * <td>得到上一页页码</td>
+ * </tr>
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link #getNextPageNo()}</td>
+ * <td>得到下一页页码</td>
+ * </tr>
+ * <tr valign="top">
+ * <td>{@link #getOriginatingNextPageNo()}</td>
+ * <td>在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到)</td>
+ * </tr>
+ * </table>
+ * </blockquote>
  * 
  * @author feilong
  * @version 1.0.0 2009-9-2 下午02:24:44
@@ -43,16 +64,13 @@ import java.util.List;
 public final class Pager implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID           = -903770720729924696L;
-
-    /** 最多显示分页码 <code>{@value}</code>. */
-    public static final int   DEFAULT_LIMITED_MAX_PAGENO = -1;
+    private static final long serialVersionUID = -903770720729924696L;
 
     /** 当前页码. */
     private Integer           currentPageNo;
 
     /** 每页显示数量,默认10,传入该参数 可以计算分页数量. */
-    private Integer           pageSize                   = 10;
+    private Integer           pageSize         = 10;
 
     /** 总共数据数,不同的数据库返回的类型不一样. */
     private Integer           count;
@@ -111,7 +129,7 @@ public final class Pager implements Serializable{
         // maxShowPageNo不是null
         // 且maxShowPageNo !=Pager.DEFAULT_LIMITED_MAX_PAGENO
         // 且maxShowPageNo>0
-        boolean isMaxShowPageNoDecorate = (null != maxShowPageNo && maxShowPageNo != Pager.DEFAULT_LIMITED_MAX_PAGENO && maxShowPageNo > 0);
+        boolean isMaxShowPageNoDecorate = (null != maxShowPageNo && maxShowPageNo != PagerConstants.DEFAULT_LIMITED_MAX_PAGENO && maxShowPageNo > 0);
         int originatingAllPageNo = getOriginatingAllPageNo();
 
         if (isMaxShowPageNoDecorate){
@@ -173,7 +191,7 @@ public final class Pager implements Serializable{
      *         </ul>
      */
     public int getNextPageNo(){
-        /** 总页数. */
+        // 总页数.
         int allPageNo = getAllPageNo();
         int nextPage = currentPageNo + 1;
         if (nextPage >= allPageNo){
@@ -278,10 +296,13 @@ public final class Pager implements Serializable{
     }
 
     /**
-     * Gets the 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
+     * Gets the 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
      * 这是一种折中的处理方式，空间换时间. 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了.<br>
      * 新浪微博的时间轴也只给出了10页，同样的折中处理..
+     * </p>
      * 
      * @return the maxShowPageNo
      */
@@ -290,10 +311,12 @@ public final class Pager implements Serializable{
     }
 
     /**
-     * Sets the 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
+     * Sets the 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
      * 这是一种折中的处理方式，空间换时间. 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了.<br>
      * 新浪微博的时间轴也只给出了10页，同样的折中处理..
+     * </p>
      * 
      * @param maxShowPageNo
      *            the maxShowPageNo to set

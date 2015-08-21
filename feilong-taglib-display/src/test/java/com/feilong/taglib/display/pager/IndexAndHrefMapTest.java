@@ -63,7 +63,7 @@ public class IndexAndHrefMapTest extends BasePagerTest{
 
         Date beginDate = new Date();
 
-        Method declaredMethod = PagerUtil.class.getDeclaredMethod("getAllIndexAndHrefMap", PagerParams.class, Set.class);
+        Method declaredMethod = PagerBuilder.class.getDeclaredMethod("getAllIndexAndHrefMap", PagerParams.class, Set.class);
         declaredMethod.setAccessible(true);
 
         Set<Integer> set = new HashSet<Integer>();
@@ -78,7 +78,7 @@ public class IndexAndHrefMapTest extends BasePagerTest{
         for (int j = 0; j < z; ++j){
             //@SuppressWarnings({ "unchecked", "unused" })
             //Map<Integer, String> invoke = (Map<Integer, String>) 
-            declaredMethod.invoke(PagerUtil.class, pagerParams, set);
+            declaredMethod.invoke(PagerBuilder.class, pagerParams, set);
         }
 
         Date endDate = new Date();

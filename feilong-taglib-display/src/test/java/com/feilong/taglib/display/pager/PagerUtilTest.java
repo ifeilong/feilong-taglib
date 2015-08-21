@@ -27,6 +27,7 @@ import com.feilong.core.io.IOWriteUtil;
 import com.feilong.core.lang.CharsetType;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.taglib.display.pager.command.PagerParams;
+import com.feilong.taglib.display.pager.command.PagerType;
 
 /**
  * The Class PagerUtilTest.
@@ -75,7 +76,9 @@ public class PagerUtilTest extends BasePagerTest{
     public void testGetPagerContent() throws IOException{
         PagerParams pagerParams = getPagerParams();
 
-        String content = PagerUtil.getPagerContent(pagerParams);
+        pagerParams.setPagerType(PagerType.NO_REDIRECT);
+
+        String content = PagerBuilder.buildPagerContent(pagerParams);
 
         //LOGGER.info("the param content:\n\n{}", content);
 
