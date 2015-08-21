@@ -26,18 +26,21 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
 /**
- * 飞龙分页标签.<br>
+ * 飞龙分页标签.
+ * 
  * <h3>特点:</h3>
+ * 
  * <ol>
  * <li>支持皮肤切换</li>
  * <li>支持velocity模版,支持自定义velocity模版</li>
- * <li>自动识别是否是forwoad 页面分页连接</li>
+ * <li>自动识别是否是forwoad页面分页连接</li>
  * <li>分页页码,当前页码永远居中</li>
- * <li>分页 页码 支持 根据页码数字 自动显示 分页码个数,见参数说明里面的 maxIndexPages参数</li>
+ * <li>分页页码支持根据页码数字自动显示分页码个数,见参数说明里面的{@link #maxIndexPages}参数</li>
  * <li>经过大型项目检验,通用安全扫描</li>
  * <li>支持国际化(1.0.5 new feature)</li>
  * <li>内置文本框页码输入快速跳转(1.0.5 new feature)</li>
  * <li>支持类似于淘宝最大分页码100 这样的控制 ,见参数 {@link #maxShowPageNo} (1.0.5 new feature)</li>
+ * <li>支持Ajax 分页 ,见参数 {@link PagerParams#pagerType} (1.4.0 new feature)</li>
  * </ol>
  * 
  * <h3>使用方式:</h3>
@@ -284,5 +287,4 @@ public class PagerTag extends AbstractStartWriteContentTag{
     public void setPagerHtmlAttributeName(String pagerHtmlAttributeName){
         this.pagerHtmlAttributeName = pagerHtmlAttributeName;
     }
-
 }
