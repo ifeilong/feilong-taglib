@@ -22,15 +22,17 @@ import java.io.Serializable;
  *
  * @author feilong
  * @version 1.4.0 2015年8月21日 上午10:53:48
+ * @param <T>
+ *            the generic type
  * @since 1.4.0
  */
-public class PagerAndContent implements Serializable{
+public class PagerAndContent<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 4989412502718346094L;
 
     /** The pager. */
-    private Pager             pager;
+    private Pager<T>          pager;
 
     /** The html. */
     private String            content;
@@ -50,7 +52,7 @@ public class PagerAndContent implements Serializable{
      * @param content
      *            the content
      */
-    public PagerAndContent(Pager pager, String content){
+    public PagerAndContent(Pager<T> pager, String content){
         super();
         this.pager = pager;
         this.content = content;
@@ -61,7 +63,7 @@ public class PagerAndContent implements Serializable{
      *
      * @return the pager
      */
-    public Pager getPager(){
+    public Pager<T> getPager(){
         return pager;
     }
 
@@ -71,7 +73,7 @@ public class PagerAndContent implements Serializable{
      * @param pager
      *            the pager to set
      */
-    public void setPager(Pager pager){
+    public void setPager(Pager<T> pager){
         this.pager = pager;
     }
 

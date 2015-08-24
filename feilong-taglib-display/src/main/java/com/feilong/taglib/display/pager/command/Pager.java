@@ -54,14 +54,16 @@ import java.util.List;
  * </tr>
  * </table>
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.0.0 2009-9-2 下午02:24:44
  * @version 1.0.1 2012-3-16 01:01 将查询参数 删除,保留分页相关参数
  * @version 1.0.5 2014-5-3 14:22 新增 {@link #maxShowPageNo} 参数
+ * @param <T>
+ *            the generic type
  * @since 1.0.0
  */
-public final class Pager implements Serializable{
+public final class Pager<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -903770720729924696L;
@@ -76,7 +78,7 @@ public final class Pager implements Serializable{
     private Integer           count;
 
     /** 存放的数据集合. */
-    private List<?>           itemList;
+    private List<T>           itemList;
 
     /**
      * 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
@@ -201,8 +203,8 @@ public final class Pager implements Serializable{
     }
 
     /**
-     * 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到)
-     * 
+     * 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到).
+     *
      * @return <ul>
      *         <li>如果 currentPageNo+1{@code >=} {@link #getOriginatingAllPageNo()} 返回 {@link #getOriginatingAllPageNo()}</li>
      *         <li>否则返回 currentPageNo+1</li>
@@ -277,25 +279,6 @@ public final class Pager implements Serializable{
     }
 
     /**
-     * Gets the 存放的数据集合.
-     * 
-     * @return the itemList
-     */
-    public List<?> getItemList(){
-        return itemList;
-    }
-
-    /**
-     * Sets the 存放的数据集合.
-     * 
-     * @param itemList
-     *            the itemList to set
-     */
-    public void setItemList(List<?> itemList){
-        this.itemList = itemList;
-    }
-
-    /**
      * Gets the 最多显示页数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
@@ -323,5 +306,24 @@ public final class Pager implements Serializable{
      */
     public void setMaxShowPageNo(Integer maxShowPageNo){
         this.maxShowPageNo = maxShowPageNo;
+    }
+
+    /**
+     * 获得 存放的数据集合.
+     *
+     * @return the itemList
+     */
+    public List<T> getItemList(){
+        return itemList;
+    }
+
+    /**
+     * 设置 存放的数据集合.
+     *
+     * @param itemList
+     *            the itemList to set
+     */
+    public void setItemList(List<T> itemList){
+        this.itemList = itemList;
     }
 }

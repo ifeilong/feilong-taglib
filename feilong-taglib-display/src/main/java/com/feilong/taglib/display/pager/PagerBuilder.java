@@ -119,6 +119,8 @@ public final class PagerBuilder{
 
     /**
      * Builds the pager and content.
+     * 
+     * @param <T>
      *
      * @param pagerParams
      *            the pager params
@@ -126,12 +128,12 @@ public final class PagerBuilder{
      *            the item list
      * @return the pager and content
      */
-    public static PagerAndContent buildPagerAndContent(PagerParams pagerParams,List<?> itemList){
-        Pager pager = buildPager(pagerParams);
+    public static <T> PagerAndContent<T> buildPagerAndContent(PagerParams pagerParams,List<T> itemList){
+        Pager<T> pager = buildPager(pagerParams);
         pager.setItemList(itemList);
 
         String content = buildPagerContent(pagerParams);
-        return new PagerAndContent(pager, content);
+        return new PagerAndContent<T>(pager, content);
     }
 
     /**
@@ -228,14 +230,16 @@ public final class PagerBuilder{
     /**
      * Builds the pager vm param.
      * 
+     * @param <T>
+     * 
      * @param pagerParams
      *            the pager params
      * @return the pager vm param
      * @since 1.0.5
      */
-    private static PagerVMParam buildPagerVMParam(PagerParams pagerParams){
+    private static <T> PagerVMParam buildPagerVMParam(PagerParams pagerParams){
         // *************************************************************
-        Pager pager = buildPager(pagerParams);
+        Pager<T> pager = buildPager(pagerParams);
 
         int currentPageNo = detectCurrentPageNo(pagerParams);
         int allPageNo = pager.getAllPageNo();
@@ -281,18 +285,20 @@ public final class PagerBuilder{
 
     /**
      * Builds the pager.
+     * 
+     * @param <T>
      *
      * @param pagerParams
      *            the pager params
      * @return the pager
      * @since 1.4.0
      */
-    private static Pager buildPager(PagerParams pagerParams){
+    private static <T> Pager<T> buildPager(PagerParams pagerParams){
         int totalCount = pagerParams.getTotalCount();
         int currentPageNo = detectCurrentPageNo(pagerParams);
         int pageSize = pagerParams.getPageSize();
 
-        Pager pager = new Pager(currentPageNo, pageSize, totalCount);
+        Pager<T> pager = new Pager<T>(currentPageNo, pageSize, totalCount);
         pager.setMaxShowPageNo(pagerParams.getMaxShowPageNo());
         return pager;
     }
@@ -368,6 +374,8 @@ public final class PagerBuilder{
      * 注:(key={@link #DEFAULT_TEMPLATE_PAGE_NO} 为模板链接,可用户前端解析 {@link PagerVMParam#getHrefUrlTemplate()}.
      * </p>
      * 
+     * @param <T>
+     * 
      * @param pagerParams
      *            the pager params
      * @param indexSet
@@ -376,7 +384,7 @@ public final class PagerBuilder{
      * 
      * @since 1.4.0
      */
-    private static Map<Integer, String> getAllUseIndexAndHrefMap(PagerParams pagerParams,Pager pager,int[] startAndEndIteratorIndexs){
+    private static <T> Map<Integer, String> getAllUseIndexAndHrefMap(PagerParams pagerParams,Pager<T> pager,int[] startAndEndIteratorIndexs){
         Set<Integer> indexSet = getAllUseIndexSet(pager, startAndEndIteratorIndexs);
 
         String pageParamName = pagerParams.getPageParamName();
@@ -418,6 +426,8 @@ public final class PagerBuilder{
      * </ul>
      * </blockquote>
      * 
+     * @param <T>
+     * 
      * @param pager
      *            the pager
      * @param startIteratorIndexAndEndIteratorIndexs
@@ -425,7 +435,7 @@ public final class PagerBuilder{
      * @return the index set
      * @since 1.4.0
      */
-    private static Set<Integer> getAllUseIndexSet(Pager pager,int[] startIteratorIndexAndEndIteratorIndexs){
+    private static <T> Set<Integer> getAllUseIndexSet(Pager<T> pager,int[] startIteratorIndexAndEndIteratorIndexs){
         int startIteratorIndex = startIteratorIndexAndEndIteratorIndexs[0];// 开始迭代索引编号
         int endIteratorIndex = startIteratorIndexAndEndIteratorIndexs[1];// 结束迭代索引编号
 
@@ -445,6 +455,8 @@ public final class PagerBuilder{
     /**
      * 获得开始和结束的索引.
      * 
+     * @param <T>
+     * 
      * @param allPageNo
      *            总页数
      * @param currentPageNo
@@ -453,7 +465,7 @@ public final class PagerBuilder{
      *            the pager params
      * @return 获得开始和结束的索引
      */
-    private static int[] getStartAndEndIteratorIndexs(PagerParams pagerParams,Pager pager){
+    private static <T> int[] getStartAndEndIteratorIndexs(PagerParams pagerParams,Pager<T> pager){
         int currentPageNo = detectCurrentPageNo(pagerParams);
         int allPageNo = pager.getAllPageNo();
 
