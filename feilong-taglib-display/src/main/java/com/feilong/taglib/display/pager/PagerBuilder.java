@@ -521,7 +521,7 @@ public final class PagerBuilder{
      * @param maxIndexPages
      *            表示手动指定一个固定的显示码<br>
      *            如果不指定,或者<=0 那么就采用自动调节的显示码
-     * @return 最大显示码
+     * @return 最大分页码数量
      * @deprecated 需要重构,将来可能会拥有更好的扩展性
      */
     @Deprecated
@@ -530,11 +530,11 @@ public final class PagerBuilder{
             // 总页数超过1000的时候,自动调节导航数量的作用
             if (allPageNo > 1000){
                 return 6;
-            }else if (allPageNo > 100){
-                return 8;
-            }else{
-                return 10;// 默认为10
             }
+            if (allPageNo > 100){
+                return 8;
+            }
+            return 10;// 默认为10
         }
         return maxIndexPages;// 不是<= 0 或者null,直接返回指定的
     }
