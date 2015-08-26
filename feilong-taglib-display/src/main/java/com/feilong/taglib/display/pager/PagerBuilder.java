@@ -499,29 +499,34 @@ public final class PagerBuilder{
     }
 
     /**
-     * 获得分页最大显示的分页码.
+     * 获得最大显示的分页码数量.
      * 
      * <p>
-     * 如果maxIndexPages 是<=0或者null,那么根据allpageNo,采用自动调节长度功能<br>
-     * 因为,如果页码大于1000的时候, 如果还是10页码的显示(1001,1002,1003,1004,1005,1006,1007,1008,1009,1010) 显示上面会很长 ,会打乱页面布局
+     * 如果页码大于1000的时候,如果还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长 ,可能打乱页面布局<br>
+     * 所以maxIndexPages是<=0或者null,那么根据allpageNo,采用自动调节长度功能
      * </p>
+     * 
+     * <h3>目前自动规则:</h3>
+     * 
+     * <blockquote>
      * <ul>
-     * <li>当大于1000的页码 显示6个 即 1001,1002,1003,1004,1005,1006 类似于这样的</li>
-     * <li>当大于100的页码 显示8个 即 101,102,103,104,105,106,107,108 类似于这样的</li>
+     * <li>当大于1000的页码 显示6个,即 1001,1002,1003,1004,1005,1006 类似于这样的;</li>
+     * <li>当大于100的页码 显示8个,即 101,102,103,104,105,106,107,108 类似于这样的;</li>
      * <li>其余,默认显示10条</li>
      * </ul>
+     * </blockquote>
      * 
      * @param allPageNo
      *            分页总总页数
      * @param maxIndexPages
      *            表示手动指定一个固定的显示码<br>
-     *            如果不指定,或者是0 那么就采用自动调节的显示码
+     *            如果不指定,或者<=0 那么就采用自动调节的显示码
      * @return 最大显示码
-     * @deprecated 需要重构
+     * @deprecated 需要重构,将来可能会拥有更好的扩展性
      */
     @Deprecated
     private static int buildMaxIndexPages(int allPageNo,Integer maxIndexPages){
-        if (Validator.isNullOrEmpty(maxIndexPages) || 0 <= maxIndexPages){
+        if (Validator.isNullOrEmpty(maxIndexPages) || maxIndexPages <= 0){
             // 总页数超过1000的时候,自动调节导航数量的作用
             if (allPageNo > 1000){
                 return 6;
