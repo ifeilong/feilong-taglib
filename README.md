@@ -53,12 +53,12 @@ Reduce development, Release ideas
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-common</artifactId>
-				<version>1.3.0</version>
+				<version>1.4.0</version>
 			</dependency>
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-display</artifactId>
-				<version>1.3.0</version>
+				<version>1.4.0</version>
 			</dependency>
 			....
 		</dependencies>
@@ -80,5 +80,5 @@ taglib |`feilong-taglib-display` | 封装了常用的自定义标签 | 1.7
 
 如果您对feilong platform 有任何建议，可以使用下面的联系方式：
 
-* 新浪微博:http://weibo.com/venusdrogon 
+* 新浪微博:http://weibo.com/venusdrogon
 * iteye博客:http://feitianbenyue.iteye.com/
