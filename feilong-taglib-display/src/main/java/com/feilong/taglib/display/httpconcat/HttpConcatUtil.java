@@ -108,36 +108,11 @@ public final class HttpConcatUtil{
     // XXX 支持多变量
     static{
         LOGGER.info("begin init [{}]", HttpConcatUtil.class.getSimpleName());
-        GLOBAL_HTTP_CONCAT_SUPPORT = ResourceBundleUtil.getValue(
-                        HttpConcatConstants.CONFIG_FILE,
-                        HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
-                        Boolean.class);
 
-        if (Validator.isNullOrEmpty(GLOBAL_HTTP_CONCAT_SUPPORT)){
-            LOGGER.warn(
-                            "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]",
-                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
-                            HttpConcatConstants.CONFIG_FILE);
-        }
+        GLOBAL_HTTP_CONCAT_SUPPORT = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT, Boolean.class);
+        TEMPLATE_CSS = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_TEMPLATE_CSS, String.class);
+        TEMPLATE_JS = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_TEMPLATE_JS, String.class);
 
-        // 加载模板
-        TEMPLATE_CSS = ResourceBundleUtil.getValue(HttpConcatConstants.CONFIG_FILE, HttpConcatConstants.KEY_TEMPLATE_CSS);
-        TEMPLATE_JS = ResourceBundleUtil.getValue(HttpConcatConstants.CONFIG_FILE, HttpConcatConstants.KEY_TEMPLATE_JS);
-        if (Validator.isNullOrEmpty(TEMPLATE_CSS)){
-            String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
-                            messagePattern,
-                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
-                            HttpConcatConstants.CONFIG_FILE));
-
-        }
-        if (Validator.isNullOrEmpty(TEMPLATE_JS)){
-            String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new IllegalArgumentException(Slf4jUtil.formatMessage(
-                            messagePattern,
-                            HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT,
-                            HttpConcatConstants.CONFIG_FILE));
-        }
         LOGGER.info(
                         "end init [{}],GLOBAL_HTTP_CONCAT_SUPPORT:[{}],TEMPLATE_CSS:[{}],TEMPLATE_JS:[{}]",
                         HttpConcatUtil.class.getSimpleName(),
@@ -195,14 +170,12 @@ public final class HttpConcatUtil{
             String content = CACHE.get(httpConcatParam);
             //包含
             if (null != content){
-                if (LOGGER.isInfoEnabled()){
-                    LOGGER.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
-                }
+                LOGGER.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
                 return content;
             }
 
             //超出cache 数量
-            boolean outOfCacheItemSizeLimit = (cacheSize >= DEFAULT_CACHESIZELIMIT);
+            boolean outOfCacheItemSizeLimit = cacheSize >= DEFAULT_CACHESIZELIMIT;
             if (outOfCacheItemSizeLimit){
                 LOGGER.warn(
                                 "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
@@ -213,28 +186,22 @@ public final class HttpConcatUtil{
                 //超过,那么就不记录cache
                 isWriteCache = false;
             }else{
-
-                if (LOGGER.isInfoEnabled()){
-                    LOGGER.info(
-                                    "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
-                                    cacheKeyHashCode,
-                                    cacheSize);
-                }
+                LOGGER.info(
+                                "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
+                                cacheKeyHashCode,
+                                cacheSize);
             }
         }
 
         String content = buildContent(httpConcatParam);
 
         // **************************log***************************************************
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
-        }
+        LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
+
         //********************设置cache***********************************************
         if (isWriteCache){
-            CACHE.put(httpConcatParam, (null == content) ? "" : content);
-            if (LOGGER.isInfoEnabled()){
-                LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
-            }
+            CACHE.put(httpConcatParam, content);
+            LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
             if (DEFAULT_CACHEENABLE){
                 LOGGER.warn(
@@ -501,6 +468,32 @@ public final class HttpConcatUtil{
             return TEMPLATE_JS;
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
+    }
+
+    /**
+     * 获得 value if not null or empty.
+     * 
+     * <p>
+     * 如果 {@code Validator.isNullOrEmpty(Object)} ,抛出NullPointerException
+     * </p>
+     *
+     * @param <T>
+     *            the generic type
+     * @param keyName
+     *            the key name
+     * @param typeClass
+     *            the type class
+     * @return the value if not null or empty
+     * @since 1.4.1
+     */
+    private static <T> T getValueIfNotNullOrEmpty(String keyName,Class<T> typeClass){
+        String baseName = HttpConcatConstants.CONFIG_FILE;
+        T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
+        if (Validator.isNullOrEmpty(keyValue)){
+            String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
+            throw new NullPointerException(Slf4jUtil.formatMessage(messagePattern, keyName, baseName));
+        }
+        return keyValue;
     }
 
 }

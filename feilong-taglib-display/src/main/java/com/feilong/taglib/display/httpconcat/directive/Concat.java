@@ -21,9 +21,6 @@ import java.io.Writer;
 import java.util.List;
 
 import org.apache.velocity.context.InternalContextAdapter;
-import org.apache.velocity.exception.MethodInvocationException;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.parser.node.ASTBlock;
 import org.apache.velocity.runtime.parser.node.Node;
 import org.slf4j.Logger;
@@ -139,11 +136,11 @@ import com.feilong.tools.velocity.directive.AbstractDirective;
  * <li>可以写注释,但只支持velocity 的注释格式(行注释 {@code ##} 以及块注释 {@code #* balabalabala *#}),不可使用java注释 //,也不可使用html注释 {@code <!---->}</li>
  * </ol>
  * </blockquote>
- * 
+ *
  * @author feilong
  * @version 1.0.7 2014年5月14日 下午6:23:50
- * @since 1.0.7
  * @see HttpConcatUtil
+ * @since 1.0.7
  */
 public final class Concat extends AbstractDirective{
 
@@ -154,10 +151,10 @@ public final class Concat extends AbstractDirective{
     // 由于继承 字段是不会被覆盖的,所以下面的 两个方法 必须每个实现类重写
     // ****************************************************************
     /** 自定义标签名称. */
-    private final String        DIRECTIVE_NAME = "concat";
+    private static final String DIRECTIVE_NAME = "concat";
 
     /** 自定义标签类型. */
-    private final int           DIRECTIVE_TYPE = BLOCK;
+    private static final int    DIRECTIVE_TYPE = BLOCK;
 
     /*
      * (non-Javadoc)
@@ -166,8 +163,7 @@ public final class Concat extends AbstractDirective{
      * java.io.Writer, org.apache.velocity.runtime.parser.node.Node)
      */
     @Override
-    public boolean doRender(InternalContextAdapter internalContextAdapter,Writer writer,Node node) throws IOException,
-                    ResourceNotFoundException,ParseErrorException,MethodInvocationException{
+    public boolean doRender(InternalContextAdapter internalContextAdapter,Writer writer,Node node) throws IOException{
 
         HttpConcatParam httpConcatParam = getHttpConcatParam(internalContextAdapter, node);
         if (null == httpConcatParam){

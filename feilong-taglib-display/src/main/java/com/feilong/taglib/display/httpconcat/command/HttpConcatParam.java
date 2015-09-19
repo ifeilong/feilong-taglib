@@ -200,7 +200,7 @@ public final class HttpConcatParam implements Serializable{
         //HashCodeBuilder.reflectionHashCode(this);
         //************************************************************************************
         //你选择一个硬编码，随机选择，不为零，奇数 
-        //理想情况下 每个类不同
+        //理想情况下,每个类不同
 
         String[] itemSrcArray = null;
         if (null != this.itemSrcList){

@@ -128,10 +128,8 @@ public final class Pager<T> implements Serializable{
      *         </ul>
      */
     public int getAllPageNo(){
-        // maxShowPageNo不是null
-        // 且maxShowPageNo !=Pager.DEFAULT_LIMITED_MAX_PAGENO
-        // 且maxShowPageNo>0
-        boolean isMaxShowPageNoDecorate = (null != maxShowPageNo && maxShowPageNo != PagerConstants.DEFAULT_LIMITED_MAX_PAGENO && maxShowPageNo > 0);
+        boolean isMaxShowPageNoDecorate = null != maxShowPageNo && maxShowPageNo != PagerConstants.DEFAULT_LIMITED_MAX_PAGENO
+                        && maxShowPageNo > 0;
         int originatingAllPageNo = getOriginatingAllPageNo();
 
         if (isMaxShowPageNoDecorate){

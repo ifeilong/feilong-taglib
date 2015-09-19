@@ -485,7 +485,7 @@ public final class PagerBuilder{
 
         //**********总页数大于最大导航页数******************************************************************
         // 当前页导航两边总数和
-        int fenTwo = (maxIndexPages - 1);
+        int fenTwo = maxIndexPages - 1;
         // 当前页左侧导航数
         int leftCount = fenTwo / 2;
         // 当前页右侧导航数
