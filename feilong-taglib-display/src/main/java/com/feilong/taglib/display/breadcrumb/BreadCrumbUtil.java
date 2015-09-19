@@ -166,7 +166,17 @@ public class BreadCrumbUtil{
 
     /**
      * 按照父子关系排序好的 list.
-     *
+     * 
+     * <ol>
+     * <li>如果没有传递{@code currentPath},那么渲染全部的{@code List<BreadCrumbEntity<Object>>}, <br>
+     * 但是如果此时的{@code List<BreadCrumbEntity<Object>>} 不是标准的面包屑树,即如果含有重复的parentId,那么会 throw {@link IllegalArgumentException}<br>
+     * </li>
+     * <li>如果设置了{@link BreadCrumbParams#setCurrentPath(String)}参数,如果没有找到{@code currentPath},什么都不会渲染;因为{@code currentPath}不在所有的面包屑中<br>
+     * </li>
+     * <li>如果设置了 {@link BreadCrumbParams#setCurrentPath(String)}参数,那么{@code currentPath} 路径,然后渲染到当前节点;<br>
+     * </li>
+     * </ol>
+     * 
      * @param <PK>
      *            the generic type
      * @param breadCrumbParams
@@ -177,8 +187,6 @@ public class BreadCrumbUtil{
         String currentPath = breadCrumbParams.getCurrentPath();
         List<BreadCrumbEntity<PK>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
 
-        //如果没有传递{@code currentPath},那么渲染全部的{@code List<BreadCrumbEntity<Object>>},
-        //但是如果此时的{@code List<BreadCrumbEntity<Object>>} 不是标准的面包屑树,即如果含有重复的parentId,那么会 throw {@link IllegalArgumentException}
         if (Validator.isNullOrEmpty(currentPath)){
             //find all
             Map<PK, Integer> groupCount = CollectionsUtil.groupCount(breadCrumbEntityList, "parentId");
@@ -192,13 +200,11 @@ public class BreadCrumbUtil{
         }
         BreadCrumbEntity<PK> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
 
-        //如果设置了{@link BreadCrumbParams#setCurrentPath(String)}参数,如果没有找到{@code currentPath},什么都不会渲染;因为{@code currentPath}不在所有的面包屑中
         if (Validator.isNullOrEmpty(currentBreadCrumbEntity)){
             LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
             return null;
         }
 
-        //如果设置了 {@link BreadCrumbParams#setCurrentPath(String)}参数,那么{@code currentPath} 路径,然后渲染到当前节点;
         return sortOutAllParentBreadCrumbEntityList(currentBreadCrumbEntity, breadCrumbEntityList);
     }
 

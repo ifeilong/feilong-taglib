@@ -200,6 +200,13 @@ public final class Concat extends AbstractDirective{
             LOGGER.warn("blockContent is isNullOrEmpty...,you should write source list between #{} and #end", DIRECTIVE_NAME);
             return null;
         }
+
+        // *******************************************************************************************
+        // 转成item src list
+        List<String> itemSrcList = HttpConcatUtil.toItemSrcList(blockContent);
+        if (Validator.isNullOrEmpty(itemSrcList)){
+            return null;
+        }
         // **********************parse params******************************************************
 
         String type = "";
@@ -241,13 +248,6 @@ public final class Concat extends AbstractDirective{
             }
         }
 
-        // *******************************************************************************************
-        // 转成item src list
-        List<String> itemSrcList = HttpConcatUtil.toItemSrcList(blockContent);
-        if (Validator.isNullOrEmpty(itemSrcList)){
-            return null;
-        }
-
         HttpConcatParam httpConcatParam = new HttpConcatParam();
 
         httpConcatParam.setDomain(domain);
@@ -278,8 +278,7 @@ public final class Concat extends AbstractDirective{
         StringWriter stringWriter = new StringWriter();
         endNode.render(internalContextAdapter, stringWriter);
 
-        String blockContent = stringWriter.toString();
-        return blockContent;
+        return stringWriter.toString();
     }
 
     // ***************************************************************
@@ -290,9 +289,7 @@ public final class Concat extends AbstractDirective{
      */
     @Override
     public String getName(){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("DIRECTIVE_NAME:[{}]", DIRECTIVE_NAME);
-        }
+        LOGGER.debug("DIRECTIVE_NAME:[{}]", DIRECTIVE_NAME);
         return DIRECTIVE_NAME;
     }
 
@@ -303,9 +300,7 @@ public final class Concat extends AbstractDirective{
      */
     @Override
     public int getType(){
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("DIRECTIVE_TYPE:[{}]", DIRECTIVE_TYPE);
-        }
+        LOGGER.debug("DIRECTIVE_TYPE:[{}]", DIRECTIVE_TYPE);
         return DIRECTIVE_TYPE;
     }
 }

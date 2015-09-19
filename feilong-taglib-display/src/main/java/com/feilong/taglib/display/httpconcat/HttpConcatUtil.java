@@ -223,39 +223,7 @@ public final class HttpConcatUtil{
             }
         }
 
-        // **********是否开启了连接********************************************************
-        Boolean httpConcatSupport = httpConcatParam.getHttpConcatSupport();
-        //如果没有设置就使用默认的全局设置
-        if (null == httpConcatSupport){
-            httpConcatSupport = (null == GLOBAL_HTTP_CONCAT_SUPPORT) ? false : GLOBAL_HTTP_CONCAT_SUPPORT;
-        }
-
-        // *******************************************************************
-        // 标准化 httpConcatParam,比如list去重,标准化domain等等
-        // 下面的解析均基于standardHttpConcatParam来操作
-        // httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = standardHttpConcatParam(httpConcatParam);
-
-        // *********************************************************************************
-
-        String type = standardHttpConcatParam.getType();
-        String template = getTemplate(type);
-
-        // *********************************************************************************
-        String content = "";
-        if (httpConcatSupport){
-            // concat
-            String concatLink = getConcatLink(standardHttpConcatParam);
-            content = MessageFormatUtil.format(template, concatLink);
-        }else{ // 本地开发环境支持的.
-            itemSrcList = standardHttpConcatParam.getItemSrcList();
-            StringBuilder sb = new StringBuilder();
-            for (String itemSrc : itemSrcList){
-                String noConcatLink = getNoConcatLink(itemSrc, standardHttpConcatParam);
-                sb.append(MessageFormatUtil.format(template, noConcatLink));
-            }
-            content = sb.toString();
-        }
+        String content = buildContent(httpConcatParam);
 
         // **************************log***************************************************
         if (LOGGER.isDebugEnabled()){
@@ -278,6 +246,49 @@ public final class HttpConcatUtil{
         }
         //************************************************************************
         return content;
+    }
+
+    /**
+     * 构造content.
+     *
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the string
+     * @since 1.4.1
+     */
+    private static String buildContent(HttpConcatParam httpConcatParam){
+
+        // **********是否开启了连接********************************************************
+        Boolean httpConcatSupport = httpConcatParam.getHttpConcatSupport();
+        //如果没有设置就使用默认的全局设置
+        if (null == httpConcatSupport){
+            httpConcatSupport = (null == GLOBAL_HTTP_CONCAT_SUPPORT) ? false : GLOBAL_HTTP_CONCAT_SUPPORT;
+        }
+
+        // *******************************************************************
+        // 标准化 httpConcatParam,比如list去重,标准化domain等等
+        // 下面的解析均基于standardHttpConcatParam来操作
+        // httpConcatParam只做入参判断,数据转换,以及cache存取
+        HttpConcatParam standardHttpConcatParam = standardHttpConcatParam(httpConcatParam);
+
+        // *********************************************************************************
+        String type = standardHttpConcatParam.getType();
+        String template = getTemplate(type);
+
+        // *********************************************************************************
+        if (httpConcatSupport){ // concat
+            String concatLink = getConcatLink(standardHttpConcatParam);
+            return MessageFormatUtil.format(template, concatLink);
+        }
+
+        // 本地开发环境支持的.
+        List<String> itemSrcList = standardHttpConcatParam.getItemSrcList();
+        StringBuilder sb = new StringBuilder();
+        for (String itemSrc : itemSrcList){
+            String noConcatLink = getNoConcatLink(itemSrc, standardHttpConcatParam);
+            sb.append(MessageFormatUtil.format(template, noConcatLink));
+        }
+        return sb.toString();
     }
 
     /**
