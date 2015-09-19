@@ -48,26 +48,26 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * <pre>
  * {@code
  * 
- * 	步骤1.JSP引用自定义标签
- * 		<%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
+ *  步骤1.JSP引用自定义标签
+ *      <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
  * 
- * 	步骤2.使用自定义标签
- * 	
- * 		精简写法:
- * 			<feilongDisplay:pager count="1000"/>
- * 			此时其余参数缺省,均使用默认值
- * 		
- * 		所有参数都赋值的写法:
- * 			<feilongDisplay:pager count="1000" 
- * 				charsetType="utf-8" 
- * 				maxIndexPages="3" 
- * 				pageParamName="page" 
- * 				pageSize="10"
- * 				locale="}${requestScope['org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE']}{@code" 
- * 				vmPath="velocity/feilong-default-pager.vm" 
- * 				skin="scott"
- * 				pagerHtmlAttributeName="feilongPagerHtml1" />
- * 				每个参数的含义,请参见下面参数表格部分
+ *  步骤2.使用自定义标签
+ *  
+ *      精简写法:
+ *          <feilongDisplay:pager count="1000"/>
+ *          此时其余参数缺省,均使用默认值
+ *      
+ *      所有参数都赋值的写法:
+ *          <feilongDisplay:pager count="1000" 
+ *              charsetType="utf-8" 
+ *              maxIndexPages="3" 
+ *              pageParamName="page" 
+ *              pageSize="10"
+ *              locale="}${requestScope['org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE']}{@code" 
+ *              vmPath="velocity/feilong-default-pager.vm" 
+ *              skin="scott"
+ *              pagerHtmlAttributeName="feilongPagerHtml1" />
+ *              每个参数的含义,请参见下面参数表格部分
  * }
  * </pre>
  * 

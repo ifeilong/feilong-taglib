@@ -50,9 +50,9 @@ import com.feilong.tools.velocity.directive.AbstractDirective;
  * <pre>
  * {@code
  * 支持以下格式写法:
- * 	#concat(String type,String version)
- * 	#concat(String type,String version,String domain)
- * 	#concat(String type,String version,String domain,String root)
+ *  #concat(String type,String version)
+ *  #concat(String type,String version,String domain)
+ *  #concat(String type,String version,String domain,String root)
  * }
  * </pre>
  * 
@@ -104,18 +104,18 @@ import com.feilong.tools.velocity.directive.AbstractDirective;
  * {@code
  *  #concat("js","20140515","http://www.feilong.com")
  *  
- * 	    ##原来这个文件的script type是text/ecmascript,找不到主人,暂时合并,看看会不会出问题
- * 	    static/marketplace/js/marketplace.js
- * 	
- * 	    static/public/js/cascading/jquery.cascading.data.js
- * 	    static/public/js/cascading/jquery.cascading.js
- * 	
- * 	    static/public/js/jquery.json-2.4.js
- * 	    static/public/js/jquery.form.js
- * 	    static/public/js/jquery.lazyload.min.js
- * 	
- * 	    static/member/messages/messageAddress_$request.getAttribute('locale').js
- * 	    static/trade/messages/messageTrade_$request.getAttribute('locale').js
+ *      ##原来这个文件的script type是text/ecmascript,找不到主人,暂时合并,看看会不会出问题
+ *      static/marketplace/js/marketplace.js
+ *  
+ *      static/public/js/cascading/jquery.cascading.data.js
+ *      static/public/js/cascading/jquery.cascading.js
+ *  
+ *      static/public/js/jquery.json-2.4.js
+ *      static/public/js/jquery.form.js
+ *      static/public/js/jquery.lazyload.min.js
+ *  
+ *      static/member/messages/messageAddress_$request.getAttribute('locale').js
+ *      static/trade/messages/messageTrade_$request.getAttribute('locale').js
  * 
  * 
  *  #end
