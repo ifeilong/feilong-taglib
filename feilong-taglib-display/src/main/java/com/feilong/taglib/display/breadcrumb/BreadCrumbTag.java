@@ -86,16 +86,6 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
         return breadCrumbEntityList;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.taglib.base.AbstractWriteContentTag#useTimeLog()
-     */
-    @Override
-    protected String useTimeLog(){
-        return super.useTimeLog();
-    }
-
     /**
      * 设置 连接符,默认>.
      *

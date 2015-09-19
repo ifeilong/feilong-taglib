@@ -109,9 +109,9 @@ public final class HttpConcatUtil{
     static{
         LOGGER.info("begin init [{}]", HttpConcatUtil.class.getSimpleName());
 
-        GLOBAL_HTTP_CONCAT_SUPPORT = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT, Boolean.class);
-        TEMPLATE_CSS = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_TEMPLATE_CSS, String.class);
-        TEMPLATE_JS = getValueIfNotNullOrEmpty(HttpConcatConstants.KEY_TEMPLATE_JS, String.class);
+        GLOBAL_HTTP_CONCAT_SUPPORT = getRequiredValue(HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT, Boolean.class);
+        TEMPLATE_CSS = getRequiredValue(HttpConcatConstants.KEY_TEMPLATE_CSS, String.class);
+        TEMPLATE_JS = getRequiredValue(HttpConcatConstants.KEY_TEMPLATE_JS, String.class);
 
         LOGGER.info(
                         "end init [{}],GLOBAL_HTTP_CONCAT_SUPPORT:[{}],TEMPLATE_CSS:[{}],TEMPLATE_JS:[{}]",
@@ -471,12 +471,12 @@ public final class HttpConcatUtil{
     }
 
     /**
-     * 获得 value if not null or empty.
+     * 获得 required value.
      * 
      * <p>
      * 如果 {@code Validator.isNullOrEmpty(Object)} ,抛出NullPointerException
      * </p>
-     *
+     * 
      * @param <T>
      *            the generic type
      * @param keyName
@@ -486,7 +486,7 @@ public final class HttpConcatUtil{
      * @return the value if not null or empty
      * @since 1.4.1
      */
-    private static <T> T getValueIfNotNullOrEmpty(String keyName,Class<T> typeClass){
+    private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
         String baseName = HttpConcatConstants.CONFIG_FILE;
         T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
         if (Validator.isNullOrEmpty(keyValue)){
@@ -495,5 +495,4 @@ public final class HttpConcatUtil{
         }
         return keyValue;
     }
-
 }

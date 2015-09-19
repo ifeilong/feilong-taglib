@@ -202,7 +202,7 @@ public class BreadCrumbUtil{
 
         if (Validator.isNullOrEmpty(currentBreadCrumbEntity)){
             LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
-            return null;
+            return Collections.emptyList();
         }
 
         return sortOutAllParentBreadCrumbEntityList(currentBreadCrumbEntity, breadCrumbEntityList);
