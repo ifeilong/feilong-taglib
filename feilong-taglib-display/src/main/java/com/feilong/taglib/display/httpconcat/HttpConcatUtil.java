@@ -102,7 +102,7 @@ public final class HttpConcatUtil{
      * @since 1.0.7
      */
     //TODO change to ConcurrentHashMap
-    //这里对 线程安全的要求不高, 仅仅是 插入和读取的操作,即时出了线程安全问题, 重新解析js/css 标签代码 并加载 即可
+    //这里对线程安全的要求不高,仅仅是插入和读取的操作,即使出了线程安全问题,重新解析js/css标签代码并加载即可
     private static final Map<HttpConcatParam, String> CACHE                  = new HashMap<HttpConcatParam, String>();
 
     // XXX 支持多变量
@@ -343,9 +343,7 @@ public final class HttpConcatUtil{
      */
     public static String createVersion(String origin){
         String version = MD5Util.encode(origin);
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("origin:[{}],version:[{}]", origin, version);
-        }
+        LOGGER.info("origin:[{}],version:[{}]", origin, version);
         return version;
     }
 
@@ -373,9 +371,7 @@ public final class HttpConcatUtil{
         // 只有一条 输出原生字符串
         if (size == 1){
             sb.append(itemSrcList.get(0));
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
-            }
+            LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
         }else{
             sb.append("??");
 
@@ -421,9 +417,7 @@ public final class HttpConcatUtil{
             sb.append("?");
             sb.append(version);
         }else{
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("the param version isNullOrEmpty,we suggest you to set version value");
-            }
+            LOGGER.debug("the param version isNullOrEmpty,we suggest you to set version value");
         }
     }
 

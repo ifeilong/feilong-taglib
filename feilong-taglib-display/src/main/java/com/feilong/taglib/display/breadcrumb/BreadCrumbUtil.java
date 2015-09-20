@@ -177,20 +177,20 @@ public class BreadCrumbUtil{
      * </li>
      * </ol>
      * 
-     * @param <PK>
+     * @param <T>
      *            the generic type
      * @param breadCrumbParams
      *            the bread crumb params
      * @return the all parent site map entity list
      */
-    private static <PK> List<BreadCrumbEntity<PK>> lookUpCurrentBreadCrumbEntityTreeList(BreadCrumbParams breadCrumbParams){
+    private static <T> List<BreadCrumbEntity<T>> lookUpCurrentBreadCrumbEntityTreeList(BreadCrumbParams breadCrumbParams){
         String currentPath = breadCrumbParams.getCurrentPath();
-        List<BreadCrumbEntity<PK>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
+        List<BreadCrumbEntity<T>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
 
         if (Validator.isNullOrEmpty(currentPath)){
             //find all
-            Map<PK, Integer> groupCount = CollectionsUtil.groupCount(breadCrumbEntityList, "parentId");
-            for (Map.Entry<PK, Integer> entry : groupCount.entrySet()){
+            Map<T, Integer> groupCount = CollectionsUtil.groupCount(breadCrumbEntityList, "parentId");
+            for (Map.Entry<T, Integer> entry : groupCount.entrySet()){
                 Integer value = entry.getValue();
                 if (value > 1){
                     throw new IllegalArgumentException("currentPath isNullOrEmpty,but breadCrumbEntityList has repeat parentId data!");
@@ -198,7 +198,7 @@ public class BreadCrumbUtil{
             }
             return sortOutAllParentBreadCrumbEntityList(breadCrumbEntityList);
         }
-        BreadCrumbEntity<PK> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
+        BreadCrumbEntity<T> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
 
         if (Validator.isNullOrEmpty(currentBreadCrumbEntity)){
             LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
@@ -211,14 +211,14 @@ public class BreadCrumbUtil{
     /**
      * 按照父子关系排序好的 list.
      *
-     * @param <PK>
+     * @param <T>
      *            the generic type
      * @param breadCrumbEntityList
      *            the bread crumb entity list
      * @return the all parent bread crumb entity list
      */
-    private static <PK> List<BreadCrumbEntity<PK>> sortOutAllParentBreadCrumbEntityList(List<BreadCrumbEntity<PK>> breadCrumbEntityList){
-        BreadCrumbEntity<PK> currentBreadCrumbEntity = null;
+    private static <T> List<BreadCrumbEntity<T>> sortOutAllParentBreadCrumbEntityList(List<BreadCrumbEntity<T>> breadCrumbEntityList){
+        BreadCrumbEntity<T> currentBreadCrumbEntity = null;
         return sortOutAllParentBreadCrumbEntityList(currentBreadCrumbEntity, breadCrumbEntityList);
     }
 
@@ -227,7 +227,7 @@ public class BreadCrumbUtil{
     /**
      * 按照父子关系排序好的 list.
      *
-     * @param <PK>
+     * @param <T>
      *            the generic type
      * @param currentBreadCrumbEntity
      *            the current bread crumb entity
@@ -235,16 +235,16 @@ public class BreadCrumbUtil{
      *            the bread crumb entity list
      * @return the all parent bread crumb entity list
      */
-    private static <PK> List<BreadCrumbEntity<PK>> sortOutAllParentBreadCrumbEntityList(
-                    BreadCrumbEntity<PK> currentBreadCrumbEntity,
-                    List<BreadCrumbEntity<PK>> breadCrumbEntityList){
+    private static <T> List<BreadCrumbEntity<T>> sortOutAllParentBreadCrumbEntityList(
+                    BreadCrumbEntity<T> currentBreadCrumbEntity,
+                    List<BreadCrumbEntity<T>> breadCrumbEntityList){
         if (null == currentBreadCrumbEntity){
             //目前 原样返回, 将来可能支持自动排序
             //TODO 要点工作量
             return breadCrumbEntityList;
         }
         // 每次成一个新的
-        List<BreadCrumbEntity<PK>> allParentBreadCrumbEntityList = new ArrayList<BreadCrumbEntity<PK>>();
+        List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList = new ArrayList<BreadCrumbEntity<T>>();
         allParentBreadCrumbEntityList = constructParentBreadCrumbEntityList(
                         currentBreadCrumbEntity,
                         breadCrumbEntityList,
@@ -262,7 +262,7 @@ public class BreadCrumbUtil{
      * 递归生成
      * </p>
      *
-     * @param <PK>
+     * @param <T>
      *            the generic type
      * @param breadCrumbEntity
      *            the site map entity_in
@@ -270,20 +270,18 @@ public class BreadCrumbUtil{
      *            the site map entities
      * @param allParentBreadCrumbEntityList
      *            the all parent site map entity list
-     * @return the list< bread crumb entity
-     *         < p k>
-     *         >
+     * @return the list< bread crumb entity< t>>
      */
-    private static <PK> List<BreadCrumbEntity<PK>> constructParentBreadCrumbEntityList(
-                    BreadCrumbEntity<PK> breadCrumbEntity,
-                    List<BreadCrumbEntity<PK>> siteMapEntities,
-                    List<BreadCrumbEntity<PK>> allParentBreadCrumbEntityList){
+    private static <T> List<BreadCrumbEntity<T>> constructParentBreadCrumbEntityList(
+                    BreadCrumbEntity<T> breadCrumbEntity,
+                    List<BreadCrumbEntity<T>> siteMapEntities,
+                    List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList){
         // 加入到链式表
         allParentBreadCrumbEntityList.add(breadCrumbEntity);
-        PK parentId = breadCrumbEntity.getParentId();
+        T parentId = breadCrumbEntity.getParentId();
 
         // ****************************************************
-        for (BreadCrumbEntity<PK> loopBreadCrumbEntity : siteMapEntities){
+        for (BreadCrumbEntity<T> loopBreadCrumbEntity : siteMapEntities){
             // 当前的id和传入的breadCrumbEntity equals
             if (loopBreadCrumbEntity.getId().equals(parentId)){
                 LOGGER.debug("loopBreadCrumbEntity.getId():{},breadCrumbEntity_in.getParentId():{}", loopBreadCrumbEntity.getId(), parentId);
@@ -298,7 +296,7 @@ public class BreadCrumbUtil{
     /**
      * 匹配路径.
      *
-     * @param <PK>
+     * @param <T>
      *            the generic type
      * @param currentPath
      *            the current path
@@ -306,8 +304,8 @@ public class BreadCrumbUtil{
      *            the bread crumb entity list
      * @return the site map entity by path
      */
-    private static <PK> BreadCrumbEntity<PK> getBreadCrumbEntityByPath(String currentPath,List<BreadCrumbEntity<PK>> breadCrumbEntityList){
-        for (BreadCrumbEntity<PK> breadCrumbEntity : breadCrumbEntityList){
+    private static <T> BreadCrumbEntity<T> getBreadCrumbEntityByPath(String currentPath,List<BreadCrumbEntity<T>> breadCrumbEntityList){
+        for (BreadCrumbEntity<T> breadCrumbEntity : breadCrumbEntityList){
             if (breadCrumbEntity.getPath().equals(currentPath)){
                 return breadCrumbEntity;
             }
