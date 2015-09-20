@@ -23,36 +23,36 @@ import java.util.List;
  *
  * @author feilong
  * @version 1.2.2 2015年7月16日 下午2:20:32
- * @param <PK>
+ * @param <T>
  *            the generic type
  * @since 1.2.2
  */
-public class BreadCrumbParams<PK> implements Serializable{
+public class BreadCrumbParams<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long          serialVersionUID = 2706654282393984018L;
+    private static final long         serialVersionUID = 2706654282393984018L;
 
     /** The bread crumb entity list. */
-    private List<BreadCrumbEntity<PK>> breadCrumbEntityList;
+    private List<BreadCrumbEntity<T>> breadCrumbEntityList;
 
     /** The current path. */
-    private String                     currentPath;
+    private String                    currentPath;
 
     /** url前缀, 用来拼接 {@link BreadCrumbEntity#path}. */
-    private String                     urlPrefix;
+    private String                    urlPrefix;
 
     /** The connector. */
-    private String                     connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
+    private String                    connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
 
     /** vm的路径. */
-    private String                     vmPath           = BreadCrumbConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
+    private String                    vmPath           = BreadCrumbConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /**
      * 获得 the bread crumb entity list.
      *
      * @return the breadCrumbEntityList
      */
-    public List<BreadCrumbEntity<PK>> getBreadCrumbEntityList(){
+    public List<BreadCrumbEntity<T>> getBreadCrumbEntityList(){
         return breadCrumbEntityList;
     }
 
@@ -62,7 +62,7 @@ public class BreadCrumbParams<PK> implements Serializable{
      * @param breadCrumbEntityList
      *            the breadCrumbEntityList to set
      */
-    public void setBreadCrumbEntityList(List<BreadCrumbEntity<PK>> breadCrumbEntityList){
+    public void setBreadCrumbEntityList(List<BreadCrumbEntity<T>> breadCrumbEntityList){
         this.breadCrumbEntityList = breadCrumbEntityList;
     }
 

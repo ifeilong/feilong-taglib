@@ -23,17 +23,17 @@ import java.util.List;
  *
  * @author feilong
  * @version 1.2.2 2015年7月16日 下午2:20:32
- * @param <PK>
+ * @param <T>
  *            the generic type
  * @since 1.2.2
  */
-public class BreadCrumbVMParams<PK> implements Serializable{
+public class BreadCrumbVMParams<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long          serialVersionUID = 2706654282393984018L;
 
     /** The bread crumb entity list. */
-    private List<BreadCrumbEntity<PK>> breadCrumbEntityList;
+    private List<BreadCrumbEntity<T>> breadCrumbEntityList;
 
     /** The connector. */
     private String                     connector;
@@ -43,7 +43,7 @@ public class BreadCrumbVMParams<PK> implements Serializable{
      *
      * @return the breadCrumbEntityList
      */
-    public List<BreadCrumbEntity<PK>> getBreadCrumbEntityList(){
+    public List<BreadCrumbEntity<T>> getBreadCrumbEntityList(){
         return breadCrumbEntityList;
     }
 
@@ -53,7 +53,7 @@ public class BreadCrumbVMParams<PK> implements Serializable{
      * @param breadCrumbEntityList
      *            the breadCrumbEntityList to set
      */
-    public void setBreadCrumbEntityList(List<BreadCrumbEntity<PK>> breadCrumbEntityList){
+    public void setBreadCrumbEntityList(List<BreadCrumbEntity<T>> breadCrumbEntityList){
         this.breadCrumbEntityList = breadCrumbEntityList;
     }
 

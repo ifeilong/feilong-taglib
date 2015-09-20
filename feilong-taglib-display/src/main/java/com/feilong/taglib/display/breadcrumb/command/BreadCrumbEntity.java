@@ -26,16 +26,16 @@ import java.io.Serializable;
  *
  * @author feilong
  * @version 1.0 2012-2-16 下午12:55:43
- * @param <PK>
+ * @param <T>
  *            the generic type
  */
-public class BreadCrumbEntity<PK> implements Serializable{
+public class BreadCrumbEntity<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -2739340747216481761L;
 
     /** current id, 可以是Number String 或者其他类型.. */
-    private PK                id;
+    private T                 id;
 
     /** name,用于拼接. */
     private String            name;
@@ -47,7 +47,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
     private String            path;
 
     /** parent id ,可以是Number String 或者其他类型.. */
-    private PK                parentId;
+    private T                 parentId;
 
     /**
      * Instantiates a new site map entity.
@@ -70,7 +70,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * @param parentId
      *            the parent id
      */
-    public BreadCrumbEntity(PK id, String name, String title, String path, PK parentId){
+    public BreadCrumbEntity(T id, String name, String title, String path, T parentId){
         super();
         this.id = id;
         this.name = name;
@@ -141,7 +141,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * 
      * @return the id
      */
-    public PK getId(){
+    public T getId(){
         return id;
     }
 
@@ -151,7 +151,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * @param id
      *            the id to set
      */
-    public void setId(PK id){
+    public void setId(T id){
         this.id = id;
     }
 
@@ -161,7 +161,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * @param parentId
      *            the parentId to set
      */
-    public void setParentId(PK parentId){
+    public void setParentId(T parentId){
         this.parentId = parentId;
     }
 
@@ -170,7 +170,7 @@ public class BreadCrumbEntity<PK> implements Serializable{
      * 
      * @return the parentId
      */
-    public PK getParentId(){
+    public T getParentId(){
         return parentId;
     }
 }
