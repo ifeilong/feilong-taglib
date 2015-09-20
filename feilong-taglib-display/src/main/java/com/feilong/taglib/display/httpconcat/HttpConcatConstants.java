@@ -25,6 +25,7 @@ package com.feilong.taglib.display.httpconcat;
 public class HttpConcatConstants{
 
     /** 配置文件 <code>{@value}</code>. */
+    //TODO support different environment
     public static final String CONFIG_FILE            = "config/httpconcat";
 
     //**************************************************************
