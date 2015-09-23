@@ -30,9 +30,9 @@ Reduce development, Release ideas
 
 #说明
 
-1. 基于Apache2 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
-1. 基于maven3.2构建;
-1. 需要jdk1.6及以上环境;
+1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+1. 基于`maven3.2`构建;
+1. 1.5.0及以上版本需要`jdk1.7`及以上环境(1.5.0以下版本需要`jdk1.6`及以上环境);
 
 
 # Maven使用配置
@@ -70,7 +70,7 @@ Reduce development, Release ideas
 
 # feilong-platform module:
 
-Category |Name | Description | JDK编译版本(将来会统一)
+Category |Name | Description | JDK编译版本
 ----|------------ | ---------|------------
 taglib |`feilong-taglib-common` | 封装了常用的自定义标签 | 1.7
 taglib |`feilong-taglib-display` | 封装了常用的自定义标签 | 1.7
