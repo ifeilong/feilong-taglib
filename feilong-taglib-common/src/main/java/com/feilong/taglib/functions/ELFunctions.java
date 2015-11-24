@@ -17,6 +17,10 @@ package com.feilong.taglib.functions;
 
 import java.util.Iterator;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
@@ -56,6 +60,9 @@ import com.feilong.core.util.CollectionsUtil;
  */
 public final class ELFunctions{
 
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ELFunctions.class);
+
     /** Don't let anyone instantiate this class. */
     private ELFunctions(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -93,6 +100,12 @@ public final class ELFunctions{
      * @see com.feilong.core.tools.jsonlib.JsonUtil#format(Object, int, int)
      */
     public static String toJsonString(Object obj){
-        return JsonUtil.format(obj, 0, 0);
+        try{
+            return JsonUtil.format(obj, 0, 0);
+        }catch (Exception e){
+            LOGGER.error("json format:" + obj.toString(), e);
+        }
+        //此方法应用于jsp标签,如果抛出异常,可能页面不能持续渲染, 但是不会显示异常页面, 因此,此处,直接返回null
+        return StringUtils.EMPTY;
     }
 }
