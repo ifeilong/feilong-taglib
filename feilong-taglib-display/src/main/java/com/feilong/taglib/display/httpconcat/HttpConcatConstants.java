@@ -24,29 +24,11 @@ package com.feilong.taglib.display.httpconcat;
  */
 public class HttpConcatConstants{
 
-    /** 配置文件 <code>{@value}</code>. */
-    //TODO support different environment
-    public static final String CONFIG_FILE            = "config/httpconcat";
-
-    //**************************************************************
     /** css <code>{@value}</code>. */
-    public static final String TYPE_CSS               = "css";
+    public static final String TYPE_CSS = "css";
 
     /** js <code>{@value}</code>. */
-    public static final String TYPE_JS                = "js";
-
-    //**************************************************************
-
-    /** <code>{@value}</code>. */
-    public static final String KEY_HTTPCONCAT_SUPPORT = "httpconcatSupport";
-
-    //**************************************************************
-
-    /** <code>{@value}</code>. */
-    public static final String KEY_TEMPLATE_CSS       = "template.css";
-
-    /** <code>{@value}</code>. */
-    public static final String KEY_TEMPLATE_JS        = "template.js";
+    public static final String TYPE_JS  = "js";
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatConstants(){

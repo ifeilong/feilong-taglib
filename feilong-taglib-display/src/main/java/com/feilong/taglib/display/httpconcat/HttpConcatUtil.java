@@ -29,18 +29,18 @@ import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.core.util.Validator;
+import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.security.oneway.MD5Util;
 
 /**
  * http concat的核心工具类.
  * <p>
- * 类加载的时候,会使用 {@link ResourceBundleUtil} 来读取{@link HttpConcatConstants#CONFIG_FILE} 配置文件中的 {@link HttpConcatConstants#KEY_TEMPLATE_CSS}
- * css模板 以及 {@link HttpConcatConstants#KEY_TEMPLATE_JS} JS模板<br>
+ * 类加载的时候,会使用 {@link ResourceBundleUtil} 来读取{@link HttpConcatGlobalConfigBuilder#CONFIG_FILE} 配置文件中的
+ * {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_CSS} css模板 以及 {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_JS} JS模板<br>
  * 请确保文件路径中有配置文件,以及正确的key<br>
  * 如果获取不到,会 throw {@link IllegalArgumentException}
  * 
@@ -57,42 +57,12 @@ import com.feilong.tools.security.oneway.MD5Util;
 public final class HttpConcatUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger                       LOGGER                 = LoggerFactory.getLogger(HttpConcatUtil.class);
+    private static final Logger                       LOGGER = LoggerFactory.getLogger(HttpConcatUtil.class);
 
-    /** The Constant TEMPLATE_CSS. */
-    private static final String                       TEMPLATE_CSS;
-
-    /** The Constant TEMPLATE_JS. */
-    private static final String                       TEMPLATE_JS;
-
-    /** 是否支持 HTTP_CONCAT (全局参数). */
-    private static final Boolean                      GLOBAL_HTTP_CONCAT_SUPPORT;
+    /** http concat 全局配置. */
+    private static final HttpConcatGlobalConfig       httpConcatGlobalConfig;
 
     //*****************************************************************************
-
-    /**
-     * 设置缓存是否开启.
-     * 
-     * @since 1.0.7
-     */
-    private static final boolean                      DEFAULT_CACHEENABLE    = true;
-
-    /**
-     * cache size 限制,仅当 {@link #DEFAULT_CACHEENABLE}开启生效, 当cache数达到 {@link #DEFAULT_CACHESIZELIMIT},将不会再缓存结果
-     * 经过测试
-     * <ul>
-     * <li>300000 size cache占用 内存 :87.43KB(非精准)</li>
-     * <li>304850 size cache占用 内存 :87.43KB(非精准)</li>
-     * <li>400000 size cache占用 内存 :8.36MB(非精准)</li>
-     * </ul>
-     * 
-     * 对于一个正式项目而言,http concat的cache, size极限大小会是 <blockquote><i>页面总数(P)*页面concat标签数(C)*i18N数(I)*版本号(V)</i></blockquote><br>
-     * 如果一个项目 页面有1000个,每个页面有5个concat块,一共有5种国际化语言,如果应用重启前支持5次版本更新,那么计算公式会是 <blockquote><i>1000*5*5*5=50000</i></blockquote>
-     * <b>注意:此公式中的页面总数是指,VM/JSP的数量,除非参数不同导致VM/JSP渲染的JS也不同,另当别论</b>
-     * 
-     * @since 1.0.7
-     */
-    private static final int                          DEFAULT_CACHESIZELIMIT = 300000;
 
     /**
      * 将结果缓存到map.<br>
@@ -103,22 +73,14 @@ public final class HttpConcatUtil{
      */
     //TODO change to ConcurrentHashMap
     //这里对线程安全的要求不高,仅仅是插入和读取的操作,即使出了线程安全问题,重新解析js/css标签代码并加载即可
-    private static final Map<HttpConcatParam, String> CACHE                  = new HashMap<HttpConcatParam, String>();
+    private static final Map<HttpConcatParam, String> CACHE  = new HashMap<HttpConcatParam, String>();
 
-    // XXX 支持多变量
     static{
         LOGGER.info("begin init [{}]", HttpConcatUtil.class.getSimpleName());
 
-        GLOBAL_HTTP_CONCAT_SUPPORT = getRequiredValue(HttpConcatConstants.KEY_HTTPCONCAT_SUPPORT, Boolean.class);
-        TEMPLATE_CSS = getRequiredValue(HttpConcatConstants.KEY_TEMPLATE_CSS, String.class);
-        TEMPLATE_JS = getRequiredValue(HttpConcatConstants.KEY_TEMPLATE_JS, String.class);
+        httpConcatGlobalConfig = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
 
-        LOGGER.info(
-                        "end init [{}],GLOBAL_HTTP_CONCAT_SUPPORT:[{}],TEMPLATE_CSS:[{}],TEMPLATE_JS:[{}]",
-                        HttpConcatUtil.class.getSimpleName(),
-                        GLOBAL_HTTP_CONCAT_SUPPORT,
-                        TEMPLATE_CSS,
-                        TEMPLATE_JS);
+        LOGGER.info("end init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(httpConcatGlobalConfig));
     }
 
     /** Don't let anyone instantiate this class. */
@@ -158,12 +120,12 @@ public final class HttpConcatUtil{
         }
 
         //是否使用cache
-        boolean isWriteCache = DEFAULT_CACHEENABLE;
+        boolean isWriteCache = httpConcatGlobalConfig.getDefaultCacheEnable();
 
         int cacheKeyHashCode = httpConcatParam.hashCode();
         //*************************************************************************************
         //缓存
-        if (DEFAULT_CACHEENABLE){
+        if (httpConcatGlobalConfig.getDefaultCacheEnable()){
             //返回此映射中的键-值映射关系数。如果该映射包含的元素大于 Integer.MAX_VALUE，则返回 Integer.MAX_VALUE。 
             int cacheSize = CACHE.size();
 
@@ -175,13 +137,13 @@ public final class HttpConcatUtil{
             }
 
             //超出cache 数量
-            boolean outOfCacheItemSizeLimit = cacheSize >= DEFAULT_CACHESIZELIMIT;
+            boolean outOfCacheItemSizeLimit = cacheSize >= httpConcatGlobalConfig.getDefaultCacheSizeLimit();
             if (outOfCacheItemSizeLimit){
                 LOGGER.warn(
                                 "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
                                 cacheKeyHashCode,
                                 cacheSize,
-                                DEFAULT_CACHESIZELIMIT);
+                                httpConcatGlobalConfig.getDefaultCacheSizeLimit());
 
                 //超过,那么就不记录cache
                 isWriteCache = false;
@@ -194,7 +156,6 @@ public final class HttpConcatUtil{
         }
 
         String content = buildContent(httpConcatParam);
-
         // **************************log***************************************************
         LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
 
@@ -203,15 +164,14 @@ public final class HttpConcatUtil{
             CACHE.put(httpConcatParam, content);
             LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
-            if (DEFAULT_CACHEENABLE){
+            if (httpConcatGlobalConfig.getDefaultCacheEnable()){
                 LOGGER.warn(
                                 "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache",
                                 cacheKeyHashCode,
-                                DEFAULT_CACHEENABLE,
+                                httpConcatGlobalConfig.getDefaultCacheEnable(),
                                 isWriteCache);
             }
         }
-        //************************************************************************
         return content;
     }
 
@@ -224,12 +184,12 @@ public final class HttpConcatUtil{
      * @since 1.4.1
      */
     private static String buildContent(HttpConcatParam httpConcatParam){
-
         // **********是否开启了连接********************************************************
         Boolean httpConcatSupport = httpConcatParam.getHttpConcatSupport();
         //如果没有设置就使用默认的全局设置
         if (null == httpConcatSupport){
-            httpConcatSupport = (null == GLOBAL_HTTP_CONCAT_SUPPORT) ? false : GLOBAL_HTTP_CONCAT_SUPPORT;
+            httpConcatSupport = (null == httpConcatGlobalConfig.getHttpConcatSupport()) ? false : httpConcatGlobalConfig
+                            .getHttpConcatSupport();
         }
 
         // *******************************************************************
@@ -242,7 +202,6 @@ public final class HttpConcatUtil{
         String type = standardHttpConcatParam.getType();
         String template = getTemplate(type);
 
-        // *********************************************************************************
         if (httpConcatSupport){ // concat
             String concatLink = getConcatLink(standardHttpConcatParam);
             return MessageFormatUtil.format(template, concatLink);
@@ -266,7 +225,6 @@ public final class HttpConcatUtil{
      * @return the http concat param
      */
     private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-
         //******************domain*******************************************
         String domain = httpConcatParam.getDomain();
         // 格式化 domain 成 http://www.feilong.com/ 形式
@@ -314,7 +272,6 @@ public final class HttpConcatUtil{
                             itemSrcListSize,
                             JsonUtil.format(httpConcatParam));
         }
-
         // *******************************************************************
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
         standardHttpConcatParam.setItemSrcList(noRepeatitemList);
@@ -417,7 +374,7 @@ public final class HttpConcatUtil{
             sb.append("?");
             sb.append(version);
         }else{
-            LOGGER.debug("the param version isNullOrEmpty,we suggest you to set version value");
+            LOGGER.debug("the param version isNullOrEmpty,we suggest you should set version value");
         }
     }
 
@@ -457,36 +414,10 @@ public final class HttpConcatUtil{
      */
     private static String getTemplate(String type){
         if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
-            return TEMPLATE_CSS;
+            return httpConcatGlobalConfig.getTemplateCss();
         }else if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
-            return TEMPLATE_JS;
+            return httpConcatGlobalConfig.getTemplateJs();
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
-    }
-
-    /**
-     * 获得 required value.
-     * 
-     * <p>
-     * 如果 {@code Validator.isNullOrEmpty(Object)} ,抛出NullPointerException
-     * </p>
-     * 
-     * @param <T>
-     *            the generic type
-     * @param keyName
-     *            the key name
-     * @param typeClass
-     *            the type class
-     * @return the value if not null or empty
-     * @since 1.4.1
-     */
-    private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
-        String baseName = HttpConcatConstants.CONFIG_FILE;
-        T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
-        if (Validator.isNullOrEmpty(keyValue)){
-            String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new NullPointerException(Slf4jUtil.formatMessage(messagePattern, keyName, baseName));
-        }
-        return keyValue;
     }
 }

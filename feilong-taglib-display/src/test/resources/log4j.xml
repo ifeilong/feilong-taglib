@@ -2,10 +2,7 @@
 <!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
-
 	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-		<!-- The default target is System.out. -->
-		<!-- <param name="Target" value="System.out" /> -->
 		<param name="Threshold" value="debug" />
 		<!-- 设置监视器输出方式 -->
 		<layout class="org.apache.log4j.PatternLayout">
@@ -18,14 +15,6 @@
 		</filter>
 	</appender>
 
-	<appender name="logFile" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
-		<param name="File" value="D:\\logs\\feilong\\feilong-taglib-display\\log.log" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %t (%F:%L) [%M()] - %m%n" />
-		</layout>
-	</appender>
-
 	<category name="com.feilong">
 		<priority value="debug" />
 	</category>
@@ -33,7 +22,7 @@
 		<priority value="debug" />
 	</category>
 	<category name="com.feilong.taglib.display.httpconcat.HttpConcatUtil">
-		<priority value="warn" />
+		<priority value="debug" />
 	</category>
 	<category name="com.feilong.core.net.URIUtil">
 		<priority value="info" />
@@ -55,6 +44,5 @@
 	<root>
 		<level value="debug" />
 		<appender-ref ref="stdout" />
-		<appender-ref ref="logFile" />
 	</root>
 </log4j:configuration>

@@ -41,11 +41,6 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatUtilTest.class);
 
-    /**
-     * Test method for
-     * {@link com.feilong.taglib.display.httpconcat.HttpConcatUtil#getWriteContent(com.feilong.taglib.display.httpconcat.command.HttpConcatParam)}
-     * .
-     */
     @Test
     public final void testGetWriteContent(){
         HttpConcatParam httpConcatParam = getHttpConcatParam();
@@ -77,7 +72,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
             Date beginDate = new Date();
             for (int i = 0; i < j; ++i){
                 //LOGGER.info(i);
-                HttpConcatParam httpConcatParam = getHttpConcatParamByI(null);
+                HttpConcatParam httpConcatParam = getHttpConcatParamByIndex(null);
                 HttpConcatUtil.getWriteContent(httpConcatParam);
                 //				httpConcatParam = null;
                 //				System.gc();

@@ -35,7 +35,7 @@ public abstract class BaseHttpConcatTest{
      * @return the http concat param
      */
     protected HttpConcatParam getHttpConcatParam(){
-        return getHttpConcatParamByI(null);
+        return getHttpConcatParamByIndex(null);
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class BaseHttpConcatTest{
      *            the i
      * @return the http concat param by i
      */
-    protected HttpConcatParam getHttpConcatParamByI(Integer i){
+    protected HttpConcatParam getHttpConcatParamByIndex(Integer i){
         HttpConcatParam httpConcatParam1 = new HttpConcatParam();
         httpConcatParam1.setType("js");
         //httpConcatParam.setDomain("http://www.feilong.com");
