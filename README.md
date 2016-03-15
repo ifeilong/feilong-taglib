@@ -30,9 +30,9 @@ Reduce development, Release ideas
 
 有 
 
-1.  [feilongDisplay pager J2EE分页解决方案.md](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案.md") 
-2.  [isContain-taglib.md](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib.md") 
-3.  [isInTime-taglib.md](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib.md") 
+1.  [feilongDisplay pager J2EE分页解决方案](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案") 
+2.  [isContain-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib") 
+3.  [isInTime-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib") 
 
 
 #说明
