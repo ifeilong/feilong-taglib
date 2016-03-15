@@ -12,4 +12,6 @@
 	<name>feilong-taglib-common</name>
 	<description>${project.name} ${project.version} API</description>
 
+	<url>https://github.com/venusdrogon/feilong-taglib</url>
+
 </project>

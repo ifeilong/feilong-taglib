@@ -10,6 +10,8 @@
 	<name>feilong-taglib-display</name>
 	<description>${project.name} ${project.version} API</description>
 
+	<url>https://github.com/venusdrogon/feilong-taglib</url>
+
 	<dependencies>
 
 		<dependency>

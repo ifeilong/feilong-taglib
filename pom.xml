@@ -14,8 +14,6 @@
 	<name>feilong-taglib-parent</name>
 	<description>${project.name} ${project.version} API</description>
 
-	<url>https://github.com/venusdrogon/feilong-taglib</url>
-
 	<modules>
 		<module>feilong-taglib-common</module>
 		<module>feilong-taglib-display</module>
