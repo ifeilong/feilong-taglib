@@ -34,7 +34,6 @@ import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-import com.feilong.tools.security.oneway.MD5Util;
 
 /**
  * http concat的核心工具类.
@@ -188,8 +187,8 @@ public final class HttpConcatUtil{
         Boolean httpConcatSupport = httpConcatParam.getHttpConcatSupport();
         //如果没有设置就使用默认的全局设置
         if (null == httpConcatSupport){
-            httpConcatSupport = (null == httpConcatGlobalConfig.getHttpConcatSupport()) ? false : httpConcatGlobalConfig
-                            .getHttpConcatSupport();
+            httpConcatSupport = (null == httpConcatGlobalConfig.getHttpConcatSupport()) ? false
+                            : httpConcatGlobalConfig.getHttpConcatSupport();
         }
 
         // *******************************************************************
@@ -287,21 +286,6 @@ public final class HttpConcatUtil{
         }
         return standardHttpConcatParam;
 
-    }
-
-    // *****************************************************************************
-    /**
-     * 生成version号<br>
-     * 目前采用md5加密.
-     * 
-     * @param origin
-     *            the origin
-     * @return the string
-     */
-    public static String createVersion(String origin){
-        String version = MD5Util.encode(origin);
-        LOGGER.info("origin:[{}],version:[{}]", origin, version);
-        return version;
     }
 
     // *****************************************************************************
