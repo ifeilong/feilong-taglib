@@ -28,6 +28,13 @@ Reduce development, Release ideas
 
 `封装了常用的自定义标签`
 
+有 
+
+1.  [feilongDisplay pager J2EE分页解决方案.md](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案.md") 
+2.  [isContain-taglib.md](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib.md") 
+3.  [isInTime-taglib.md](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib.md") 
+
+
 #说明
 
 1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
