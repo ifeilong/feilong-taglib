@@ -28,7 +28,18 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 
 /**
- * 飞龙面包屑标签.
+ * 面包屑标签.
+ * 
+ * <p>
+ * 默认通过解析 {@link BreadCrumbConstants#DEFAULT_TEMPLATE_IN_CLASSPATH}
+ * </p>
+ * 
+ * <h3>扩展:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>{@link #constructBreadCrumbEntityList()}支持扩展</li>
+ * </ol>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0.0 2010-6-8 上午05:50:38

@@ -207,9 +207,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * 
      * @param maxIndexPages
      *            the maxIndexPages to set
-     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
      */
-    @Deprecated
     public void setMaxIndexPages(Integer maxIndexPages){
         this.maxIndexPages = maxIndexPages;
     }
