@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- *Sitemap（即站点地图）就是您网站上各网页的列表。创建并提交Sitemap有助于百度发现并了解您网站上的所有网页。
+ *Sitemap(即站点地图)就是您网站上各网页的列表。创建并提交Sitemap有助于百度发现并了解您网站上的所有网页。
  *
  您还可以使用Sitemap提供有关您网站的其他信息，如上次更新日期、Sitemap文件的更新频率等，供百度Spider参考。
 
