@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,16 +88,16 @@ public class BreadCrumbUtil{
      *
      * @param breadCrumbParams
      *            the bread crumb params
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>if Validator.isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
      *         <li>if Validator.isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
      *         <li>if Validator.isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
      *         </ul>
      */
     public static String getBreadCrumbContent(BreadCrumbParams breadCrumbParams){
-        if (Validator.isNullOrEmpty(breadCrumbParams)){
-            throw new NullPointerException("the breadCrumbParams is null or empty!");
-        }
+        Validate.notNull(breadCrumbParams, "breadCrumbParams can't be null!");
+
         List<BreadCrumbEntity<Object>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
         if (Validator.isNullOrEmpty(breadCrumbEntityList)){
             throw new NullPointerException("breadCrumbEntityList is null or empty!");
@@ -284,7 +285,10 @@ public class BreadCrumbUtil{
         for (BreadCrumbEntity<T> loopBreadCrumbEntity : siteMapEntities){
             // 当前的id和传入的breadCrumbEntity equals
             if (loopBreadCrumbEntity.getId().equals(parentId)){
-                LOGGER.debug("loopBreadCrumbEntity.getId():{},breadCrumbEntity_in.getParentId():{}", loopBreadCrumbEntity.getId(), parentId);
+                LOGGER.debug(
+                                "loopBreadCrumbEntity.getId():{},breadCrumbEntity_in.getParentId():{}",
+                                loopBreadCrumbEntity.getId(),
+                                parentId);
                 // 递归
                 constructParentBreadCrumbEntityList(loopBreadCrumbEntity, siteMapEntities, allParentBreadCrumbEntityList);
                 break;

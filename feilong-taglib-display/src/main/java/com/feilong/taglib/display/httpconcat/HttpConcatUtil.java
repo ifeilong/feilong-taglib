@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,9 +104,7 @@ public final class HttpConcatUtil{
      *         </ul>
      */
     public static String getWriteContent(HttpConcatParam httpConcatParam){
-        if (Validator.isNullOrEmpty(httpConcatParam)){
-            throw new NullPointerException("the httpConcatParam is null or empty!");
-        }
+        Validate.notNull(httpConcatParam, "httpConcatParam can't be null!");
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(JsonUtil.format(httpConcatParam));

@@ -23,6 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,9 +161,7 @@ public final class PagerBuilder{
      *         else 生成分页html代码
      */
     public static String buildPagerContent(PagerParams pagerParams){
-        if (Validator.isNullOrEmpty(pagerParams)){
-            throw new NullPointerException("pagerParams can't be null/empty!");
-        }
+        Validate.notNull(pagerParams, "pagerParams can't be null!");
 
         int totalCount = pagerParams.getTotalCount();
 
@@ -391,7 +390,10 @@ public final class PagerBuilder{
      * 
      * @since 1.4.0
      */
-    private static <T> Map<Integer, String> getAllUseIndexAndHrefMap(PagerParams pagerParams,Pager<T> pager,int[] startAndEndIteratorIndexs){
+    private static <T> Map<Integer, String> getAllUseIndexAndHrefMap(
+                    PagerParams pagerParams,
+                    Pager<T> pager,
+                    int[] startAndEndIteratorIndexs){
         Set<Integer> indexSet = getAllUseIndexSet(pager, startAndEndIteratorIndexs);
 
         String pageParamName = pagerParams.getPageParamName();
@@ -400,8 +402,11 @@ public final class PagerBuilder{
         String templateEncodedUrl = "";
         CharSequence targetForReplace = pageParamName + "=" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
         if (PagerType.REDIRECT == pagerType){
-            templateEncodedUrl = ParamUtil.addParameter(pagerParams.getPageUrl(), pageParamName, ""
-                            + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO, pagerParams.getCharsetType());
+            templateEncodedUrl = ParamUtil.addParameter(
+                            pagerParams.getPageUrl(),
+                            pageParamName,
+                            "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO,
+                            pagerParams.getCharsetType());
         }else{
             templateEncodedUrl = "javascript:void(0);";
         }
