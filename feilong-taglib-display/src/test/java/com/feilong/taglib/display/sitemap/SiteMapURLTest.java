@@ -25,7 +25,7 @@ import java.util.Map;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 
-import com.feilong.core.io.IOWriteUtil;
+import com.feilong.io.IOWriteUtil;
 import com.feilong.tools.velocity.VelocityUtil;
 
 /**
