@@ -36,7 +36,7 @@ public class PagerTest{
      * Test.
      */
     @Test
-    public final void test(){
+    public void test(){
         Pager pager = new Pager(2, 10, 10000);
         pager.setMaxShowPageNo(-2);
         LOGGER.info(JsonUtil.format(pager));

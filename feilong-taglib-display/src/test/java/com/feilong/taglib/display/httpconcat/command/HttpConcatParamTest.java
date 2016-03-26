@@ -43,7 +43,7 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
      * Test hash code.
      */
     @Test
-    public final void testHashCode(){
+    public void testHashCode(){
         HttpConcatParam t = new HttpConcatParam();
 
         LOGGER.info("" + t.hashCode());
@@ -55,7 +55,7 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
      * Test equals object.
      */
     @Test
-    public final void testEqualsObject(){
+    public void testEqualsObject(){
         HttpConcatParam pagerParams1 = new HttpConcatParam();
 
         HttpConcatParam pagerParams2 = new HttpConcatParam();

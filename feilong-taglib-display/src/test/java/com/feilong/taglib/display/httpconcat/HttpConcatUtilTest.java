@@ -42,7 +42,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatUtilTest.class);
 
     @Test
-    public final void testGetWriteContent(){
+    public void testGetWriteContent(){
         HttpConcatParam httpConcatParam = getHttpConcatParam();
         String writeContent = HttpConcatUtil.getWriteContent(httpConcatParam);
         LOGGER.info(writeContent);
@@ -87,7 +87,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
      * Test get write content1.
      */
     @Test
-    public final void testGetWriteContent1(){
+    public void testGetWriteContent1(){
         HttpConcatParam httpConcatParam = new HttpConcatParam();
         httpConcatParam.setType("js");
         //httpConcatParam.setDomain("http://www.feilong.com");

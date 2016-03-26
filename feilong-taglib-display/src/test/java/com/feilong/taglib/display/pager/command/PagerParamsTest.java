@@ -38,7 +38,7 @@ public class PagerParamsTest{
      * Test method for {@link com.feilong.taglib.display.pager.command.PagerParams#hashCode()}.
      */
     @Test
-    public final void testHashCode(){
+    public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
         LOGGER.info("" + pagerParams1.hashCode());
@@ -51,7 +51,7 @@ public class PagerParamsTest{
      */
     @SuppressWarnings("cast")
     @Test
-    public final void testEqualsObject(){
+    public void testEqualsObject(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
         PagerParams pagerParams2 = new PagerParams(0, "a");
 
