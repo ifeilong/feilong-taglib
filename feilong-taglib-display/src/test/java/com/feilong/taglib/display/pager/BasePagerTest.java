@@ -17,7 +17,7 @@ package com.feilong.taglib.display.pager;
 
 import java.util.Locale;
 
-import com.feilong.core.lang.CharsetType;
+import com.feilong.core.CharsetType;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
