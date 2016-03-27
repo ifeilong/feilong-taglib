@@ -71,6 +71,8 @@ import com.feilong.core.UncheckedIOException;
  * @version 1.2.1 2015-6-12 15:38
  * @see javax.servlet.jsp.tagext.BodyTagSupport
  * @see javax.servlet.jsp.tagext.TagSupport
+ * 
+ * @see javax.servlet.jsp.jstl.core.Config
  * @since 1.0.0
  */
 public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
