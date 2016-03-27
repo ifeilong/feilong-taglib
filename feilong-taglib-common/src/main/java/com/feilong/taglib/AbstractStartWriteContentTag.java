@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.base;
-
-import javax.servlet.jsp.JspException;
+package com.feilong.taglib;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,37 +24,27 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * end 输出.
+ * start输出.
  *
  * @author feilong
- * @version 1.3.0 2015年7月23日 下午9:03:41
+ * @version 1.3.0 2015年7月23日 下午9:03:54
  * @since 1.3.0
  */
-public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag{
+public abstract class AbstractStartWriteContentTag extends AbstractWriteContentTag{
 
-    private static final long   serialVersionUID = -3979342234682529223L;
+    /** The Constant serialVersionUID. */
+    private static final long   serialVersionUID = 20290570902030061L;
 
     /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractEndWriteContentTag.class);
+    private static final Logger LOGGER           = LoggerFactory.getLogger(AbstractStartWriteContentTag.class);
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.feilong.taglib.base.AbstractCommonTag#doStartTag()
+    /**
+     * 标签开始.
+     *
+     * @return the int
      */
     @Override
     public int doStartTag(){
-        //Request the creation of new buffer, a BodyContent on which to evaluate the body of this tag. Returned from doStartTag when it implements BodyTag. This is an illegal return value for doStartTag when the class does not implement BodyTag.
-        return EVAL_BODY_BUFFERED;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.jsp.tagext.BodyTagSupport#doEndTag()
-     */
-    @Override
-    public int doEndTag() throws JspException{
         try{
             execute();
         }catch (Exception e){
@@ -69,6 +57,7 @@ public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag
                             getClass().getSimpleName());
             LOGGER.error(formatMessage, e);
         }
-        return EVAL_PAGE;
+        // 开始:跳过了开始和结束标签之间的代码。
+        return SKIP_BODY;
     }
 }

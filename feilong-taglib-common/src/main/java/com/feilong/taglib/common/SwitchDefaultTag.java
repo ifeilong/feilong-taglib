@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.common.standard;
+package com.feilong.taglib.common;
 
 import javax.servlet.jsp.tagext.Tag;
 
-import com.feilong.taglib.base.BaseTag;
+import com.feilong.taglib.BaseTag;
 
 /**
  * default标签 配合switch标签使用.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.base;
+package com.feilong.taglib;
 
 import java.util.Date;
 import java.util.Map;
@@ -37,7 +37,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * @version 1.2.1 2015年6月12日 下午3:33:05
  * @version 1.2.2 2015-7-17 00:24 add time monitor
  * @version 1.2.3 2015-7-23 21:21 update Access Modifier to default
- * @see com.feilong.taglib.base.BaseTag
+ * @see com.feilong.taglib.BaseTag
  * @since 1.0.0
  */
 //默认修饰符号 限制访问

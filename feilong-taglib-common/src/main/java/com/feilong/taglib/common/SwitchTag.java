@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.common.standard;
+package com.feilong.taglib.common;
 
-import com.feilong.taglib.base.BaseTag;
+import com.feilong.taglib.BaseTag;
 
 /**
  * 飞龙switch标签.

@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.taglib.base.AbstractConditionalTag;
+import com.feilong.taglib.AbstractConditionalTag;
 
 /**
  * 判断一个值是否在一个集合(或者可以被转成Iterator)当中.

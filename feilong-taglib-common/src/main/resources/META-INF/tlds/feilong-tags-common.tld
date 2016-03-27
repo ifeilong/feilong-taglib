@@ -12,7 +12,7 @@
 	<!-- 判断一个日期,是否在一个时间区间内 -->
 	<tag>
 		<name>isInTime</name>
-		<tag-class>com.feilong.taglib.common.date.IsInTimeTag</tag-class>
+		<tag-class>com.feilong.taglib.common.IsInTimeTag</tag-class>
 		<body-content>JSP</body-content>
 		<description><![CDATA[判断一个日期,是否在一个时间区间内]]></description>
 		<attribute>
@@ -99,7 +99,7 @@
 	<!-- switch -->
 	<tag>
 		<name>swicth</name>
-		<tag-class>com.feilong.taglib.common.standard.SwitchTag</tag-class>
+		<tag-class>com.feilong.taglib.common.SwitchTag</tag-class>
 		<body-content>jsp</body-content>
 		<description>switch</description>
 		<attribute>
@@ -112,7 +112,7 @@
 	<!-- switch case -->
 	<tag>
 		<name>case</name>
-		<tag-class>com.feilong.taglib.common.standard.SwitchCaseTag</tag-class>
+		<tag-class>com.feilong.taglib.common.SwitchCaseTag</tag-class>
 		<body-content>jsp</body-content>
 		<description>switch case</description>
 		<attribute>
@@ -125,7 +125,7 @@
 	<!-- switch default -->
 	<tag>
 		<name>default</name>
-		<tag-class>com.feilong.taglib.common.standard.SwitchDefaultTag</tag-class>
+		<tag-class>com.feilong.taglib.common.SwitchDefaultTag</tag-class>
 		<body-content>jsp</body-content>
 		<description>switch default</description>
 	</tag>

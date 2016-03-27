@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.base;
+package com.feilong.taglib;
 
 /**
  * 条件父类标签,需要条件控制的 例如logic equal请使用这个.

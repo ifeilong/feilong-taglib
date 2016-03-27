@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.common.date;
+package com.feilong.taglib.common;
 
 import java.util.Date;
 
 import com.feilong.core.date.DateUtil;
-import com.feilong.taglib.base.AbstractConditionalTag;
+import com.feilong.taglib.AbstractConditionalTag;
 
 /**
  * 判断一个日期,是否在一个时间区间内.

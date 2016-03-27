@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.CollectionsUtil;
-import com.feilong.taglib.base.AbstractConditionalTag;
+import com.feilong.taglib.AbstractConditionalTag;
 
 /**
  * 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中).
