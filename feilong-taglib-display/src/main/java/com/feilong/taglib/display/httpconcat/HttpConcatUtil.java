@@ -25,16 +25,16 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.ResourceBundleUtil;
-import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * http concat的核心工具类.

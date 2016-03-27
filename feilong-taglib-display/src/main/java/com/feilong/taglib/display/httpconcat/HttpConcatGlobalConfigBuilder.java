@@ -15,10 +15,10 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
-import com.feilong.core.tools.slf4j.Slf4jUtil;
+import com.feilong.core.Validator;
 import com.feilong.core.util.ResourceBundleUtil;
-import com.feilong.core.util.Validator;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * The Class HttpConcatGlobalConfigBuilder.

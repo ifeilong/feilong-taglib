@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.Validator;
+import com.feilong.core.Validator;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
 /**

@@ -20,10 +20,10 @@ import javax.servlet.jsp.JspException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.core.tools.slf4j.Slf4jUtil;
 import com.feilong.servlet.http.RequestUtil;
-import com.feilong.servlet.http.builder.RequestLogSwitch;
+import com.feilong.servlet.http.entity.RequestLogSwitch;
+import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * end 输出.

@@ -29,7 +29,7 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.UncheckedIOException;
 
 /**
  * 自定义标签的父类,所有自定义标签的基类,包含通用的方法.

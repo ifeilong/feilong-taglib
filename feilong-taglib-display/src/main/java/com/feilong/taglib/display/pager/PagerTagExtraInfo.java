@@ -24,8 +24,8 @@ import javax.servlet.jsp.tagext.VariableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.taglib.base.BaseTEI;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class PagerTagExtraInfo.

@@ -22,8 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.tools.jsonlib.JsonUtil;
 import com.feilong.core.util.CollectionsUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * Static methods for JSP EL expression functions.
@@ -97,7 +97,7 @@ public final class ELFunctions{
      * @param obj
      *            the obj
      * @return the string
-     * @see com.feilong.core.tools.jsonlib.JsonUtil#format(Object, int, int)
+     * @see com.feilong.tools.jsonlib.JsonUtil#format(Object, int, int)
      */
     public static String toJsonString(Object obj){
         try{

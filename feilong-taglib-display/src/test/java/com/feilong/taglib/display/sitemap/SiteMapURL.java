@@ -20,10 +20,10 @@ import java.util.Date;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
+import com.feilong.core.Validator;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.CharsetType;
-import com.feilong.core.util.Validator;
 
 /**
  * robots.txt 里面定义的 sitemap.xml url list部分 <br>
