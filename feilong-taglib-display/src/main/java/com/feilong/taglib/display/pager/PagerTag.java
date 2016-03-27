@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.core.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
-import com.feilong.taglib.base.AbstractStartWriteContentTag;
+import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 

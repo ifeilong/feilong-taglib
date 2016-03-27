@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.Validator;
-import com.feilong.taglib.base.AbstractEndWriteContentTag;
+import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**

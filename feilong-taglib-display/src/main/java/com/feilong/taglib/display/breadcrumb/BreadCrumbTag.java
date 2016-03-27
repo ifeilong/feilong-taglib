@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
-import com.feilong.taglib.base.AbstractStartWriteContentTag;
+import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
