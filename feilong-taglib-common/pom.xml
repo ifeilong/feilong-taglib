@@ -5,7 +5,7 @@
 		<groupId>com.feilong.platform.taglib</groupId>
 		<artifactId>parent</artifactId>
 		<version>1.5.3-SNAPSHOT</version>
-		<relativePath>..</relativePath>
+		
 	</parent>
 
 	<artifactId>feilong-taglib-common</artifactId>
