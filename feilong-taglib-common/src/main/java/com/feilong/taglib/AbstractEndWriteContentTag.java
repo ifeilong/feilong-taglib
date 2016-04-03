@@ -26,7 +26,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * end 输出.
+ * 拿到标签体中间的内容,解析之后,输出内容显示.
  *
  * @author feilong
  * @version 1.3.0 2015年7月23日 下午9:03:41
@@ -63,9 +63,10 @@ public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag
             //XXX 默认处理异常,让页面正常执行,但是以错误log显示
             String formatMessage = Slf4jUtil.formatMessage(
                             "request info:{},tag is:[{}]",
-                            JsonUtil.format(RequestUtil.getRequestInfoMapForLog(
-                                            getHttpServletRequest(),
-                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
+                            JsonUtil.format(
+                                            RequestUtil.getRequestInfoMapForLog(
+                                                            getHttpServletRequest(),
+                                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
                             getClass().getSimpleName());
             LOGGER.error(formatMessage, e);
         }

@@ -15,14 +15,17 @@
  */
 package com.feilong.taglib;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspWriter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.UncheckedIOException;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.servlet.http.entity.RequestLogSwitch;
@@ -30,6 +33,15 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * 输出内容的标签.
+ * 
+ * <h3>可以使用的方法:</h3>
+ * 
+ * <blockquote>
+ * <ul>
+ * <li>{@link #print(Object)}</li>
+ * <li>{@link #println(Object)}</li>
+ * </ul>
+ * </blockquote>
  *
  * @author feilong
  * @version 1.0.0 2009-5-2下午05:20:22
@@ -73,6 +85,38 @@ abstract class AbstractWriteContentTag extends BaseTag{
                         getClass().getSimpleName(),
                         useTimeLog(),
                         DateExtensionUtil.getIntervalForView(beginDate, endDate));
+    }
+
+    /**
+     * 将文字输出到页面.
+     *
+     * @param object
+     *            the object
+     * @since 1.5.3 move from {@link BaseTag}
+     */
+    protected void print(Object object){
+        JspWriter jspWriter = pageContext.getOut();
+        try{
+            jspWriter.print(object);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 将文字输出到页面.
+     *
+     * @param object
+     *            the object
+     * @since 1.5.3 move from {@link BaseTag}
+     */
+    protected void println(Object object){
+        JspWriter jspWriter = pageContext.getOut();
+        try{
+            jspWriter.println(object.toString());
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
     }
 
     /**

@@ -51,13 +51,13 @@ public abstract class AbstractStartWriteContentTag extends AbstractWriteContentT
             //XXX 默认处理异常,让页面正常执行,但是以错误log显示
             String formatMessage = Slf4jUtil.formatMessage(
                             "request info:{},tag is:[{}]",
-                            JsonUtil.format(RequestUtil.getRequestInfoMapForLog(
-                                            getHttpServletRequest(),
-                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
+                            JsonUtil.format(
+                                            RequestUtil.getRequestInfoMapForLog(
+                                                            getHttpServletRequest(),
+                                                            RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD)),
                             getClass().getSimpleName());
             LOGGER.error(formatMessage, e);
         }
-        // 开始:跳过了开始和结束标签之间的代码。
-        return SKIP_BODY;
+        return SKIP_BODY; // 跳过开始和结束标签之间的代码。
     }
 }
