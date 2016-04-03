@@ -33,7 +33,7 @@ public class PagerVMParam implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long              serialVersionUID = -6666715430016900907L;
 
-    /** 总行数，总结果数. */
+    /** 总行数,总结果数. */
     private Integer                        totalCount;
 
     /** 当前页码. */
@@ -87,7 +87,7 @@ public class PagerVMParam implements Serializable{
     /** 结束迭代索引编号. */
     private Integer                        endIteratorIndex;
 
-    /** 循环 迭代索引map key是编号，value 是页面链接. */
+    /** 循环 迭代索引map key是编号,value 是页面链接. */
     private LinkedHashMap<Integer, String> iteratorIndexMap;
 
     /** The pager url template. */
@@ -109,8 +109,8 @@ public class PagerVMParam implements Serializable{
      * 最多显示页数,(如果不设置,默认显示所有页数).
      * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * 这是一种折中的处理方式,空间换时间。 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了。<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理。
      * </p>
      */
     private Integer                        maxShowPageNo;
@@ -135,7 +135,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Gets the 总行数，总结果数.
+     * Gets the 总行数,总结果数.
      * 
      * @return the totalCount
      */
@@ -144,7 +144,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Sets the 总行数，总结果数.
+     * Sets the 总行数,总结果数.
      * 
      * @param totalCount
      *            the totalCount to set
@@ -195,8 +195,8 @@ public class PagerVMParam implements Serializable{
      * 最多显示页数,(如果不设置,默认显示所有页数).
      * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * 这是一种折中的处理方式,空间换时间。 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了。<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理。
      * </p>
      * 
      * @return the maxShowPageNo
@@ -209,8 +209,8 @@ public class PagerVMParam implements Serializable{
      * 最多显示页数,(如果不设置,默认显示所有页数).
      * <p>
      * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式，空间换时间。 数据查询越往后翻，对服务器的压力越大，速度越低，而且从业务上来讲商品质量也越差，所以就没有必要给太多了。<br>
-     * 新浪微博的时间轴也只给出了10页，同样的折中处理。
+     * 这是一种折中的处理方式,空间换时间。 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了。<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理。
      * </p>
      * 
      * @param maxShowPageNo
@@ -335,7 +335,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Gets the 循环 迭代索引map key是编号，value 是页面链接.
+     * Gets the 循环 迭代索引map key是编号,value 是页面链接.
      * 
      * @return the iteratorIndexMap
      */
@@ -344,7 +344,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Sets the 循环 迭代索引map key是编号，value 是页面链接.
+     * Sets the 循环 迭代索引map key是编号,value 是页面链接.
      * 
      * @param iteratorIndexMap
      *            the iteratorIndexMap to set

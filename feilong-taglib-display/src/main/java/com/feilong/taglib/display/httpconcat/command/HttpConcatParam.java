@@ -181,25 +181,25 @@ public final class HttpConcatParam implements Serializable{
     public int hashCode(){
         //返回该对象的哈希码值  支持此方法是为了提高哈希表(例如 java.util.Hashtable 提供的哈希表)的性能。 
 
-        //当我们向一个集合中添加某个元素，集合会首先调用hashCode方法，这样就可以直接定位它所存储的位置，
-        //若该处没有其他元素，则直接保存。
+        //当我们向一个集合中添加某个元素,集合会首先调用hashCode方法,这样就可以直接定位它所存储的位置,
+        //若该处没有其他元素,则直接保存。
 
-        //若该处已经有元素存在，
-        //就调用equals方法来匹配这两个元素是否相同，相同则不存，
+        //若该处已经有元素存在,
+        //就调用equals方法来匹配这两个元素是否相同,相同则不存,
         //不同则散列到其他位置(具体情况请参考(Java提高篇()-----HashMap))。
 
-        //这样处理，当我们存入大量元素时就可以大大减少调用equals()方法的次数，极大地提高了效率。
+        //这样处理,当我们存入大量元素时就可以大大减少调用equals()方法的次数,极大地提高了效率。
 
         //hashCode在上面扮演的角色为寻域(寻找某个对象在集合中区域位置)
 
         //************************************************************************************
-        //可替代地，存在使用反射来确定测试中的字段的方法。
-        //因为这些字段通常是私有的，该方法中，reflectionHashCode，使用AccessibleObject.setAccessible改变字段的可见性。
-        //这点会在一个安全管理器失败，除非相应的权限设置是否正确。
+        //可替代地,存在使用反射来确定测试中的字段的方法。
+        //因为这些字段通常是私有的,该方法中,reflectionHashCode,使用AccessibleObject.setAccessible改变字段的可见性。
+        //这点会在一个安全管理器失败,除非相应的权限设置是否正确。
         //它也比明确地测试速度较慢。 
         //HashCodeBuilder.reflectionHashCode(this);
         //************************************************************************************
-        //你选择一个硬编码，随机选择，不为零，奇数 
+        //你选择一个硬编码,随机选择,不为零,奇数 
         //理想情况下,每个类不同
 
         String[] itemSrcArray = null;
@@ -236,8 +236,8 @@ public final class HttpConcatParam implements Serializable{
             return false;
         }
 
-        //存在使用反射来确定测试中的字段的方法。因为这些字段通常是私有的，该方法中，reflectionEquals，使用AccessibleObject.setAccessible改变字段的可见性。
-        //这点会在一个安全管理器失败，除非相应的权限设置是否正确。
+        //存在使用反射来确定测试中的字段的方法。因为这些字段通常是私有的,该方法中,reflectionEquals,使用AccessibleObject.setAccessible改变字段的可见性。
+        //这点会在一个安全管理器失败,除非相应的权限设置是否正确。
         //它也比明确地测试速度较慢。 
         //EqualsBuilder.reflectionEquals(this, obj);
 

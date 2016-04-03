@@ -67,7 +67,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
      */
     private String            root;
 
-    /** 域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}. */
+    /** 域名,如果没有设置,将自动使用 {@link HttpServletRequest#getContextPath()}. */
     private String            domain;
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
@@ -144,7 +144,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     }
 
     /**
-     * 域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}.
+     * 域名,如果没有设置,将自动使用 {@link HttpServletRequest#getContextPath()}.
      *
      * @param domain
      *            the domain to set

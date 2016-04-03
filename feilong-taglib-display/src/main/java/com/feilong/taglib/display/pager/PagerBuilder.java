@@ -266,7 +266,7 @@ public final class PagerBuilder{
         pagerVMParam.setSkin(pagerParams.getSkin());// 皮肤
         pagerVMParam.setPagerType(pagerParams.getPagerType());//分页类型
 
-        pagerVMParam.setTotalCount(pagerParams.getTotalCount());// 总行数，总结果数
+        pagerVMParam.setTotalCount(pagerParams.getTotalCount());// 总行数,总结果数
         pagerVMParam.setCurrentPageNo(currentPageNo);// 当前页
         pagerVMParam.setAllPageNo(allPageNo);// 总页数
         pagerVMParam.setPrePageNo(prePageNo);
@@ -386,7 +386,7 @@ public final class PagerBuilder{
      *            the pager params
      * @param indexSet
      *            索引set
-     * @return key是分页页码，value是解析之后的链接
+     * @return key是分页页码,value是解析之后的链接
      * 
      * @since 1.4.0
      */
