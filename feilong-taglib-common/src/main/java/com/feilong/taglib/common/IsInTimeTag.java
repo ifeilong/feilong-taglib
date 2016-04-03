@@ -67,7 +67,7 @@ public class IsInTimeTag extends AbstractConditionalTag{
      */
     @Override
     public boolean condition(){
-        // 不能直接使用 date ，全局变量 一旦赋值 不会变化
+        // 不能直接使用 date ,全局变量 一旦赋值 不会变化
         Date compareDate = (null == date) ? new Date() : date;
         // *********************************************************************
         if (null != beginDate){

@@ -43,8 +43,8 @@ public class SwitchCaseTag extends BaseTag{
         SwitchTag switchTag = (SwitchTag) tag;
         // 判断是否可以执行本身。
         if (!switchTag.isExecuteTag()){
-            // 如果当前的value=switch的value，
-            // 通知父类。表示已经有了一个符合条件的。 否则，忽略标签体。
+            // 如果当前的value=switch的value,
+            // 通知父类。表示已经有了一个符合条件的。 否则,忽略标签体。
             String parentValue = switchTag.getValue();
             if (this.value.equals(parentValue)){
                 switchTag.setExecuteTag();
