@@ -30,13 +30,13 @@ import java.util.List;
 public class BreadCrumbVMParams<T> implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long          serialVersionUID = 2706654282393984018L;
+    private static final long         serialVersionUID = 2706654282393984018L;
 
     /** The bread crumb entity list. */
     private List<BreadCrumbEntity<T>> breadCrumbEntityList;
 
     /** The connector. */
-    private String                     connector;
+    private String                    connector;
 
     /**
      * 获得 the bread crumb entity list.

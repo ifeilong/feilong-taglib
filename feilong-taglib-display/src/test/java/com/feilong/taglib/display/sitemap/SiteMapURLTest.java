@@ -53,7 +53,8 @@ public class SiteMapURLTest{
         SiteMapURL siteMapURL = new SiteMapURL();
         siteMapURL.setChangefreq(ChangeFreq.daily);
         siteMapURL.setLastmod(new Date());
-        siteMapURL.setLoc("http://www.example.com/?>>> >>>>>>>>>>>><<<<<<<<<<<<<<<<<&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'''''''''''''''''''''");
+        siteMapURL.setLoc(
+                        "http://www.example.com/?>>> >>>>>>>>>>>><<<<<<<<<<<<<<<<<&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'''''''''''''''''''''");
         siteMapURL.setPriority(0.5f);
         siteMapURLList.add(siteMapURL);
 

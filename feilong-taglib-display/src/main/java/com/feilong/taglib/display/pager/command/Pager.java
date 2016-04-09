@@ -114,7 +114,8 @@ public final class Pager<T> implements Serializable{
      * 总页数({@link #maxShowPageNo} 参与装饰).<br>
      * 如果要获得原始的真正的总页数,请使用 {@link #getOriginatingAllPageNo()}
      * 
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果{@code count==0}直接返回0</li>
      *         <li>如果{@code count < pageSize} 直接返回1</li>
      *         <li>如果{@code count % pageSize == 0 }除数是整数, 返回count / pageSize</li>
@@ -144,7 +145,8 @@ public final class Pager<T> implements Serializable{
     /**
      * 获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的 ,(通过这个值 可以实现一些特殊的功能,一般用不到).
      * 
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果{@code count == 0}直接返回0</li>
      *         <li>如果{@code count < pageSize} 直接返回1</li>
      *         <li>如果{@code count % pageSize == 0}除数是整数, 返回count / pageSize</li>
@@ -169,7 +171,8 @@ public final class Pager<T> implements Serializable{
     /**
      * 上一页页码.
      * 
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果{@code currentPageNo - 1<=1} 返回1</li>
      *         <li>否则返回 currentPageNo - 1</li>
      *         </ul>
@@ -185,7 +188,8 @@ public final class Pager<T> implements Serializable{
     /**
      * 下一页页码.
      * 
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果 currentPageNo+1 {@code >=} {@link #getAllPageNo()} 返回 {@link #getAllPageNo()}</li>
      *         <li>否则返回 currentPageNo+1</li>
      *         </ul>
@@ -203,7 +207,8 @@ public final class Pager<T> implements Serializable{
     /**
      * 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到).
      *
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>如果 currentPageNo+1{@code >=} {@link #getOriginatingAllPageNo()} 返回 {@link #getOriginatingAllPageNo()}</li>
      *         <li>否则返回 currentPageNo+1</li>
      *         </ul>

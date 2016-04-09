@@ -46,14 +46,14 @@ public class PagerVMParam implements Serializable{
      * 上一页页码.
      * 
      * @since 1.4.0
-     * */
+     */
     private Integer                        prePageNo;
 
     /**
      * 下一页页码.
      * 
      * @since 1.4.0
-     * */
+     */
     private Integer                        nextPageNo;
 
     //********************************************************************************************
@@ -99,7 +99,7 @@ public class PagerVMParam implements Serializable{
      * The pager type.
      * 
      * @since 1.4.0
-     * */
+     */
     private PagerType                      pagerType        = PagerType.REDIRECT;
 
     /** 设置的皮肤. */

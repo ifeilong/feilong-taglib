@@ -54,7 +54,7 @@ public class PagerParams implements Serializable{
      * The pager type.
      * 
      * @since 1.4.0
-     * */
+     */
     private PagerType         pagerType        = PagerType.REDIRECT;
 
     //******************************************************************************

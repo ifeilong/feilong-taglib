@@ -50,7 +50,8 @@ public final class PagerHelper{
      *            当前请求
      * @param pageParamName
      *            分页参数名称 see {@link PagerConstants#DEFAULT_PAGE_PARAM_NAME}
-     * @return <ul>
+     * @return
+     *         <ul>
      *         <li>请求参数中,分页参数值 Integer 类型</li>
      *         <li>如果参数中不带这个分页参数,或者转换异常 返回1</li>
      *         </ul>
