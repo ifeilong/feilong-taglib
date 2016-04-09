@@ -99,10 +99,7 @@ public class BreadCrumbUtil{
         Validate.notNull(breadCrumbParams, "breadCrumbParams can't be null!");
 
         List<BreadCrumbEntity<Object>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
-        if (Validator.isNullOrEmpty(breadCrumbEntityList)){
-            throw new NullPointerException("breadCrumbEntityList is null or empty!");
-        }
-
+        Validate.notEmpty(breadCrumbEntityList, "breadCrumbEntityList can't be null/empty!");
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("input breadCrumbParams info:[{}]", JsonUtil.format(breadCrumbParams));
         }
@@ -193,9 +190,7 @@ public class BreadCrumbUtil{
             Map<T, Integer> groupCount = CollectionsUtil.groupCount(breadCrumbEntityList, "parentId");
             for (Map.Entry<T, Integer> entry : groupCount.entrySet()){
                 Integer value = entry.getValue();
-                if (value > 1){
-                    throw new IllegalArgumentException("currentPath isNullOrEmpty,but breadCrumbEntityList has repeat parentId data!");
-                }
+                Validate.isTrue(value <= 1, "currentPath isNullOrEmpty,but breadCrumbEntityList has repeat parentId data!");
             }
             return sortOutAllParentBreadCrumbEntityList(breadCrumbEntityList);
         }

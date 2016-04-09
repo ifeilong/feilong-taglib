@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.DatePattern;
@@ -179,15 +180,10 @@ public class SiteMapURL implements Serializable{
      * @see StringEscapeUtils#unescapeXml(String)
      */
     public String getFormatLoc() throws IllegalArgumentException{
-        if (Validator.isNullOrEmpty(loc)){
-            throw new IllegalArgumentException("loc can't be null/empty!");
-        }
-
+        Validate.notBlank(loc, "loc can't be blank!");
         String formatLoc = StringEscapeUtils.escapeXml(loc);
         int length = formatLoc.length();
-        if (length >= 2048){
-            throw new IllegalArgumentException("formatLoc's length:" + length + " can't >= 2048!");
-        }
+        Validate.isTrue(length < 2048, "formatLoc's length:" + length + " can't >= 2048!");
         return formatLoc;
     }
 
