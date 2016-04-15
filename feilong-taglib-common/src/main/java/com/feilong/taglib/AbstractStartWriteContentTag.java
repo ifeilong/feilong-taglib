@@ -58,6 +58,6 @@ public abstract class AbstractStartWriteContentTag extends AbstractWriteContentT
                             getClass().getSimpleName());
             LOGGER.error(formatMessage, e);
         }
-        return SKIP_BODY; // 跳过开始和结束标签之间的代码。
+        return SKIP_BODY; // 跳过开始和结束标签之间的代码.
     }
 }

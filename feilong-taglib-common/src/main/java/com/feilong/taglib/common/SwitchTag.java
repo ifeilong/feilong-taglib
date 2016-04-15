@@ -34,7 +34,7 @@ public class SwitchTag extends BaseTag{
     private String            value            = "";
 
     /*
-     * 当遇到switch标签时,所有的子标签都不执行。
+     * 当遇到switch标签时,所有的子标签都不执行.
      * 
      * @see javax.servlet.jsp.tagext.TagSupport#doStartTag()
      */
@@ -51,9 +51,9 @@ public class SwitchTag extends BaseTag{
     }
 
     /**
-     * 该方法有子标签调用,表示是否可以执行自身的标签。.
+     * 该方法有子标签调用,表示是否可以执行自身的标签..
      *
-     * @return 该方法有子标签调用,表示是否可以执行自身的标签。
+     * @return 该方法有子标签调用,表示是否可以执行自身的标签.
      */
     public synchronized boolean isExecuteTag(){
         return flag;
@@ -67,7 +67,7 @@ public class SwitchTag extends BaseTag{
     }
 
     /*
-     * 销毁到该方法。
+     * 销毁到该方法.
      * 
      * @see javax.servlet.jsp.tagext.TagSupport#release()
      */

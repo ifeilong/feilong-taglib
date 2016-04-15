@@ -29,7 +29,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.<br>
  * <br>
  * <p>
- * 作用:遵循Yahoo!前端优化准则第一条：减少HTTP请求发送次数<br>
+ * 作用:遵循Yahoo!前端优化准则第一条:减少HTTP请求发送次数<br>
  * 这一功能可以组合Javascript 以及 Css文件<br>
  * </p>
  * 

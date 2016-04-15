@@ -124,7 +124,7 @@ public final class HttpConcatUtil{
         //*************************************************************************************
         //缓存
         if (httpConcatGlobalConfig.getDefaultCacheEnable()){
-            //返回此映射中的键-值映射关系数。如果该映射包含的元素大于 Integer.MAX_VALUE,则返回 Integer.MAX_VALUE。 
+            //返回此映射中的键-值映射关系数.如果该映射包含的元素大于 Integer.MAX_VALUE,则返回 Integer.MAX_VALUE. 
             int cacheSize = CACHE.size();
 
             String content = CACHE.get(httpConcatParam);
