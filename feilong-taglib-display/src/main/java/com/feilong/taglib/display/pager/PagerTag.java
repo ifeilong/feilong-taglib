@@ -26,7 +26,7 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
 /**
- * 飞龙分页标签.
+ * 分页标签.
  * 
  * <h3>特点:</h3>
  * 

@@ -18,7 +18,7 @@ package com.feilong.taglib.common;
 import com.feilong.taglib.BaseTag;
 
 /**
- * 飞龙switch标签.
+ * switch标签.
  *
  * @version 2010-3-19 上午10:48:32
  */

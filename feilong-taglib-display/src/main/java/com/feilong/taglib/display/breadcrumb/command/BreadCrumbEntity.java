@@ -18,7 +18,7 @@ package com.feilong.taglib.display.breadcrumb.command;
 import java.io.Serializable;
 
 /**
- * 飞龙面包屑所需要的字段 封装.
+ * 面包屑所需要的字段 封装.
  * 
  * <p>
  * 其中泛型中的T 是 id 主键的类型,可以是Number String 或者其他类型.
