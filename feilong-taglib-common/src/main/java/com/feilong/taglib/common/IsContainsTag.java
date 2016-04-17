@@ -18,7 +18,7 @@ package com.feilong.taglib.common;
 import java.util.Iterator;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.util.CollectionsUtil;
+import com.feilong.core.util.IteratorUtil;
 import com.feilong.taglib.AbstractConditionalTag;
 
 /**
@@ -46,7 +46,7 @@ public class IsContainsTag extends AbstractConditionalTag{
     @Override
     public boolean condition(){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return CollectionsUtil.contains(iterator, value);
+        return IteratorUtil.contains(iterator, value);
     }
 
     /**
