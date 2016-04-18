@@ -83,12 +83,12 @@ public final class ELFunctions{
      *            任意类型的值,最终toString 判断比较.
      * @return true, if successful
      * @see ConvertUtil#toIterator(Object)
-     * @see IteratorUtil#contains(Iterator, Object)
+     * @see IteratorUtil#containsByStringValue(Iterator, Object)
      * @see org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)
      */
     public static boolean contains(Object collection,Object value){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return IteratorUtil.contains(iterator, value);
+        return IteratorUtil.containsByStringValue(iterator, value);
     }
 
     /**

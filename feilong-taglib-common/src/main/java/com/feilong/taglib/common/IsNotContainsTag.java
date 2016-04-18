@@ -46,7 +46,7 @@ public class IsNotContainsTag extends AbstractConditionalTag{
     @Override
     public boolean condition(){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return !IteratorUtil.contains(iterator, value);
+        return !IteratorUtil.containsByStringValue(iterator, value);
     }
 
     /**
