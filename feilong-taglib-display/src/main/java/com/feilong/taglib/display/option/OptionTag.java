@@ -89,6 +89,49 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * </pre>
  * 
  * </blockquote>
+ * 
+ * <h3>关于 locale:</h3>
+ * <blockquote>
+ * <p>
+ * 如果此时 我们有 英文语言站点, 他的配置文件是 i18n/education_en.properties,内容如下:
+ * 
+ * <pre>
+{@code
+edu.option1=Middle School
+edu.option2=Junior College
+edu.option3=Bachelor
+edu.option4=Others(Master/PHD)
+}
+ * </pre>
+ * </p>
+ * 
+ * 可以传递 locale参数,如下:
+ * 
+ * <pre>
+{@code
+    <%
+        request.setAttribute("enLocale", Locale.ENGLISH);
+    %>
+    
+    <select name="education3">
+        <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option2" locale="}${enLocale}" /> {@code
+    </select>
+}
+
+返回:
+
+{@code 
+    <select name="education3">
+        <option value="edu.option1">Middle School</option>
+        <option value="edu.option2" selected="selected">Junior College</option>
+        <option value="edu.option3">Bachelor</option>
+        <option value="edu.option4">Others(Master/PHD)</option>
+    </select>
+}
+ * 
+ * </pre>
+ * 
+ * </blockquote>
  *
  * @author feilong
  * @version 1.5.4 2016年4月19日 上午12:53:42
