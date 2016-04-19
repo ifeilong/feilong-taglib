@@ -34,8 +34,11 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  */
 public class OptionBuilder{
 
-    /** <code>{@value}</code>. */
-    private static final String OPTION_PATTERN = "<option value=\"{}\"{}>{}</option>";
+    /** option 格式 <code>{@value}</code>. */
+    private static final String OPTION_PATTERN  = "<option value=\"{}\"{}>{}</option>";
+
+    /** 选中的字符串 <code>{@value}</code>. */
+    private static final String SELECTED_STRING = " selected=\"selected\"";
 
     /**
      * Builds the options.
@@ -97,7 +100,7 @@ public class OptionBuilder{
             String key = entry.getKey();
             String value = entry.getValue();
 
-            String selectedStatus = key.equals(selectedKey) ? " selected=\"selected\"" : StringUtils.EMPTY;
+            String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : StringUtils.EMPTY;
 
             String option = Slf4jUtil.formatMessage(OPTION_PATTERN, key, selectedStatus, value);
             sb.append(option).append(SystemUtils.LINE_SEPARATOR);
