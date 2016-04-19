@@ -110,6 +110,7 @@ edu.option4=Others(Master/PHD)
  * <pre>
 {@code
     <%
+        //此处是演示代码,实际开发过程中,不允许使用  <% %> 里面写jsp scriptlet
         request.setAttribute("enLocale", Locale.ENGLISH);
     %>
     
