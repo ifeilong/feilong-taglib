@@ -41,7 +41,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * 
  * 我们现在需要在jsp中渲染成 select option 项,我们可以使用下面的方式:
  * 
-{@code  <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>}
+{@code <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>}
 
  * {@code
 
@@ -50,7 +50,6 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
 </select>
 }
  * 此时页面渲染结果为
- * 
  * {@code 
         <select name="education">
             <option value="edu.option1">初中</option>
@@ -63,28 +62,33 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
             <option value="edu.option8">其他</option>
         </select>
    }
+ * </pre>
  * 
- * 如果要做 有值默认选中,那么可以 设置  selectedKey 参数
+ * </blockquote>
+ * 
+ * <h3>关于 selectedKey:</h3>
+ * <blockquote>
+ * 
+ * <pre>
+ * 
+ * 如果要做有值默认选中,那么可以设置  selectedKey 参数
  * {@code
-
-<select name="education2">
-    <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option6" />
-</select>
+    <select name="education2">
+        <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option6" />
+    </select>
 }
  * 此时页面渲染结果为
- * 
  * {@code 
-<select name="education2">
-    <option value="edu.option1">初中</option>
-    <option value="edu.option2">高中</option>
-    <option value="edu.option3">中专</option>
-    <option value="edu.option4">大专</option>
-    <option value="edu.option5">本科</option>
-    <option value="edu.option6" selected="selected">硕士</option>
-    <option value="edu.option7">博士</option>
-    <option value="edu.option8">其他</option>
-</select>
-
+    <select name="education2">
+        <option value="edu.option1">初中</option>
+        <option value="edu.option2">高中</option>
+        <option value="edu.option3">中专</option>
+        <option value="edu.option4">大专</option>
+        <option value="edu.option5">本科</option>
+        <option value="edu.option6" selected="selected">硕士</option>
+        <option value="edu.option7">博士</option>
+        <option value="edu.option8">其他</option>
+    </select>
    }
  * </pre>
  * 
