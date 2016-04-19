@@ -38,13 +38,15 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * http concat的核心工具类.
+ * 
  * <p>
  * 类加载的时候,会使用 {@link ResourceBundleUtil} 来读取{@link HttpConcatGlobalConfigBuilder#CONFIG_FILE} 配置文件中的
  * {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_CSS} css模板 以及 {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_JS} JS模板<br>
- * 请确保文件路径中有配置文件,以及正确的key<br>
- * 如果获取不到,会 throw {@link IllegalArgumentException}
+ * </p>
  * 
- * <h3>全局合并开关</h3>
+ * <p>
+ * 注意: 请确保文件路径中有配置文件,以及正确的key ,如果获取不到,会 throw {@link IllegalArgumentException}
+ * </p>
  * 
  * @author feilong
  * @version 1.0.7 2014年5月19日 下午2:50:43
@@ -61,8 +63,6 @@ public final class HttpConcatUtil{
 
     /** http concat 全局配置. */
     private static final HttpConcatGlobalConfig       httpConcatGlobalConfig;
-
-    //*****************************************************************************
 
     /**
      * 将结果缓存到map.<br>
