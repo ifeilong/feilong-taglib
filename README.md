@@ -32,10 +32,12 @@ Reduce development, Release ideas
 
 有 
 
-1.  [feilongDisplay pager J2EE分页解决方案](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案") 
-2.  [isContain-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib") 
-3.  [isInTime-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib") 
-4.  [option-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/option-taglib "option-taglib") 
+taglib	|说明	
+:---- | :---------
+[feilongDisplay pager J2EE分页解决方案](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案") 	|feilongDisplay pager J2EE分页解决方案
+[isContain-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib") 	|判断一个值,是否在一个集合(或者可以被转成Iterator)当中
+[isInTime-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib") 	|判断一个日期(date),是否在一个时间区间内(beginDate,endDate)
+[option-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/option-taglib "option-taglib")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
 
 
 #说明
