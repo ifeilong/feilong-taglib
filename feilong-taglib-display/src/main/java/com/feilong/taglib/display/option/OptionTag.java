@@ -64,7 +64,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
         </select>
    }
  * 
- * 如果要做 有值默认选中,那么可以多设置参数
+ * 如果要做 有值默认选中,那么可以 设置  selectedKey 参数
  * {@code
 
 <select name="education2">
@@ -93,7 +93,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * <h3>关于 locale:</h3>
  * <blockquote>
  * <p>
- * 如果此时 我们有 英文语言站点, 他的配置文件是 i18n/education_en.properties,内容如下:
+ * 如果此时我们有英文语言站点,他的配置文件是 i18n/education_en.properties,内容如下:
  * 
  * <pre>
 {@code
