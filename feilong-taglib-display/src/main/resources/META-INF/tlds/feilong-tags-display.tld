@@ -154,9 +154,7 @@
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					类型css/js
-				]]>
+				<![CDATA[ 类型css/js ]]>
 			</description>
 		</attribute>
 
@@ -187,9 +185,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}
-				]]>
+				<![CDATA[域名,如果没有设置，将自动使用 {@link HttpServletRequest#getContextPath()}]]>
 			</description>
 		</attribute>
 
@@ -198,9 +194,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量)
-				]]>
+				<![CDATA[是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量)]]>
 			</description>
 		</attribute>
 	</tag>
@@ -219,22 +213,17 @@
 			<rtexprvalue>true</rtexprvalue>
 
 			<description>
-				<![CDATA[
-					数据源,用户所有可以访问的菜单url List
-				]]>
+				<![CDATA[数据源,用户所有可以访问的菜单url List]]>
 			</description>
 		</attribute>
 
 		<attribute>
 			<name>connector</name>
-			<description></description>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 
 			<description>
-				<![CDATA[
-					面包屑导航的连接符,默认">"
-				]]>
+				<![CDATA[面包屑导航的连接符,默认">"]]>
 			</description>
 		</attribute>
 
@@ -243,9 +232,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					url前缀
-				]]>
+				<![CDATA[url前缀]]>
 			</description>
 		</attribute>
 
@@ -254,10 +241,38 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					vm的路径
-				]]>
+				<![CDATA[vm的路径]]>
 			</description>
 		</attribute>
+	</tag>
+
+	<!-- **********************OptionTag*********************************** -->
+	<tag>
+		<name>option</name>
+		<tag-class>com.feilong.taglib.display.option.OptionTag</tag-class>
+		<body-content>empty</body-content>
+
+		<description>用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发</description>
+
+		<attribute>
+			<name>baseName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu ]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>locale</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}]]>
+			</description>
+		</attribute>
+
 	</tag>
 </taglib>

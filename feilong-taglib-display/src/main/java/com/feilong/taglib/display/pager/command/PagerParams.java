@@ -22,13 +22,14 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.feilong.core.CharsetType;
+import com.feilong.taglib.display.CacheParam;
 import com.feilong.taglib.display.pager.PagerBuilder;
 
 /**
  * 方法参数.
  * 
  * <p>
- * 用于{@link PagerBuilder#buildPagerContent(PagerParams)}参数封装
+ * 用于{@link PagerBuilder#buildContent(PagerParams)}参数封装
  * </p>
  * 
  * @author feilong
@@ -36,7 +37,7 @@ import com.feilong.taglib.display.pager.PagerBuilder;
  * 
  * @see PagerVMParam
  */
-public class PagerParams implements Serializable{
+public class PagerParams implements Serializable,CacheParam{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 7310948528499709685L;

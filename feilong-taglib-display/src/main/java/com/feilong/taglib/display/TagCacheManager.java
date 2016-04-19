@@ -13,54 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.pager;
+package com.feilong.taglib.display;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
-import com.feilong.taglib.display.pager.command.PagerParams;
 
 /**
  * The Class PagerCacheManager.
  *
  * @author feilong
- * @version 1.4.0 2015年8月21日 上午11:32:27
- * @since 1.4.0
- * 
+ * @version 1.5.4 2016年4月19日 上午2:26:10
+ * @since 1.5.4
  * @see "com.google.common.cache.Cache"
  */
 //XXX 将来可能会有更好的做法
-//默认作用域
-final class PagerCacheManager{
+public final class TagCacheManager{
 
     /** The Constant LOGGER. */
-    private static final Logger                   LOGGER       = LoggerFactory.getLogger(PagerCacheManager.class);
+    private static final Logger                  LOGGER       = LoggerFactory.getLogger(TagCacheManager.class);
 
     /**
      * 设置缓存是否开启.
-     * 
-     * @since 1.0.7
      */
-    private static final boolean                  CACHE_ENABLE = true;
+    private static final boolean                 CACHE_ENABLE = true;
 
     /**
      * 将结果缓存到map.
      * <p>
-     * key是入参 {@link PagerParams}对象,value是解析完的分页字符串<br>
+     * key是入参对象,value是解析完的字符串<br>
      * 该cache里面value不会存放null/empty
      * </p>
-     * 
-     * @since 1.0.7
      */
-    private static final Map<PagerParams, String> CACHE        = new HashMap<PagerParams, String>();
+    private static final Map<CacheParam, String> CACHE        = new ConcurrentHashMap<CacheParam, String>();
 
     /** Don't let anyone instantiate this class. */
-    private PagerCacheManager(){
+    private TagCacheManager(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -69,19 +62,19 @@ final class PagerCacheManager{
     /**
      * 从缓存中读取.
      *
-     * @param pagerParams
+     * @param cacheParam
      *            the pager params
      * @return the content from cache
      */
-    static String getContentFromCache(PagerParams pagerParams){
+    public static String getContentFromCache(CacheParam cacheParam){
         //缓存
         if (CACHE_ENABLE){
-            LOGGER.debug("pagerCache.size:{}", CACHE.size());
-            if (CACHE.containsKey(pagerParams)){
-                LOGGER.info("hashcode:[{}],get pager info from pagerCache", pagerParams.hashCode());
-                return CACHE.get(pagerParams);
+            LOGGER.debug("cache.size:{}", CACHE.size());
+            if (CACHE.containsKey(cacheParam)){
+                LOGGER.info("hashcode:[{}],get info from cache", cacheParam.hashCode());
+                return CACHE.get(cacheParam);
             }
-            LOGGER.info("hashcode:[{}],pagerCache not contains pagerParams,will do parse", pagerParams.hashCode());
+            LOGGER.info("hashcode:[{}],cache not contains [{}],will do parse", cacheParam.hashCode(), cacheParam.getClass().getName());
         }else{
             LOGGER.info("the cache status is disable!");
         }
@@ -91,14 +84,14 @@ final class PagerCacheManager{
     /**
      * 设置.
      *
-     * @param pagerParams
+     * @param cacheParam
      *            the pager params
      * @param content
      *            the content
      */
-    static void put(PagerParams pagerParams,String content){
+    public static void put(CacheParam cacheParam,String content){
         if (CACHE_ENABLE && Validator.isNotNullOrEmpty(content)){//设置cache
-            CACHE.put(pagerParams, content);
+            CACHE.put(cacheParam, content);
         }
     }
 }

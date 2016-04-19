@@ -78,7 +78,7 @@ public class PagerUtilTest extends BasePagerTest{
 
         pagerParams.setPagerType(PagerType.NO_REDIRECT);
 
-        String content = PagerBuilder.buildPagerContent(pagerParams);
+        String content = PagerBuilder.buildContent(pagerParams);
 
         //LOGGER.info("the param content:\n\n{}", content);
 

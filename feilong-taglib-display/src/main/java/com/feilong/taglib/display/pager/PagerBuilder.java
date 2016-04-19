@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.ResourceBundleUtil;
+import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerAndContent;
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -140,7 +141,7 @@ public final class PagerBuilder{
         Pager<T> pager = buildPager(pagerParams);
         pager.setItemList(itemList);
 
-        String content = buildPagerContent(pagerParams);
+        String content = buildContent(pagerParams);
         return new PagerAndContent<T>(pager, content);
     }
 
@@ -160,7 +161,7 @@ public final class PagerBuilder{
      * @return if {@link PagerParams#getTotalCount()}{@code <=0} return {@link StringUtils#EMPTY} <br>
      *         else 生成分页html代码
      */
-    public static String buildPagerContent(PagerParams pagerParams){
+    public static String buildContent(PagerParams pagerParams){
         Validate.notNull(pagerParams, "pagerParams can't be null!");
 
         int totalCount = pagerParams.getTotalCount();
@@ -178,13 +179,13 @@ public final class PagerBuilder{
             LOGGER.debug("input pagerParams info:{}", JsonUtil.format(pagerParams));
         }
 
-        String content = PagerCacheManager.getContentFromCache(pagerParams);
+        String content = TagCacheManager.getContentFromCache(pagerParams);
         if (Validator.isNotNullOrEmpty(content)){
             return content;
         }
 
-        content = buildPagerContentMain(pagerParams);
-        PagerCacheManager.put(pagerParams, content);
+        content = buildContentMain(pagerParams);
+        TagCacheManager.put(pagerParams, content);
         return content;
 
     }
@@ -199,7 +200,7 @@ public final class PagerBuilder{
      * @return the string
      * @since 1.4.0
      */
-    private static String buildPagerContentMain(PagerParams pagerParams){
+    private static String buildContentMain(PagerParams pagerParams){
         if (pagerParams.getDebugIsNotParseVM()){
             return StringUtils.EMPTY;
         }

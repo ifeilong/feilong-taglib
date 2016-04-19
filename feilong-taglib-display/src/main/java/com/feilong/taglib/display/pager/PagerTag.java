@@ -176,7 +176,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
         boolean debugIsNotParseVM = PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
         pagerParams.setDebugIsNotParseVM(debugIsNotParseVM);
 
-        String html = PagerBuilder.buildPagerContent(pagerParams);
+        String html = PagerBuilder.buildContent(pagerParams);
         // 解析之后的变量设置在 pageContext作用域中
         pageContext.setAttribute(pagerHtmlAttributeName, html);
         return html;
