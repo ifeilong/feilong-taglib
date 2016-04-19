@@ -82,10 +82,10 @@ taglib	|说明
 
 # feilong-platform module:
 
-Category |Name | Description | JDK编译版本
-----|------------ | ---------|------------
-taglib |`feilong-taglib-common` | 封装了常用的自定义标签 | 1.7
-taglib |`feilong-taglib-display` | 封装了常用的自定义标签 | 1.7
+Category |Name | Description 
+----|------------ | ---------
+taglib |`feilong-taglib-common` | 封装了常用的自定义标签 
+taglib |`feilong-taglib-display` | 封装了常用的用来页面显示用的标签 
 
 
 # About
