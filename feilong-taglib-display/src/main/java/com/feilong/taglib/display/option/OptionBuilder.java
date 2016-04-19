@@ -17,6 +17,7 @@ package com.feilong.taglib.display.option;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.feilong.core.Validator;
@@ -63,7 +64,7 @@ public class OptionBuilder{
      */
     private static String buildContentMain(OptionParam optionParam){
         Map<String, String> map = getKeyValueMap(optionParam);
-        return render(map);
+        return render(map, optionParam);
     }
 
     /**
@@ -84,15 +85,21 @@ public class OptionBuilder{
      *
      * @param map
      *            the map
+     * @param optionParam
      * @return the object
      */
-    private static String render(Map<String, String> map){
+    private static String render(Map<String, String> map,OptionParam optionParam){
         StringBuilder sb = new StringBuilder();
+
+        String selectedKey = optionParam.getSelectedKey();
 
         for (Map.Entry<String, String> entry : map.entrySet()){
             String key = entry.getKey();
             String value = entry.getValue();
-            String option = Slf4jUtil.formatMessage(OPTION_PATTERN, key, "", value);
+
+            String selectedStatus = key.equals(selectedKey) ? " selected=\"selected\"" : StringUtils.EMPTY;
+
+            String option = Slf4jUtil.formatMessage(OPTION_PATTERN, key, selectedStatus, value);
             sb.append(option).append(SystemUtils.LINE_SEPARATOR);
         }
         return sb.toString();

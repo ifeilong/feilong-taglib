@@ -41,8 +41,9 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * 
  * 我们现在需要在jsp中渲染成 select option 项,我们可以使用下面的方式:
  * 
+{@code  <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>}
+
  * {@code
-<%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
 
 <select name="education">
     <feilongDisplay:option baseName="i18n/education" />
@@ -61,6 +62,29 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
             <option value="edu.option7">博士</option>
             <option value="edu.option8">其他</option>
         </select>
+   }
+ * 
+ * 如果要做 有值默认选中,那么可以多设置参数
+ * {@code
+
+<select name="education2">
+    <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option6" />
+</select>
+}
+ * 此时页面渲染结果为
+ * 
+ * {@code 
+<select name="education2">
+    <option value="edu.option1">初中</option>
+    <option value="edu.option2">高中</option>
+    <option value="edu.option3">中专</option>
+    <option value="edu.option4">大专</option>
+    <option value="edu.option5">本科</option>
+    <option value="edu.option6" selected="selected">硕士</option>
+    <option value="edu.option7">博士</option>
+    <option value="edu.option8">其他</option>
+</select>
+
    }
  * </pre>
  * 
@@ -83,6 +107,9 @@ public class OptionTag extends AbstractStartWriteContentTag{
     /** 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}. */
     private Locale            locale;
 
+    /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
+    private String            selectedKey;
+
     /*
      * (non-Javadoc)
      * 
@@ -93,6 +120,7 @@ public class OptionTag extends AbstractStartWriteContentTag{
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
         optionParam.setLocale(locale);
+        optionParam.setSelectedKey(selectedKey);
         return OptionBuilder.buildContent(optionParam);
     }
 
@@ -114,5 +142,15 @@ public class OptionTag extends AbstractStartWriteContentTag{
      */
     public void setLocale(Locale locale){
         this.locale = locale;
+    }
+
+    /**
+     * 设置 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
+     *
+     * @param selectedKey
+     *            the selectedKey to set
+     */
+    public void setSelectedKey(String selectedKey){
+        this.selectedKey = selectedKey;
     }
 }

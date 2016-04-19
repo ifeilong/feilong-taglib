@@ -44,6 +44,9 @@ public class OptionParam implements Serializable,CacheParam{
     /** 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}. */
     private Locale            locale;
 
+    /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
+    private String            selectedKey;
+
     /**
      * 获得 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.
      *
@@ -80,6 +83,25 @@ public class OptionParam implements Serializable,CacheParam{
      */
     public void setLocale(Locale locale){
         this.locale = locale;
+    }
+
+    /**
+     * 获得 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
+     *
+     * @return the selectedKey
+     */
+    public String getSelectedKey(){
+        return selectedKey;
+    }
+
+    /**
+     * 设置 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
+     *
+     * @param selectedKey
+     *            the selectedKey to set
+     */
+    public void setSelectedKey(String selectedKey){
+        this.selectedKey = selectedKey;
     }
 
     /*
