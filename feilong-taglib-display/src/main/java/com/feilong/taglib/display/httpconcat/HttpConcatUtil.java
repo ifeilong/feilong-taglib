@@ -130,7 +130,7 @@ public final class HttpConcatUtil{
             String content = CACHE.get(httpConcatParam);
             //包含
             if (null != content){
-                LOGGER.info("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
+                LOGGER.debug("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
                 return content;
             }
 
@@ -146,7 +146,7 @@ public final class HttpConcatUtil{
                 //超过,那么就不记录cache
                 isWriteCache = false;
             }else{
-                LOGGER.info(
+                LOGGER.debug(
                                 "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
                                 cacheKeyHashCode,
                                 cacheSize);
@@ -160,7 +160,7 @@ public final class HttpConcatUtil{
         //********************设置cache***********************************************
         if (isWriteCache){
             CACHE.put(httpConcatParam, content);
-            LOGGER.info("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
+            LOGGER.debug("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
             if (httpConcatGlobalConfig.getDefaultCacheEnable()){
                 LOGGER.warn(
