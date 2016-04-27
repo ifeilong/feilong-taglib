@@ -31,6 +31,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>com.feilong.platform.tools</groupId>
+			<artifactId>feilong-tools-barcode</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
 
 	</dependencies>
 </project>

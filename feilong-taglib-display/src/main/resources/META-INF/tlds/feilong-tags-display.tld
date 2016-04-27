@@ -285,4 +285,55 @@
 		</attribute>
 
 	</tag>
+
+	<!-- **********************OptionTag*********************************** -->
+	<tag>
+		<name>barcode</name>
+		<tag-class>com.feilong.taglib.display.barcode.BarcodeTag</tag-class>
+		<body-content>empty</body-content>
+
+		<description>二维码等barcode生成 标签</description>
+
+
+		<attribute>
+			<name>barcodeId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突.]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>contents</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[生成二维码的内容,如果不设置默认是当前请求的url地址]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[Barcode 宽度,默认是300]]>
+			</description>
+		</attribute>
+
+
+		<attribute>
+			<name>height</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+
+			<description>
+				<![CDATA[Barcode 高度,默认是300]]>
+			</description>
+		</attribute>
+	</tag>
 </taglib>
