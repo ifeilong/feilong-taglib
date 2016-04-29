@@ -59,9 +59,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      * @see com.feilong.taglib.AbstractWriteContentTag#writeContent()
      */
     @Override
-    protected Object writeContent(){
-        HttpServletRequest request = getHttpServletRequest();
-
+    protected Object buildContent(HttpServletRequest request){
         //把这些配置存储起来,以便在图片servlet获取
         BarcodeContentsAndConfig barcodeContentsAndConfig = buildBarcodeContentsAndConfig(request);
 

@@ -17,7 +17,6 @@ package com.feilong.taglib;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
@@ -27,9 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.date.DateExtensionUtil;
-import com.feilong.servlet.http.RequestUtil;
-import com.feilong.servlet.http.entity.RequestLogSwitch;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * 输出内容的标签.
@@ -69,14 +65,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
 
         HttpServletRequest request = getHttpServletRequest();
 
-        if (LOGGER.isDebugEnabled()){
-            RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL;
-            Map<String, Object> requestInfoMapForLog = RequestUtil.getRequestInfoMapForLog(request, requestLogSwitch);
-            LOGGER.debug("class:[{}],request info:{}", getClass().getSimpleName(), JsonUtil.format(requestInfoMapForLog));
-        }
-
         // 开始执行的部分
-        Object writeContent = this.writeContent();
+        Object writeContent = this.buildContent(request);
         print(writeContent);
 
         Date endDate = new Date();
@@ -87,6 +77,24 @@ abstract class AbstractWriteContentTag extends BaseTag{
                         useTimeLog(),
                         DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
+
+    /**
+     * 标签体内容.
+     *
+     * @return the object
+     */
+    protected abstract Object buildContent(HttpServletRequest request);
+
+    /**
+     * 耗时时间.
+     *
+     * @return the string
+     */
+    protected String useTimeLog(){
+        return "";
+    }
+
+    // *******************************************************************
 
     /**
      * 将文字输出到页面.
@@ -119,21 +127,4 @@ abstract class AbstractWriteContentTag extends BaseTag{
             throw new UncheckedIOException(e);
         }
     }
-
-    /**
-     * 耗时时间.
-     *
-     * @return the string
-     */
-    protected String useTimeLog(){
-        return "";
-    }
-
-    // *******************************************************************
-    /**
-     * 标签体内容.
-     *
-     * @return the object
-     */
-    protected abstract Object writeContent();
 }

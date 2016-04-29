@@ -80,7 +80,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
      * @see com.feilong.taglib.base.AbstractCommonTag#writeContent()
      */
     @Override
-    protected Object writeContent(){
+    protected Object buildContent(HttpServletRequest request){
         String bodyContentSrc = bodyContent.getString();
         if (Validator.isNullOrEmpty(bodyContentSrc)){
             return StringUtils.EMPTY;

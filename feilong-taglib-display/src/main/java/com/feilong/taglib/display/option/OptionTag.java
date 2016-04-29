@@ -17,6 +17,8 @@ package com.feilong.taglib.display.option;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 
@@ -164,7 +166,7 @@ public class OptionTag extends AbstractStartWriteContentTag{
      * @see com.feilong.taglib.AbstractWriteContentTag#writeContent()
      */
     @Override
-    protected Object writeContent(){
+    protected Object buildContent(HttpServletRequest request){
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
         optionParam.setLocale(locale);

@@ -17,6 +17,8 @@ package com.feilong.taglib.display.breadcrumb;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +74,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
      * @return the object
      */
     @Override
-    protected Object writeContent(){
+    protected Object buildContent(HttpServletRequest request){
         List<BreadCrumbEntity<Object>> opBreadCrumbEntityList = constructBreadCrumbEntityList();
 
         if (Validator.isNullOrEmpty(opBreadCrumbEntityList)){

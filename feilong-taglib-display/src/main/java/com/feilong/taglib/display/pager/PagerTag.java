@@ -149,10 +149,8 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * @return the string
      */
     @Override
-    public String writeContent(){
-        HttpServletRequest request = getHttpServletRequest();
+    public String buildContent(HttpServletRequest request){
 
-        // **********************************************************************
         // 当前页码
         int currentPageNo = PagerHelper.getCurrentPageNo(request, pageParamName);
         // 当前全路径
