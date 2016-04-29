@@ -74,23 +74,25 @@ abstract class AbstractWriteContentTag extends BaseTag{
                         "[{}],[{}],{},use time:[{}]",
                         getClass().getSimpleName(),
                         request.getRequestURI(),
-                        useTimeLog(),
+                        buildExtraKeyInfoToLog(),
                         DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
 
     /**
      * 标签体内容.
      *
+     * @param request
+     *            the request
      * @return the object
      */
     protected abstract Object buildContent(HttpServletRequest request);
 
     /**
-     * 耗时时间.
+     * 额外的关键的信息,用在log里面显示, 比如面包屑 可以放itemId=xxx.
      *
      * @return the string
      */
-    protected String useTimeLog(){
+    protected String buildExtraKeyInfoToLog(){
         return "";
     }
 
