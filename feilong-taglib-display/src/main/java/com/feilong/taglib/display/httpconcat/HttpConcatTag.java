@@ -109,6 +109,15 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.taglib.AbstractWriteContentTag#buildExtraKeyInfoToLog()
+     */
+    @Override
+    protected String buildExtraKeyInfoToLog(){
+        return "[type=" + type + "]";
+    }
     // **************************************************************************
 
     /**
