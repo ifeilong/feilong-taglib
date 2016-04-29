@@ -81,8 +81,9 @@ abstract class AbstractWriteContentTag extends BaseTag{
 
         Date endDate = new Date();
         LOGGER.info(
-                        "[{}],{},use time:[{}]",
+                        "[{}],[{}],{},use time:[{}]",
                         getClass().getSimpleName(),
+                        request.getRequestURI(),
                         useTimeLog(),
                         DateExtensionUtil.getIntervalForView(beginDate, endDate));
     }
