@@ -25,7 +25,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.UncheckedIOException;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
 
 /**
@@ -51,8 +54,11 @@ import com.feilong.tools.barcode.BarcodeEncodeUtil;
  */
 public class BarcodeServlet extends HttpServlet{
 
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(BarcodeServlet.class);
+
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 231074760785325078L;
+    private static final long   serialVersionUID = 231074760785325078L;
 
     /*
      * (non-Javadoc)
@@ -60,7 +66,7 @@ public class BarcodeServlet extends HttpServlet{
      * @see javax.servlet.http.HttpServlet#service(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
      */
     @Override
-    public void service(ServletRequest request,ServletResponse response) throws ServletException,IOException{
+    public void service(ServletRequest request,ServletResponse response) throws ServletException{
         String barcodeId = request.getParameter(BarcodeRequestParams.BARCODE_ID);
         Validate.notEmpty(barcodeId, "barcodeId can't be null/empty!");
 
@@ -69,8 +75,25 @@ public class BarcodeServlet extends HttpServlet{
         BarcodeContentsAndConfig barcodeContentsAndConfig = accessor.get(barcodeId, (HttpServletRequest) request);
         Validate.notNull(barcodeContentsAndConfig, "barcodeContentsAndConfig can't be null!");
 
-        ServletOutputStream outputStream = response.getOutputStream();
-        BarcodeEncodeUtil.encode(barcodeContentsAndConfig.getContents(), outputStream, barcodeContentsAndConfig.getBarcodeConfig());
+        render(barcodeContentsAndConfig, response);
+    }
+
+    /**
+     * Encode.
+     *
+     * @param response
+     *            the response
+     * @param barcodeContentsAndConfig
+     *            the barcode contents and config
+     */
+    private void render(BarcodeContentsAndConfig barcodeContentsAndConfig,ServletResponse response){
+        try{
+            ServletOutputStream outputStream = response.getOutputStream();
+            BarcodeEncodeUtil.encode(barcodeContentsAndConfig.getContents(), outputStream, barcodeContentsAndConfig.getBarcodeConfig());
+        }catch (IOException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
+        }
     }
 
 }

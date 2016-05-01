@@ -30,6 +30,18 @@ import com.feilong.tools.barcode.BarcodeConfig;
 /**
  * 二维码等barcode生成 标签.
  * 
+ * <h3>核心原理:</h3>
+ * <blockquote>
+ * 
+ * <p>
+ * 和 {@link com.feilong.taglib.display.barcode.BarcodeServlet} 搭配着使用
+ * </p>
+ * 
+ * <p>
+ * 在使用标签的时候,页面会输出一段 img 标签, src路径会去访问{@link com.feilong.taglib.display.barcode.BarcodeServlet},从而输出二维码图片
+ * </p>
+ * </blockquote>
+ * 
  * @author feilong
  * @version 1.5.4 2016年4月27日 下午12:42:36
  * @since 1.5.4
@@ -77,9 +89,10 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      * @return the string
      */
     private String buildImgTag(HttpServletRequest request){
-        String imageSrc = buildImageSrc(request);
+        String imageSrc = buildBarcodeImageSrc(request);
 
-        StringBuilder imgTag = new StringBuilder("<img");
+        StringBuilder imgTag = new StringBuilder();
+        imgTag.append("<img");
         imgTag.append(" src=\"" + imageSrc + "\"");
         imgTag.append(" width=\"" + width + "\"");
         imgTag.append(" height=\"" + height + "\"");
@@ -89,13 +102,19 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * Builds the image src.
+     * 构造二维码图片请求src.
+     * 
+     * <p>
+     * 设计成protected Access Modifiers,允许重写;<br>
+     * 比如可以实现,判断是否是第一次访问,如果是,那么调用二维码APi创建二维码图片,保存到nginx可以访问的地址中,并在cache中记录下已经生成了图片,<br>
+     * 下次再访问的话,那么直接加载这个图片地址
+     * </p>
      *
      * @param request
      *            the request
      * @return the string
      */
-    private String buildImageSrc(HttpServletRequest request){
+    protected String buildBarcodeImageSrc(HttpServletRequest request){
         Map<String, String> paramsMap = new HashMap<String, String>();
         paramsMap.put(BarcodeRequestParams.BARCODE_ID, barcodeId);
 
@@ -117,6 +136,8 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         barcodeConfig.setWidth(width);
         return new BarcodeContentsAndConfig(useContents, barcodeConfig);
     }
+
+    //************************************************************************************************
 
     /**
      * 设置 生成二维码的内容,如果不设置默认是当前请求的url地址.
