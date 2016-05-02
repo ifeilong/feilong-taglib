@@ -84,7 +84,7 @@ public class PagerUtilTest extends BasePagerTest{
 
         if (false){
             String filePath = "F://pagerTest.html";
-            IOWriteUtil.write(filePath, content, CharsetType.UTF8);
+            IOWriteUtil.writeStringToFile(filePath, content, CharsetType.UTF8);
             DesktopUtil.browse(filePath);
         }
     }
