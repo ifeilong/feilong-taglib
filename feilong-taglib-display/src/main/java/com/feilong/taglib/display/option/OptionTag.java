@@ -28,7 +28,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * <h3>示例:</h3>
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * 
  * 假设有 i18n/education_zh_CN.properties 内容如下:
  * 
@@ -71,7 +71,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * <h3>关于 selectedKey:</h3>
  * <blockquote>
  * 
- * <pre>
+ * <pre class="code">
  * 
  * 如果要做有值默认选中,那么可以设置  selectedKey 参数
  * {@code
@@ -101,7 +101,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * <p>
  * 如果此时我们有英文语言站点,他的配置文件是 i18n/education_en.properties,内容如下:
  * 
- * <pre>
+ * <pre class="code">
 {@code
 edu.option1=Middle School
 edu.option2=Junior College
@@ -113,7 +113,7 @@ edu.option4=Others(Master/PHD)
  * 
  * 可以传递 locale参数,如下:
  * 
- * <pre>
+ * <pre class="code">
 {@code
     <%
         //此处是演示代码,实际开发过程中,不允许使用  <% %> 里面写jsp scriptlet

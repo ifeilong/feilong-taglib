@@ -30,7 +30,7 @@ import com.feilong.core.date.DateUtil;
  * robots.txt 里面定义的 sitemap.xml url list部分 <br>
  * 示例参考:
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  * <?xml version="1.0" encoding="UTF-8"?>
  * 

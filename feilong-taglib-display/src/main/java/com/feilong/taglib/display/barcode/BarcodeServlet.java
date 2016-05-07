@@ -34,7 +34,7 @@ import com.feilong.tools.barcode.BarcodeEncodeUtil;
 /**
  * 渲染验证码的servlet.
  *
- * <pre>
+ * <pre class="code">
 {@code
     <!-- barcode -->
     <servlet>

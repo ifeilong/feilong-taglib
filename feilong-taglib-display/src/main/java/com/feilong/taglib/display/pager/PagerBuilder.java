@@ -55,7 +55,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * 内部会分别对入参 {@link PagerParams} 和构造vm参数,记录<b>debug</b>级别的log,<br>
  * 如果不需要care这部分log,可以在LOGGER.xml中配置:
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  *  <category name="com.feilong.taglib.display.pager.PagerUtil">
  *      <priority value="info" />
@@ -65,7 +65,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * 
  * 或者在logback.xml中配置
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  *      <logger name="com.feilong.taglib.display.pager.PagerUtil" level="info" />
  * }

@@ -45,7 +45,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * 
  * <h3>使用方式:</h3>
  * 
- * <pre>
+ * <pre class="code">
  * {@code
  * 
  *  步骤1.JSP引用自定义标签
