@@ -30,7 +30,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 public class HttpConcatGlobalConfigBuilder{
 
     /** 配置文件 <code>{@value}</code>. */
-    //FIXME support different environment
+    //XXX support different environment
     public static final String CONFIG_FILE                  = "config/httpconcat";
 
     /** <code>{@value}</code>. */
