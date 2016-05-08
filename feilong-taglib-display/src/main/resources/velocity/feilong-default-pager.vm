@@ -12,7 +12,7 @@
     @version 1.0.5 May 3, 2014 1:44:08 PM
     @since 1.0.0
 *#
-<div class="div_feilongPager ${pagerVMParam.skin}" style="text-align:left">
+<div class="div_feilongPager ${pagerVMParam.skin}">
 	##总数
 	<span class="span_pagerInfo">${i18nMap.get('feilong-pager.text.totalCount')}${pagerVMParam.totalCount}</span>
 	##当前第${pagerVMParam.currentPageNo}页/共${pagerVMParam.allPageNo}页
