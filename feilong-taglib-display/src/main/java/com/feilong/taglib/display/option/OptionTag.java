@@ -102,13 +102,13 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * 如果此时我们有英文语言站点,他的配置文件是 i18n/education_en.properties,内容如下:
  * 
  * <pre class="code">
-{@code
+ * 
 edu.option1=Middle School
 edu.option2=Junior College
 edu.option3=Bachelor
 edu.option4=Others(Master/PHD)
-}
  * </pre>
+ * 
  * </p>
  * 
  * 可以传递 locale参数,如下:
