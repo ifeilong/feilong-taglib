@@ -30,14 +30,28 @@ Reduce development, Release ideas
 
 `封装了常用的自定义标签`
 
-有 
+主要由两部分组成
+
+## common 包含
+
+包含所有自定义标签的base类,以及常用的自定义标签和el function
 
 taglib	|说明	
 :---- | :---------
-[feilongDisplay pager J2EE分页解决方案](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager-J2EE%E5%88%86%E9%A1%B5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88 "feilongDisplay pager J2EE分页解决方案") 	|feilongDisplay pager J2EE分页解决方案
-[isContain-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain-taglib") 	|判断一个值,是否在一个集合(或者可以被转成Iterator)当中
-[isInTime-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime-taglib") 	|判断一个日期(date),是否在一个时间区间内(beginDate,endDate)
-[option-taglib](https://github.com/venusdrogon/feilong-taglib/wiki/option-taglib "option-taglib")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
+[isContain](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain") 	|判断一个值,是否在一个集合(或者可以被转成Iterator)当中
+[isInTime](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime") 	|判断一个日期(date),是否在一个时间区间内(beginDate,endDate)
+
+
+## Display 
+
+包含页面渲染显示的标签
+
+taglib	|说明	
+:---- | :---------
+[pager](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager "J2EE分页解决方案") 	|J2EE分页解决方案
+[concat](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat "feilongDisplay concat")  	| jsp版本的 "css/js合并以及版本控制"的标签 
+[option](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option "feilongDisplay-option")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
+[barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode")  	|用来在页面生成二维码
 
 
 #说明
