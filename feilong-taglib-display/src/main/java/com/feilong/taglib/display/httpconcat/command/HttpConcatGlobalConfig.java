@@ -49,6 +49,7 @@ public class HttpConcatGlobalConfig{
      * 如果一个项目 页面有1000个,每个页面有5个concat块,一共有5种国际化语言,如果应用重启前支持5次版本更新,那么计算公式会是 <blockquote><i>1000*5*5*5=50000</i></blockquote>
      * <b>注意:此公式中的页面总数是指,VM/JSP的数量,除非参数不同导致VM/JSP渲染的JS也不同,另当别论</b>
      * 
+     * @see org.apache.commons.collections4.map.LRUMap
      */
     private int     defaultCacheSizeLimit;
 
