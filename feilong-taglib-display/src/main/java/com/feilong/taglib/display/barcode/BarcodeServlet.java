@@ -29,6 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
+import com.feilong.servlet.Accessor;
+import com.feilong.servlet.SessionAccessor;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
 
 /**
@@ -86,7 +88,7 @@ public class BarcodeServlet extends HttpServlet{
      * @param barcodeContentsAndConfig
      *            the barcode contents and config
      */
-    private void render(BarcodeContentsAndConfig barcodeContentsAndConfig,ServletResponse response){
+    private static void render(BarcodeContentsAndConfig barcodeContentsAndConfig,ServletResponse response){
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             BarcodeEncodeUtil.encode(barcodeContentsAndConfig.getContents(), outputStream, barcodeContentsAndConfig.getBarcodeConfig());
@@ -95,5 +97,4 @@ public class BarcodeServlet extends HttpServlet{
             throw new UncheckedIOException(e);
         }
     }
-
 }
