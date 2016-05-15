@@ -72,7 +72,6 @@
 			<description><![CDATA[数据总数]]></description>
 		</attribute>
 
-
 		<!-- optional -->
 		<attribute>
 			<name>pageSize</name>
@@ -174,9 +173,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[
-					版本号
-				]]>
+				<![CDATA[版本号]]>
 			</description>
 		</attribute>
 
@@ -211,7 +208,6 @@
 			<name>breadCrumbEntityList</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[数据源,用户所有可以访问的菜单url List]]>
 			</description>
@@ -221,7 +217,6 @@
 			<name>connector</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[面包屑导航的连接符,默认">"]]>
 			</description>
@@ -251,14 +246,12 @@
 		<name>option</name>
 		<tag-class>com.feilong.taglib.display.option.OptionTag</tag-class>
 		<body-content>empty</body-content>
-
 		<description>用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发</description>
 
 		<attribute>
 			<name>baseName</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu ]]>
 			</description>
@@ -268,7 +261,6 @@
 			<name>locale</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}]]>
 			</description>
@@ -278,7 +270,6 @@
 			<name>selectedKey</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中]]>
 			</description>
@@ -291,15 +282,12 @@
 		<name>barcode</name>
 		<tag-class>com.feilong.taglib.display.barcode.BarcodeTag</tag-class>
 		<body-content>empty</body-content>
-
 		<description>二维码等barcode生成 标签</description>
-
 
 		<attribute>
 			<name>barcodeId</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突.]]>
 			</description>
@@ -309,7 +297,6 @@
 			<name>contents</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[生成二维码的内容,如果不设置默认是当前请求的url地址]]>
 			</description>
@@ -319,20 +306,26 @@
 			<name>width</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[Barcode 宽度,默认是300]]>
 			</description>
 		</attribute>
 
-
 		<attribute>
 			<name>height</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-
 			<description>
 				<![CDATA[Barcode 高度,默认是300]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>encodeHintTypeMargin</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[指定边距,单位像素 ,参见 com.google.zxing.EncodeHintType#MARGIN]]>
 			</description>
 		</attribute>
 	</tag>

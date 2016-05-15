@@ -49,7 +49,7 @@ import com.feilong.tools.barcode.BarcodeConfig;
 public class BarcodeTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 7891625772743297912L;
+    private static final long serialVersionUID     = 7891625772743297912L;
 
     /**
      * 用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突.
@@ -60,10 +60,17 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
     private String            contents;
 
     /** Barcode 宽度,默认是300. */
-    private Integer           width            = 300;
+    private Integer           width                = 300;
 
     /** Barcode 高度,默认是300. */
-    private Integer           height           = 300;
+    private Integer           height               = 300;
+
+    /**
+     * 指定边距,单位像素 .
+     * 
+     * @see com.google.zxing.EncodeHintType#MARGIN
+     */
+    private Integer           encodeHintTypeMargin = 1;
 
     /*
      * (non-Javadoc)
@@ -134,6 +141,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         BarcodeConfig barcodeConfig = new BarcodeConfig();
         barcodeConfig.setHeight(height);
         barcodeConfig.setWidth(width);
+        barcodeConfig.setEncodeHintTypeMargin(encodeHintTypeMargin);
         return new BarcodeContentsAndConfig(useContents, barcodeConfig);
     }
 
@@ -177,5 +185,15 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      */
     public void setBarcodeId(String barcodeId){
         this.barcodeId = barcodeId;
+    }
+
+    /**
+     * 设置 指定边距,单位像素 .
+     *
+     * @param encodeHintTypeMargin
+     *            the encodeHintTypeMargin to set
+     */
+    public void setEncodeHintTypeMargin(Integer encodeHintTypeMargin){
+        this.encodeHintTypeMargin = encodeHintTypeMargin;
     }
 }
