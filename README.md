@@ -79,12 +79,12 @@ taglib	|说明
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-common</artifactId>
-				<version>1.5.3</version>
+				<version>1.5.4</version>
 			</dependency>
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-display</artifactId>
-				<version>1.5.3</version>
+				<version>1.5.4</version>
 			</dependency>
 			....
 		</dependencies>
