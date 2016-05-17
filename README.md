@@ -38,8 +38,8 @@ Reduce development, Release ideas
 
 taglib	|说明	
 :---- | :---------
-[isContain](https://github.com/venusdrogon/feilong-taglib/wiki/isContain-taglib "isContain") 	|判断一个值,是否在一个集合(或者可以被转成Iterator)当中
-[isInTime](https://github.com/venusdrogon/feilong-taglib/wiki/isInTime-taglib "isInTime") 	|判断一个日期(date),是否在一个时间区间内(beginDate,endDate)
+[isContains](https://github.com/venusdrogon/feilong-taglib/wiki/feilong-isContains "isContains") 	|判断一个值,是否在一个集合(或者可以被转成Iterator)当中
+[isInTime](https://github.com/venusdrogon/feilong-taglib/wiki/feilong-isInTime "isInTime") 	|判断一个日期(date),是否在一个时间区间内(beginDate,endDate)
 
 
 ## Display 
