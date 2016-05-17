@@ -23,8 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.feilong.core.CharsetType;
 import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
-import com.feilong.servlet.Accessor;
-import com.feilong.servlet.SessionAccessor;
+import com.feilong.framework.accessor.KeyAccessor;
+import com.feilong.framework.accessor.SessionKeyAccessor;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.tools.barcode.BarcodeConfig;
@@ -82,8 +82,8 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         //把这些配置存储起来,以便在图片servlet获取
         BarcodeContentsAndConfig barcodeContentsAndConfig = buildBarcodeContentsAndConfig(request);
 
-        Accessor accessor = new SessionAccessor();
-        accessor.save(barcodeId, barcodeContentsAndConfig, request);
+        KeyAccessor keyAccessor = new SessionKeyAccessor();
+        keyAccessor.save(barcodeId, barcodeContentsAndConfig, request);
 
         return buildImgTag(request);
     }

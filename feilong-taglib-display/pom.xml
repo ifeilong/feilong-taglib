@@ -39,5 +39,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>com.feilong.platform.framework</groupId>
+			<artifactId>feilong-framework-accessor</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
+
 	</dependencies>
 </project>

@@ -29,8 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.servlet.Accessor;
-import com.feilong.servlet.SessionAccessor;
+import com.feilong.framework.accessor.KeyAccessor;
+import com.feilong.framework.accessor.SessionKeyAccessor;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
 
 /**
@@ -72,9 +72,9 @@ public class BarcodeServlet extends HttpServlet{
         String barcodeId = request.getParameter(BarcodeRequestParams.BARCODE_ID);
         Validate.notEmpty(barcodeId, "barcodeId can't be null/empty!");
 
-        Accessor accessor = new SessionAccessor();
+        KeyAccessor keyAccessor = new SessionKeyAccessor();
 
-        BarcodeContentsAndConfig barcodeContentsAndConfig = accessor.get(barcodeId, (HttpServletRequest) request);
+        BarcodeContentsAndConfig barcodeContentsAndConfig = keyAccessor.get(barcodeId, (HttpServletRequest) request);
         Validate.notNull(barcodeContentsAndConfig, "barcodeContentsAndConfig can't be null!");
 
         render(barcodeContentsAndConfig, response);
