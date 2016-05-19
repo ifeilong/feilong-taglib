@@ -32,10 +32,10 @@ import com.feilong.test.User;
  * @version 1.0.7 2014年5月24日 下午11:23:49
  * @since 1.0.7
  */
-public class PagerCacheMemoryTest{
+public class PagerCachePerformanceTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerCacheMemoryTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerCachePerformanceTest.class);
 
     /**
      * Name.

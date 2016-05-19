@@ -33,10 +33,10 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @version 1.0.7 2014年5月24日 下午11:23:49
  * @since 1.0.7
  */
-public class HttpConcatCacheMemoryTest extends BaseHttpConcatTest{
+public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatCacheMemoryTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatCachePerformanceTest.class);
 
     /**
      * Name.
