@@ -202,10 +202,7 @@ public final class HttpConcatParam implements Serializable{
         //你选择一个硬编码,随机选择,不为零,奇数 
         //理想情况下,每个类不同
 
-        String[] itemSrcArray = null;
-        if (null != this.itemSrcList){
-            itemSrcArray = ConvertUtil.toArray(this.itemSrcList, String.class);
-        }
+        String[] itemSrcArray = null != this.itemSrcList ? ConvertUtil.toArray(this.itemSrcList, String.class) : null;
 
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);
         return hashCodeBuilder//
@@ -244,15 +241,8 @@ public final class HttpConcatParam implements Serializable{
         HttpConcatParam t = (HttpConcatParam) obj;
         EqualsBuilder equalsBuilder = new EqualsBuilder();
 
-        String[] itemSrcArray = null;
-        if (null != this.itemSrcList){
-            itemSrcArray = ConvertUtil.toArray(this.itemSrcList, String.class);
-        }
-
-        String[] itemSrcArray2 = null;
-        if (null != t.getItemSrcList()){
-            itemSrcArray2 = ConvertUtil.toArray(t.getItemSrcList(), String.class);
-        }
+        String[] itemSrcArray = null != this.itemSrcList ? ConvertUtil.toArray(this.itemSrcList, String.class) : null;
+        String[] itemSrcArray2 = null != t.getItemSrcList() ? ConvertUtil.toArray(t.getItemSrcList(), String.class) : null;
 
         return equalsBuilder //
                         //.appendSuper(super.equals(obj))//

@@ -41,10 +41,7 @@ public abstract class AbstractConditionalTag extends BaseTag{
      */
     @Override
     public int doStartTag(){
-        if (condition()){
-            return EVAL_BODY_INCLUDE;
-        }
-        return SKIP_BODY;
+        return condition() ? EVAL_BODY_INCLUDE : SKIP_BODY;
     }
 
     /**

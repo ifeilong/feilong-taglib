@@ -69,11 +69,8 @@ public class IsInTimeTag extends AbstractConditionalTag{
     public boolean condition(){
         // 不能直接使用 date ,全局变量 一旦赋值 不会变化
         Date compareDate = (null == date) ? new Date() : date;
-        // *********************************************************************
-        if (null != beginDate){
-            return DateUtil.isInTime(compareDate, beginDate, endDate);
-        }
-        return DateUtil.isInTime(compareDate, beginDateString, endDateString, pattern);
+        return null != beginDate ? DateUtil.isInTime(compareDate, beginDate, endDate)
+                        : DateUtil.isInTime(compareDate, beginDateString, endDateString, pattern);
     }
 
     /**
