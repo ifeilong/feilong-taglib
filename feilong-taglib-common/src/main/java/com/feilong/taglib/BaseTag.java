@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +26,11 @@ import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.servlet.http.RequestUtil;
+import com.feilong.servlet.http.entity.RequestLogSwitch;
+import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 自定义标签的父类,所有自定义标签的基类,包含通用的方法.
@@ -100,6 +107,19 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      */
     protected final HttpServletResponse getHttpServletResponse(){
         return (HttpServletResponse) pageContext.getResponse();
+    }
+
+    /**
+     * Log exception.
+     *
+     * @param e
+     *            the e
+     * @since 1.5.5
+     */
+    protected void logException(Exception e){
+        RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD;
+        Map<String, Object> map = RequestUtil.getRequestInfoMapForLog(getHttpServletRequest(), requestLogSwitch);
+        LOGGER.error(Slf4jUtil.formatMessage("request info:{},tag is:[{}]", JsonUtil.format(map), getClass().getSimpleName()), e);
     }
 
     /*
