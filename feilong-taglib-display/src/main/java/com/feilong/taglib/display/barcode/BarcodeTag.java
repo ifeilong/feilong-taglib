@@ -24,7 +24,7 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.framework.accessor.KeyAccessor;
-import com.feilong.framework.accessor.SessionKeyAccessor;
+import com.feilong.framework.accessor.session.SessionKeyAccessor;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.tools.barcode.BarcodeConfig;
@@ -79,32 +79,30 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      */
     @Override
     protected Object buildContent(HttpServletRequest request){
-        //把这些配置存储起来,以便在图片servlet获取
         BarcodeContentsAndConfig barcodeContentsAndConfig = buildBarcodeContentsAndConfig(request);
 
+        //把这些配置存储起来,以便在图片servlet获取
         KeyAccessor keyAccessor = new SessionKeyAccessor();
         keyAccessor.save(barcodeId, barcodeContentsAndConfig, request);
 
-        return buildImgTag(request);
+        String imageSrc = buildBarcodeImageSrc(request);
+        return buildImgTag(imageSrc);//构造img标签,用来在页面显示二维码图片.
     }
 
     /**
-     * Builds the image tag.
+     * 构造img标签,用来在页面显示二维码图片.
      *
      * @param request
      *            the request
      * @return the string
      */
-    private String buildImgTag(HttpServletRequest request){
-        String imageSrc = buildBarcodeImageSrc(request);
-
+    private String buildImgTag(String imageSrc){
         StringBuilder imgTag = new StringBuilder();
         imgTag.append("<img");
         imgTag.append(" src=\"" + imageSrc + "\"");
         imgTag.append(" width=\"" + width + "\"");
         imgTag.append(" height=\"" + height + "\"");
         imgTag.append("/>");
-
         return imgTag.toString();
     }
 

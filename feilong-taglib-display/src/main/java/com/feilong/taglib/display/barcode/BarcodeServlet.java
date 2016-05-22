@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.framework.accessor.KeyAccessor;
-import com.feilong.framework.accessor.SessionKeyAccessor;
+import com.feilong.framework.accessor.session.SessionKeyAccessor;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
 
 /**
