@@ -64,7 +64,15 @@ taglib	|说明
 # Maven使用配置
 
 ```XML
+
 	<project>
+	
+		....
+		<properties>
+			<version.feilong-platform>1.5.4</version.feilong-platform>
+			....
+		</properties>
+		
 		....
 		<repositories>
 			<repository>
@@ -79,12 +87,12 @@ taglib	|说明
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-common</artifactId>
-				<version>1.5.4</version>
+				<version>${version.feilong-platform}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.feilong.platform.taglib</groupId>
 				<artifactId>feilong-taglib-display</artifactId>
-				<version>1.5.4</version>
+				<version>${version.feilong-platform}</version>
 			</dependency>
 			....
 		</dependencies>
