@@ -124,7 +124,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         paramsMap.put(BarcodeRequestParams.BARCODE_ID, barcodeId);
 
         String servletPath = "/feilongbarcode";
-        return request.getContextPath() + servletPath + "?" + ParamUtil.joinSingleValueMap(paramsMap);
+        return request.getContextPath() + servletPath + "?" + ParamUtil.toQueryStringUseSingleValueMap(paramsMap);
     }
 
     /**
