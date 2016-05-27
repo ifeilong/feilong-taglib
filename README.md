@@ -69,7 +69,7 @@ taglib	|说明
 	
 		....
 		<properties>
-			<version.feilong-platform>1.5.4</version.feilong-platform>
+			<version.feilong-platform>1.5.5</version.feilong-platform>
 			....
 		</properties>
 		
