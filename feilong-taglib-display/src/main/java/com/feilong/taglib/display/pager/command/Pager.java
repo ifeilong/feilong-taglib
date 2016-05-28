@@ -27,7 +27,7 @@ import java.util.List;
  * 通过简单的构造方法示例, 你可以得到下面的数据:
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>

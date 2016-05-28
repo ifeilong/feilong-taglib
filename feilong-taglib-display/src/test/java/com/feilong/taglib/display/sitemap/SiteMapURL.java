@@ -66,7 +66,7 @@ import com.feilong.core.date.DateUtil;
  * <p>
  * 
  * <blockquote>
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">Character</th>
  * <th align="left">Escape Code</th>

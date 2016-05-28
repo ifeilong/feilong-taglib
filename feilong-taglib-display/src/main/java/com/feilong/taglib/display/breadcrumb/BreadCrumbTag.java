@@ -66,7 +66,7 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * 一共有三种类型的网站面包屑导航:
  * </p>
  * 
- * <table border="1" cellspacing="0" cellpadding="4">
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
  * <th align="left">说明</th>
