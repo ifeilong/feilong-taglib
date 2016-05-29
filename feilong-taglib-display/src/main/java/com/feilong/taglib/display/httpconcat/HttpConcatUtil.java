@@ -98,7 +98,7 @@ public final class HttpConcatUtil{
      *            the http concat param
      * @return
      *         <ul>
-     *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,return {@link StringUtils#EMPTY}</li>
+     *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,返回 {@link StringUtils#EMPTY}</li>
      *         <li>如果支持 concat,那么生成concat字符串</li>
      *         <li>如果不支持 concat,那么生成多行js/css 原生的字符串</li>
      *         </ul>
