@@ -158,7 +158,7 @@ public final class PagerBuilder{
      * 
      * @param pagerParams
      *            构造分页需要的请求参数
-     * @return if {@link PagerParams#getTotalCount()}{@code <=0} return {@link StringUtils#EMPTY} <br>
+     * @return 如果 {@link PagerParams#getTotalCount()}{@code <=0} return {@link StringUtils#EMPTY} <br>
      *         else 生成分页html代码
      */
     public static String buildContent(PagerParams pagerParams){
@@ -362,7 +362,7 @@ public final class PagerBuilder{
      * 
      * @param pagerParams
      *            the pager params
-     * @return if {@link PagerParams#getCurrentPageNo()}<1 return 1<br>
+     * @return 如果 {@link PagerParams#getCurrentPageNo()}<1 return 1<br>
      *         else return {@link PagerParams#getCurrentPageNo()}
      * @since 1.0.5
      */
