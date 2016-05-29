@@ -90,9 +90,9 @@ public class BreadCrumbUtil{
      *            the bread crumb params
      * @return
      *         <ul>
-     *         <li>if Validator.isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
-     *         <li>if Validator.isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
-     *         <li>if Validator.isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
+     *         <li>如果 Validator.isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
+     *         <li>如果 Validator.isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
+     *         <li>如果 Validator.isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
      *         </ul>
      */
     public static String getBreadCrumbContent(BreadCrumbParams breadCrumbParams){
