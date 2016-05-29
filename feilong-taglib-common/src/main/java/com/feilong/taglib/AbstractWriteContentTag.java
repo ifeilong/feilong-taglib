@@ -21,6 +21,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,7 +90,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
      * @return the string
      */
     protected String buildExtraKeyInfoToLog(){
-        return "";
+        return StringUtils.EMPTY;
     }
 
     // *******************************************************************
