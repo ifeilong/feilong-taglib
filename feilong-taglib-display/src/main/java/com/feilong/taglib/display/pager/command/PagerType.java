@@ -19,7 +19,6 @@ package com.feilong.taglib.display.pager.command;
  * 分页类型
  * 
  * @author feilong
- * @version 1.4.0 2015年8月20日 下午8:57:07
  * @since 1.4.0
  */
 public enum PagerType{

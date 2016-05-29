@@ -35,14 +35,13 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
  * </ol>
  *
  * @author feilong
- * @version 1.0.3 2012-3-13 上午1:35:28
  * @see javax.servlet.jsp.tagext.TagExtraInfo
- * 
  * @see org.apache.taglibs.standard.tei.DeclareTEI
  * @see org.apache.taglibs.standard.tei.ForEachTEI
  * @see org.apache.taglibs.standard.tei.ImportTEI
  * @see org.apache.taglibs.standard.tei.XmlParseTEI
  * @see org.apache.taglibs.standard.tei.XmlTransformTEI
+ * @since 1.0.3
  */
 public abstract class BaseTEI extends TagExtraInfo{
 

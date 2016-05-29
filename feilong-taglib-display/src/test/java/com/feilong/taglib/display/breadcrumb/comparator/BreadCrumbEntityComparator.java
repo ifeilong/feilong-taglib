@@ -26,7 +26,6 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
  * The Class BreadCrumbEntityComparator.
  *
  * @author feilong
- * @version 1.2.2 2015年7月16日 下午8:03:17
  * @param <PK>
  *            the generic type
  * @since 1.2.2

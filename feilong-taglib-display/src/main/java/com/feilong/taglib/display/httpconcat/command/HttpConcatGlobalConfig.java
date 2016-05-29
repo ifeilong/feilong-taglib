@@ -19,7 +19,6 @@ package com.feilong.taglib.display.httpconcat.command;
  * http concat 全局配置.
  *
  * @author feilong
- * @version 1.5.0 2016年1月26日 下午4:58:28
  * @since 1.5.0
  */
 public class HttpConcatGlobalConfig{

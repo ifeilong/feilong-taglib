@@ -98,7 +98,6 @@ import com.feilong.core.date.DateUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.7 2014年6月19日 下午5:56:46
  * @see <a href="http://www.sitemaps.org/protocol.html#xmlTagDefinitions">xmlTagDefinitions</a>
  * @see StringEscapeUtils#ESCAPE_XML
  * @see StringEscapeUtils#escapeXml(String)

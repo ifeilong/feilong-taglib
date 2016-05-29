@@ -21,7 +21,6 @@ import java.io.Serializable;
  * {@link Pager} && 分页解析的html 代码.
  *
  * @author feilong
- * @version 1.4.0 2015年8月21日 上午10:53:48
  * @param <T>
  *            the generic type
  * @since 1.4.0

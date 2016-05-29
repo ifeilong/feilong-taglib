@@ -33,7 +33,6 @@ import com.feilong.taglib.display.pager.command.PagerType;
  * The Class PagerUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-5-23 15:58:19
  */
 public class PagerUtilTest extends BasePagerTest{
 

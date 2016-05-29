@@ -28,7 +28,6 @@ import com.feilong.taglib.display.CacheParam;
  * The Class OptionParam.
  *
  * @author feilong
- * @version 1.5.4 2016年4月19日 上午2:01:59
  * @since 1.5.4
  */
 public class OptionParam implements Serializable,CacheParam{

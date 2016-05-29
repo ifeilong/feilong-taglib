@@ -19,7 +19,6 @@ package com.feilong.taglib;
  * start输出.
  *
  * @author feilong
- * @version 1.3.0 2015年7月23日 下午9:03:54
  * @since 1.3.0
  */
 public abstract class AbstractStartWriteContentTag extends AbstractWriteContentTag{

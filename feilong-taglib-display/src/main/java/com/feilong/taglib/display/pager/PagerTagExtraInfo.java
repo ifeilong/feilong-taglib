@@ -31,7 +31,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class PagerTagExtraInfo.
  *
  * @author feilong
- * @version 1.0.3 2012-3-13 上午12:50:50
+ * @since 1.0.3
  */
 public class PagerTagExtraInfo extends BaseTEI{
 

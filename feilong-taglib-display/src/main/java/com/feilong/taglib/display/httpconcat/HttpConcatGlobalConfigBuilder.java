@@ -24,7 +24,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * The Class HttpConcatGlobalConfigBuilder.
  *
  * @author feilong
- * @version 1.5.0 2016年1月26日 下午5:16:59
  * @since 1.5.0
  */
 public class HttpConcatGlobalConfigBuilder{

@@ -31,11 +31,10 @@ import com.feilong.taglib.display.pager.PagerBuilder;
  * <p>
  * 用于{@link PagerBuilder#buildContent(PagerParams)}参数封装
  * </p>
- * 
+ *
  * @author feilong
- * @version 1.0.3 Mar 9, 2013 1:14:35 AM
- * 
  * @see PagerVMParam
+ * @since 1.0.3
  */
 public class PagerParams implements Serializable,CacheParam{
 

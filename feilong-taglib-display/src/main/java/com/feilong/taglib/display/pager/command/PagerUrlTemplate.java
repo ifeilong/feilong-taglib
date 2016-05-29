@@ -21,7 +21,6 @@ import java.io.Serializable;
  * 分页链接模板.
  * 
  * @author feilong
- * @version 1.0.5 2014年5月7日 下午1:01:31 模板链接单独配置
  * @since 1.0.5
  */
 public class PagerUrlTemplate implements Serializable{

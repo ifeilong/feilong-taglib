@@ -29,7 +29,6 @@ import com.feilong.test.User;
  * The Class MapMemoryTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年5月24日 下午11:23:49
  * @since 1.0.7
  */
 public class PagerCachePerformanceTest{

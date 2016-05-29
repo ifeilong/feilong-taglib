@@ -27,7 +27,7 @@ import com.feilong.core.bean.ConvertUtil;
  * 封装解析http concat 用到的参数.
  * 
  * @author feilong
- * @version 1.0 2014年5月5日 上午11:13:14
+ * @since 1.4.0
  */
 public final class HttpConcatParam implements Serializable{
 

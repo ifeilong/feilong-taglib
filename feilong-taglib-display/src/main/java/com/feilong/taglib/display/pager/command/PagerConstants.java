@@ -19,8 +19,7 @@ package com.feilong.taglib.display.pager.command;
  * 分页常量.
  * 
  * @author feilong
- * @version 1.0 2012-3-16 上午12:03:45
- * @version 1.0.5 2014-5-7 13:24
+ * @since 1.0.5
  */
 public final class PagerConstants{
 

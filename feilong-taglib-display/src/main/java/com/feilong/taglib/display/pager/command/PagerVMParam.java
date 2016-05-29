@@ -20,13 +20,10 @@ import java.util.LinkedHashMap;
 
 /**
  * PagerVMParam 可以在 vm中 取到的值.
- * 
+ *
  * @author feilong
- * @version 1.0.2 Mar 9, 2013 1:14:35 AM
- * @version 1.0.5 2014-5-7 13:26
- * @version 1.0.6 2014-5-7 13:50
- * 
  * @see PagerParams
+ * @since 1.0.2
  */
 public class PagerVMParam implements Serializable{
 

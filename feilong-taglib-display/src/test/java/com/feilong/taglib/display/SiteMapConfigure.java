@@ -24,7 +24,6 @@ package com.feilong.taglib.display;
 ///**
 // * 面包屑配置
 // * 
-// * @version 2010-6-17 上午09:45:51
 // */
 //@Deprecated
 //public class SiteMapConfigure{

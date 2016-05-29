@@ -21,7 +21,6 @@ import javax.servlet.jsp.JspException;
  * 拿到标签体中间的内容,解析之后,输出内容显示.
  *
  * @author feilong
- * @version 1.3.0 2015年7月23日 下午9:03:41
  * @since 1.3.0
  */
 public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag{

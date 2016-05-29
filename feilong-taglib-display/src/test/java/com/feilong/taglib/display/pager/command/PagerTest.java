@@ -25,7 +25,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class PagerTest.
  * 
  * @author feilong
- * @version 1.0 May 3, 2014 2:41:11 PM
  */
 public class PagerTest{
 

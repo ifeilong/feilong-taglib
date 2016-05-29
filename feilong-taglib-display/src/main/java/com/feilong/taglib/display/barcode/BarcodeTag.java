@@ -45,7 +45,6 @@ import com.feilong.tools.barcode.BarcodeConfig;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.5.4 2016年4月27日 下午12:42:36
  * @since 1.5.4
  */
 public class BarcodeTag extends AbstractStartWriteContentTag{

@@ -72,8 +72,6 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * </pre>
  * 
  * @author feilong
- * @version 1.0.0 2010-2-3 下午01:03:14
- * @version 1.0.5 May 3, 2014 1:44:08 PM
  * @since 1.0.0
  */
 public class PagerTag extends AbstractStartWriteContentTag{

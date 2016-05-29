@@ -51,7 +51,6 @@ import com.feilong.tools.barcode.BarcodeEncodeUtil;
  * </pre>
  *
  * @author feilong
- * @version 1.5.4 2016年4月27日 下午12:53:56
  * @since 1.5.4
  */
 public class BarcodeServlet extends HttpServlet{

@@ -28,10 +28,9 @@ import com.feilong.core.Validator;
  * The Class PagerCacheManager.
  *
  * @author feilong
- * @version 1.5.4 2016年4月19日 上午2:26:10
- * @since 1.5.4
  * @see "com.google.common.cache.Cache"
  * @see org.apache.commons.collections4.map.LRUMap
+ * @since 1.5.4
  */
 //XXX 将来可能会有更好的做法
 public final class TagCacheManager{

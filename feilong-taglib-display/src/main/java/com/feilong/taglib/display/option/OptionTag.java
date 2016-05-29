@@ -141,7 +141,6 @@ edu.option4=Others(Master/PHD)
  * </blockquote>
  *
  * @author feilong
- * @version 1.5.4 2016年4月19日 上午12:53:42
  * @since 1.5.4
  */
 public class OptionTag extends AbstractStartWriteContentTag{

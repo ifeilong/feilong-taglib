@@ -19,7 +19,6 @@ package com.feilong.taglib.display.breadcrumb.command;
  * 面包屑常量.
  *
  * @author feilong
- * @version 1.2.2 2015年7月16日 下午2:31:30
  * @since 1.2.2
  */
 public final class BreadCrumbConstants{

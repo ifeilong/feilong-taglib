@@ -32,8 +32,7 @@ import com.feilong.taglib.AbstractConditionalTag;
  * </ul>
  * 
  * @author feilong
- * @version 1.0 2010-2-9 下午03:37:51
- * @version 1.1 Oct 31, 2012 4:06:19 PM
+ * @since 1.0.0
  */
 public class IsInTimeTag extends AbstractConditionalTag{
 

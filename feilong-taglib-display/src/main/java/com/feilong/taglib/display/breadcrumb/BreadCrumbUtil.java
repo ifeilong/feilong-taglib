@@ -62,7 +62,6 @@ import com.feilong.tools.velocity.VelocityUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.2.2 2015年7月16日 下午2:08:09
  * @since 1.2.2
  */
 public class BreadCrumbUtil{

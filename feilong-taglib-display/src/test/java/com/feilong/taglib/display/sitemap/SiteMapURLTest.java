@@ -33,7 +33,6 @@ import com.feilong.tools.velocity.VelocityUtil;
  * The Class Test1.
  *
  * @author feilong
- * @version 1.0 Jun 26, 2014 4:09:19 PM
  */
 public class SiteMapURLTest{
 

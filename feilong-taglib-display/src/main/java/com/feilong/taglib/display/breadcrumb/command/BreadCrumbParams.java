@@ -22,7 +22,6 @@ import java.util.List;
  * 面包屑参数.
  *
  * @author feilong
- * @version 1.2.2 2015年7月16日 下午2:20:32
  * @param <T>
  *            the generic type
  * @since 1.2.2

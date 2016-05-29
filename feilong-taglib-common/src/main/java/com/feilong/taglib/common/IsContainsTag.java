@@ -25,7 +25,7 @@ import com.feilong.taglib.AbstractConditionalTag;
  * 判断一个值是否在一个集合(或者可以被转成Iterator)当中.
  *
  * @author feilong
- * @version 1.0.0 2010-7-5 下午01:16:43
+ * @since 1.0.0
  */
 public class IsContainsTag extends AbstractConditionalTag{
 

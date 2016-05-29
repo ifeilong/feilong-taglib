@@ -33,7 +33,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class HttpConcatUtilTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年5月16日 下午11:42:49
  * @since 1.0.7
  */
 public class HttpConcatUtilTest extends BaseHttpConcatTest{

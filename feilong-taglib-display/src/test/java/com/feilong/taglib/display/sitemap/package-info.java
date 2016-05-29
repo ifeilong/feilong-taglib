@@ -24,7 +24,6 @@
  * 此外,Sitemap 与搜索排名没有关系. 
  * 
  * @author feilong
- * @version 1.0.8 2014年7月22日 下午6:23:37
  * @since 1.0.8
  */
 package com.feilong.taglib.display.sitemap;

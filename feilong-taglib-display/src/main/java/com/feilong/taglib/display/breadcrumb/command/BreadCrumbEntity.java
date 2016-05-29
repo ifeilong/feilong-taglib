@@ -25,9 +25,10 @@ import java.io.Serializable;
  * </p>
  *
  * @author feilong
- * @version 1.0 2012-2-16 下午12:55:43
  * @param <T>
  *            the generic type
+ * 
+ * @since 1.2.2
  */
 public class BreadCrumbEntity<T> implements Serializable{
 

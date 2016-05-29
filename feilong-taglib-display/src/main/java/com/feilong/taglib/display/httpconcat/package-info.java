@@ -17,8 +17,6 @@
  * c)用一个?来便是时间戳<br>
  * 
  * @author feilong
- * 
  * @since 1.0.5
- * @version 1.0.5 2014-5-5 13:41
  */
 package com.feilong.taglib.display.httpconcat;

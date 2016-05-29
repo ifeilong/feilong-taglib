@@ -23,7 +23,6 @@ import com.feilong.tools.barcode.BarcodeConfig;
  * The Class BarcodeContentsAndConfig.
  *
  * @author feilong
- * @version 1.5.4 2016年4月27日 下午3:00:26
  * @since 1.5.4
  */
 public class BarcodeContentsAndConfig implements Serializable{

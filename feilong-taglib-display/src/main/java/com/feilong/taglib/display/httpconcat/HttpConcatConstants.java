@@ -19,7 +19,6 @@ package com.feilong.taglib.display.httpconcat;
  * 解析http concat用到的常量
  * 
  * @author feilong
- * @version 1.0.7 2014年5月15日 下午2:48:45
  * @since 1.0.7
  */
 public class HttpConcatConstants{

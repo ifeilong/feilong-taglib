@@ -26,7 +26,6 @@ import com.feilong.core.CharsetType;
  * The Class PagerParamsTest.
  *
  * @author feilong
- * @version 1.0.7 2014年5月23日 下午10:31:59
  * @since 1.0.7
  */
 public class PagerParamsTest{

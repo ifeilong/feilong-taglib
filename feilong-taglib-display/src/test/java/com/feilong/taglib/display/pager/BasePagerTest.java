@@ -25,17 +25,16 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * The Class BasePagerTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年5月24日 下午11:50:17
  * @since 1.0.7
  */
 public abstract class BasePagerTest{
 
     // Locale.ENGLISH;
     /** The locale. */
-    private Locale locale            = Locale.SIMPLIFIED_CHINESE;
+    private final Locale locale            = Locale.SIMPLIFIED_CHINESE;
 
     /** The debug is not parse vm. */
-    boolean        debugIsNotParseVM = false;
+    boolean              debugIsNotParseVM = false;
 
     /**
      * Gets the pager params.

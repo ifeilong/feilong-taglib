@@ -20,7 +20,8 @@ import com.feilong.taglib.BaseTag;
 /**
  * switch标签.
  *
- * @version 2010-3-19 上午10:48:32
+ * @author feilong
+ * @since 1.0.1
  */
 public class SwitchTag extends BaseTag{
 

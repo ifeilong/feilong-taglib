@@ -49,7 +49,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </p>
  * 
  * @author feilong
- * @version 1.0.7 2014年5月19日 下午2:50:43
  * @see HttpConcatTag
  * @see HttpConcatConstants
  * @see HttpConcatParam

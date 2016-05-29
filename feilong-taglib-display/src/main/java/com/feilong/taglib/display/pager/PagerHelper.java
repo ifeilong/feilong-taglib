@@ -28,7 +28,6 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
  * 分页helper.
  *
  * @author feilong
- * @version 1.4.0 2015年8月20日 下午9:53:48
  * @since 1.4.0
  */
 public final class PagerHelper{

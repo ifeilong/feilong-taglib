@@ -51,7 +51,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * </blockquote>
  *
  * @author feilong
- * @version 1.4.0 2015年8月11日 下午6:29:37
  * @see org.apache.taglibs.standard.functions.Functions
  * @see "org.owasp.esapi.tags.ELEncodeFunctions"
  * 

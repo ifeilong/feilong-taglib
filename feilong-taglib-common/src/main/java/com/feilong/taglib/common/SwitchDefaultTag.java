@@ -22,7 +22,8 @@ import com.feilong.taglib.BaseTag;
 /**
  * default标签 配合switch标签使用.
  *
- * @version 2010年3月19日 11:24:28
+ * @author feilong
+ * @since 1.0.1
  */
 public class SwitchDefaultTag extends BaseTag{
 

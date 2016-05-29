@@ -32,7 +32,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class SiteMapTagTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-6-25 16:22:39
  */
 public class BreadCrumbUtilTest{
 

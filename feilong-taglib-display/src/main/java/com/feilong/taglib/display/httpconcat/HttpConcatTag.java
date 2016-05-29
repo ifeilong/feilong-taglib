@@ -44,8 +44,6 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.2 2014年5月4日 下午11:45:20
- * @version 1.2.2 2015年7月23日 下午8:50:08
  * @since 1.0.2
  */
 public class HttpConcatTag extends AbstractEndWriteContentTag{

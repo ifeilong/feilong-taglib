@@ -19,7 +19,6 @@ package com.feilong.taglib.display;
  * cache 标识接口.
  *
  * @author feilong
- * @version 1.5.4 2016年4月19日 上午2:24:26
  * @since 1.5.4
  */
 public interface CacheParam{

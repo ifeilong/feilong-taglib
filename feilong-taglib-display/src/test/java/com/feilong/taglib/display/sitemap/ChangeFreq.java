@@ -37,7 +37,6 @@ package com.feilong.taglib.display.sitemap;
  * 爬虫可能会定期爬取标识为 never的页面,so that they can handle unexpected changes to those pages.
  * 
  * @author feilong
- * @version 1.0 Jun 26, 2014 4:43:10 PM
  */
 public enum ChangeFreq{
 

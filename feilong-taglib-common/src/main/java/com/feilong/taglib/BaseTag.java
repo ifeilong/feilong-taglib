@@ -66,8 +66,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * {@link BodyTagSupport}继承了{@link TagSupport}.
  * 
  * @author feilong
- * @version 1.0.0 2012-3-13 01:46
- * @version 1.2.1 2015-6-12 15:38
  * @see javax.servlet.jsp.tagext.BodyTagSupport
  * @see javax.servlet.jsp.tagext.TagSupport
  * 

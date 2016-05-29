@@ -19,7 +19,6 @@ package com.feilong.taglib.display.barcode;
  * The Class BarcodeRequestParams.
  *
  * @author feilong
- * @version 1.5.4 2016年4月27日 下午1:32:54
  * @since 1.5.4
  */
 public class BarcodeRequestParams{

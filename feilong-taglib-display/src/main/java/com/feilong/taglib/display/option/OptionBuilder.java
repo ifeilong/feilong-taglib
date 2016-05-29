@@ -29,7 +29,6 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * The Class OptionBuilder.
  *
  * @author feilong
- * @version 1.5.4 2016年4月19日 上午2:01:44
  * @since 1.5.4
  */
 public class OptionBuilder{

@@ -28,7 +28,6 @@ import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
  * The Class HttpConcatParamTest.
  * 
  * @author feilong
- * @version 1.0.7 2014年5月24日 下午6:22:48
  * @since 1.0.7
  */
 public class HttpConcatParamTest extends BaseHttpConcatTest{

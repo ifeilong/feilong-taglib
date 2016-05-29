@@ -105,12 +105,11 @@ import com.feilong.tools.velocity.VelocityUtil;
  * </blockquote>
  * 
  * @author feilong
- * @version 1.0.0 2010-5-26 下午11:50:10
- * @version 1.0.5 2014-5-4 19:36
  * @see PagerConstants
  * @see PagerParams
  * @see PagerUrlTemplate
  * @see PagerVMParam
+ * @since 1.0.0
  */
 public final class PagerBuilder{
 
@@ -128,9 +127,9 @@ public final class PagerBuilder{
 
     /**
      * Builds the pager and content.
-     * 
-     * @param <T>
      *
+     * @param <T>
+     *            the generic type
      * @param pagerParams
      *            the pager params
      * @param itemList
@@ -236,9 +235,9 @@ public final class PagerBuilder{
 
     /**
      * Builds the pager vm param.
-     * 
+     *
      * @param <T>
-     * 
+     *            the generic type
      * @param pagerParams
      *            the pager params
      * @return the pager vm param
@@ -292,9 +291,9 @@ public final class PagerBuilder{
 
     /**
      * Builds the pager.
-     * 
-     * @param <T>
      *
+     * @param <T>
+     *            the generic type
      * @param pagerParams
      *            the pager params
      * @return the pager
@@ -329,13 +328,11 @@ public final class PagerBuilder{
 
     /**
      * 要循环的 index和 end 索引 =href map.
-     * 
-     * @param startIteratorIndex
-     *            the start iterator index
-     * @param endIteratorIndex
-     *            the end iterator index
+     *
      * @param indexAndHrefMap
      *            the index and href map
+     * @param startAndEndIteratorIndexs
+     *            the start and end iterator indexs
      * @return the iterator index and href map
      * @since 1.0.5
      */
@@ -380,15 +377,16 @@ public final class PagerBuilder{
      * <p>
      * 注:(key={@link #DEFAULT_TEMPLATE_PAGE_NO} 为模板链接,可用户前端解析 {@link PagerVMParam#getHrefUrlTemplate()}.
      * </p>
-     * 
+     *
      * @param <T>
-     * 
+     *            the generic type
      * @param pagerParams
      *            the pager params
-     * @param indexSet
-     *            索引set
+     * @param pager
+     *            the pager
+     * @param startAndEndIteratorIndexs
+     *            the start and end iterator indexs
      * @return key是分页页码,value是解析之后的链接
-     * 
      * @since 1.4.0
      */
     private static <T> Map<Integer, String> getAllUseIndexAndHrefMap(
@@ -438,9 +436,9 @@ public final class PagerBuilder{
      * <li>以及迭代的 <code>startIteratorIndexAndEndIteratorIndexs</code></li>
      * </ul>
      * </blockquote>
-     * 
+     *
      * @param <T>
-     * 
+     *            the generic type
      * @param pager
      *            the pager
      * @param startIteratorIndexAndEndIteratorIndexs
@@ -467,15 +465,13 @@ public final class PagerBuilder{
 
     /**
      * 获得开始和结束的索引.
-     * 
+     *
      * @param <T>
-     * 
-     * @param allPageNo
-     *            总页数
-     * @param currentPageNo
-     *            当前页数
+     *            the generic type
      * @param pagerParams
      *            the pager params
+     * @param pager
+     *            the pager
      * @return 获得开始和结束的索引
      */
     private static <T> int[] getStartAndEndIteratorIndexs(PagerParams pagerParams,Pager<T> pager){

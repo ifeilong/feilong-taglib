@@ -113,11 +113,10 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * </blockquote>
  *
  * @author feilong
- * @version 1.0.0 2010-6-8 上午05:50:38
- * @version 1.2.2 2015年7月17日 上午12:09:08
  * @see <a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%8C%85%E5%B1%91%E5%AF%BC%E8%88%AA">面包屑导航</a>
  * @see <a href="http://baike.baidu.com/view/2122303.htm">面包屑导航</a>
  * @see <a href="http://www.webdesignpractices.com/navigation/breadcrumb.html">Breadcrumb Navigation</a>
+ * @since 1.2.2
  */
 //TODO ADD javadoc
 public class BreadCrumbTag extends AbstractStartWriteContentTag{
