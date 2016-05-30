@@ -24,7 +24,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 /**
  * The Class BasePagerTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public abstract class BasePagerTest{

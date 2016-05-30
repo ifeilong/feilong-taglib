@@ -140,7 +140,7 @@ edu.option4=Others(Master/PHD)
  * 
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
 public class OptionTag extends AbstractStartWriteContentTag{

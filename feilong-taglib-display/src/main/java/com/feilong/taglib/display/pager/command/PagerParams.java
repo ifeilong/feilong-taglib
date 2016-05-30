@@ -32,7 +32,7 @@ import com.feilong.taglib.display.pager.PagerBuilder;
  * 用于{@link PagerBuilder#buildContent(PagerParams)}参数封装
  * </p>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see PagerVMParam
  * @since 1.0.3
  */

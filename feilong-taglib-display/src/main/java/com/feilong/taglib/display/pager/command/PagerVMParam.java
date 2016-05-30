@@ -21,7 +21,7 @@ import java.util.LinkedHashMap;
 /**
  * PagerVMParam 可以在 vm中 取到的值.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see PagerParams
  * @since 1.0.2
  */

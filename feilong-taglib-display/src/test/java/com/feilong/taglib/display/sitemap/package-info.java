@@ -23,7 +23,7 @@
  * 
  * 此外,Sitemap 与搜索排名没有关系. 
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.8
  */
 package com.feilong.taglib.display.sitemap;

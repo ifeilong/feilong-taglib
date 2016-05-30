@@ -65,7 +65,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  * </p>
  * {@link BodyTagSupport}继承了{@link TagSupport}.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see javax.servlet.jsp.tagext.BodyTagSupport
  * @see javax.servlet.jsp.tagext.TagSupport
  * 

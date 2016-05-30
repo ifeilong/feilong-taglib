@@ -24,7 +24,7 @@ import com.feilong.taglib.AbstractConditionalTag;
 /**
  * 判断一个值是否在一个集合(或者可以被转成Iterator)当中.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
 public class IsContainsTag extends AbstractConditionalTag{

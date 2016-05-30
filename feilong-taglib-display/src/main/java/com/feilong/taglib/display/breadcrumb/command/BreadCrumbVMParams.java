@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 面包屑VM参数.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.2.2

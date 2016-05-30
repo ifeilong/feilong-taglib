@@ -20,7 +20,7 @@ import java.io.Serializable;
 /**
  * {@link Pager} && 分页解析的html 代码.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.4.0

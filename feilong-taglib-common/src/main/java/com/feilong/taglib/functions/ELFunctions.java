@@ -50,7 +50,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.taglibs.standard.functions.Functions
  * @see "org.owasp.esapi.tags.ELEncodeFunctions"
  * 

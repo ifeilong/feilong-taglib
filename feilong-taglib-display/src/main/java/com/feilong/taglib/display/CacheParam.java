@@ -18,7 +18,7 @@ package com.feilong.taglib.display;
 /**
  * cache 标识接口.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
 public interface CacheParam{

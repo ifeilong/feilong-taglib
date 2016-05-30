@@ -27,7 +27,7 @@ import com.feilong.core.Validator;
 /**
  * The Class PagerCacheManager.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "com.google.common.cache.Cache"
  * @see org.apache.commons.collections4.map.LRUMap
  * @since 1.5.4

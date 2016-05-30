@@ -112,7 +112,7 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
  * </ol>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%8C%85%E5%B1%91%E5%AF%BC%E8%88%AA">面包屑导航</a>
  * @see <a href="http://baike.baidu.com/view/2122303.htm">面包屑导航</a>
  * @see <a href="http://www.webdesignpractices.com/navigation/breadcrumb.html">Breadcrumb Navigation</a>

@@ -27,7 +27,7 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
 /**
  * 分页helper.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public final class PagerHelper{

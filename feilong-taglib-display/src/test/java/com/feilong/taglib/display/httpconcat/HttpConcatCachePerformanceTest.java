@@ -29,7 +29,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 /**
  * The Class MapMemoryTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{

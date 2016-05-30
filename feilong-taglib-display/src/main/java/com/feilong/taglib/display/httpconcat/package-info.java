@@ -16,7 +16,7 @@
  * b)多文件之间用半角逗号(,)分开<br>
  * c)用一个?来便是时间戳<br>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.5
  */
 package com.feilong.taglib.display.httpconcat;

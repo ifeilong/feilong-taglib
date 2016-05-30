@@ -104,7 +104,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * </p>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see PagerConstants
  * @see PagerParams
  * @see PagerUrlTemplate

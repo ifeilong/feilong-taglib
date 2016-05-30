@@ -16,7 +16,7 @@
 /**
  * 分页工具包,支持自定义标签(用于 jsp view),支持纯VM解析(用于Velocity view).
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
 package com.feilong.taglib.display.pager;

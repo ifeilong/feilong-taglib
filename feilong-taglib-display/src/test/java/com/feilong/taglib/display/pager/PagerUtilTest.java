@@ -32,7 +32,7 @@ import com.feilong.taglib.display.pager.command.PagerType;
 /**
  * The Class PagerUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class PagerUtilTest extends BasePagerTest{
 

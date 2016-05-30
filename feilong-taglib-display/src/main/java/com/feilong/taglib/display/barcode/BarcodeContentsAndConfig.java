@@ -22,7 +22,7 @@ import com.feilong.tools.barcode.BarcodeConfig;
 /**
  * The Class BarcodeContentsAndConfig.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
 public class BarcodeContentsAndConfig implements Serializable{

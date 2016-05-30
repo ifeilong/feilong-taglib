@@ -32,7 +32,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class HttpConcatUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public class HttpConcatUtilTest extends BaseHttpConcatTest{

@@ -30,7 +30,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 /**
  * The Class PagerTagExtraInfo.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.3
  */
 public class PagerTagExtraInfo extends BaseTEI{

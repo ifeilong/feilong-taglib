@@ -23,7 +23,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 /**
  * The Class BaseHttpConcatTest.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public abstract class BaseHttpConcatTest{

@@ -55,7 +55,7 @@ import java.util.List;
  * </table>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
  *            the generic type
  * @since 1.0.0

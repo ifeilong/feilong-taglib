@@ -32,7 +32,7 @@ import com.feilong.tools.velocity.VelocityUtil;
 /**
  * The Class Test1.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class SiteMapURLTest{
 

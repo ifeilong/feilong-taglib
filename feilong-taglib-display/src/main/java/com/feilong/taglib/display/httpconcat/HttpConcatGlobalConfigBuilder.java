@@ -23,7 +23,7 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 /**
  * The Class HttpConcatGlobalConfigBuilder.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.0
  */
 public class HttpConcatGlobalConfigBuilder{

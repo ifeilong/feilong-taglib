@@ -36,7 +36,7 @@ package com.feilong.taglib.display.sitemap;
  * 也可能爬取标识为 yearly的页面 高于这个频率 <br>
  * 爬虫可能会定期爬取标识为 never的页面,so that they can handle unexpected changes to those pages.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public enum ChangeFreq{
 

@@ -20,7 +20,7 @@ import com.feilong.taglib.BaseTag;
 /**
  * switch标签.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.1
  */
 public class SwitchTag extends BaseTag{

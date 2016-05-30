@@ -43,7 +43,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * </ul>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.2
  */
 public class HttpConcatTag extends AbstractEndWriteContentTag{

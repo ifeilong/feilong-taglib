@@ -22,7 +22,7 @@ import com.feilong.taglib.BaseTag;
 /**
  * default标签 配合switch标签使用.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.1
  */
 public class SwitchDefaultTag extends BaseTag{

@@ -27,7 +27,7 @@ import com.feilong.taglib.display.CacheParam;
 /**
  * The Class OptionParam.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
 public class OptionParam implements Serializable,CacheParam{

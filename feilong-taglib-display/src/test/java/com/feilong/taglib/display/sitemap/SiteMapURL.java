@@ -97,7 +97,7 @@ import com.feilong.core.date.DateUtil;
  * </p>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="http://www.sitemaps.org/protocol.html#xmlTagDefinitions">xmlTagDefinitions</a>
  * @see StringEscapeUtils#ESCAPE_XML
  * @see StringEscapeUtils#escapeXml(String)

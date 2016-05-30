@@ -18,7 +18,7 @@ package com.feilong.taglib.display.httpconcat;
 /**
  * 解析http concat用到的常量
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
 public class HttpConcatConstants{

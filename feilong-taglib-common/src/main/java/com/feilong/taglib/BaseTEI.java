@@ -34,7 +34,7 @@ import javax.servlet.jsp.tagext.TagExtraInfo;
  * <li>Validation</li>
  * </ol>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see javax.servlet.jsp.tagext.TagExtraInfo
  * @see org.apache.taglibs.standard.tei.DeclareTEI
  * @see org.apache.taglibs.standard.tei.ForEachTEI

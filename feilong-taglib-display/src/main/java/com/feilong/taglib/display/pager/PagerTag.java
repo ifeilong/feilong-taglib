@@ -71,7 +71,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * }
  * </pre>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
 public class PagerTag extends AbstractStartWriteContentTag{

@@ -61,7 +61,7 @@ import com.feilong.tools.velocity.VelocityUtil;
  * </p>
  * </blockquote>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.2.2
  */
 public class BreadCrumbUtil{
