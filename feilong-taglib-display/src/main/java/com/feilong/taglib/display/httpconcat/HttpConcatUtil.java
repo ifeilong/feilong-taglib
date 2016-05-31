@@ -76,11 +76,8 @@ public final class HttpConcatUtil{
     private static final Map<HttpConcatParam, String> CACHE  = new HashMap<HttpConcatParam, String>();
 
     static{
-        LOGGER.info("begin init [{}]", HttpConcatUtil.class.getSimpleName());
-
         httpConcatGlobalConfig = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
-
-        LOGGER.info("end init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(httpConcatGlobalConfig));
+        LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(httpConcatGlobalConfig));
     }
 
     /** Don't let anyone instantiate this class. */
