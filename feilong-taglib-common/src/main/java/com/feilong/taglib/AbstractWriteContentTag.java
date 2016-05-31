@@ -66,12 +66,12 @@ abstract class AbstractWriteContentTag extends BaseTag{
         Object writeContent = this.buildContent(request);
         print(writeContent);
 
-        if (LOGGER.isInfoEnabled()){
+        if (LOGGER.isDebugEnabled()){
             Date endDate = new Date();
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String string = Validator.isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
             String useTime = DateExtensionUtil.getIntervalForView(beginDate, endDate);
-            LOGGER.info("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), request.getRequestURI(), string, useTime);
+            LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), request.getRequestURI(), string, useTime);
         }
     }
 
