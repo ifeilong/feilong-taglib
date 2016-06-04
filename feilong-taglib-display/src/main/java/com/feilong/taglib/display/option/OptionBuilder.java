@@ -108,7 +108,7 @@ public class OptionBuilder{
 
             String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : StringUtils.EMPTY;
 
-            String option = Slf4jUtil.formatMessage(OPTION_PATTERN, key, selectedStatus, value);
+            String option = Slf4jUtil.format(OPTION_PATTERN, key, selectedStatus, value);
             sb.append(option).append(SystemUtils.LINE_SEPARATOR);
         }
         return sb.toString();

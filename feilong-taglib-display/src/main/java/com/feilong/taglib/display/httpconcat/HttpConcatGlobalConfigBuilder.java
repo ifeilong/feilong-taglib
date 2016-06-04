@@ -95,7 +95,7 @@ public class HttpConcatGlobalConfigBuilder{
 
         if (Validator.isNullOrEmpty(keyValue)){
             String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
-            throw new NullPointerException(Slf4jUtil.formatMessage(messagePattern, keyName, baseName));
+            throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, baseName));
         }
 
         return keyValue;

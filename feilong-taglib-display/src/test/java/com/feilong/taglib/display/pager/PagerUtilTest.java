@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.date.DateUtil;
+import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.taglib.display.pager.command.PagerParams;
@@ -62,7 +62,7 @@ public class PagerUtilTest extends BasePagerTest{
             // LOGGER.debug("{} ", i);
         }
         Date endDate = new Date();
-        LOGGER.info("{}次\t{}", j, DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{}次\t{}", j, DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 
     /**

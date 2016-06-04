@@ -25,7 +25,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateUtil;
+import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.tools.jsonlib.JsonUtil;
@@ -81,6 +81,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
         }
 
         Date endDate = new Date();
-        LOGGER.info("{},time:{}", z, DateUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, endDate));
     }
 }
