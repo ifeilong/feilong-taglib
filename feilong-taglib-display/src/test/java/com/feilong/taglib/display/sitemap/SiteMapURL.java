@@ -190,7 +190,7 @@ public class SiteMapURL implements Serializable{
      * 使用YYYY-MM-DD格式 (只读字段).
      * 
      * @return 如果 Validator.isNullOrEmpty(lastmod),返回 null; else return yyyy-MM-dd format
-     * @see com.feilong.core.date.DateUtil#date2String(Date, String)
+     * @see com.feilong.core.date.DateUtil#toString(Date, String)
      * @see com.feilong.core.DatePattern#COMMON_DATE
      * @see #lastmod
      */
@@ -198,7 +198,7 @@ public class SiteMapURL implements Serializable{
         if (Validator.isNullOrEmpty(lastmod)){
             return null;
         }
-        String formatLastmod = DateUtil.date2String(lastmod, DatePattern.COMMON_DATE);
+        String formatLastmod = DateUtil.toString(lastmod, DatePattern.COMMON_DATE);
         return formatLastmod;
     }
 
