@@ -168,9 +168,8 @@ public final class PagerBuilder{
         // 有数据,不是空
         // 如果=0 应该显示其他内容
         if (totalCount <= 0){
-            LOGGER.info("the param totalCount:{} not >0", totalCount);
-            // 如果总数不>0 则直接返回 empty,页面分页地方显示空白
-            return StringUtils.EMPTY;
+            LOGGER.info("totalCount value is [{}] not > 0,will return empty", totalCount);
+            return StringUtils.EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         }
 
         //**********************************************************************************************
