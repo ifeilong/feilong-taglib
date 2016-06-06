@@ -396,28 +396,37 @@ public final class PagerBuilder{
 
         String pageParamName = pagerParams.getPageParamName();
         PagerType pagerType = pagerParams.getPagerType();
+
         //*********************这种替换的性能要高***********************************************
-        String templateEncodedUrl = "";
         CharSequence targetForReplace = pageParamName + "=" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
-        if (PagerType.REDIRECT == pagerType){
-            templateEncodedUrl = ParamUtil.addParameter(
-                            pagerParams.getPageUrl(),
-                            pageParamName,
-                            "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO,
-                            pagerParams.getCharsetType());
-        }else{
-            templateEncodedUrl = "javascript:void(0);";
-        }
+
+        String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
         // *************************************************************************
         Map<Integer, String> returnMap = new HashMap<Integer, String>();
         for (Integer index : indexSet){
-            if (pagerType == PagerType.NO_REDIRECT){
-                returnMap.put(index, templateEncodedUrl);
-            }else{
-                returnMap.put(index, templateEncodedUrl.replace(targetForReplace, pageParamName + "=" + index));
-            }
+            String link = pagerType == PagerType.NO_REDIRECT ? templateEncodedUrl
+                            : templateEncodedUrl.replace(targetForReplace, pageParamName + "=" + index);
+            returnMap.put(index, link);
         }
         return returnMap;
+    }
+
+    /**
+     * @param pagerParams
+     * @param pageParamName
+     * @param pagerType
+     * @return
+     * @since 1.6.1
+     */
+    private static String getTemplateEncodedUrl(PagerParams pagerParams,String pageParamName,PagerType pagerType){
+        String ajaxLink = "javascript:void(0);";
+        boolean isNoRedirect = PagerType.NO_REDIRECT == pagerType;
+        return isNoRedirect ? ajaxLink
+                        : ParamUtil.addParameter(
+                                        pagerParams.getPageUrl(),
+                                        pageParamName,
+                                        "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO,
+                                        pagerParams.getCharsetType());
     }
 
     /**
