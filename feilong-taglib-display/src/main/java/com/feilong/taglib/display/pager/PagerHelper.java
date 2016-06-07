@@ -17,9 +17,6 @@ package com.feilong.taglib.display.pager;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -31,9 +28,6 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
  * @since 1.4.0
  */
 public final class PagerHelper{
-
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerHelper.class);
 
     /** Don't let anyone instantiate this class. */
     private PagerHelper(){
@@ -57,15 +51,7 @@ public final class PagerHelper{
      * @see PagerConstants#DEFAULT_PAGE_PARAM_NAME
      */
     public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
-        // /s/s-t-b-f-a-cBlack-s-f-p-gHeat+Gear-e-i-o.htm?keyword=&pageNo=%uFF1B
         String pageNoString = RequestUtil.getParameter(request, pageParamName);
-        try{
-            Integer pageNo = ConvertUtil.toInteger(pageNoString);
-            return null == pageNo ? 1 : pageNo;
-        }catch (Exception e){
-            // 抛出异常, 但是不给 currentPageNo 赋值
-            LOGGER.error(e.getClass().getName(), e);
-        }
-        return 1; // 不带这个参数 或者转换异常 返回1
+        return ConvertUtil.toInteger(pageNoString, 1);
     }
 }
