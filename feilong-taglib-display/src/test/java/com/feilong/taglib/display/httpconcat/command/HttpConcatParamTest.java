@@ -15,9 +15,10 @@
  */
 package com.feilong.taglib.display.httpconcat.command;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,28 +60,28 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
 
         HttpConcatParam pagerParams2 = new HttpConcatParam();
 
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
-        Assert.assertEquals(false, pagerParams1.equals(null));
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        assertEquals(true, pagerParams1.equals(pagerParams1));
+        assertEquals(false, pagerParams1.equals(null));
+        assertEquals(true, pagerParams1.equals(pagerParams2));
 
         pagerParams2.setDomain(domain);
-        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        assertEquals(false, pagerParams1.equals(pagerParams2));
 
         pagerParams1.setDomain(domain);
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        assertEquals(true, pagerParams1.equals(pagerParams2));
 
         ArrayList<String> itemSrcList = new ArrayList<String>();
         itemSrcList.add("1.js");
         pagerParams1.setItemSrcList(itemSrcList);
-        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        assertEquals(false, pagerParams1.equals(pagerParams2));
 
         itemSrcList = new ArrayList<String>();
         itemSrcList.add("1.js");
         pagerParams2.setItemSrcList(itemSrcList);
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        assertEquals(true, pagerParams1.equals(pagerParams2));
 
         pagerParams1.setDomain(null);
-        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        assertEquals(false, pagerParams1.equals(pagerParams2));
     }
 
     /**
@@ -90,6 +91,6 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
     public void name(){
         HttpConcatParam httpConcatParam1 = getHttpConcatParam();
         HttpConcatParam httpConcatParam2 = getHttpConcatParam();
-        Assert.assertEquals(true, httpConcatParam1.equals(httpConcatParam2));
+        assertEquals(true, httpConcatParam1.equals(httpConcatParam2));
     }
 }

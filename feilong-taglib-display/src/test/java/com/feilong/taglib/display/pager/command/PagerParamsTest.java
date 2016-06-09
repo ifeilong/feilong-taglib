@@ -15,7 +15,8 @@
  */
 package com.feilong.taglib.display.pager.command;
 
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,20 +55,20 @@ public class PagerParamsTest{
         PagerParams pagerParams1 = new PagerParams(0, "a");
         PagerParams pagerParams2 = new PagerParams(0, "a");
 
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams1));
-        Assert.assertEquals(false, pagerParams1.equals(null));
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        assertEquals(true, pagerParams1.equals(pagerParams1));
+        assertEquals(false, pagerParams1.equals(null));
+        assertEquals(true, pagerParams1.equals(pagerParams2));
 
         pagerParams2.setCharsetType(CharsetType.UTF8);
-        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
+        assertEquals(false, pagerParams1.equals(pagerParams2));
 
         pagerParams1.setCharsetType(CharsetType.UTF8);
-        Assert.assertEquals(true, pagerParams1.equals(pagerParams2));
+        assertEquals(true, pagerParams1.equals(pagerParams2));
 
         pagerParams1.setCharsetType(null);
-        Assert.assertEquals(false, pagerParams1.equals(pagerParams2));
-        Assert.assertEquals(false, (null instanceof PagerParams));
-        Assert.assertEquals(true, (pagerParams1 instanceof PagerParams));
-        Assert.assertEquals(false, (null instanceof Object));
+        assertEquals(false, pagerParams1.equals(pagerParams2));
+        assertEquals(false, (null instanceof PagerParams));
+        assertEquals(true, (pagerParams1 instanceof PagerParams));
+        assertEquals(false, (null instanceof Object));
     }
 }
