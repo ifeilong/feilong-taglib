@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -134,19 +136,14 @@ public final class HttpConcatUtil{
             //超出cache 数量
             boolean outOfCacheItemSizeLimit = cacheSize >= httpConcatGlobalConfig.getDefaultCacheSizeLimit();
             if (outOfCacheItemSizeLimit){
-                LOGGER.warn(
-                                "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache",
-                                cacheKeyHashCode,
-                                cacheSize,
-                                httpConcatGlobalConfig.getDefaultCacheSizeLimit());
+                String pattern = "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache";
+                LOGGER.warn(pattern, cacheKeyHashCode, cacheSize, httpConcatGlobalConfig.getDefaultCacheSizeLimit());
 
                 //超过,那么就不记录cache
                 isWriteCache = false;
             }else{
-                LOGGER.debug(
-                                "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse",
-                                cacheKeyHashCode,
-                                cacheSize);
+                String pattern = "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse";
+                LOGGER.debug(pattern, cacheKeyHashCode, cacheSize);
             }
         }
 
@@ -160,11 +157,8 @@ public final class HttpConcatUtil{
             LOGGER.debug("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
             if (httpConcatGlobalConfig.getDefaultCacheEnable()){
-                LOGGER.warn(
-                                "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache",
-                                cacheKeyHashCode,
-                                httpConcatGlobalConfig.getDefaultCacheEnable(),
-                                isWriteCache);
+                String pattern = "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache";
+                LOGGER.warn(pattern, cacheKeyHashCode, httpConcatGlobalConfig.getDefaultCacheEnable(), isWriteCache);
             }
         }
         return content;
@@ -179,13 +173,9 @@ public final class HttpConcatUtil{
      * @since 1.4.1
      */
     private static String buildContent(HttpConcatParam httpConcatParam){
-        // **********是否开启了连接********************************************************
-        Boolean httpConcatSupport = httpConcatParam.getHttpConcatSupport();
         //如果没有设置就使用默认的全局设置
-        if (null == httpConcatSupport){
-            httpConcatSupport = (null == httpConcatGlobalConfig.getHttpConcatSupport()) ? false
-                            : httpConcatGlobalConfig.getHttpConcatSupport();
-        }
+        boolean globalConcatSupport = BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport());
+        Boolean concatSupport = ObjectUtils.defaultIfNull(httpConcatParam.getHttpConcatSupport(), globalConcatSupport);
 
         // *******************************************************************
         // 标准化 httpConcatParam,比如list去重,标准化domain等等
@@ -197,17 +187,16 @@ public final class HttpConcatUtil{
         String type = standardHttpConcatParam.getType();
         String template = getTemplate(type);
 
-        if (httpConcatSupport){ // concat
-            String concatLink = getConcatLink(standardHttpConcatParam);
-            return MessageFormatUtil.format(template, concatLink);
+        if (concatSupport){ // concat
+            return MessageFormatUtil.format(template, getConcatLink(standardHttpConcatParam));
         }
 
         // 本地开发环境支持的.
         List<String> itemSrcList = standardHttpConcatParam.getItemSrcList();
+
         StringBuilder sb = new StringBuilder();
         for (String itemSrc : itemSrcList){
-            String noConcatLink = getNoConcatLink(itemSrc, standardHttpConcatParam);
-            sb.append(MessageFormatUtil.format(template, noConcatLink));
+            sb.append(MessageFormatUtil.format(template, getNoConcatLink(itemSrc, standardHttpConcatParam)));
         }
         return sb.toString();
     }
@@ -261,11 +250,8 @@ public final class HttpConcatUtil{
         int itemSrcListSize = itemSrcList.size();
 
         if (noRepeatitemListSize != itemSrcListSize){
-            LOGGER.warn(
-                            "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}",
-                            noRepeatitemListSize,
-                            itemSrcListSize,
-                            JsonUtil.format(httpConcatParam));
+            String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}";
+            LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, JsonUtil.format(httpConcatParam));
         }
         // *******************************************************************
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
@@ -294,19 +280,14 @@ public final class HttpConcatUtil{
      */
     private static String getConcatLink(HttpConcatParam httpConcatParam){
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
-        String domain = httpConcatParam.getDomain();
-        String root = httpConcatParam.getRoot();
-        String version = httpConcatParam.getVersion();
 
         // **********************************************************************************
-
         StringBuilder sb = new StringBuilder();
-        sb.append(domain);
-        sb.append(root);
+        sb.append(httpConcatParam.getDomain());
+        sb.append(httpConcatParam.getRoot());
 
-        int size = itemSrcList.size();
         // 只有一条 输出原生字符串
-        if (size == 1){
+        if (itemSrcList.size() == 1){
             sb.append(itemSrcList.get(0));
             LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
         }else{
@@ -315,8 +296,7 @@ public final class HttpConcatUtil{
             ToStringConfig toStringConfig = new ToStringConfig(ToStringConfig.DEFAULT_CONNECTOR);
             sb.append(ConvertUtil.toString(toStringConfig, itemSrcList));
         }
-        appendVersion(version, sb);
-
+        appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
     }
 
@@ -330,14 +310,11 @@ public final class HttpConcatUtil{
      * @return the string
      */
     private static String getNoConcatLink(String itemSrc,HttpConcatParam httpConcatParam){
-        String domain = httpConcatParam.getDomain();
-        String root = httpConcatParam.getRoot();
-        String version = httpConcatParam.getVersion();
         StringBuilder sb = new StringBuilder();
-        sb.append(domain);
-        sb.append(root);
+        sb.append(httpConcatParam.getDomain());
+        sb.append(httpConcatParam.getRoot());
         sb.append(itemSrc);
-        appendVersion(version, sb);
+        appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
     }
 
@@ -395,7 +372,9 @@ public final class HttpConcatUtil{
     private static String getTemplate(String type){
         if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
             return httpConcatGlobalConfig.getTemplateCss();
-        }else if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
+        }
+
+        if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
             return httpConcatGlobalConfig.getTemplateJs();
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
