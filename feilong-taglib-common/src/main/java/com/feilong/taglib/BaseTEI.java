@@ -59,8 +59,7 @@ public abstract class BaseTEI extends TagExtraInfo{
         Enumeration<String> attributes = tagData.getAttributes();
         while (attributes.hasMoreElements()){
             String key = attributes.nextElement();
-            Object value = tagData.getAttribute(key);
-            map.put(key, value);
+            map.put(key, tagData.getAttribute(key));
         }
         return map;
     }
