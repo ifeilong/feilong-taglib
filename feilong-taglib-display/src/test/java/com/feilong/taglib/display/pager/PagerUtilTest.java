@@ -61,8 +61,7 @@ public class PagerUtilTest extends BasePagerTest{
             // LOGGER.info("the param content:\n\n{}", content);
             // LOGGER.debug("{} ", i);
         }
-        Date endDate = new Date();
-        LOGGER.info("{}次\t{}", j, DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{}次\t{}", j, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 
     /**

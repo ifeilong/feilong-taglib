@@ -80,7 +80,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             declaredMethod.invoke(PagerBuilder.class, pagerParams, set);
         }
 
-        Date endDate = new Date();
-        LOGGER.info("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, endDate));
+        LOGGER.info("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 }
