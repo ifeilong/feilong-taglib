@@ -19,6 +19,7 @@ import java.util.Date;
 
 import org.apache.commons.lang3.ObjectUtils;
 
+import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.AbstractConditionalTag;
 
@@ -71,7 +72,30 @@ public class IsInTimeTag extends AbstractConditionalTag{
         // 不能直接使用 date ,全局变量 一旦赋值 不会变化
         Date compareDate = ObjectUtils.defaultIfNull(date, new Date());
         return null != beginDate ? DateUtil.isInTime(compareDate, beginDate, endDate)
-                        : DateUtil.isInTime(compareDate, beginDateString, endDateString, pattern);
+                        : isInTime(compareDate, beginDateString, endDateString, pattern);
+    }
+
+    /**
+     * 判断指定日期 <code>date</code>是否在两个时间之间.
+     * 
+     * <pre class="code">
+     * DateUtil.isInTime("2012-10-16 23:00:02", "2012-10-10 22:59:00", "2012-10-18 22:59:00", DatePattern.commonWithTime) = true
+     * </pre>
+     * 
+     * @param date
+     *            需要判断的日期
+     * @param beginTime
+     *            开始时间
+     * @param endTime
+     *            结束时间
+     * @param datePattern
+     *            开始时间和结束时间的格式{@link DatePattern}
+     * @return 如果 指定日期 <code>date</code> after <code>beginTime</code>, 并且 指定日期 <code>date</code> before <code>endTime</code>,返回true
+     */
+    private static boolean isInTime(Date date,String beginTime,String endTime,String datePattern){
+        Date beginTimeDate = DateUtil.toDate(beginTime, datePattern);
+        Date endTimeDate = DateUtil.toDate(endTime, datePattern);
+        return DateUtil.isInTime(date, beginTimeDate, endTimeDate);
     }
 
     /**
