@@ -68,9 +68,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
             long start = Runtime.getRuntime().freeMemory();
 
             HashMap<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
-
             for (int i = 0; i < j; i++){
-
                 httpConcatParam2.setDomain("" + i);
                 map.put(httpConcatParam2, writeContent);
             }

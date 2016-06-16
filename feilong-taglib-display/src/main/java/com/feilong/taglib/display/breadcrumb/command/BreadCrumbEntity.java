@@ -51,15 +51,15 @@ public class BreadCrumbEntity<T> implements Serializable{
     private T                 parentId;
 
     /**
-     * Instantiates a new site map entity.
+     * The Constructor.
      */
     public BreadCrumbEntity(){
         super();
     }
 
     /**
-     * Instantiates a new site map entity.
-     * 
+     * The Constructor.
+     *
      * @param id
      *            the id
      * @param name
@@ -67,7 +67,7 @@ public class BreadCrumbEntity<T> implements Serializable{
      * @param title
      *            the title
      * @param path
-     *            the request mapping
+     *            the path
      * @param parentId
      *            the parent id
      */
