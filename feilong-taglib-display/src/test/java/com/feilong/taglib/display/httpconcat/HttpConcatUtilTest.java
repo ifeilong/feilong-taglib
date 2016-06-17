@@ -17,7 +17,6 @@ package com.feilong.taglib.display.httpconcat;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.util.MapUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
 
@@ -66,7 +66,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         list.add(1000000);
         //		list.add(300001);
 
-        Map<Integer, Object> map = new LinkedHashMap<Integer, Object>(list.size());
+        Map<Integer, Object> map = MapUtil.newLinkedHashMap(list.size());
         for (Integer j : list){
             Date beginDate = new Date();
             for (int i = 0; i < j; ++i){
