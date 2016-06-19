@@ -343,7 +343,7 @@ public final class HttpConcatUtil{
      * @return the items array
      */
     public static List<String> toItemSrcList(String blockContent){
-        String regex = "\n";
+        String regex = StringUtils.LF;
         String[] items = StringUtil.split(blockContent.trim(), regex);
         int length = items.length;
 
