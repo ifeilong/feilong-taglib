@@ -102,17 +102,8 @@ taglib	|说明
 	</project>
 ```
 
-# feilong-platform module:
+# :panda_face: About
 
-Category |Name | Description 
-----|------------ | ---------
-taglib |`feilong-taglib-common` | 封装了常用的自定义标签 
-taglib |`feilong-taglib-display` | 封装了常用的用来页面显示用的标签 
+如果您对feilong core 有任何建议和批评,可以使用下面的联系方式：
 
-
-# About
-
-如果您对feilong platform 有任何建议，可以使用下面的联系方式：
-
-* 新浪微博:http://weibo.com/venusdrogon
 * iteye博客:http://feitianbenyue.iteye.com/
