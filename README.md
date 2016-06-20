@@ -53,14 +53,6 @@ taglib	|说明
 [option](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option "feilongDisplay-option")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
 [barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode")  	|用来在页面生成二维码
 
-
-# :memo: 说明
-
-1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
-1. 基于`maven3.3`构建;
-1. 1.5.0及以上版本需要`jdk1.7`及以上环境(1.5.0以下版本需要`jdk1.6`及以上环境);
-
-
 # Maven使用配置
 
 ```XML
@@ -101,6 +93,12 @@ taglib	|说明
 		
 	</project>
 ```
+
+# :memo: 说明
+
+1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+1. 基于`maven3.3`构建;
+1. 1.5.0及以上版本需要`jdk1.7`及以上环境(1.5.0以下版本需要`jdk1.6`及以上环境);
 
 # :panda_face: About
 
