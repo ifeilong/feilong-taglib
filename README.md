@@ -54,7 +54,7 @@ taglib	|说明
 [barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode")  	|用来在页面生成二维码
 
 
-#说明
+# :memo: 说明
 
 1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 基于`maven3.3`构建;
