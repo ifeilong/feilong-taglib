@@ -2,29 +2,9 @@ feilong-platform feilong-taglib
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+![build](https://img.shields.io/wercker/ci/wercker/docs.svg "build")
 
 Reduce development, Release ideas
-
-            .--.
-           /    \
-          ## a  a
-          (   '._)
-           |'-- |
-         _.\___/_   ___feilong___
-       ."\> \Y/|<'.  '._.-'
-      /  \ \_\/ /  '-' /
-      | --'\_/|/ |   _/
-      |___.-' |  |`'`
-        |     |  |
-        |    / './
-       /__./` | |
-          \   | |
-           \  | |
-           ;  | |
-           /  | |
-     jgs  |___\_.\_
-          `-"--'---'
-
 
 #Welcome to feilong-platform feilong-taglib
 
