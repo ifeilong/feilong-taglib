@@ -53,7 +53,7 @@ taglib	|说明
 [option](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option "feilongDisplay-option")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
 [barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode")  	|用来在页面生成二维码
 
-# Maven使用配置
+# :dragon: Maven使用配置
 
 ```XML
 
