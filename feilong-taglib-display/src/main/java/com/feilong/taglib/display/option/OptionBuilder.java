@@ -84,9 +84,7 @@ public class OptionBuilder{
      * @return the key value map
      */
     private static Map<String, String> getKeyValueMap(OptionParam optionParam){
-        Map<String, String> map = ResourceBundleUtil.readAllPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
-        //XXX 排序
-        return map;
+        return ResourceBundleUtil.readAllPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
     }
 
     /**
