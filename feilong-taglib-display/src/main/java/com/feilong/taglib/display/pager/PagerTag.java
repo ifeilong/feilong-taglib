@@ -19,6 +19,8 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.feilong.core.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
@@ -122,7 +124,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * 
      * @since 1.0.5
      */
-    private Locale            locale                 = Locale.getDefault();
+    private Locale            locale;
 
     /**
      * url编码.
@@ -164,7 +166,9 @@ public class PagerTag extends AbstractStartWriteContentTag{
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
-        pagerParams.setLocale(locale);
+        //Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. 
+        //If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.
+        pagerParams.setLocale(ObjectUtils.defaultIfNull(locale, request.getLocale()));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         // debugNotParseVM=true参数可以来控制 是否解析vm模板,以便测试
