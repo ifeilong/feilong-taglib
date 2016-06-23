@@ -19,6 +19,7 @@
 	<!-- ******************分页*************************************** -->
 	<tag>
 		<name>pager</name>
+
 		<tag-class>com.feilong.taglib.display.pager.PagerTag</tag-class>
 		<tei-class>com.feilong.taglib.display.pager.PagerTagExtraInfo</tei-class>
 		<body-content>empty</body-content>
@@ -33,9 +34,9 @@
 				 <li>1.4.分页页码,当前页码永远居中</li>
 				 <li>1.5.分页 页码 支持 根据页码数字 自动显示 分页码个数,见参数说明里面的 maxIndexPages参数</li>
 				 <li>1.6.经过大型项目检验,通用安全扫描</li>
-				 <li>1.7.支持国际化(1.0.5 new feature)</li>
-				 <li>1.8.内置文本框页码输入快速跳转(1.0.5 new feature)</li>
-				 <li>1.9.支持类似于淘宝最大分页码100 这样的控制 ,见参数 {@link #maxShowPageNo} (1.0.5 new feature)</li>
+				 <li>1.7.支持国际化</li>
+				 <li>1.8.内置文本框页码输入快速跳转</li>
+				 <li>1.9.支持类似于淘宝最大分页码100 这样的控制 ,见参数 {@link #maxShowPageNo}</li>
 				 <li>1.10.支持Ajax 分页 ,见参数 {@link PagerParams#pagerType} (1.4.0 new feature)</li>
 			 </ul>
 			]]>
@@ -72,7 +73,7 @@
 			<description><![CDATA[数据总数]]></description>
 		</attribute>
 
-		<!-- optional -->
+		<!--****************optional******************** -->
 		<attribute>
 			<name>pageSize</name>
 			<required>false</required>
@@ -108,7 +109,7 @@
 			<name>locale</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<description>国际化语言,默认 Locale.getDefault() </description>
+			<description>国际化语言,默认request.getLocale() </description>
 		</attribute>
 		<attribute>
 			<name>charsetType</name>

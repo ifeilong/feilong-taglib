@@ -21,18 +21,47 @@ import java.util.TreeMap;
 
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
+import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
  * The Class BaseTagExtraInfo.
  * 
- * <p>
- * TagExtraInfo can be used to:
- * </p>
- * 
+ * <h3>{@link TagExtraInfo} can be used to:</h3>
+ * <blockquote>
  * <ol>
  * <li>Define Scripting Variables</li>
  * <li>Validation</li>
  * </ol>
+ * </blockquote>
+ * 
+ * 
+ * <h3>{@link VariableInfo}:</h3>
+ * 
+ * <blockquote>
+ * <table border="1" cellspacing="0" cellpadding="4" summary="">
+ * 
+ * <tr style="background-color:#ccccff">
+ * <th align="left">字段</th>
+ * <th align="left">说明</th>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>{@link VariableInfo#AT_BEGIN AT_BEGIN}</td>
+ * <td>Scope information that scripting variable is visible after start tag.</td>
+ * </tr>
+ * 
+ * <tr valign="top" style="background-color:#eeeeff">
+ * <td>{@link VariableInfo#AT_END AT_END}</td>
+ * <td>Scope information that scripting variable is visible after end tag.</td>
+ * </tr>
+ * 
+ * <tr valign="top">
+ * <td>{@link VariableInfo#NESTED NESTED}</td>
+ * <td>Scope information that scripting variable is visible only within the start/end tags</td>
+ * </tr>
+ * 
+ * </table>
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see javax.servlet.jsp.tagext.TagExtraInfo

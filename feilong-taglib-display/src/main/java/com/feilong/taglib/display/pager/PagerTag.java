@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -79,7 +80,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 public class PagerTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID       = -3523064037264688170L;
+    private static final long serialVersionUID = -3523064037264688170L;
 
     /** 数据总数. */
     private Integer           count;
@@ -87,7 +88,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
     // *******************************************************************
 
     /** 每页显示多少行,默认20. */
-    private Integer           pageSize               = PagerConstants.DEFAULT_PAGESIZE;
+    private Integer           pageSize         = PagerConstants.DEFAULT_PAGESIZE;
 
     // *******************************************************************
 
@@ -100,13 +101,13 @@ public class PagerTag extends AbstractStartWriteContentTag{
     private Integer           maxIndexPages;
 
     /** url页码参数,默认 pageNo. */
-    private String            pageParamName          = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
+    private String            pageParamName    = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
 
     /** The vm path. */
-    private String            vmPath                 = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
+    private String            vmPath           = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /** 皮肤 默认digg. */
-    private String            skin                   = PagerConstants.DEFAULT_SKIN;
+    private String            skin             = PagerConstants.DEFAULT_SKIN;
 
     // *************************************************************************************************
     /**
@@ -117,7 +118,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * 
      * @since 1.0.5
      */
-    private Integer           maxShowPageNo          = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
+    private Integer           maxShowPageNo    = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
      * 国际化语言 .
@@ -131,38 +132,58 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * 
      * @since 1.0.5
      */
-    private String            charsetType            = CharsetType.UTF8;
+    private String            charsetType      = CharsetType.UTF8;
 
     /**
-     * vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作<br>
+     * vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * 
+     * <p>
      * 此外,此变量名称允许变更,以便实现,同一页页面不同功能的的分页.
+     * </p>
      * 
      * @since 1.0.5
      */
-    private String            pagerHtmlAttributeName = PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
+    private String            pagerHtmlAttributeName;
 
     // *****************************end**************************************************.
 
     /**
      * Write content.
-     * 
+     *
+     * @param request
+     *            the request
      * @return the string
      */
     @Override
     public String buildContent(HttpServletRequest request){
+        PagerParams pagerParams = buildPagerParams(request);
 
-        // 当前页码
-        int currentPageNo = PagerHelper.getCurrentPageNo(request, pageParamName);
+        String html = PagerBuilder.buildContent(pagerParams);
+
+        pageContext.setAttribute(
+                        ObjectUtil.defaultIfNullOrEmpty(pagerHtmlAttributeName, PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME),
+                        html);// 解析之后的变量设置在 pageContext作用域中
+
+        return html;
+    }
+
+    /**
+     * Builds the pager params.
+     *
+     * @param request
+     *            the request
+     * @return the pager params
+     * @since 1.7.2
+     */
+    private PagerParams buildPagerParams(HttpServletRequest request){
         // 当前全路径
         String pageUrl = RequestUtil.getRequestFullURL(request, charsetType);
 
         // ****************************************************************************
         PagerParams pagerParams = new PagerParams(count, pageUrl);
 
-        pagerParams.setCurrentPageNo(currentPageNo);
+        pagerParams.setCurrentPageNo(PagerHelper.getCurrentPageNo(request, pageParamName)); // 当前页码
         pagerParams.setPageSize(pageSize);
-        pagerParams.setMaxIndexPages(maxIndexPages);
-        pagerParams.setSkin(skin);
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
@@ -171,16 +192,27 @@ public class PagerTag extends AbstractStartWriteContentTag{
         pagerParams.setLocale(ObjectUtils.defaultIfNull(locale, request.getLocale()));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
+        pagerParams.setSkin(skin);
+        pagerParams.setMaxIndexPages(maxIndexPages);
+        pagerParams.setDebugIsNotParseVM(getDebugIsNotParseVM(request));
+        return pagerParams;
+    }
+
+    /**
+     * debugNotParseVM=true参数可以来控制 是否解析vm模板,以便测试.
+     *
+     * @param request
+     *            the request
+     * @return the debug is not parse vm
+     * @since 1.7.2
+     */
+    private static boolean getDebugIsNotParseVM(HttpServletRequest request){
         // debugNotParseVM=true参数可以来控制 是否解析vm模板,以便测试
         String parameter = request.getParameter(PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM);
-        boolean debugIsNotParseVM = PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
-        pagerParams.setDebugIsNotParseVM(debugIsNotParseVM);
-
-        String html = PagerBuilder.buildContent(pagerParams);
-        // 解析之后的变量设置在 pageContext作用域中
-        pageContext.setAttribute(pagerHtmlAttributeName, html);
-        return html;
+        return PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
     }
+
+    //***************************************************************************
 
     /**
      * Sets the 数据总数.
@@ -276,8 +308,11 @@ public class PagerTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * Sets the vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作<br>
+     * vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * 
+     * <p>
      * 此外,此变量名称允许变更,以便实现,同一页页面不同功能的的分页.
+     * </p>
      * 
      * @param pagerHtmlAttributeName
      *            the pagerHtmlAttributeName to set

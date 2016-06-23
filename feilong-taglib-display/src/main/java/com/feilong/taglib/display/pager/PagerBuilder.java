@@ -174,7 +174,7 @@ public final class PagerBuilder{
 
         //**********************************************************************************************
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input pagerParams info:{}", JsonUtil.format(pagerParams));
+            LOGGER.debug("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
         }
 
         String content = TagCacheManager.getContentFromCache(pagerParams);

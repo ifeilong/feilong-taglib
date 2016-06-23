@@ -24,7 +24,10 @@ import javax.servlet.jsp.tagext.VariableInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.ObjectUtil;
 import com.feilong.taglib.BaseTEI;
+import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -50,7 +53,6 @@ public class PagerTagExtraInfo extends BaseTEI{
     public ValidationMessage[] validate(TagData tagData){
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(tagData));
             Map<String, Object> map = getTagDataAttributeMap(tagData);
             LOGGER.debug(JsonUtil.format(map));
         }
@@ -81,10 +83,17 @@ public class PagerTagExtraInfo extends BaseTEI{
      */
     @Override
     public VariableInfo[] getVariableInfo(TagData tagData){
-        // VariableInfo[] variableInfos = new VariableInfo[1];
-        // variableInfos[0] = new VariableInfo(tagData.getAttributeString("id"), "java.lang.String[]", true, VariableInfo.NESTED);
-        // return (variableInfos);
-        return super.getVariableInfo(tagData);
+        //如果不设置 使用 ${feilongPagerHtml1 } 是正常的
+        //但是如果使用 <%=feilongPagerHtml1%> 会提示 feilongPagerHtml1 cannot be resolved to a variable
+
+        String pagerHtmlAttributeName = ObjectUtil.defaultIfNullOrEmpty(
+                        tagData.getAttributeString("pagerHtmlAttributeName"),
+                        PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
+
+        VariableInfo variableInfo = new VariableInfo(pagerHtmlAttributeName, String.class.getName(), true, VariableInfo.AT_END);
+        return ConvertUtil.toArray(variableInfo);
+
+        //return super.getVariableInfo(tagData);
     }
 
     /*

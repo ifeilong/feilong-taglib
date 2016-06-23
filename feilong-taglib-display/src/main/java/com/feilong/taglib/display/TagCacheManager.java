@@ -69,7 +69,7 @@ public final class TagCacheManager{
     public static String getContentFromCache(CacheParam cacheParam){
         //缓存
         if (CACHE_ENABLE){
-            LOGGER.debug("cache.size:{}", CACHE.size());
+            LOGGER.debug("cache.size:[{}]", CACHE.size());
             if (CACHE.containsKey(cacheParam)){
                 LOGGER.info("hashcode:[{}],get info from cache", cacheParam.hashCode());
                 return CACHE.get(cacheParam);
