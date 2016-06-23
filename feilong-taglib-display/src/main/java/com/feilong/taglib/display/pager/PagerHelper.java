@@ -37,7 +37,7 @@ public final class PagerHelper{
     }
 
     /**
-     * 获得当前分页数字,不带这个参数 或者转换异常 返回1.
+     * 获得当前分页数字,不带这个参数或者转换异常 返回1.
      * 
      * @param request
      *            当前请求

@@ -18,6 +18,7 @@ package com.feilong.taglib.display.pager;
 import java.util.Map;
 
 import javax.servlet.jsp.tagext.TagData;
+import javax.servlet.jsp.tagext.TagInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 import javax.servlet.jsp.tagext.VariableInfo;
 
@@ -44,17 +45,38 @@ public class PagerTagExtraInfo extends BaseTEI{
     /*
      * (non-Javadoc)
      * 
+     * @see javax.servlet.jsp.tagext.TagExtraInfo#getVariableInfo(javax.servlet.jsp.tagext.TagData)
+     */
+    @Override
+    public VariableInfo[] getVariableInfo(TagData tagData){
+        //如果不设置 使用 ${feilongPagerHtml1 } 是正常的
+        //但是如果使用 <%=feilongPagerHtml1%> 会提示 feilongPagerHtml1 cannot be resolved to a variable
+
+        String pagerHtmlAttributeName = ObjectUtil.defaultIfNullOrEmpty(
+                        tagData.getAttributeString("pagerHtmlAttributeName"),
+                        PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
+
+        VariableInfo variableInfo = new VariableInfo(pagerHtmlAttributeName, String.class.getName(), true, VariableInfo.AT_END);
+        return ConvertUtil.toArray(variableInfo);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see javax.servlet.jsp.tagext.TagExtraInfo#validate(javax.servlet.jsp.tagext.TagData)
      */
     @Override
     // JSP 2.0 and higher containers call validate() instead of isValid().
     // The default implementation of this method is to call isValid().
+
     // If isValid() returns false, a generic ValidationMessage[] is returned indicating isValid() returned false.
     public ValidationMessage[] validate(TagData tagData){
-
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = getTagDataAttributeMap(tagData);
             LOGGER.debug(JsonUtil.format(map));
+
+            TagInfo tagInfo = getTagInfo();
+            LOGGER.debug(JsonUtil.format(tagInfo));
         }
 
         // Object count = tagData.getAttribute("maxElements");
@@ -76,33 +98,4 @@ public class PagerTagExtraInfo extends BaseTEI{
         return super.validate(tagData);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.jsp.tagext.TagExtraInfo#getVariableInfo(javax.servlet.jsp.tagext.TagData)
-     */
-    @Override
-    public VariableInfo[] getVariableInfo(TagData tagData){
-        //如果不设置 使用 ${feilongPagerHtml1 } 是正常的
-        //但是如果使用 <%=feilongPagerHtml1%> 会提示 feilongPagerHtml1 cannot be resolved to a variable
-
-        String pagerHtmlAttributeName = ObjectUtil.defaultIfNullOrEmpty(
-                        tagData.getAttributeString("pagerHtmlAttributeName"),
-                        PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
-
-        VariableInfo variableInfo = new VariableInfo(pagerHtmlAttributeName, String.class.getName(), true, VariableInfo.AT_END);
-        return ConvertUtil.toArray(variableInfo);
-
-        //return super.getVariableInfo(tagData);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.jsp.tagext.TagExtraInfo#isValid(javax.servlet.jsp.tagext.TagData)
-     */
-    @Override
-    public boolean isValid(TagData tagData){
-        return super.isValid(tagData);
-    }
 }

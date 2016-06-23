@@ -62,14 +62,6 @@ public class PagerParams implements Serializable,CacheParam{
     /** 分页的 基础 url. */
     private String            pageUrl;
 
-    /**
-     * 最大 分页码数量.
-     * 
-     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
-     */
-    @Deprecated
-    private Integer           maxIndexPages;
-
     /** 皮肤:可选. */
     private String            skin             = PagerConstants.DEFAULT_SKIN;
 
@@ -80,10 +72,17 @@ public class PagerParams implements Serializable,CacheParam{
     private String            vmPath           = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式,空间换时间. 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
-     * 新浪微博的时间轴也只给出了10页,同样的折中处理..
+     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
+     * 比如淘宝,不管搜索东西多少,最多显示100页
+     * </p>
+     * 
+     * <p>
+     * 这是一种折中的处理方式,<b>空间换时间</b>.<br>
+     * 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理.
+     * </p>
      * 
      * @since 1.0.5
      */
@@ -106,6 +105,14 @@ public class PagerParams implements Serializable,CacheParam{
 
     /** debug 模式. */
     private boolean           debugIsNotParseVM;
+
+    /**
+     * 最大 分页码数量.
+     * 
+     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
+     */
+    @Deprecated
+    private Integer           maxIndexPages;
 
     /**
      * The Constructor.
@@ -287,10 +294,17 @@ public class PagerParams implements Serializable,CacheParam{
     }
 
     /**
-     * 获得 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式,空间换时间. 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
-     * 新浪微博的时间轴也只给出了10页,同样的折中处理..
+     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
+     * 比如淘宝,不管搜索东西多少,最多显示100页
+     * </p>
+     * 
+     * <p>
+     * 这是一种折中的处理方式,<b>空间换时间</b>.<br>
+     * 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理.
+     * </p>
      * 
      * @return the maxShowPageNo
      */
@@ -299,10 +313,17 @@ public class PagerParams implements Serializable,CacheParam{
     }
 
     /**
-     * 设置 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式,空间换时间. 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
-     * 新浪微博的时间轴也只给出了10页,同样的折中处理..
+     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
+     * 比如淘宝,不管搜索东西多少,最多显示100页
+     * </p>
+     * 
+     * <p>
+     * 这是一种折中的处理方式,<b>空间换时间</b>.<br>
+     * 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理.
+     * </p>
      * 
      * @param maxShowPageNo
      *            the maxShowPageNo to set

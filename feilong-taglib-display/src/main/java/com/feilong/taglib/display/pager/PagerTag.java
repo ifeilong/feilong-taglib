@@ -92,29 +92,28 @@ public class PagerTag extends AbstractStartWriteContentTag{
 
     // *******************************************************************
 
-    /**
-     * 最多显示多少个导航页码.
-     * 
-     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
-     */
-    @Deprecated
-    private Integer           maxIndexPages;
-
     /** url页码参数,默认 pageNo. */
     private String            pageParamName    = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
 
     /** The vm path. */
     private String            vmPath           = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
-    /** 皮肤 默认digg. */
+    /** 皮肤,默认digg. */
     private String            skin             = PagerConstants.DEFAULT_SKIN;
 
     // *************************************************************************************************
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式,空间换时间. 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
-     * 新浪微博的时间轴也只给出了10页,同样的折中处理..
+     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
+     * 比如淘宝,不管搜索东西多少,最多显示100页
+     * </p>
+     * 
+     * <p>
+     * 这是一种折中的处理方式,<b>空间换时间</b>.<br>
+     * 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理.
+     * </p>
      * 
      * @since 1.0.5
      */
@@ -135,17 +134,30 @@ public class PagerTag extends AbstractStartWriteContentTag{
     private String            charsetType      = CharsetType.UTF8;
 
     /**
-     * vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * vm被解析出来的文本,会被存在在这个变量中,作用域为pageContext,以便重复使用.
      * 
      * <p>
-     * 此外,此变量名称允许变更,以便实现,同一页页面不同功能的的分页.
+     * 比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * </p>
+     * 
+     * <p>
+     * 此外,此变量名称允许变更,以便实现同一页页面不同功能的的分页.
      * </p>
      * 
      * @since 1.0.5
      */
     private String            pagerHtmlAttributeName;
 
-    // *****************************end**************************************************.
+    // *****************************end**************************************************
+    /**
+     * 最多显示多少个导航页码.
+     * 
+     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
+     */
+    @Deprecated
+    private Integer           maxIndexPages;
+
+    // *****************************end*************************************************
 
     /**
      * Write content.
@@ -158,13 +170,23 @@ public class PagerTag extends AbstractStartWriteContentTag{
     public String buildContent(HttpServletRequest request){
         PagerParams pagerParams = buildPagerParams(request);
 
-        String html = PagerBuilder.buildContent(pagerParams);
+        String htmlContent = PagerBuilder.buildContent(pagerParams);
 
-        pageContext.setAttribute(
-                        ObjectUtil.defaultIfNullOrEmpty(pagerHtmlAttributeName, PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME),
-                        html);// 解析之后的变量设置在 pageContext作用域中
+        afterBuildContent(htmlContent);
 
-        return html;
+        return htmlContent;
+    }
+
+    /**
+     * After build content.
+     *
+     * @param htmlContent
+     *            the html
+     * @since 1.7.2
+     */
+    private void afterBuildContent(String htmlContent){
+        String name = ObjectUtil.defaultIfNullOrEmpty(pagerHtmlAttributeName, PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
+        pageContext.setAttribute(name, htmlContent);// 解析之后的变量设置在 pageContext作用域中
     }
 
     /**
@@ -187,15 +209,27 @@ public class PagerTag extends AbstractStartWriteContentTag{
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
-        //Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. 
-        //If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.
-        pagerParams.setLocale(ObjectUtils.defaultIfNull(locale, request.getLocale()));
+        pagerParams.setLocale(resolverLocale(request));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         pagerParams.setSkin(skin);
         pagerParams.setMaxIndexPages(maxIndexPages);
         pagerParams.setDebugIsNotParseVM(getDebugIsNotParseVM(request));
         return pagerParams;
+    }
+
+    /**
+     * Resolver locale.
+     *
+     * @param request
+     *            the request
+     * @return the locale
+     * @since 1.7.2
+     */
+    private Locale resolverLocale(HttpServletRequest request){
+        //Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. 
+        //If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.
+        return ObjectUtils.defaultIfNull(locale, request.getLocale());
     }
 
     /**
@@ -275,10 +309,17 @@ public class PagerTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * Sets the 最多显示页数,(-1或者不设置,默认显示所有页数)<br>
-     * 类似于淘宝不管搜索东西多少,最多显示100页<br>
-     * 这是一种折中的处理方式,空间换时间. 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
-     * 新浪微博的时间轴也只给出了10页,同样的折中处理..
+     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 
+     * <p>
+     * 比如淘宝,不管搜索东西多少,最多显示100页
+     * </p>
+     * 
+     * <p>
+     * 这是一种折中的处理方式,<b>空间换时间</b>.<br>
+     * 数据查询越往后翻,对服务器的压力越大,速度越低,而且从业务上来讲商品质量也越差,所以就没有必要给太多了.<br>
+     * 新浪微博的时间轴也只给出了10页,同样的折中处理.
+     * </p>
      * 
      * @param maxShowPageNo
      *            the maxShowPageNo to set
@@ -308,10 +349,14 @@ public class PagerTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * vm被解析出来的文本会被存在在这个变量中,作用域为pageContext,以便重复使用,比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * vm被解析出来的文本,会被存在在这个变量中,作用域为pageContext,以便重复使用.
      * 
      * <p>
-     * 此外,此变量名称允许变更,以便实现,同一页页面不同功能的的分页.
+     * 比如某些页面,上面下面都要显示同样的分页,方便用户操作.
+     * </p>
+     * 
+     * <p>
+     * 此外,此变量名称允许变更,以便实现同一页页面不同功能的的分页.
      * </p>
      * 
      * @param pagerHtmlAttributeName

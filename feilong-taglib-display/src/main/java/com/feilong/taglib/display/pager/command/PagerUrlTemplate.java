@@ -71,5 +71,4 @@ public class PagerUrlTemplate implements Serializable{
     public void setTemplateValue(Integer templateValue){
         this.templateValue = templateValue;
     }
-
 }

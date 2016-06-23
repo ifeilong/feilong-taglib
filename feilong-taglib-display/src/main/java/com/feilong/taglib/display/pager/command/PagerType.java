@@ -16,23 +16,21 @@
 package com.feilong.taglib.display.pager.command;
 
 /**
- * 分页类型
- * 
+ * 分页类型.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public enum PagerType{
 
-    /**
-     * 跳转分页
-     */
+    /** 跳转分页. */
     REDIRECT,
 
     /**
-     * 不跳转分页, 一般需要自行处理 逻辑,比如 ajax分页.
+     * 不跳转分页,一般需要自行处理逻辑,比如 ajax分页.
      * 
      * <p>
-     * 此类型的时候, 不会帮拼接url地址
+     * 此类型的时候,不会帮拼接url地址
      * </p>
      */
     NO_REDIRECT
