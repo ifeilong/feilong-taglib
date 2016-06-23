@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
@@ -120,11 +121,17 @@ public class PagerTag extends AbstractStartWriteContentTag{
     private Integer           maxShowPageNo    = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
-     * 国际化语言 .
-     * 
+     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 .
+     *
+     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
+     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
+     * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
+     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
+     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
      * @since 1.0.5
+     * @since 1.7.2 change Object type
      */
-    private Locale            locale;
+    private Object            locale;
 
     /**
      * url编码.
@@ -229,7 +236,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
     private Locale resolverLocale(HttpServletRequest request){
         //Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. 
         //If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.
-        return ObjectUtils.defaultIfNull(locale, request.getLocale());
+        return ObjectUtils.defaultIfNull(ConvertUtil.toLocale(locale), request.getLocale());
     }
 
     /**
@@ -329,16 +336,6 @@ public class PagerTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * Sets the 国际化语言 .
-     * 
-     * @param locale
-     *            the locale to set
-     */
-    public void setLocale(Locale locale){
-        this.locale = locale;
-    }
-
-    /**
      * Sets the url编码.
      * 
      * @param charsetType
@@ -364,5 +361,15 @@ public class PagerTag extends AbstractStartWriteContentTag{
      */
     public void setPagerHtmlAttributeName(String pagerHtmlAttributeName){
         this.pagerHtmlAttributeName = pagerHtmlAttributeName;
+    }
+
+    /**
+     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 .
+     *
+     * @param locale
+     *            the locale to set
+     */
+    public void setLocale(Object locale){
+        this.locale = locale;
     }
 }
