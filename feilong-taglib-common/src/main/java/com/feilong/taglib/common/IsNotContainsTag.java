@@ -15,57 +15,25 @@
  */
 package com.feilong.taglib.common;
 
-import java.util.Iterator;
-
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.util.IteratorUtil;
-import com.feilong.taglib.AbstractConditionalTag;
-
 /**
  * 判断一个集合(或者可以被转成Iterator) 是否 没有 一个值 (或者说这个value 不在 collection当中).
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
-public class IsNotContainsTag extends AbstractConditionalTag{
+public class IsNotContainsTag extends AbstractContainsSupport{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 8239319419199818297L;
 
-    /** 一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator. */
-    private Object            collection       = null;
-
-    /** 任意类型的值,最终toString 判断比较. */
-    private Object            value            = null;
-
     /*
      * (non-Javadoc)
      * 
-     * @see com.feilong.taglib.base.AbstractConditionalTag#condition()
+     * @see com.feilong.taglib.common.AbstractContainsSupport#condition()
      */
     @Override
     public boolean condition(){
-        Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return !IteratorUtil.containsByStringValue(iterator, value);
+        return !containsByStringValue();
     }
 
-    /**
-     * Sets the 一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.
-     * 
-     * @param collection
-     *            the collection to set
-     */
-    public void setCollection(Object collection){
-        this.collection = collection;
-    }
-
-    /**
-     * Sets the 一个值.
-     * 
-     * @param value
-     *            the value to set
-     */
-    public void setValue(Object value){
-        this.value = value;
-    }
 }

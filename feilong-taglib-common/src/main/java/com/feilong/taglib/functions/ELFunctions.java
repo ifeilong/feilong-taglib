@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.util.IteratorUtil;
+import com.feilong.taglib.common.AbstractContainsSupport;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -82,12 +82,11 @@ public final class ELFunctions{
      *            任意类型的值,最终toString 判断比较.
      * @return true, if successful
      * @see ConvertUtil#toIterator(Object)
-     * @see IteratorUtil#containsByStringValue(Iterator, Object)
      * @see org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)
      */
     public static boolean contains(Object collection,Object value){
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
-        return IteratorUtil.containsByStringValue(iterator, value);
+        return AbstractContainsSupport.containsByStringValue(iterator, value);
     }
 
     /**
