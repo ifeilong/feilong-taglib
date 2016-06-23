@@ -29,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
+import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
@@ -126,7 +127,7 @@ public final class PagerBuilder{
     }
 
     /**
-     * Builds the pager and content.
+     * 通常用于ajax分页.
      *
      * @param <T>
      *            the generic type
@@ -135,6 +136,8 @@ public final class PagerBuilder{
      * @param itemList
      *            the item list
      * @return the pager and content
+     * @see com.feilong.taglib.display.pager.command.PagerType#NO_REDIRECT
+     * @since 1.4.0
      */
     public static <T> PagerAndContent<T> buildPagerAndContent(PagerParams pagerParams,List<T> itemList){
         Pager<T> pager = buildPager(pagerParams);
@@ -157,8 +160,8 @@ public final class PagerBuilder{
      * 
      * @param pagerParams
      *            构造分页需要的请求参数
-     * @return 如果 {@link PagerParams#getTotalCount()}{@code <=0} return {@link StringUtils#EMPTY} <br>
-     *         else 生成分页html代码
+     * @return 如果 {@link PagerParams#getTotalCount()}{@code <=0} 返回 {@link StringUtils#EMPTY} <br>
+     *         否则 生成分页html代码
      */
     public static String buildContent(PagerParams pagerParams){
         Validate.notNull(pagerParams, "pagerParams can't be null!");
@@ -243,13 +246,9 @@ public final class PagerBuilder{
      * @since 1.0.5
      */
     private static <T> PagerVMParam buildPagerVMParam(PagerParams pagerParams){
-        // *************************************************************
         Pager<T> pager = buildPager(pagerParams);
 
-        int currentPageNo = detectCurrentPageNo(pagerParams);
-        int allPageNo = pager.getAllPageNo();
-
-        // *************************************************************
+        // ***********************************************************************
         int[] startAndEndIteratorIndexs = getStartAndEndIteratorIndexs(pagerParams, pager); // 获得开始和结束的索引
 
         // ****************************************************************************************
@@ -266,8 +265,9 @@ public final class PagerBuilder{
         pagerVMParam.setPagerType(pagerParams.getPagerType());//分页类型
 
         pagerVMParam.setTotalCount(pagerParams.getTotalCount());// 总行数,总结果数
-        pagerVMParam.setCurrentPageNo(currentPageNo);// 当前页
-        pagerVMParam.setAllPageNo(allPageNo);// 总页数
+
+        pagerVMParam.setCurrentPageNo(pager.getCurrentPageNo());// 当前页
+        pagerVMParam.setAllPageNo(pager.getAllPageNo());// 总页数
         pagerVMParam.setPrePageNo(prePageNo);
         pagerVMParam.setNextPageNo(nextPageNo);
 
@@ -278,7 +278,7 @@ public final class PagerBuilder{
         pagerVMParam.setPreUrl(allUseIndexAndHrefMap.get(prePageNo)); // 上一页链接
         pagerVMParam.setNextUrl(allUseIndexAndHrefMap.get(nextPageNo));// 下一页链接
         pagerVMParam.setFirstUrl(allUseIndexAndHrefMap.get(1));// firstPageNo 第一页的链接
-        pagerVMParam.setLastUrl(allUseIndexAndHrefMap.get(allPageNo));//lastPageNo 最后一页的链接
+        pagerVMParam.setLastUrl(allUseIndexAndHrefMap.get(pager.getAllPageNo()));//lastPageNo 最后一页的链接
 
         pagerVMParam.setPagerUrlTemplate(buildPagerUrlTemplate(allUseIndexAndHrefMap));
 
@@ -342,30 +342,30 @@ public final class PagerBuilder{
         int startIteratorIndex = startAndEndIteratorIndexs[0];// 开始迭代索引编号
         int endIteratorIndex = startAndEndIteratorIndexs[1]; // 结束迭代索引编号        
 
-        LinkedHashMap<Integer, String> iteratorIndexAndHrefMap = new LinkedHashMap<Integer, String>();
+        LinkedHashMap<Integer, String> map = MapUtil.newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
         for (int i = startIteratorIndex; i <= endIteratorIndex; ++i){
-            iteratorIndexAndHrefMap.put(i, indexAndHrefMap.get(i));
+            map.put(i, indexAndHrefMap.get(i));
         }
-        return iteratorIndexAndHrefMap;
+        return map;
     }
 
     /**
      * 获得当前的页码.
      * 
      * <p>
-     * 对于<1的情况做 返回1特殊处理.
+     * 对于 {@code <} 1的情况做 返回1特殊处理.
      * </p>
      * 
      * @param pagerParams
      *            the pager params
-     * @return 如果 {@link PagerParams#getCurrentPageNo()}<1 return 1<br>
-     *         else return {@link PagerParams#getCurrentPageNo()}
+     * @return 如果 {@link PagerParams#getCurrentPageNo()} {@code <} 1, 返回 1 <br>
+     *         否则返回 {@link PagerParams#getCurrentPageNo()}
      * @since 1.0.5
      */
     private static int detectCurrentPageNo(PagerParams pagerParams){
         Integer currentPageNo = pagerParams.getCurrentPageNo();
         if (null == currentPageNo || currentPageNo < 1){
-            return 1;// 解决可能出现界面上 负数的情况
+            return 1;// 解决可能出现界面上负数的情况
         }
         return currentPageNo;
     }
@@ -412,21 +412,24 @@ public final class PagerBuilder{
     }
 
     /**
+     * Gets the template encoded url.
+     *
      * @param pagerParams
+     *            the pager params
      * @param pageParamName
+     *            the page param name
      * @param pagerType
-     * @return
+     *            the pager type
+     * @return the template encoded url
      * @since 1.6.1
      */
     private static String getTemplateEncodedUrl(PagerParams pagerParams,String pageParamName,PagerType pagerType){
-        String ajaxLink = "javascript:void(0);";
         boolean isNoRedirect = PagerType.NO_REDIRECT == pagerType;
-        return isNoRedirect ? ajaxLink
-                        : ParamUtil.addParameter(
-                                        pagerParams.getPageUrl(),
-                                        pageParamName,
-                                        "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO,
-                                        pagerParams.getCharsetType());
+        if (isNoRedirect){
+            return "javascript:void(0);";//ajaxLink
+        }
+        String defaultTemplatePageNo = "" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
+        return ParamUtil.addParameter(pagerParams.getPageUrl(), pageParamName, defaultTemplatePageNo, pagerParams.getCharsetType());
     }
 
     /**
@@ -483,7 +486,7 @@ public final class PagerBuilder{
      * @return 获得开始和结束的索引
      */
     private static <T> int[] getStartAndEndIteratorIndexs(PagerParams pagerParams,Pager<T> pager){
-        int currentPageNo = detectCurrentPageNo(pagerParams);
+        int currentPageNo = pager.getCurrentPageNo();
         int allPageNo = pager.getAllPageNo();
 
         // 最多显示多少个导航页码

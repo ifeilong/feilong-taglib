@@ -18,7 +18,7 @@ package com.feilong.taglib.display.pager.command;
 import java.io.Serializable;
 
 /**
- * {@link Pager} {@code &&} 分页解析的html 代码.
+ * {@link Pager} {@code &&} 解析的分页html 代码.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
