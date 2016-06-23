@@ -16,8 +16,8 @@
 package com.feilong.taglib;
 
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -55,7 +55,7 @@ public abstract class BaseTEI extends TagExtraInfo{
      * @since 1.4.0
      */
     protected Map<String, Object> getTagDataAttributeMap(TagData tagData){
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new TreeMap<String, Object>();
         Enumeration<String> attributes = tagData.getAttributes();
         while (attributes.hasMoreElements()){
             String key = attributes.nextElement();
