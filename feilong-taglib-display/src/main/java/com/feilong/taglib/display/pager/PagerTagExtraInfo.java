@@ -18,7 +18,6 @@ package com.feilong.taglib.display.pager;
 import java.util.Map;
 
 import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagInfo;
 import javax.servlet.jsp.tagext.ValidationMessage;
 import javax.servlet.jsp.tagext.VariableInfo;
 
@@ -75,8 +74,8 @@ public class PagerTagExtraInfo extends BaseTEI{
             Map<String, Object> map = getTagDataAttributeMap(tagData);
             LOGGER.debug(JsonUtil.format(map));
 
-            TagInfo tagInfo = getTagInfo();
-            LOGGER.debug(JsonUtil.format(tagInfo));
+            //            TagInfo tagInfo = getTagInfo();
+            //            LOGGER.debug(JsonUtil.format(tagInfo));
         }
 
         // Object count = tagData.getAttribute("maxElements");
