@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.servlet.http.RequestUtil;
 
 /**
  * 输出内容的标签.
@@ -67,11 +68,10 @@ abstract class AbstractWriteContentTag extends BaseTag{
         print(writeContent);
 
         if (LOGGER.isDebugEnabled()){
-            Date endDate = new Date();
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String string = Validator.isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
-            String useTime = DateExtensionUtil.getIntervalForView(beginDate, endDate);
-            LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), request.getRequestURI(), string, useTime);
+            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
+            LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), string, useTime);
         }
     }
 
