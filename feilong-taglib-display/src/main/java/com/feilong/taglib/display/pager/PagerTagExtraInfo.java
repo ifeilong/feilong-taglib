@@ -73,27 +73,7 @@ public class PagerTagExtraInfo extends BaseTEI{
         if (LOGGER.isDebugEnabled()){
             Map<String, Object> map = getTagDataAttributeMap(tagData);
             LOGGER.debug(JsonUtil.format(map));
-
-            //            TagInfo tagInfo = getTagInfo();
-            //            LOGGER.debug(JsonUtil.format(tagInfo));
         }
-
-        // Object count = tagData.getAttribute("maxElements");
-        // if (TagData.REQUEST_TIME_VALUE == count){
-        // // String id = tagData.getId();
-        // // return new ValidationMessage[] { new ValidationMessage(id, "asdasdasdad") };
-        // }
-        // if (TagData.REQUEST_TIME_VALUE == count){
-        // showAttributes(tagData);
-        // Object allPageNo = tagData.getAttribute("allPageNo");
-        // Object pageParamName = tagData.getAttribute("pageParamName");
-        // // if (maxElements < 0){
-        // // LOGGER.debug("the param maxElements:{},must >=0", maxElements);
-        // // return false;
-        // // }
-        // // Object maxIndexPages = tagData.getAttribute("maxIndexPages");
-        // // Object skin = tagData.getAttribute("skin");
-        // }
         return super.validate(tagData);
     }
 
