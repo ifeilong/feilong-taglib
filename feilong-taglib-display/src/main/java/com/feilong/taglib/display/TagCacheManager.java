@@ -70,10 +70,10 @@ public final class TagCacheManager{
         //缓存
         if (CACHE_ENABLE){
             if (CACHE.containsKey(cacheParam)){
-                LOGGER.info("cache.size:[{}],hashcode:[{}],get info from cache", CACHE.size(), cacheParam.hashCode());
+                LOGGER.debug("cache.size:[{}],hashcode:[{}],hit cache,get info from cache", CACHE.size(), cacheParam.hashCode());
                 return CACHE.get(cacheParam);
             }
-            LOGGER.info(
+            LOGGER.debug(
                             "cache.size:[{}],hashcode:[{}],cache not contains [{}],will do parse",
                             CACHE.size(),
                             cacheParam.hashCode(),
