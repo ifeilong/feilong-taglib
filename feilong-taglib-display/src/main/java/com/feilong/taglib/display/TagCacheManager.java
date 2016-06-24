@@ -69,12 +69,15 @@ public final class TagCacheManager{
     public static String getContentFromCache(CacheParam cacheParam){
         //缓存
         if (CACHE_ENABLE){
-            LOGGER.debug("cache.size:[{}]", CACHE.size());
             if (CACHE.containsKey(cacheParam)){
-                LOGGER.info("hashcode:[{}],get info from cache", cacheParam.hashCode());
+                LOGGER.info("cache.size:[{}],hashcode:[{}],get info from cache", CACHE.size(), cacheParam.hashCode());
                 return CACHE.get(cacheParam);
             }
-            LOGGER.info("hashcode:[{}],cache not contains [{}],will do parse", cacheParam.hashCode(), cacheParam.getClass().getName());
+            LOGGER.info(
+                            "cache.size:[{}],hashcode:[{}],cache not contains [{}],will do parse",
+                            CACHE.size(),
+                            cacheParam.hashCode(),
+                            cacheParam.getClass().getName());
         }else{
             LOGGER.info("the cache status is disable!");
         }
