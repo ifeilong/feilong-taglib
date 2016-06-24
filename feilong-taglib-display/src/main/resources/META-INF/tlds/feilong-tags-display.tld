@@ -109,7 +109,9 @@
 			<name>locale</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<description>国际化语言,默认request.getLocale() </description>
+			<description>
+				<![CDATA[设置 Locale环境, 支持java.util.Locale或 String 类型 ,默认使用 request.getLocale()]]>
+			</description>
 		</attribute>
 		<attribute>
 			<name>charsetType</name>
@@ -263,7 +265,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
-				<![CDATA[国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}]]>
+				<![CDATA[设置 Locale环境, 支持java.util.Locale或 String 类型 ,默认使用 request.getLocale()]]>
 			</description>
 		</attribute>
 

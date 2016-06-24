@@ -19,11 +19,19 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
+import com.feilong.taglib.LocaleSupport;
 
 /**
  * 用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发.
+ * 
+ * <p>
+ * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option">feilongDisplay-option</a>
+ * </p>
  * 
  * <h3>示例:</h3>
  * <blockquote>
@@ -143,7 +151,7 @@ edu.option4=Others(Master/PHD)
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
-public class OptionTag extends AbstractStartWriteContentTag{
+public class OptionTag extends AbstractStartWriteContentTag implements LocaleSupport{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4523036188885941366L;
@@ -153,8 +161,17 @@ public class OptionTag extends AbstractStartWriteContentTag{
      */
     private String            baseName;
 
-    /** 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}. */
-    private Locale            locale;
+    /**
+     * 设置{@link Locale} 环境, 支持 <code>java.util.Locale</code> 或 String 类型的实例 ,如果是null,将默认使用 <code>request.getLocale()</code>.
+     *
+     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
+     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
+     * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
+     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
+     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
+     * @since 1.7.2 change Object type
+     */
+    private Object            locale;
 
     /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
     private String            selectedKey;
@@ -168,7 +185,7 @@ public class OptionTag extends AbstractStartWriteContentTag{
     protected Object buildContent(HttpServletRequest request){
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
-        optionParam.setLocale(locale);
+        optionParam.setLocale(ObjectUtils.defaultIfNull(ConvertUtil.toLocale(locale), request.getLocale()));
         optionParam.setSelectedKey(selectedKey);
         return OptionBuilder.buildContent(optionParam);
     }
@@ -184,16 +201,6 @@ public class OptionTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}.
-     * 
-     * @param locale
-     *            the locale to set
-     */
-    public void setLocale(Locale locale){
-        this.locale = locale;
-    }
-
-    /**
      * 设置 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
      *
      * @param selectedKey
@@ -202,4 +209,16 @@ public class OptionTag extends AbstractStartWriteContentTag{
     public void setSelectedKey(String selectedKey){
         this.selectedKey = selectedKey;
     }
+
+    /**
+     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 ,如果是null,将默认使用 <code>request.getLocale()</code>.
+     *
+     * @param locale
+     *            the locale to set
+     */
+    @Override
+    public void setLocale(Object locale){
+        this.locale = locale;
+    }
+
 }

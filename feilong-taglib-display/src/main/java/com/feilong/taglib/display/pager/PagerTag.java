@@ -26,6 +26,7 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
+import com.feilong.taglib.LocaleSupport;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
@@ -78,7 +79,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.0
  */
-public class PagerTag extends AbstractStartWriteContentTag{
+public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupport{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3523064037264688170L;
@@ -216,27 +217,13 @@ public class PagerTag extends AbstractStartWriteContentTag{
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
-        pagerParams.setLocale(resolverLocale(request));
+        pagerParams.setLocale(ObjectUtils.defaultIfNull(ConvertUtil.toLocale(locale), request.getLocale()));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         pagerParams.setSkin(skin);
         pagerParams.setMaxIndexPages(maxIndexPages);
         pagerParams.setDebugIsNotParseVM(getDebugIsNotParseVM(request));
         return pagerParams;
-    }
-
-    /**
-     * Resolver locale.
-     *
-     * @param request
-     *            the request
-     * @return the locale
-     * @since 1.7.2
-     */
-    private Locale resolverLocale(HttpServletRequest request){
-        //Returns the preferred Locale that the client will accept content in, based on the Accept-Language header. 
-        //If the client request doesn't provide an Accept-Language header, this method returns the default locale for the server.
-        return ObjectUtils.defaultIfNull(ConvertUtil.toLocale(locale), request.getLocale());
     }
 
     /**
@@ -369,6 +356,7 @@ public class PagerTag extends AbstractStartWriteContentTag{
      * @param locale
      *            the locale to set
      */
+    @Override
     public void setLocale(Object locale){
         this.locale = locale;
     }
