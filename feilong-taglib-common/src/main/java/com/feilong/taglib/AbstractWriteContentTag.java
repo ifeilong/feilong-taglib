@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -27,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.servlet.http.RequestUtil;
 
 /**
@@ -70,7 +71,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
         if (LOGGER.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String string = Validator.isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
-            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
+            String useTime = getIntervalForView(beginDate, new Date());
             LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), string, useTime);
         }
     }
