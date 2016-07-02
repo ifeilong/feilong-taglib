@@ -78,10 +78,10 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
             //对象占内存:
             //map1.put(j, FileUtil.formatSize((end - start)));
 
-            LOGGER.info(j + " size cache占用 内存 :" + FileUtil.formatSize((end - start)));
+            LOGGER.debug(j + " size cache占用 内存 :" + FileUtil.formatSize((end - start)));
 
             int size = SerializableUtil.size(map);
-            LOGGER.info("Data Size: " + size + "--->" + FileUtil.formatSize(size));
+            LOGGER.debug("Data Size: " + size + "--->" + FileUtil.formatSize(size));
 
             //map1.put(j, end - start);
         }

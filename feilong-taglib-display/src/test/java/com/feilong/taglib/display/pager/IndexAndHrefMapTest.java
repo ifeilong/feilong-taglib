@@ -72,7 +72,7 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             set.add(i);
         }
         PagerParams pagerParams = getPagerParams();
-        LOGGER.info(JsonUtil.format(pagerParams));
+        LOGGER.debug(JsonUtil.format(pagerParams));
 
         for (int j = 0; j < z; ++j){
             //@SuppressWarnings({ "unchecked", "unused" })
@@ -80,6 +80,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             declaredMethod.invoke(PagerBuilder.class, pagerParams, set);
         }
 
-        LOGGER.info("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
+        LOGGER.debug("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 }

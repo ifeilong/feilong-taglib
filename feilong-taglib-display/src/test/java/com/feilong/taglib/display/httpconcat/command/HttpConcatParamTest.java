@@ -46,9 +46,9 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
     public void testHashCode(){
         HttpConcatParam t = new HttpConcatParam();
 
-        LOGGER.info("" + t.hashCode());
+        LOGGER.debug("" + t.hashCode());
         t.setDomain(domain);
-        LOGGER.info("" + t.hashCode());
+        LOGGER.debug("" + t.hashCode());
     }
 
     /**

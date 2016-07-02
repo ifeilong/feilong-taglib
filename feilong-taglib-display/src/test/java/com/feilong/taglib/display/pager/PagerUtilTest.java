@@ -58,10 +58,10 @@ public class PagerUtilTest extends BasePagerTest{
         for (int i = 0; i < j; ++i){
             // LOGGER.debug("===================================================");
             testGetPagerContent();
-            // LOGGER.info("the param content:\n\n{}", content);
+            // LOGGER.debug("the param content:\n\n{}", content);
             // LOGGER.debug("{} ", i);
         }
-        LOGGER.info("{}次\t{}", j, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
+        LOGGER.debug("{}次\t{}", j, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
     }
 
     /**
@@ -78,7 +78,7 @@ public class PagerUtilTest extends BasePagerTest{
 
         String content = PagerBuilder.buildContent(pagerParams);
 
-        //LOGGER.info("the param content:\n\n{}", content);
+        //LOGGER.debug("the param content:\n\n{}", content);
 
         if (false){
             String filePath = "F://pagerTest.html";

@@ -72,6 +72,6 @@ public class PagerCachePerformanceTest{
         // 快要计算的时,再清理一次
         System.gc();
         long end = Runtime.getRuntime().freeMemory();
-        LOGGER.info("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
+        LOGGER.debug("一个HashMap对象占内存:" + FileUtil.formatSize((end - start)));
     }
 }

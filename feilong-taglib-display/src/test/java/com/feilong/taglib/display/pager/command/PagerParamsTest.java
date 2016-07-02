@@ -41,9 +41,9 @@ public class PagerParamsTest{
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
-        LOGGER.info("" + pagerParams1.hashCode());
+        LOGGER.debug("" + pagerParams1.hashCode());
         pagerParams1.setCharsetType(null);
-        LOGGER.info("" + pagerParams1.hashCode());
+        LOGGER.debug("" + pagerParams1.hashCode());
     }
 
     /**

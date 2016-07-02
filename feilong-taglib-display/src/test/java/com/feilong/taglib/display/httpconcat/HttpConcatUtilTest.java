@@ -45,7 +45,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
     public void testGetWriteContent(){
         HttpConcatParam httpConcatParam = getHttpConcatParam();
         String writeContent = HttpConcatUtil.getWriteContent(httpConcatParam);
-        LOGGER.info(writeContent);
+        LOGGER.debug(writeContent);
     }
 
     /**
@@ -71,7 +71,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         for (Integer j : list){
             Date beginDate = new Date();
             for (int i = 0; i < j; ++i){
-                //LOGGER.info(i);
+                //LOGGER.debug(i);
                 HttpConcatParam httpConcatParam = getHttpConcatParamByIndex(null);
                 HttpConcatUtil.getWriteContent(httpConcatParam);
                 //				httpConcatParam = null;
@@ -79,7 +79,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
             }
             map.put(j, getIntervalForView(beginDate, new Date()));
         }
-        LOGGER.info(JsonUtil.format(map));
+        LOGGER.debug(JsonUtil.format(map));
     }
 
     /**
@@ -94,6 +94,6 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         httpConcatParam.setHttpConcatSupport(true);
         httpConcatParam.setItemSrcList(null);
         httpConcatParam.setVersion("20140517");
-        LOGGER.info(HttpConcatUtil.getWriteContent(httpConcatParam));
+        LOGGER.debug(HttpConcatUtil.getWriteContent(httpConcatParam));
     }
 }

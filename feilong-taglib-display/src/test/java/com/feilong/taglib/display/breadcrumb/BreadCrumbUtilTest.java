@@ -93,7 +93,7 @@ public class BreadCrumbUtilTest{
         //        breadCrumbParams.setCurrentPath("/test8.htm");
         //        breadCrumbParams.setVmPath(null);
 
-        LOGGER.info(BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams));
+        LOGGER.debug(BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams));
     }
 
     /**
@@ -105,13 +105,13 @@ public class BreadCrumbUtilTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        List<BreadCrumbEntity<Number>> allParentSiteMapEntityList = siteMapTag.getAllParentSiteMapEntityList(path, siteMapEntities);
-        //        LOGGER.info("show");
+        //        LOGGER.debug("show");
         //        if (null != allParentSiteMapEntityList){
         //            for (BreadCrumbEntity<Number> sme : allParentSiteMapEntityList){
-        //                LOGGER.info(sme.getName());
+        //                LOGGER.debug(sme.getName());
         //            }
         //        }else{
-        //            LOGGER.info("allParentSiteMapEntityList is null/empty");
+        //            LOGGER.debug("allParentSiteMapEntityList is null/empty");
         //        }
     }
 
@@ -124,8 +124,8 @@ public class BreadCrumbUtilTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        BreadCrumbEntity<Number> siteMapEntity = siteMapTag.getSiteMapEntityByPath(path, siteMapEntities);
-        //        LOGGER.info(siteMapEntity.getParentId() + "");
-        //        LOGGER.info(siteMapEntity.getName());
+        //        LOGGER.debug(siteMapEntity.getParentId() + "");
+        //        LOGGER.debug(siteMapEntity.getName());
     }
 
     /**
@@ -140,6 +140,6 @@ public class BreadCrumbUtilTest{
         //        contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         //        contextKeyValues.put("connector", ">");
         //        String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);
-        //        LOGGER.info(siteMapString);
+        //        LOGGER.debug(siteMapString);
     }
 }
