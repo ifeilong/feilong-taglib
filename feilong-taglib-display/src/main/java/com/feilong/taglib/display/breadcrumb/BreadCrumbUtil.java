@@ -150,12 +150,11 @@ public class BreadCrumbUtil{
         for (BreadCrumbEntity<Object> breadCrumbEntity : currentBreadCrumbEntityTreeList){
             String path = breadCrumbEntity.getPath();
 
-            if (URIUtil.isAbsolutePath(path)){
+            //验证path是不是绝对路径.
+            if (URIUtil.create(path).isAbsolute()){//(调用了 {@link java.net.URI#isAbsolute()},原理是 <code>url's scheme !=null</code>).
                 //nothing to do 
             }else{
-                URL context = URLUtil.newURL(urlPrefix);
-                String unionUrl = URLUtil.getUnionUrl(context, path);
-                breadCrumbEntity.setPath(unionUrl);
+                breadCrumbEntity.setPath(URLUtil.getUnionUrl(URLUtil.toURL(urlPrefix), path));
             }
         }
         return currentBreadCrumbEntityTreeList;
