@@ -77,7 +77,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
                 //				httpConcatParam = null;
                 //				System.gc();
             }
-            map.put(j, getIntervalForView(beginDate, new Date()));
+            map.put(j, getIntervalForView(beginDate));
         }
         LOGGER.debug(JsonUtil.format(map));
     }

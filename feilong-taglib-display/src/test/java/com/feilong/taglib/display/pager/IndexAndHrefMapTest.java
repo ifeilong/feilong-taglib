@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -25,7 +27,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.tools.jsonlib.JsonUtil;
@@ -80,6 +81,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             declaredMethod.invoke(PagerBuilder.class, pagerParams, set);
         }
 
-        LOGGER.debug("{},time:{}", z, DateExtensionUtil.getIntervalTime(beginDate, new Date()));
+        LOGGER.debug("{},time:{}", z, getIntervalForView(beginDate));
     }
 }
