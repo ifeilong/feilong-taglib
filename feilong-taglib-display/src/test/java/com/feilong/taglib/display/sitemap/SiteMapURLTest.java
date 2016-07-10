@@ -25,9 +25,10 @@ import java.util.Map;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 
-import com.feilong.core.CharsetType;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.tools.velocity.VelocityUtil;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class Test1.
@@ -93,6 +94,6 @@ public class SiteMapURLTest{
         //		Document document = Dom4jUtil.getDocument(filePath);
         //		
         //		//document.
-        IOWriteUtil.writeStringToFile(filePath, aString, CharsetType.UTF8);
+        IOWriteUtil.writeStringToFile(filePath, aString, UTF8);
     }
 }

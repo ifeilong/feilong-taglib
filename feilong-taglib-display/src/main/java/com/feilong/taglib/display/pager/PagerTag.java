@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
@@ -29,6 +28,8 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * 分页标签.
@@ -139,7 +140,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      * 
      * @since 1.0.5
      */
-    private String            charsetType      = CharsetType.UTF8;
+    private String            charsetType      = UTF8;
 
     /**
      * vm被解析出来的文本,会被存在在这个变量中,作用域为pageContext,以便重复使用.

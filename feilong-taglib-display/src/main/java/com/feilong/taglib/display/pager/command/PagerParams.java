@@ -21,9 +21,10 @@ import java.util.Locale;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.feilong.core.CharsetType;
 import com.feilong.taglib.display.CacheParam;
 import com.feilong.taglib.display.pager.PagerBuilder;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * 方法参数.
@@ -93,7 +94,7 @@ public class PagerParams implements Serializable,CacheParam{
      * 
      * @since 1.0.5
      */
-    private String            charsetType      = CharsetType.UTF8;
+    private String            charsetType      = UTF8;
 
     /**
      * 获得此 Java 虚拟机实例的当前默认语言环境值. <br>

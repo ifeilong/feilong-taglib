@@ -15,8 +15,6 @@
  */
 package com.feilong.taglib.display.pager;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -24,11 +22,13 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
 import com.feilong.coreextension.awt.DesktopUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.taglib.display.pager.command.PagerType;
+
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * The Class PagerUtilTest.
@@ -83,7 +83,7 @@ public class PagerUtilTest extends BasePagerTest{
 
         if (false){
             String filePath = "F://pagerTest.html";
-            IOWriteUtil.writeStringToFile(filePath, content, CharsetType.UTF8);
+            IOWriteUtil.writeStringToFile(filePath, content, UTF8);
             DesktopUtil.browse(filePath);
         }
     }

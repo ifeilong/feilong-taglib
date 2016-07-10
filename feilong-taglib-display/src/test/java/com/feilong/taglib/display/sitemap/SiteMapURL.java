@@ -22,9 +22,11 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.DatePattern;
-import com.feilong.core.Validator;
 import com.feilong.core.date.DateUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+
+import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
  * robots.txt 里面定义的 sitemap.xml url list部分 <br>
@@ -195,11 +197,7 @@ public class SiteMapURL implements Serializable{
      * @see #lastmod
      */
     public String getFormatLastmod(){
-        if (Validator.isNullOrEmpty(lastmod)){
-            return null;
-        }
-        String formatLastmod = DateUtil.toString(lastmod, DatePattern.COMMON_DATE);
-        return formatLastmod;
+        return isNullOrEmpty(lastmod) ? null : DateUtil.toString(lastmod, COMMON_DATE);
     }
 
     //*******************************************************************************************************

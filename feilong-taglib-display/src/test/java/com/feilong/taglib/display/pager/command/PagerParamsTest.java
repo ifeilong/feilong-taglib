@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class PagerParamsTest.
@@ -59,10 +59,10 @@ public class PagerParamsTest{
         assertEquals(false, pagerParams1.equals(null));
         assertEquals(true, pagerParams1.equals(pagerParams2));
 
-        pagerParams2.setCharsetType(CharsetType.UTF8);
+        pagerParams2.setCharsetType(UTF8);
         assertEquals(false, pagerParams1.equals(pagerParams2));
 
-        pagerParams1.setCharsetType(CharsetType.UTF8);
+        pagerParams1.setCharsetType(UTF8);
         assertEquals(true, pagerParams1.equals(pagerParams2));
 
         pagerParams1.setCharsetType(null);

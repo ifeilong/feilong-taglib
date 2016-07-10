@@ -17,9 +17,10 @@ package com.feilong.taglib.display.pager;
 
 import java.util.Locale;
 
-import com.feilong.core.CharsetType;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class BasePagerTest.
@@ -66,7 +67,7 @@ public abstract class BasePagerTest{
         pagerParams.setSkin(skin);
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
-        pagerParams.setCharsetType(CharsetType.UTF8);
+        pagerParams.setCharsetType(UTF8);
 
         pagerParams.setDebugIsNotParseVM(debugIsNotParseVM);
 

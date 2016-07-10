@@ -22,12 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.accessor.KeyAccessor;
 import com.feilong.accessor.session.SessionKeyAccessor;
-import com.feilong.core.CharsetType;
-import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.tools.barcode.BarcodeConfig;
+
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 二维码等barcode生成 标签.
@@ -134,7 +135,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      * @return the barcode contents and config
      */
     private BarcodeContentsAndConfig buildBarcodeContentsAndConfig(HttpServletRequest request){
-        String useContents = Validator.isNullOrEmpty(contents) ? RequestUtil.getRequestFullURL(request, CharsetType.UTF8) : contents;
+        String useContents = isNullOrEmpty(contents) ? RequestUtil.getRequestFullURL(request, UTF8) : contents;
         BarcodeConfig barcodeConfig = new BarcodeConfig();
         barcodeConfig.setHeight(height);
         barcodeConfig.setWidth(width);
