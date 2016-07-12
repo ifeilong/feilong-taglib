@@ -47,11 +47,11 @@ public class BreadCrumbEntityComparator<PK> implements Comparator<BreadCrumbEnti
     public int compare(BreadCrumbEntity<PK> breadCrumbEntity1,BreadCrumbEntity<PK> breadCrumbEntity2){
         //TODO
         throw new NotImplementedException("compare is not implemented!");
-        //        if (Validator.isNullOrEmpty(breadCrumbEntity1)){
+        //        if (isNullOrEmpty(breadCrumbEntity1)){
         //            throw new NullPointerException("breadCrumbEntity1 can't be null/empty!");
         //        }
         //
-        //        if (Validator.isNullOrEmpty(breadCrumbEntity2)){
+        //        if (isNullOrEmpty(breadCrumbEntity2)){
         //            throw new NullPointerException("breadCrumbEntity2 can't be null/empty!");
         //        }
         //

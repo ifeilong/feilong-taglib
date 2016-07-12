@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * The Class PagerCacheManager.
@@ -93,7 +93,7 @@ public final class TagCacheManager{
      *            the content
      */
     public static void put(CacheParam cacheParam,String content){
-        if (CACHE_ENABLE && Validator.isNotNullOrEmpty(content)){//设置cache
+        if (CACHE_ENABLE && isNotNullOrEmpty(content)){//设置cache
             CACHE.put(cacheParam, content);
         }
     }

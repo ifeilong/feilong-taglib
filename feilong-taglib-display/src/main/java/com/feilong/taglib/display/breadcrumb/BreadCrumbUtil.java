@@ -27,7 +27,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.core.util.StatisticsUtil;
@@ -36,6 +35,8 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.velocity.VelocityUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 面包屑渲染核心工具类.
@@ -89,9 +90,9 @@ public class BreadCrumbUtil{
      *            the bread crumb params
      * @return
      *         <ul>
-     *         <li>如果 Validator.isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
-     *         <li>如果 Validator.isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
-     *         <li>如果 Validator.isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
+     *         <li>如果 isNullOrEmpty(breadCrumbParams) , throw {@link NullPointerException}</li>
+     *         <li>如果 isNullOrEmpty(breadCrumbEntityList) , throw {@link NullPointerException}</li>
+     *         <li>如果 isNullOrEmpty(currentBreadCrumbEntityTreeList) , throw {@link StringUtils#EMPTY}</li>
      *         </ul>
      */
     public static String getBreadCrumbContent(BreadCrumbParams breadCrumbParams){
@@ -106,7 +107,7 @@ public class BreadCrumbUtil{
         //***************************************************************************************
         List<BreadCrumbEntity<Object>> currentBreadCrumbEntityTreeList = lookUpCurrentBreadCrumbEntityTreeList(breadCrumbParams);
 
-        if (Validator.isNullOrEmpty(currentBreadCrumbEntityTreeList)){
+        if (isNullOrEmpty(currentBreadCrumbEntityTreeList)){
             return StringUtils.EMPTY;
         }
 
@@ -143,7 +144,7 @@ public class BreadCrumbUtil{
     private static List<BreadCrumbEntity<Object>> restructureBreadCrumbEntityTreeListPath(
                     List<BreadCrumbEntity<Object>> currentBreadCrumbEntityTreeList,
                     String urlPrefix){
-        if (Validator.isNullOrEmpty(urlPrefix)){
+        if (isNullOrEmpty(urlPrefix)){
             return currentBreadCrumbEntityTreeList;
         }
 
@@ -183,7 +184,7 @@ public class BreadCrumbUtil{
         String currentPath = breadCrumbParams.getCurrentPath();
         List<BreadCrumbEntity<T>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
 
-        if (Validator.isNullOrEmpty(currentPath)){
+        if (isNullOrEmpty(currentPath)){
             //find all
             Map<T, Integer> groupCount = StatisticsUtil.groupCount(breadCrumbEntityList, "parentId");
             for (Map.Entry<T, Integer> entry : groupCount.entrySet()){
@@ -194,7 +195,7 @@ public class BreadCrumbUtil{
         }
         BreadCrumbEntity<T> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
 
-        if (Validator.isNullOrEmpty(currentBreadCrumbEntity)){
+        if (isNullOrEmpty(currentBreadCrumbEntity)){
             LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
             return Collections.emptyList();
         }

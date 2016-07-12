@@ -15,10 +15,11 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
-import com.feilong.core.Validator;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class HttpConcatGlobalConfigBuilder.
@@ -78,7 +79,7 @@ public class HttpConcatGlobalConfigBuilder{
      * 获得 required value.
      * 
      * <p>
-     * 如果 {@code Validator.isNullOrEmpty(Object)} ,抛出NullPointerException
+     * 如果 {@code isNullOrEmpty(Object)} ,抛出NullPointerException
      * </p>
      * 
      * @param <T>
@@ -93,7 +94,7 @@ public class HttpConcatGlobalConfigBuilder{
         String baseName = CONFIG_FILE;
         T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
 
-        if (Validator.isNullOrEmpty(keyValue)){
+        if (isNullOrEmpty(keyValue)){
             String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
             throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, baseName));
         }

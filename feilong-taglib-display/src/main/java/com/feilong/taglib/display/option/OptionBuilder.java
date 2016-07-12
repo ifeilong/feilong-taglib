@@ -20,10 +20,11 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
-import com.feilong.core.Validator;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.tools.slf4j.Slf4jUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * The Class OptionBuilder.
@@ -55,7 +56,7 @@ public class OptionBuilder{
      */
     public static String buildContent(OptionParam optionParam){
         String content = TagCacheManager.getContentFromCache(optionParam);
-        if (Validator.isNotNullOrEmpty(content)){
+        if (isNotNullOrEmpty(content)){
             return content;
         }
 

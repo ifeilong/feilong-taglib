@@ -23,11 +23,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 面包屑标签.
@@ -150,7 +151,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     protected Object buildContent(HttpServletRequest request){
         List<BreadCrumbEntity<Object>> opBreadCrumbEntityList = constructBreadCrumbEntityList();
 
-        if (Validator.isNullOrEmpty(opBreadCrumbEntityList)){
+        if (isNullOrEmpty(opBreadCrumbEntityList)){
             LOGGER.warn("breadCrumbEntityList is NullOrEmpty!!,return empty!!");
             return StringUtils.EMPTY;
         }

@@ -108,7 +108,7 @@ package com.feilong.taglib.display;
 //	 * @return 面包屑数据源xml路径
 //	 */
 //	public String getSiteMapProviderSiteMapFile(String providerName){
-//		if (Validator.isNullOrEmpty(providerName)){
+//		if (isNullOrEmpty(providerName)){
 //			providerName = getDefaultSiteMapProviderName();
 //		}
 //		return xmlConfigure.getAttributeValueByXPath("//add[@name='" + providerName + "']", "siteMapFile");

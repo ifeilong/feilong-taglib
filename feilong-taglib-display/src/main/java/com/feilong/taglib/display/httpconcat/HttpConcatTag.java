@@ -21,9 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.Validator;
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.<br>
@@ -80,19 +81,19 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     @Override
     protected Object buildContent(HttpServletRequest request){
         String bodyContentSrc = bodyContent.getString();
-        if (Validator.isNullOrEmpty(bodyContentSrc)){
+        if (isNullOrEmpty(bodyContentSrc)){
             return StringUtils.EMPTY;
         }
 
-        if (Validator.isNullOrEmpty(type)){
+        if (isNullOrEmpty(type)){
             return StringUtils.EMPTY;
         }
 
         List<String> itemSrcList = HttpConcatUtil.toItemSrcList(bodyContentSrc);
-        if (Validator.isNullOrEmpty(itemSrcList)){
+        if (isNullOrEmpty(itemSrcList)){
             return StringUtils.EMPTY;
         }
-        if (Validator.isNullOrEmpty(domain)){
+        if (isNullOrEmpty(domain)){
             domain = getHttpServletRequest().getContextPath();
         }
 

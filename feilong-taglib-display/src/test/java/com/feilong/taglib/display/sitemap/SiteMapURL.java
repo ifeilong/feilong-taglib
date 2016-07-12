@@ -174,7 +174,7 @@ public class SiteMapURL implements Serializable{
      * 
      * @return the formatLoc
      * @throws IllegalArgumentException
-     *             if Validator.isNullOrEmpty(loc) or formatLoc length >=2048
+     *             if isNullOrEmpty(loc) or formatLoc length >=2048
      * @see #loc
      * @see StringEscapeUtils#ESCAPE_XML
      * @see StringEscapeUtils#escapeXml(String)
@@ -191,7 +191,7 @@ public class SiteMapURL implements Serializable{
     /**
      * 使用YYYY-MM-DD格式 (只读字段).
      * 
-     * @return 如果 Validator.isNullOrEmpty(lastmod),返回 null; else 返回 yyyy-MM-dd format
+     * @return 如果 isNullOrEmpty(lastmod),返回 null; else 返回 yyyy-MM-dd format
      * @see com.feilong.core.date.DateUtil#toString(Date, String)
      * @see com.feilong.core.DatePattern#COMMON_DATE
      * @see #lastmod

@@ -27,7 +27,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.net.ParamUtil;
 import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.ResourceBundleUtil;
@@ -41,6 +40,9 @@ import com.feilong.taglib.display.pager.command.PagerUrlTemplate;
 import com.feilong.taglib.display.pager.command.PagerVMParam;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.velocity.VelocityUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 分页工具类.
@@ -181,7 +183,7 @@ public final class PagerBuilder{
         }
 
         String content = TagCacheManager.getContentFromCache(pagerParams);
-        if (Validator.isNotNullOrEmpty(content)){
+        if (isNotNullOrEmpty(content)){
             return content;
         }
 
@@ -546,7 +548,7 @@ public final class PagerBuilder{
      */
     @Deprecated
     private static int buildMaxIndexPages(int allPageNo,Integer maxIndexPages){
-        if (Validator.isNullOrEmpty(maxIndexPages) || maxIndexPages <= 0){
+        if (isNullOrEmpty(maxIndexPages) || maxIndexPages <= 0){
             // 总页数超过1000的时候,自动调节导航数量的作用
             if (allPageNo > 1000){
                 return 6;

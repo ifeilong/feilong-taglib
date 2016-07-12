@@ -27,7 +27,6 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
@@ -37,6 +36,9 @@ import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * http concat的核心工具类.
@@ -111,7 +113,7 @@ public final class HttpConcatUtil{
 
         // 判断item list
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
-        if (Validator.isNullOrEmpty(itemSrcList)){
+        if (isNullOrEmpty(itemSrcList)){
             LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
             return StringUtils.EMPTY;
         }
@@ -212,7 +214,7 @@ public final class HttpConcatUtil{
         //******************domain*******************************************
         String domain = httpConcatParam.getDomain();
         // 格式化 domain 成 http://www.feilong.com/ 形式
-        if (Validator.isNotNullOrEmpty(domain)){
+        if (isNotNullOrEmpty(domain)){
             if (!domain.endsWith("/")){
                 domain = domain + "/";
             }
@@ -223,7 +225,7 @@ public final class HttpConcatUtil{
         //********************root*****************************************
         String root = httpConcatParam.getRoot();
         // 格式化 root 成 xxxx/xxx/ 形式,
-        if (Validator.isNotNullOrEmpty(root)){
+        if (isNotNullOrEmpty(root)){
             if (!root.endsWith("/")){
                 root = root + "/";
             }
@@ -242,7 +244,7 @@ public final class HttpConcatUtil{
         List<String> noRepeatitemList = CollectionsUtil.removeDuplicate(itemSrcList);
 
         //**************************************************************
-        if (Validator.isNullOrEmpty(noRepeatitemList)){
+        if (isNullOrEmpty(noRepeatitemList)){
             LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
             return null;
         }
@@ -327,7 +329,7 @@ public final class HttpConcatUtil{
      *            the sb
      */
     private static void appendVersion(String version,StringBuilder sb){
-        if (Validator.isNotNullOrEmpty(version)){
+        if (isNotNullOrEmpty(version)){
             sb.append("?");
             sb.append(version);
         }else{
@@ -350,7 +352,7 @@ public final class HttpConcatUtil{
         for (int i = 0; i < length; ++i){
             String item = items[i];
             // 忽视空行
-            if (Validator.isNotNullOrEmpty(item)){
+            if (isNotNullOrEmpty(item)){
                 // 去除空格
                 list.add(item.trim());
             }

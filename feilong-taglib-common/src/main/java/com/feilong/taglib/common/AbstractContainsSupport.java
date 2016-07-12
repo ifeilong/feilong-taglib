@@ -20,9 +20,10 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.taglib.AbstractConditionalTag;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 包含父类.
@@ -80,7 +81,7 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
      * @since 1.7.2
      */
     public static boolean containsByStringValue(Iterator<?> iterator,Object value){
-        if (Validator.isNullOrEmpty(iterator)){
+        if (isNullOrEmpty(iterator)){
             return false;
         }
         while (iterator.hasNext()){
