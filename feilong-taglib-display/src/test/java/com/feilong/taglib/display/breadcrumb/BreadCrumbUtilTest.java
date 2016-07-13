@@ -16,7 +16,6 @@
 package com.feilong.taglib.display.breadcrumb;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -27,6 +26,8 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.comparator.BreadCrumbEntityComparator;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.util.SortUtil.sort;
 
 /**
  * The Class SiteMapTagTest.
@@ -67,7 +68,7 @@ public class BreadCrumbUtilTest{
 
         //TreeMap<Number, BreadCrumbEntity> treeMap = new TreeMap<Number, BreadCrumbEntity>();
 
-        Collections.sort(list, new BreadCrumbEntityComparator());
+        sort(list, new BreadCrumbEntityComparator());
 
         LOGGER.debug(JsonUtil.format(list));
     }
