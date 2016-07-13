@@ -21,10 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;
+
+import static com.feilong.core.bean.ConvertUtil.toLocale;
 
 /**
  * 用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发.
@@ -185,7 +186,7 @@ public class OptionTag extends AbstractStartWriteContentTag implements LocaleSup
     protected Object buildContent(HttpServletRequest request){
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
-        optionParam.setLocale(ObjectUtils.defaultIfNull(ConvertUtil.toLocale(locale), request.getLocale()));
+        optionParam.setLocale(ObjectUtils.defaultIfNull(toLocale(locale), request.getLocale()));
         optionParam.setSelectedKey(selectedKey);
         return OptionBuilder.buildContent(optionParam);
     }

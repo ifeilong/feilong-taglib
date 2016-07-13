@@ -17,9 +17,10 @@ package com.feilong.taglib.display.pager;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.core.bean.ConvertUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
+
+import static com.feilong.core.bean.ConvertUtil.toInteger;
 
 /**
  * 分页helper.
@@ -52,7 +53,7 @@ public final class PagerHelper{
      */
     public static Integer getCurrentPageNo(HttpServletRequest request,String pageParamName){
         String pageNoString = RequestUtil.getParameter(request, pageParamName);
-        return ConvertUtil.toInteger(pageNoString, 1);
+        return toInteger(pageNoString, 1);
     }
 
 }
