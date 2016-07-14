@@ -15,8 +15,6 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +27,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.util.MapUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * The Class HttpConcatUtilTest.

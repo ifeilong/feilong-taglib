@@ -15,8 +15,6 @@
  */
 package com.feilong.taglib.display.pager;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -30,6 +28,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * The Class PagerUtilTest.
