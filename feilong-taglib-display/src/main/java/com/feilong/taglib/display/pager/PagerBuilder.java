@@ -28,7 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.ParamUtil;
-import com.feilong.core.util.MapUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
@@ -43,6 +42,7 @@ import com.feilong.tools.velocity.VelocityUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * 分页工具类.
@@ -344,7 +344,7 @@ public final class PagerBuilder{
         int startIteratorIndex = startAndEndIteratorIndexs[0];// 开始迭代索引编号
         int endIteratorIndex = startAndEndIteratorIndexs[1]; // 结束迭代索引编号        
 
-        LinkedHashMap<Integer, String> map = MapUtil.newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
+        LinkedHashMap<Integer, String> map = newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
         for (int i = startIteratorIndex; i <= endIteratorIndex; ++i){
             map.put(i, indexAndHrefMap.get(i));
         }

@@ -24,11 +24,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.util.MapUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
  * The Class HttpConcatUtilTest.
@@ -67,7 +67,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         list.add(1000000);
         //		list.add(300001);
 
-        Map<Integer, Object> map = MapUtil.newLinkedHashMap(list.size());
+        Map<Integer, Object> map = newLinkedHashMap(list.size());
         for (Integer j : list){
             Date beginDate = new Date();
             for (int i = 0; i < j; ++i){
