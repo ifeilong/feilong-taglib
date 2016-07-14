@@ -13,7 +13,7 @@
 	<name>feilong-taglib-parent</name>
 	<description>${project.name} ${project.version} API</description>
 
-	<!-- 软件配置管理，如cvs 和svn -->
+	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
 	<scm>
 		<url>https://github.com/venusdrogon/feilong-taglib</url>
 		<connection>scm:git:https://github.com/venusdrogon/feilong-taglib</connection>
