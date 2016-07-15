@@ -20,6 +20,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * The Class HttpConcatGlobalConfigBuilder.
@@ -110,13 +111,11 @@ public class HttpConcatGlobalConfigBuilder{
      * @since 1.8.1
      */
     private static <T> T getRequiredValue(String baseName,String keyName,Class<T> typeClass){
-        T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
-
-        if (isNullOrEmpty(keyValue)){
+        String value = ResourceBundleUtil.getValue(baseName, keyName);
+        if (isNullOrEmpty(value)){
             String messagePattern = "can't find key:[{}] in file:[{}],pls ensure you have put the correct configuration";
             throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, baseName));
         }
-
-        return keyValue;
+        return convert(value, typeClass);
     }
 }
