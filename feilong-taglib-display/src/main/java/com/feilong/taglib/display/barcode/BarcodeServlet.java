@@ -32,10 +32,24 @@ import com.feilong.accessor.KeyAccessor;
 import com.feilong.accessor.session.SessionKeyAccessor;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.tools.barcode.BarcodeEncodeUtil;
+import com.feilong.tools.jsonlib.JsonUtil;
+import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
  * 渲染验证码的servlet.
- *
+ * 
+ * <h3>使用说明:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 参见<a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode">feilongDisplay-barcode wiki</a>
+ * </p>
+ * </blockquote>
+ * 
+ * <h3>配置方式:</h3>
+ * 
+ * <blockquote>
+ * 
  * <pre class="code">
 {@code
     <!-- barcode -->
@@ -49,8 +63,19 @@ import com.feilong.tools.barcode.BarcodeEncodeUtil;
     </servlet-mapping>
 }
  * </pre>
+ * 
+ * </blockquote>
+ * 
+ * <h3>注意:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 通常该类不会单独使用,要和 自定义标签 {@link BarcodeTag} 搭配使用
+ * </p>
+ * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode">feilongDisplay-barcode wiki</a>
  * @since 1.5.4
  */
 public class BarcodeServlet extends HttpServlet{
@@ -68,32 +93,36 @@ public class BarcodeServlet extends HttpServlet{
      */
     @Override
     public void service(ServletRequest request,ServletResponse response) throws ServletException{
+        //① 取到 参数 里面的 barcodeId
         String barcodeId = request.getParameter(BarcodeRequestParams.BARCODE_ID);
         Validate.notEmpty(barcodeId, "barcodeId can't be null/empty!");
 
+        //② 基于 barcodeId 取到session里面保存的 BarcodeContentsAndConfig
         KeyAccessor keyAccessor = new SessionKeyAccessor();
 
         BarcodeContentsAndConfig barcodeContentsAndConfig = keyAccessor.get(barcodeId, (HttpServletRequest) request);
         Validate.notNull(barcodeContentsAndConfig, "barcodeContentsAndConfig can't be null!");
 
+        //③ render
         render(barcodeContentsAndConfig, response);
     }
 
     /**
      * Encode.
      *
-     * @param response
-     *            the response
      * @param barcodeContentsAndConfig
      *            the barcode contents and config
+     * @param response
+     *            the response
      */
     private static void render(BarcodeContentsAndConfig barcodeContentsAndConfig,ServletResponse response){
         try{
             ServletOutputStream outputStream = response.getOutputStream();
             BarcodeEncodeUtil.encode(barcodeContentsAndConfig.getContents(), outputStream, barcodeContentsAndConfig.getBarcodeConfig());
         }catch (IOException e){
-            LOGGER.error("", e);
-            throw new UncheckedIOException(e);
+            String message = Slf4jUtil.format("barcodeContentsAndConfig:{}", JsonUtil.format(barcodeContentsAndConfig));
+            LOGGER.error(message, e);
+            throw new UncheckedIOException(message, e);
         }
     }
 }

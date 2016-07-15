@@ -33,11 +33,19 @@ import static com.feilong.core.Validator.isNullOrEmpty;
 /**
  * 二维码等barcode生成 标签.
  * 
+ * <h3>使用说明:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 参见<a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode">feilongDisplay-barcode wiki</a>
+ * </p>
+ * </blockquote>
+ * 
  * <h3>核心原理:</h3>
  * <blockquote>
  * 
  * <p>
- * 和 {@link com.feilong.taglib.display.barcode.BarcodeServlet} 搭配着使用
+ * 和 {@link com.feilong.taglib.display.barcode.BarcodeServlet BarcodeServlet} 搭配着使用
  * </p>
  * 
  * <p>
@@ -46,6 +54,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode">feilongDisplay-barcode wiki</a>
  * @since 1.5.4
  */
 public class BarcodeTag extends AbstractStartWriteContentTag{
@@ -53,6 +62,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID     = 7891625772743297912L;
 
+    //**************************************************************************************
     /** 用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突. */
     private String            barcodeId;
 
@@ -72,6 +82,8 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      */
     private Integer           encodeHintTypeMargin = 1;
 
+    //**************************************************************************************
+
     /*
      * (non-Javadoc)
      * 
@@ -85,15 +97,16 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         KeyAccessor keyAccessor = new SessionKeyAccessor();
         keyAccessor.save(barcodeId, barcodeContentsAndConfig, request);
 
+        //构造img标签,用来在页面显示二维码图片.
         String imageSrc = buildBarcodeImageSrc(request);
-        return buildImgTag(imageSrc);//构造img标签,用来在页面显示二维码图片.
+        return buildImgTag(imageSrc);
     }
 
     /**
      * 构造img标签,用来在页面显示二维码图片.
      *
-     * @param request
-     *            the request
+     * @param imageSrc
+     *            the image src
      * @return the string
      */
     private String buildImgTag(String imageSrc){
