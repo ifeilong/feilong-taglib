@@ -37,10 +37,9 @@ import static com.feilong.core.bean.ConvertUtil.toLocale;
  * <h3>示例:</h3>
  * <blockquote>
  * 
+ * 假设有 <b>i18n/education_zh_CN.properties</b> 内容如下:
+ * 
  * <pre class="code">
- * 
- * 假设有 i18n/education_zh_CN.properties 内容如下:
- * 
  * edu.option1=初中
  * edu.option2=高中
  * edu.option3=中专
@@ -49,18 +48,22 @@ import static com.feilong.core.bean.ConvertUtil.toLocale;
  * edu.option6=硕士
  * edu.option7=博士
  * edu.option8=其他
+ * </pre>
  * 
- * 我们现在需要在jsp中渲染成 select option 项,我们可以使用下面的方式:
+ * 我们现在需要在jsp中渲染成 <b>select option</b> 项,我们可以使用下面的方式:
  * 
+ * <pre class="code">
 {@code <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>}
-
- * {@code
-
+{@code
 <select name="education">
     <feilongDisplay:option baseName="i18n/education" />
 </select>
 }
- * 此时页面渲染结果为
+ * </pre>
+ * 
+ * 此时页面渲染结果为:
+ * 
+ * <pre class="code">
  * {@code 
         <select name="education">
             <option value="edu.option1">初中</option>
@@ -82,7 +85,7 @@ import static com.feilong.core.bean.ConvertUtil.toLocale;
  * 
  * <pre class="code">
  * 
- * 如果要做有值默认选中,那么可以设置  selectedKey 参数
+ * 如果要做有值默认选中,那么可以设置  <b>selectedKey</b> 参数
  * {@code
     <select name="education2">
         <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option6" />
@@ -108,14 +111,14 @@ import static com.feilong.core.bean.ConvertUtil.toLocale;
  * <h3>关于 locale:</h3>
  * <blockquote>
  * <p>
- * 如果此时我们有英文语言站点,他的配置文件是 i18n/education_en.properties,内容如下:
+ * 如果此时我们有英文语言站点,他的配置文件是<b>i18n/education_en.properties</b>,内容如下:
  * 
  * <pre class="code">
  * 
-edu.option1=Middle School
-edu.option2=Junior College
-edu.option3=Bachelor
-edu.option4=Others(Master/PHD)
+ * edu.option1=Middle School
+ * edu.option2=Junior College
+ * edu.option3=Bachelor
+ * edu.option4=Others(Master/PHD)
  * </pre>
  * 
  * </p>
@@ -123,19 +126,19 @@ edu.option4=Others(Master/PHD)
  * 可以传递 locale参数,如下:
  * 
  * <pre class="code">
-{@code
-    <%
-        //此处是演示代码,实际开发过程中,不允许使用  <% %> 里面写jsp scriptlet
+    {@code <%}
+        <span style="color:red">//此处是演示代码,实际开发过程中,不允许使用 {@code  <% %>} 里面写jsp scriptlet</span>
         request.setAttribute("enLocale", Locale.ENGLISH);
-    %>
+    {@code %>}
     
-    <select name="education3">
-        <feilongDisplay:option baseName="i18n/education" selectedKey="edu.option2" locale="}${enLocale}" /> {@code
-    </select>
-}
-
-返回:
-
+    {@code <select name="education3">}
+        {@code <}feilongDisplay:option baseName="i18n/education" selectedKey="edu.option2" locale="${enLocale}"{@code />}
+    {@code </select>}
+ * </pre>
+ * 
+ * 返回:
+ * 
+ * <pre class="code">
 {@code 
     <select name="education3">
         <option value="edu.option1">Middle School</option>
@@ -144,12 +147,12 @@ edu.option4=Others(Master/PHD)
         <option value="edu.option4">Others(Master/PHD)</option>
     </select>
 }
- * 
  * </pre>
  * 
  * </blockquote>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option">feilongDisplay-option</a>
  * @since 1.5.4
  */
 public class OptionTag extends AbstractStartWriteContentTag implements LocaleSupport{

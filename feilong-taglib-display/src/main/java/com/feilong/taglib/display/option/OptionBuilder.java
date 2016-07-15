@@ -20,14 +20,14 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
-import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.util.ResourceBundleUtil.readAllPropertiesToMap;
 
 /**
- * The Class OptionBuilder.
+ * 用来构造输出 option内容.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
@@ -73,43 +73,35 @@ public class OptionBuilder{
      * @return the string
      */
     private static String buildContentMain(OptionParam optionParam){
-        Map<String, String> map = getKeyValueMap(optionParam);
-        return render(map, optionParam);
-    }
-
-    /**
-     * 获得 key value map.
-     *
-     * @param optionParam
-     *            the option param
-     * @return the key value map
-     */
-    private static Map<String, String> getKeyValueMap(OptionParam optionParam){
-        return ResourceBundleUtil.readAllPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
-    }
-
-    /**
-     * Render.
-     *
-     * @param map
-     *            the map
-     * @param optionParam
-     * @return the object
-     */
-    private static String render(Map<String, String> map,OptionParam optionParam){
         StringBuilder sb = new StringBuilder();
 
-        String selectedKey = optionParam.getSelectedKey();
-
+        //获得 key value map.
+        Map<String, String> map = readAllPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
         for (Map.Entry<String, String> entry : map.entrySet()){
-            String key = entry.getKey();
-            String value = entry.getValue();
-
-            String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : StringUtils.EMPTY;
-
-            String option = Slf4jUtil.format(OPTION_PATTERN, key, selectedStatus, value);
+            String option = buildOption(entry.getKey(), entry.getValue(), optionParam.getSelectedKey());
             sb.append(option).append(SystemUtils.LINE_SEPARATOR);
         }
         return sb.toString();
+    }
+
+    /**
+     * Builds the option.
+     *
+     * @param key
+     *            the key
+     * @param value
+     *            the value
+     * @param selectedKey
+     *            the selected key
+     * @return the string
+     * @since 1.8.1
+     */
+    private static String buildOption(String key,String value,String selectedKey){
+        String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : StringUtils.EMPTY;
+
+        //主要为了国际化使用, 页面显示的时候,显示为  "<option value="edu.option1">初中</option>"
+        //存储到数据库的时候 值存储的是  edu.option1
+        //而 显示的时候,使用 spring message 标签显示
+        return Slf4jUtil.format(OPTION_PATTERN, key, selectedStatus, value);
     }
 }

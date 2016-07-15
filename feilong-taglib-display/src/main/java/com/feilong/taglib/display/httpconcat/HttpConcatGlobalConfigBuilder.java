@@ -92,10 +92,28 @@ public class HttpConcatGlobalConfigBuilder{
      */
     private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
         String baseName = CONFIG_FILE;
+        return getRequiredValue(baseName, keyName, typeClass);
+    }
+
+    /**
+     * Gets the required value.
+     *
+     * @param <T>
+     *            the generic type
+     * @param baseName
+     *            the base name
+     * @param keyName
+     *            the key name
+     * @param typeClass
+     *            the type class
+     * @return the required value
+     * @since 1.8.1
+     */
+    private static <T> T getRequiredValue(String baseName,String keyName,Class<T> typeClass){
         T keyValue = ResourceBundleUtil.getValue(baseName, keyName, typeClass);
 
         if (isNullOrEmpty(keyValue)){
-            String messagePattern = "can not find key:[{}],pls ensure you have put the correct configuration file path:[{}]";
+            String messagePattern = "can't find key:[{}] in file:[{}],pls ensure you have put the correct configuration";
             throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, baseName));
         }
 

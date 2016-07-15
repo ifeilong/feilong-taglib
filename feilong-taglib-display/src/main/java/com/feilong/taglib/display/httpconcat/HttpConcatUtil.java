@@ -44,12 +44,16 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * http concat的核心工具类.
  * 
  * <p>
+ * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
+ * </p>
+ * 
+ * <p>
  * 类加载的时候,会使用 {@link ResourceBundleUtil} 来读取{@link HttpConcatGlobalConfigBuilder#CONFIG_FILE} 配置文件中的
  * {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_CSS} css模板 以及 {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_JS} JS模板<br>
  * </p>
  * 
  * <p>
- * 注意: 请确保文件路径中有配置文件,以及正确的key ,如果获取不到,会 throw {@link IllegalArgumentException}
+ * 注意: 请确保文件路径中有配置文件,以及正确的key,如果获取不到,会 throw {@link IllegalArgumentException}
  * </p>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -57,6 +61,7 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * @see HttpConcatConstants
  * @see HttpConcatParam
  * @see org.apache.commons.collections4.map.LRUMap
+ * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
  * @since 1.0.7
  */
 //XXX 丰富 JavaDOC
@@ -66,7 +71,7 @@ public final class HttpConcatUtil{
     private static final Logger                       LOGGER = LoggerFactory.getLogger(HttpConcatUtil.class);
 
     /** http concat 全局配置. */
-    private static final HttpConcatGlobalConfig       httpConcatGlobalConfig;
+    private static final HttpConcatGlobalConfig       HTTP_CONCAT_GLOBAL_CONFIG;
 
     /**
      * 将结果缓存到map.<br>
@@ -80,8 +85,8 @@ public final class HttpConcatUtil{
     private static final Map<HttpConcatParam, String> CACHE  = new HashMap<HttpConcatParam, String>();
 
     static{
-        httpConcatGlobalConfig = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
-        LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(httpConcatGlobalConfig));
+        HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
+        LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
     }
 
     /** Don't let anyone instantiate this class. */
@@ -119,12 +124,12 @@ public final class HttpConcatUtil{
         }
 
         //是否使用cache
-        boolean isWriteCache = httpConcatGlobalConfig.getDefaultCacheEnable();
+        boolean isWriteCache = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable();
 
         int cacheKeyHashCode = httpConcatParam.hashCode();
         //*************************************************************************************
         //缓存
-        if (httpConcatGlobalConfig.getDefaultCacheEnable()){
+        if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
             //返回此映射中的键-值映射关系数.如果该映射包含的元素大于 Integer.MAX_VALUE,则返回 Integer.MAX_VALUE. 
             int cacheSize = CACHE.size();
 
@@ -136,10 +141,10 @@ public final class HttpConcatUtil{
             }
 
             //超出cache 数量
-            boolean outOfCacheItemSizeLimit = cacheSize >= httpConcatGlobalConfig.getDefaultCacheSizeLimit();
+            boolean outOfCacheItemSizeLimit = cacheSize >= HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheSizeLimit();
             if (outOfCacheItemSizeLimit){
                 String pattern = "hashcode:[{}],cache.size:[{}] >= DEFAULT_CACHESIZELIMIT:[{}],this time will not put result to cache";
-                LOGGER.warn(pattern, cacheKeyHashCode, cacheSize, httpConcatGlobalConfig.getDefaultCacheSizeLimit());
+                LOGGER.warn(pattern, cacheKeyHashCode, cacheSize, HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheSizeLimit());
 
                 //超过,那么就不记录cache
                 isWriteCache = false;
@@ -158,9 +163,9 @@ public final class HttpConcatUtil{
             CACHE.put(httpConcatParam, content);
             LOGGER.debug("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
-            if (httpConcatGlobalConfig.getDefaultCacheEnable()){
+            if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
                 String pattern = "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache";
-                LOGGER.warn(pattern, cacheKeyHashCode, httpConcatGlobalConfig.getDefaultCacheEnable(), isWriteCache);
+                LOGGER.warn(pattern, cacheKeyHashCode, HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable(), isWriteCache);
             }
         }
         return content;
@@ -176,7 +181,7 @@ public final class HttpConcatUtil{
      */
     private static String buildContent(HttpConcatParam httpConcatParam){
         //如果没有设置就使用默认的全局设置
-        boolean globalConcatSupport = BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport());
+        boolean globalConcatSupport = BooleanUtils.toBoolean(HTTP_CONCAT_GLOBAL_CONFIG.getHttpConcatSupport());
         Boolean concatSupport = ObjectUtils.defaultIfNull(httpConcatParam.getHttpConcatSupport(), globalConcatSupport);
 
         // *******************************************************************
@@ -372,11 +377,11 @@ public final class HttpConcatUtil{
      */
     private static String getTemplate(String type){
         if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
-            return httpConcatGlobalConfig.getTemplateCss();
+            return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateCss();
         }
 
         if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
-            return httpConcatGlobalConfig.getTemplateJs();
+            return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateJs();
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
     }

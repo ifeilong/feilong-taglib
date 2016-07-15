@@ -21,7 +21,7 @@ package com.feilong.taglib.display.httpconcat;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public class HttpConcatConstants{
+public final class HttpConcatConstants{
 
     /** css <code>{@value}</code>. */
     public static final String TYPE_CSS = "css";
