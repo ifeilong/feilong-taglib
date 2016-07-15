@@ -24,11 +24,11 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.ParamUtil;
-import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerAndContent;
@@ -43,6 +43,7 @@ import com.feilong.tools.velocity.VelocityUtil;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
+import static com.feilong.core.util.ResourceBundleUtil.readAllPropertiesToMap;
 
 /**
  * 分页工具类.
@@ -119,14 +120,14 @@ public final class PagerBuilder{
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerBuilder.class);
 
-    // *****************************************************************************************
-
     /** Don't let anyone instantiate this class. */
     private PagerBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    // *****************************************************************************************
 
     /**
      * 通常用于ajax分页.
@@ -145,8 +146,7 @@ public final class PagerBuilder{
         Pager<T> pager = buildPager(pagerParams);
         pager.setItemList(itemList);
 
-        String content = buildContent(pagerParams);
-        return new PagerAndContent<T>(pager, content);
+        return new PagerAndContent<T>(pager, buildContent(pagerParams));
     }
 
     /**
@@ -168,12 +168,8 @@ public final class PagerBuilder{
     public static String buildContent(PagerParams pagerParams){
         Validate.notNull(pagerParams, "pagerParams can't be null!");
 
-        int totalCount = pagerParams.getTotalCount();
-
-        // 有数据,不是空
-        // 如果=0 应该显示其他内容
-        if (totalCount <= 0){
-            LOGGER.info("totalCount value is [{}] not > 0,will return empty", totalCount);
+        if (pagerParams.getTotalCount() <= 0){
+            LOGGER.debug("totalCount value is [{}] not > 0,will return empty", pagerParams.getTotalCount());
             return StringUtils.EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         }
 
@@ -205,36 +201,20 @@ public final class PagerBuilder{
      */
     private static String buildContentMain(PagerParams pagerParams){
         if (pagerParams.getDebugIsNotParseVM()){
+            LOGGER.debug("param [debugIsNotParseVM] is [true],use return empty~");
             return StringUtils.EMPTY;
         }
-
-        PagerVMParam pagerVMParam = buildPagerVMParam(pagerParams);
-        Map<String, String> i18nMap = buildI18nMap(pagerParams);
-
         // ****************设置变量参数************************************************************
         Map<String, Object> vmParamMap = new HashMap<String, Object>();
-        vmParamMap.put(PagerConstants.VM_KEY_PAGERVMPARAM, pagerVMParam);
-        vmParamMap.put(PagerConstants.VM_KEY_I18NMAP, i18nMap);
+        vmParamMap.put(PagerConstants.VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
+        vmParamMap.put(PagerConstants.VM_KEY_I18NMAP, buildI18nMap(pagerParams));
 
-        String vmPath = pagerParams.getVmPath();
+        String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(pagerParams.getVmPath(), vmParamMap);
+
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parse: [{}] ,use vmParamMap:{}", vmPath, JsonUtil.format(vmParamMap));
+            LOGGER.debug("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.format(vmParamMap), content);
         }
-        String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(vmPath, vmParamMap);
-        LOGGER.debug("parse: [{}] ,content result:{}", vmPath, content);
         return content;
-    }
-
-    /**
-     * Builds the i18n map 国际化.
-     * 
-     * @param pagerParams
-     *            the pager params
-     * @return the map
-     * @since 1.0.5
-     */
-    private static Map<String, String> buildI18nMap(PagerParams pagerParams){
-        return ResourceBundleUtil.readAllPropertiesToMap(PagerConstants.I18N_FEILONG_PAGER, pagerParams.getLocale());
     }
 
     /**
@@ -250,12 +230,17 @@ public final class PagerBuilder{
     private static <T> PagerVMParam buildPagerVMParam(PagerParams pagerParams){
         Pager<T> pager = buildPager(pagerParams);
 
+        int allPageNo = pager.getAllPageNo();
+        int currentPageNo = pager.getCurrentPageNo();
+        // 最多显示多少个导航页码
+        Integer maxIndexPages = buildMaxIndexPages(allPageNo, pagerParams.getMaxIndexPages());
+
         // ***********************************************************************
-        int[] startAndEndIteratorIndexs = getStartAndEndIteratorIndexs(pagerParams, pager); // 获得开始和结束的索引
+        Pair<Integer, Integer> startAndEndIndexPair = buildStartAndEndIndexPair(allPageNo, currentPageNo, maxIndexPages); //获得开始和结束的索引
 
         // ****************************************************************************************
         // 获得所有页码的连接.
-        Map<Integer, String> allUseIndexAndHrefMap = getAllUseIndexAndHrefMap(pagerParams, pager, startAndEndIteratorIndexs);
+        Map<Integer, String> allUseIndexAndHrefMap = buildAllUseIndexAndHrefMap(pagerParams, pager, startAndEndIndexPair);
 
         // ****************************************************************************************
         int prePageNo = pager.getPrePageNo();
@@ -266,27 +251,28 @@ public final class PagerBuilder{
         pagerVMParam.setSkin(pagerParams.getSkin());// 皮肤
         pagerVMParam.setPagerType(pagerParams.getPagerType());//分页类型
 
+        // ****************************************************************************************
         pagerVMParam.setTotalCount(pagerParams.getTotalCount());// 总行数,总结果数
 
-        pagerVMParam.setCurrentPageNo(pager.getCurrentPageNo());// 当前页
-        pagerVMParam.setAllPageNo(pager.getAllPageNo());// 总页数
+        pagerVMParam.setCurrentPageNo(currentPageNo);// 当前页
+        pagerVMParam.setAllPageNo(allPageNo);// 总页数
         pagerVMParam.setPrePageNo(prePageNo);
         pagerVMParam.setNextPageNo(nextPageNo);
 
-        pagerVMParam.setStartIteratorIndex(startAndEndIteratorIndexs[0]);// 导航开始页码
-        pagerVMParam.setEndIteratorIndex(startAndEndIteratorIndexs[1]);// 导航结束页码
+        pagerVMParam.setStartIteratorIndex(startAndEndIndexPair.getLeft());// 导航开始页码
+        pagerVMParam.setEndIteratorIndex(startAndEndIndexPair.getRight());// 导航结束页码
 
         // ****************************************************************************************
         pagerVMParam.setPreUrl(allUseIndexAndHrefMap.get(prePageNo)); // 上一页链接
         pagerVMParam.setNextUrl(allUseIndexAndHrefMap.get(nextPageNo));// 下一页链接
         pagerVMParam.setFirstUrl(allUseIndexAndHrefMap.get(1));// firstPageNo 第一页的链接
         pagerVMParam.setLastUrl(allUseIndexAndHrefMap.get(pager.getAllPageNo()));//lastPageNo 最后一页的链接
+        // ****************************************************************************************
 
         pagerVMParam.setPagerUrlTemplate(buildPagerUrlTemplate(allUseIndexAndHrefMap));
-
         pagerVMParam.setPageParamName(pagerParams.getPageParamName());
-
-        pagerVMParam.setIteratorIndexMap(getIteratorIndexAndHrefMap(allUseIndexAndHrefMap, startAndEndIteratorIndexs));
+        pagerVMParam.setIteratorIndexMap(
+                        getIteratorIndexAndHrefMap(allUseIndexAndHrefMap, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight()));
         return pagerVMParam;
     }
 
@@ -322,28 +308,29 @@ public final class PagerBuilder{
         Integer defaultTemplatePageNo = PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 
         PagerUrlTemplate pagerUrlTemplate = new PagerUrlTemplate();
-        pagerUrlTemplate.setHref(indexAndHrefMap.get(defaultTemplatePageNo));// 模板链接
         pagerUrlTemplate.setTemplateValue(defaultTemplatePageNo);
+        pagerUrlTemplate.setHref(indexAndHrefMap.get(defaultTemplatePageNo));// 模板链接
         return pagerUrlTemplate;
     }
+
+    //*************************************************************************************************
 
     /**
      * 要循环的 index和 end 索引 =href map.
      *
      * @param indexAndHrefMap
      *            the index and href map
-     * @param startAndEndIteratorIndexs
-     *            the start and end iterator indexs
+     * @param startIteratorIndex
+     *            开始迭代索引编号
+     * @param endIteratorIndex
+     *            结束迭代索引编号
      * @return the iterator index and href map
-     * @since 1.0.5
+     * @since 1.8.1 change method param
      */
     private static LinkedHashMap<Integer, String> getIteratorIndexAndHrefMap(
                     Map<Integer, String> indexAndHrefMap,
-                    int[] startAndEndIteratorIndexs){
-
-        int startIteratorIndex = startAndEndIteratorIndexs[0];// 开始迭代索引编号
-        int endIteratorIndex = startAndEndIteratorIndexs[1]; // 结束迭代索引编号        
-
+                    int startIteratorIndex,
+                    int endIteratorIndex){
         LinkedHashMap<Integer, String> map = newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
         for (int i = startIteratorIndex; i <= endIteratorIndex; ++i){
             map.put(i, indexAndHrefMap.get(i));
@@ -390,12 +377,10 @@ public final class PagerBuilder{
      * @return key是分页页码,value是解析之后的链接
      * @since 1.4.0
      */
-    private static <T> Map<Integer, String> getAllUseIndexAndHrefMap(
+    private static <T> Map<Integer, String> buildAllUseIndexAndHrefMap(
                     PagerParams pagerParams,
                     Pager<T> pager,
-                    int[] startAndEndIteratorIndexs){
-        Set<Integer> indexSet = getAllUseIndexSet(pager, startAndEndIteratorIndexs);
-
+                    Pair<Integer, Integer> startAndEndIndexPair){
         String pageParamName = pagerParams.getPageParamName();
         PagerType pagerType = pagerParams.getPagerType();
 
@@ -404,6 +389,7 @@ public final class PagerBuilder{
 
         String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
         // *************************************************************************
+        Set<Integer> indexSet = buildAllUseIndexSet(pager, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight());
         Map<Integer, String> returnMap = new HashMap<Integer, String>();
         for (Integer index : indexSet){
             String link = pagerType == PagerType.NO_REDIRECT ? templateEncodedUrl
@@ -454,15 +440,14 @@ public final class PagerBuilder{
      *            the generic type
      * @param pager
      *            the pager
-     * @param startIteratorIndexAndEndIteratorIndexs
-     *            the start iterator index and end iterator indexs
+     * @param startIteratorIndex
+     *            开始迭代索引编号
+     * @param endIteratorIndex
+     *            结束迭代索引编号
      * @return the index set
-     * @since 1.4.0
+     * @since 1.8.1 change method param
      */
-    private static <T> Set<Integer> getAllUseIndexSet(Pager<T> pager,int[] startIteratorIndexAndEndIteratorIndexs){
-        int startIteratorIndex = startIteratorIndexAndEndIteratorIndexs[0];// 开始迭代索引编号
-        int endIteratorIndex = startIteratorIndexAndEndIteratorIndexs[1];// 结束迭代索引编号
-
+    private static <T> Set<Integer> buildAllUseIndexSet(Pager<T> pager,int startIteratorIndex,int endIteratorIndex){
         Set<Integer> indexSet = new HashSet<Integer>();// 所有需要生成url 的 index值
         indexSet.add(PagerConstants.DEFAULT_TEMPLATE_PAGE_NO);// 模板链接 用于前端操作
         indexSet.add(pager.getPrePageNo());//prePageNo
@@ -477,25 +462,33 @@ public final class PagerBuilder{
     }
 
     /**
-     * 获得开始和结束的索引.
-     *
-     * @param <T>
-     *            the generic type
+     * Builds the i18n map 国际化.
+     * 
      * @param pagerParams
      *            the pager params
-     * @param pager
-     *            the pager
+     * @return the map
+     * @since 1.0.5
+     */
+    private static Map<String, String> buildI18nMap(PagerParams pagerParams){
+        return readAllPropertiesToMap(PagerConstants.I18N_FEILONG_PAGER, pagerParams.getLocale());
+    }
+
+    //****************************************************************************************************
+
+    /**
+     * 获得开始和结束的索引.
+     *
+     * @param allPageNo
+     *            总页码
+     * @param currentPageNo
+     *            当前页面
+     * @param maxIndexPages
+     *            最大显示页码数量
      * @return 获得开始和结束的索引
      */
-    private static <T> int[] getStartAndEndIteratorIndexs(PagerParams pagerParams,Pager<T> pager){
-        int currentPageNo = pager.getCurrentPageNo();
-        int allPageNo = pager.getAllPageNo();
-
-        // 最多显示多少个导航页码
-        Integer maxIndexPages = buildMaxIndexPages(allPageNo, pagerParams.getMaxIndexPages());
-
+    private static Pair<Integer, Integer> buildStartAndEndIndexPair(int allPageNo,int currentPageNo,Integer maxIndexPages){
         if (allPageNo <= maxIndexPages){
-            return new int[] { 1, allPageNo };
+            return Pair.of(1, allPageNo);
         }
 
         //**********总页数大于最大导航页数******************************************************************
@@ -509,15 +502,15 @@ public final class PagerBuilder{
         //**************************************************************************************
         // 当前页<=(左边页数+1)
         if (currentPageNo <= (leftCount + 1)){
-            return new int[] { 1, maxIndexPages }; // 此时迭代结束为maxIndexPages
+            return Pair.of(1, maxIndexPages); // 此时迭代结束为maxIndexPages
         }
 
         // 如果当前页+右边页>=总页数
         if (currentPageNo + rightCount >= allPageNo){
-            return new int[] { allPageNo - maxIndexPages + 1, allPageNo };// 此时迭代结束为allPageNo
+            return Pair.of(allPageNo - maxIndexPages + 1, allPageNo);// 此时迭代结束为allPageNo
         }
 
-        return new int[] { currentPageNo - leftCount, currentPageNo + rightCount };
+        return Pair.of(currentPageNo - leftCount, currentPageNo + rightCount);
     }
 
     /**

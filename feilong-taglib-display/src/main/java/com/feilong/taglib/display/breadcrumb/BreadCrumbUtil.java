@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.URIUtil;
 import com.feilong.core.net.URLUtil;
-import com.feilong.core.util.StatisticsUtil;
+import com.feilong.core.util.AggregateUtil;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
@@ -186,7 +186,7 @@ public class BreadCrumbUtil{
 
         if (isNullOrEmpty(currentPath)){
             //find all
-            Map<T, Integer> groupCount = StatisticsUtil.groupCount(breadCrumbEntityList, "parentId");
+            Map<T, Integer> groupCount = AggregateUtil.groupCount(breadCrumbEntityList, "parentId");
             for (Map.Entry<T, Integer> entry : groupCount.entrySet()){
                 Integer value = entry.getValue();
                 Validate.isTrue(value <= 1, "currentPath isNullOrEmpty,but breadCrumbEntityList has repeat parentId data!");
