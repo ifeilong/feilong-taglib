@@ -24,7 +24,7 @@ import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.tools.slf4j.Slf4jUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.util.ResourceBundleUtil.readAllPropertiesToMap;
+import static com.feilong.core.util.ResourceBundleUtil.readPropertiesToMap;
 
 /**
  * 用来构造输出 option内容.
@@ -76,7 +76,7 @@ public class OptionBuilder{
         StringBuilder sb = new StringBuilder();
 
         //获得 key value map.
-        Map<String, String> map = readAllPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
+        Map<String, String> map = readPropertiesToMap(optionParam.getBaseName(), optionParam.getLocale());
         for (Map.Entry<String, String> entry : map.entrySet()){
             String option = buildOption(entry.getKey(), entry.getValue(), optionParam.getSelectedKey());
             sb.append(option).append(SystemUtils.LINE_SEPARATOR);
