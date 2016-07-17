@@ -43,7 +43,7 @@ import com.feilong.tools.velocity.VelocityUtil;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.ResourceBundleUtil.readPropertiesToMap;
+import static com.feilong.core.util.ResourceBundleUtil.readToMap;
 
 /**
  * 分页工具类.
@@ -470,7 +470,7 @@ public final class PagerBuilder{
      * @since 1.0.5
      */
     private static Map<String, String> buildI18nMap(PagerParams pagerParams){
-        return readPropertiesToMap(PagerConstants.I18N_FEILONG_PAGER, pagerParams.getLocale());
+        return readToMap(PagerConstants.I18N_FEILONG_PAGER, pagerParams.getLocale());
     }
 
     //****************************************************************************************************
