@@ -23,6 +23,8 @@ import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.AbstractConditionalTag;
 
+import static com.feilong.core.date.DateUtil.toDate;
+
 /**
  * 判断一个日期,是否在一个时间区间内.
  * 
@@ -93,8 +95,8 @@ public class IsInTimeTag extends AbstractConditionalTag{
      * @return 如果 指定日期 <code>date</code> after <code>beginTime</code>, 并且 指定日期 <code>date</code> before <code>endTime</code>,返回true
      */
     private static boolean isInTime(Date date,String beginTime,String endTime,String datePattern){
-        Date beginTimeDate = DateUtil.toDate(beginTime, datePattern);
-        Date endTimeDate = DateUtil.toDate(endTime, datePattern);
+        Date beginTimeDate = toDate(beginTime, datePattern);
+        Date endTimeDate = toDate(endTime, datePattern);
         return DateUtil.isInTime(date, beginTimeDate, endTimeDate);
     }
 
