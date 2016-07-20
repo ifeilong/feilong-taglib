@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.breadcrumb;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,7 +110,7 @@ public class BreadCrumbUtil{
         List<BreadCrumbEntity<Object>> currentBreadCrumbEntityTreeList = lookUpCurrentBreadCrumbEntityTreeList(breadCrumbParams);
 
         if (isNullOrEmpty(currentBreadCrumbEntityTreeList)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         //重构path地址

@@ -68,6 +68,6 @@ package com.feilong.taglib.display;
 ////			stringBuilder.append(HTMLSpan.createSpan(htmlSpanEntity));
 ////			return stringBuilder.toString();
 //		}
-//		return StringUtils.EMPTY;
+//		return EMPTY;
 //	}
 //}

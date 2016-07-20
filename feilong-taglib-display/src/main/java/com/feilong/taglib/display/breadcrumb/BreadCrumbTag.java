@@ -15,11 +15,12 @@
  */
 package com.feilong.taglib.display.breadcrumb;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -132,7 +133,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     private List<BreadCrumbEntity<Object>> breadCrumbEntityList;
 
     /** url前缀, 用来拼接 {@link BreadCrumbEntity#getPath()},可以不设置,那么原样输出{@link BreadCrumbEntity#getPath()}. */
-    private String                         urlPrefix        = StringUtils.EMPTY;
+    private String                         urlPrefix        = EMPTY;
 
     /** 连接符,默认>. */
     private String                         connector        = BreadCrumbConstants.DEFAULT_CONNECTOR;
@@ -153,7 +154,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
         if (isNullOrEmpty(opBreadCrumbEntityList)){
             LOGGER.warn("breadCrumbEntityList is NullOrEmpty!!,return empty!!");
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         BreadCrumbParams breadCrumbParams = new BreadCrumbParams();

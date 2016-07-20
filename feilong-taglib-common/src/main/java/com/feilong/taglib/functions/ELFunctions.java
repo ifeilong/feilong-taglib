@@ -15,9 +15,10 @@
  */
 package com.feilong.taglib.functions;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.Iterator;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,6 +105,6 @@ public final class ELFunctions{
             LOGGER.error("json format:" + obj.toString(), e);
         }
         //此方法应用于jsp标签,如果抛出异常,可能页面不能持续渲染, 但是不会显示异常页面, 因此,此处,直接返回null
-        return StringUtils.EMPTY;
+        return EMPTY;
     }
 }

@@ -15,10 +15,10 @@
  */
 package com.feilong.taglib.common;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.Iterator;
 import java.util.Objects;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.taglib.AbstractConditionalTag;
@@ -90,7 +90,7 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
             //而 org.apache.commons.lang3.ObjectUtils#toString(Object) 返回  ""  empty
 
             //如果发现有equals 的,那么就直接返回true
-            if (Objects.toString(object, StringUtils.EMPTY).equals(Objects.toString(value, StringUtils.EMPTY))){
+            if (Objects.toString(object, EMPTY).equals(Objects.toString(value, EMPTY))){
                 return true;
             }
         }

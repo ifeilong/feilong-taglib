@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -170,7 +172,7 @@ public final class PagerBuilder{
 
         if (pagerParams.getTotalCount() <= 0){
             LOGGER.debug("totalCount value is [{}] not > 0,will return empty", pagerParams.getTotalCount());
-            return StringUtils.EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
+            return EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         }
 
         //**********************************************************************************************
@@ -202,7 +204,7 @@ public final class PagerBuilder{
     private static String buildContentMain(PagerParams pagerParams){
         if (pagerParams.getDebugIsNotParseVM()){
             LOGGER.debug("param [debugIsNotParseVM] is [true],use return empty~");
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         // ****************设置变量参数************************************************************
         Map<String, Object> vmParamMap = new HashMap<String, Object>();

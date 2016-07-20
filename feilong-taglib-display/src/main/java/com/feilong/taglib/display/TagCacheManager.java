@@ -15,10 +15,11 @@
  */
 package com.feilong.taglib.display;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +82,7 @@ public final class TagCacheManager{
         }else{
             LOGGER.info("the cache status is disable!");
         }
-        return StringUtils.EMPTY;
+        return EMPTY;
     }
 
     /**

@@ -15,11 +15,11 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
@@ -82,16 +82,16 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     protected Object buildContent(HttpServletRequest request){
         String bodyContentSrc = bodyContent.getString();
         if (isNullOrEmpty(bodyContentSrc)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         if (isNullOrEmpty(type)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         List<String> itemSrcList = HttpConcatUtil.toItemSrcList(bodyContentSrc);
         if (isNullOrEmpty(itemSrcList)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
         if (isNullOrEmpty(domain)){
             domain = getHttpServletRequest().getContextPath();

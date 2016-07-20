@@ -15,9 +15,10 @@
  */
 package com.feilong.taglib.display.option;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.feilong.taglib.display.TagCacheManager;
@@ -97,7 +98,7 @@ public class OptionBuilder{
      * @since 1.8.1
      */
     private static String buildOption(String key,String value,String selectedKey){
-        String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : StringUtils.EMPTY;
+        String selectedStatus = key.equals(selectedKey) ? SELECTED_STRING : EMPTY;
 
         //主要为了国际化使用, 页面显示的时候,显示为  "<option value="edu.option1">初中</option>"
         //存储到数据库的时候 值存储的是  edu.option1

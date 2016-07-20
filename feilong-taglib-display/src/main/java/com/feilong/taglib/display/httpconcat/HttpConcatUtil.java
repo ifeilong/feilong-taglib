@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,7 +122,7 @@ public final class HttpConcatUtil{
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
         if (isNullOrEmpty(itemSrcList)){
             LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         //是否使用cache

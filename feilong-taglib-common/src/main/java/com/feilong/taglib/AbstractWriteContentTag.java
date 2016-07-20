@@ -15,8 +15,7 @@
  */
 package com.feilong.taglib;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
 import java.util.Date;
@@ -24,12 +23,14 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.servlet.http.RequestUtil;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * 输出内容的标签.
@@ -91,7 +92,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
      * @return the string
      */
     protected String buildExtraKeyInfoToLog(){
-        return StringUtils.EMPTY;
+        return EMPTY;
     }
 
     // *******************************************************************
