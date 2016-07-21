@@ -16,10 +16,9 @@
 package com.feilong.taglib.display.option;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
 import java.util.Map;
-
-import org.apache.commons.lang3.SystemUtils;
 
 import com.feilong.taglib.display.TagCacheManager;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -80,7 +79,7 @@ public class OptionBuilder{
         Map<String, String> map = readToMap(optionParam.getBaseName(), optionParam.getLocale());
         for (Map.Entry<String, String> entry : map.entrySet()){
             String option = buildOption(entry.getKey(), entry.getValue(), optionParam.getSelectedKey());
-            sb.append(option).append(SystemUtils.LINE_SEPARATOR);
+            sb.append(option).append(LINE_SEPARATOR);
         }
         return sb.toString();
     }
