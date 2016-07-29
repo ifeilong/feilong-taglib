@@ -120,7 +120,6 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * @see <a href="http://www.webdesignpractices.com/navigation/breadcrumb.html">Breadcrumb Navigation</a>
  * @since 1.2.2
  */
-//TODO ADD javadoc
 public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
@@ -129,6 +128,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     /** The Constant LOGGER. */
     private static final Logger            LOGGER           = LoggerFactory.getLogger(BreadCrumbTag.class);
 
+    //********************************************************************************************
     /** breadCrumbEntityList,用户所有可以访问的菜单url List,不要求已经排完序. */
     private List<BreadCrumbEntity<Object>> breadCrumbEntityList;
 
@@ -140,6 +140,8 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
 
     /** vm的路径. */
     private String                         vmPath           = BreadCrumbConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
+
+    //********************************************************************************************
 
     /**
      * 实现自定义站点地图数据提供程序的途径.
@@ -165,6 +167,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
         return BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams);
     }
 
+    //********************************************************************************************
     /**
      * Construct bread crumb entity list.
      *
