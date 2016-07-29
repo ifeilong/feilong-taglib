@@ -15,15 +15,16 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
+import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
@@ -41,6 +42,7 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 
 /**
  * http concat的核心工具类.
@@ -76,15 +78,18 @@ public final class HttpConcatUtil{
     private static final HttpConcatGlobalConfig       HTTP_CONCAT_GLOBAL_CONFIG;
 
     /**
-     * 将结果缓存到map.<br>
+     * 将结果缓存到map.
+     * 
+     * <p>
      * key是入参 {@link HttpConcatParam}对象,value是解析完的字符串<br>
      * 该cache里面value不会存放null/empty
+     * </p>
      * 
      * @since 1.0.7
      */
     //TODO change to ConcurrentHashMap
     //这里对线程安全的要求不高,仅仅是插入和读取的操作,即使出了线程安全问题,重新解析js/css标签代码并加载即可
-    private static final Map<HttpConcatParam, String> CACHE  = new HashMap<HttpConcatParam, String>();
+    private static final Map<HttpConcatParam, String> CACHE  = newHashMap(500);
 
     static{
         HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
@@ -184,7 +189,7 @@ public final class HttpConcatUtil{
     private static String buildContent(HttpConcatParam httpConcatParam){
         //如果没有设置就使用默认的全局设置
         boolean globalConcatSupport = BooleanUtils.toBoolean(HTTP_CONCAT_GLOBAL_CONFIG.getHttpConcatSupport());
-        Boolean concatSupport = ObjectUtils.defaultIfNull(httpConcatParam.getHttpConcatSupport(), globalConcatSupport);
+        Boolean concatSupport = defaultIfNull(httpConcatParam.getHttpConcatSupport(), globalConcatSupport);
 
         // *******************************************************************
         // 标准化 httpConcatParam,比如list去重,标准化domain等等
@@ -218,31 +223,6 @@ public final class HttpConcatUtil{
      * @return the http concat param
      */
     private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-        //******************domain*******************************************
-        String domain = httpConcatParam.getDomain();
-        // 格式化 domain 成 http://www.feilong.com/ 形式
-        if (isNotNullOrEmpty(domain)){
-            if (!domain.endsWith("/")){
-                domain = domain + "/";
-            }
-        }else{
-            domain = "";
-        }
-
-        //********************root*****************************************
-        String root = httpConcatParam.getRoot();
-        // 格式化 root 成 xxxx/xxx/ 形式,
-        if (isNotNullOrEmpty(root)){
-            if (!root.endsWith("/")){
-                root = root + "/";
-            }
-            if (root.startsWith("/")){
-                root = StringUtil.substring(root, 1);
-            }
-        }else{
-            root = "";
-        }
-
         // ********************itemSrcList*******************************************************
         // 判断item list
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
@@ -265,8 +245,8 @@ public final class HttpConcatUtil{
         // *******************************************************************
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
         standardHttpConcatParam.setItemSrcList(noRepeatitemList);
-        standardHttpConcatParam.setDomain(domain);
-        standardHttpConcatParam.setRoot(root);
+        standardHttpConcatParam.setDomain(buildDomain(httpConcatParam));
+        standardHttpConcatParam.setRoot(doWithRoot(httpConcatParam));
         standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
         standardHttpConcatParam.setType(httpConcatParam.getType());
         standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
@@ -277,6 +257,51 @@ public final class HttpConcatUtil{
         }
         return standardHttpConcatParam;
 
+    }
+
+    /**
+     * Builds the domain.
+     *
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the string
+     * @since 1.8.3
+     */
+    private static String buildDomain(HttpConcatParam httpConcatParam){
+        String domain = httpConcatParam.getDomain();
+        if (isNullOrEmpty(domain)){
+            return EMPTY;
+        }
+
+        // 格式化 domain 成 http://www.feilong.com/ 形式
+        if (!domain.endsWith("/")){
+            return domain + "/";
+        }
+        return domain;
+    }
+
+    /**
+     * Do with root.
+     *
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the string
+     * @since 1.8.3
+     */
+    private static String doWithRoot(HttpConcatParam httpConcatParam){
+        String root = httpConcatParam.getRoot();
+        if (isNullOrEmpty(root)){
+            return EMPTY;
+        }
+
+        // 格式化 root 成 xxxx/xxx/ 形式,
+        if (!root.endsWith("/")){
+            root = root + "/";
+        }
+        if (root.startsWith("/")){
+            root = StringUtil.substring(root, 1);
+        }
+        return root;
     }
 
     // *****************************************************************************
@@ -378,11 +403,11 @@ public final class HttpConcatUtil{
      *         {@link UnsupportedOperationException}
      */
     private static String getTemplate(String type){
-        if (HttpConcatConstants.TYPE_CSS.equalsIgnoreCase(type)){
+        if (TYPE_CSS.equalsIgnoreCase(type)){
             return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateCss();
         }
 
-        if (HttpConcatConstants.TYPE_JS.equalsIgnoreCase(type)){
+        if (TYPE_JS.equalsIgnoreCase(type)){
             return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateJs();
         }
         throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");

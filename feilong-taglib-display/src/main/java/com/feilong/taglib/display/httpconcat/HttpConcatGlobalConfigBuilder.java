@@ -92,8 +92,7 @@ public class HttpConcatGlobalConfigBuilder{
      * @return the value if not null or empty
      */
     private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
-        String baseName = CONFIG_FILE;
-        return getRequiredValue(baseName, keyName, typeClass);
+        return getRequiredValue(CONFIG_FILE, keyName, typeClass);
     }
 
     /**
