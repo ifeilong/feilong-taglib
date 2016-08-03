@@ -46,7 +46,7 @@ feilong taglib jar 你可以在这里 https://github.com/venusdrogon/feilong-pla
 	
 		....
 		<properties>
-			<version.feilong-platform>1.8.2</version.feilong-platform>
+			<version.feilong-platform>1.8.3</version.feilong-platform>
 			....
 		</properties>
 		
