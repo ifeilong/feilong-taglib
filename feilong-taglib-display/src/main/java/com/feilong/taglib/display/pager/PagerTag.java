@@ -15,11 +15,11 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
@@ -218,7 +218,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
-        pagerParams.setLocale(ObjectUtils.defaultIfNull(toLocale(locale), request.getLocale()));
+        pagerParams.setLocale(defaultIfNull(toLocale(locale), request.getLocale()));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         pagerParams.setSkin(skin);

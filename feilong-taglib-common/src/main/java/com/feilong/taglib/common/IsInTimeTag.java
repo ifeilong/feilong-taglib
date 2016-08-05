@@ -15,9 +15,9 @@
  */
 package com.feilong.taglib.common;
 
-import java.util.Date;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.Date;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
@@ -72,7 +72,7 @@ public class IsInTimeTag extends AbstractConditionalTag{
     @Override
     public boolean condition(){
         // 不能直接使用 date ,全局变量 一旦赋值 不会变化
-        Date compareDate = ObjectUtils.defaultIfNull(date, new Date());
+        Date compareDate = defaultIfNull(date, new Date());
         return null != beginDate ? DateUtil.isInTime(compareDate, beginDate, endDate)
                         : isInTime(compareDate, beginDateString, endDateString, pattern);
     }

@@ -15,11 +15,11 @@
  */
 package com.feilong.taglib.display.option;
 
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.ObjectUtils;
 
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
@@ -189,7 +189,7 @@ public class OptionTag extends AbstractStartWriteContentTag implements LocaleSup
     protected Object buildContent(HttpServletRequest request){
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
-        optionParam.setLocale(ObjectUtils.defaultIfNull(toLocale(locale), request.getLocale()));
+        optionParam.setLocale(defaultIfNull(toLocale(locale), request.getLocale()));
         optionParam.setSelectedKey(selectedKey);
         return OptionBuilder.buildContent(optionParam);
     }
