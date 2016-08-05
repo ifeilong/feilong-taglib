@@ -30,7 +30,7 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.servlet.http.RequestUtil;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 输出内容的标签.
@@ -72,7 +72,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
         if (LOGGER.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String tagLog = isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
-            String useTime = getIntervalForView(beginDate);
+            String useTime = formatDuration(beginDate);
             LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
         }
     }

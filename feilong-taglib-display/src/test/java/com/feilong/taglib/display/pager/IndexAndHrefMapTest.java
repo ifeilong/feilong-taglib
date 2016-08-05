@@ -29,7 +29,7 @@ import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * The Class PagerUtilTest.
@@ -81,6 +81,6 @@ public class IndexAndHrefMapTest extends BasePagerTest{
             declaredMethod.invoke(PagerBuilder.class, pagerParams, set);
         }
 
-        LOGGER.debug("{},time:{}", z, getIntervalForView(beginDate));
+        LOGGER.debug("{},time:{}", z, formatDuration(beginDate));
     }
 }

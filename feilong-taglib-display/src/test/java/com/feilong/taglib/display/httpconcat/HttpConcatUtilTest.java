@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 /**
@@ -77,7 +77,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
                 //				httpConcatParam = null;
                 //				System.gc();
             }
-            map.put(j, getIntervalForView(beginDate));
+            map.put(j, formatDuration(beginDate));
         }
         LOGGER.debug(JsonUtil.format(map));
     }

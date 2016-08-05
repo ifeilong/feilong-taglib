@@ -28,7 +28,7 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.taglib.display.pager.command.PagerType;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * The Class PagerUtilTest.
@@ -62,7 +62,7 @@ public class PagerUtilTest extends BasePagerTest{
             // LOGGER.debug("the param content:\n\n{}", content);
             // LOGGER.debug("{} ", i);
         }
-        LOGGER.debug("{}次\t{}", j, getIntervalForView(beginDate));
+        LOGGER.debug("{}次\t{}", j, formatDuration(beginDate));
     }
 
     /**
