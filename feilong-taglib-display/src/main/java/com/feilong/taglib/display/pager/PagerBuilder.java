@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
+import static com.feilong.taglib.display.pager.command.PagerType.NO_REDIRECT;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.HashMap;
@@ -387,14 +389,14 @@ public final class PagerBuilder{
         PagerType pagerType = pagerParams.getPagerType();
 
         //*********************这种替换的性能要高***********************************************
-        CharSequence targetForReplace = pageParamName + "=" + PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
+        CharSequence targetForReplace = pageParamName + "=" + DEFAULT_TEMPLATE_PAGE_NO;
 
         String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
         // *************************************************************************
         Set<Integer> indexSet = buildAllUseIndexSet(pager, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight());
         Map<Integer, String> returnMap = new HashMap<Integer, String>();
         for (Integer index : indexSet){
-            String link = pagerType == PagerType.NO_REDIRECT ? templateEncodedUrl
+            String link = pagerType == NO_REDIRECT ? templateEncodedUrl
                             : templateEncodedUrl.replace(targetForReplace, pageParamName + "=" + index);
             returnMap.put(index, link);
         }
@@ -414,7 +416,7 @@ public final class PagerBuilder{
      * @since 1.6.1
      */
     private static String getTemplateEncodedUrl(PagerParams pagerParams,String pageParamName,PagerType pagerType){
-        boolean isNoRedirect = PagerType.NO_REDIRECT == pagerType;
+        boolean isNoRedirect = NO_REDIRECT == pagerType;
         if (isNoRedirect){
             return "javascript:void(0);";//ajaxLink
         }

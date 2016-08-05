@@ -328,7 +328,7 @@ public final class HttpConcatUtil{
             sb.append("??");
 
             ToStringConfig toStringConfig = new ToStringConfig(ToStringConfig.DEFAULT_CONNECTOR);
-            sb.append(ConvertUtil.toString(toStringConfig, itemSrcList));
+            sb.append(ConvertUtil.toString(itemSrcList, toStringConfig));
         }
         appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
