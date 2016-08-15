@@ -36,7 +36,7 @@ taglib	|说明
 
 # :dragon: Maven使用配置
 
-feilong taglib jar 你可以在这里 https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/taglib 浏览 
+feilong taglib jar你可以在 [仓库]( https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/taglib "仓库") 浏览 
 
 在maven `pom.xml` 中,您可以通过以下方式来配置:
 
