@@ -27,7 +27,7 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.comparator.BreadCrumbEntityComparator;
 import com.feilong.tools.jsonlib.JsonUtil;
 
-import static com.feilong.core.util.SortUtil.sort;
+import static com.feilong.core.util.SortUtil.sortList;
 
 /**
  * The Class SiteMapTagTest.
@@ -68,7 +68,7 @@ public class BreadCrumbUtilTest{
 
         //TreeMap<Number, BreadCrumbEntity> treeMap = new TreeMap<Number, BreadCrumbEntity>();
 
-        sort(list, new BreadCrumbEntityComparator());
+        sortList(list, new BreadCrumbEntityComparator());
 
         LOGGER.debug(JsonUtil.format(list));
     }
