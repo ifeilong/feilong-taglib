@@ -1,4 +1,4 @@
-feilong-platform feilong-taglib
+feilong-taglib
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -7,7 +7,7 @@ feilong-platform feilong-taglib
 
 Reduce development, Release ideas
 
-#Welcome to feilong-platform feilong-taglib
+#Welcome to feilong-taglib
 
 `封装了常用的自定义标签`
 
