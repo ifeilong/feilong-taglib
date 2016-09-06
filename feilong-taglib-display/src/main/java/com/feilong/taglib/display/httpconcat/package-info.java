@@ -1,5 +1,5 @@
 /**
- * 从原来的 bs tengineConnect css js请求合并标签 移植
+ * 从原来的 bs tengineConnect css js请求合并标签移植.
  * 
  * 目前适用于 :
  * tengine ngx_http_concat_module

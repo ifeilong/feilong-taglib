@@ -21,13 +21,13 @@ package com.feilong.taglib.display.httpconcat;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public final class HttpConcatConstants{
+final class HttpConcatConstants{
 
     /** css <code>{@value}</code>. */
-    public static final String TYPE_CSS = "css";
+    static final String TYPE_CSS = "css";
 
     /** js <code>{@value}</code>. */
-    public static final String TYPE_JS  = "js";
+    static final String TYPE_JS  = "js";
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatConstants(){

@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import java.util.ResourceBundle;
+
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
@@ -27,29 +29,34 @@ import static com.feilong.core.bean.ConvertUtil.convert;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.0
+ * @since 1.8.8 change class Access Modifiers
  */
-public class HttpConcatGlobalConfigBuilder{
+class HttpConcatGlobalConfigBuilder{
 
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
-    public static final String CONFIG_FILE                  = "config/httpconcat";
+    private static final String         CONFIG_FILE                  = "config/httpconcat";
+
+    private static final ResourceBundle HTTPCONCAT_RESOURCEBUNDLE    = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
 
     /** <code>{@value}</code>. */
-    public static final String KEY_HTTPCONCAT_SUPPORT       = "httpconcat.support";
+    private static final String         KEY_HTTPCONCAT_SUPPORT       = "httpconcat.support";
 
     //**************************************************************
 
     /** <code>{@value}</code>. */
-    public static final String KEY_TEMPLATE_CSS             = "httpconcat.template.css";
+    private static final String         KEY_TEMPLATE_CSS             = "httpconcat.template.css";
 
     /** <code>{@value}</code>. */
-    public static final String KEY_TEMPLATE_JS              = "httpconcat.template.js";
+    private static final String         KEY_TEMPLATE_JS              = "httpconcat.template.js";
 
     /** <code>{@value}</code>. */
-    public static final String KEY_DEFAULT_CACHE_ENABLE     = "httpconcat.defaultCacheEnable";
+    private static final String         KEY_DEFAULT_CACHE_ENABLE     = "httpconcat.defaultCacheEnable";
 
     /** <code>{@value}</code>. */
-    public static final String KEY_DEFAULT_CACHE_SIZE_LIMIT = "httpconcat.defaultCacheSizeLimit";
+    private static final String         KEY_DEFAULT_CACHE_SIZE_LIMIT = "httpconcat.defaultCacheSizeLimit";
+
+    //**************************************************************
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatGlobalConfigBuilder(){
@@ -63,7 +70,7 @@ public class HttpConcatGlobalConfigBuilder{
      *
      * @return the http concat global config
      */
-    public static HttpConcatGlobalConfig buildHttpConcatGlobalConfig(){
+    static HttpConcatGlobalConfig buildHttpConcatGlobalConfig(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
         httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue(KEY_HTTPCONCAT_SUPPORT, Boolean.class));
@@ -90,30 +97,13 @@ public class HttpConcatGlobalConfigBuilder{
      * @param typeClass
      *            the type class
      * @return the value if not null or empty
+     * @since 1.8.8
      */
     private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
-        return getRequiredValue(CONFIG_FILE, keyName, typeClass);
-    }
-
-    /**
-     * Gets the required value.
-     *
-     * @param <T>
-     *            the generic type
-     * @param baseName
-     *            the base name
-     * @param keyName
-     *            the key name
-     * @param typeClass
-     *            the type class
-     * @return the required value
-     * @since 1.8.1
-     */
-    private static <T> T getRequiredValue(String baseName,String keyName,Class<T> typeClass){
-        String value = ResourceBundleUtil.getValue(baseName, keyName);
+        String value = ResourceBundleUtil.getValue(HTTPCONCAT_RESOURCEBUNDLE, keyName);
         if (isNullOrEmpty(value)){
             String messagePattern = "can't find key:[{}] in file:[{}],pls ensure you have put the correct configuration";
-            throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, baseName));
+            throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, CONFIG_FILE));
         }
         return convert(value, typeClass);
     }

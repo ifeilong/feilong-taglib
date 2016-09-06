@@ -47,18 +47,16 @@ import static com.feilong.core.util.MapUtil.newHashMap;
 /**
  * http concat的核心工具类.
  * 
- * <p>
- * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
- * </p>
- * 
- * <p>
- * 类加载的时候,会使用 {@link ResourceBundleUtil} 来读取{@link HttpConcatGlobalConfigBuilder#CONFIG_FILE} 配置文件中的
+ * <h3>说明:</h3>
+ * <blockquote>
+ * <ol>
+ * <li>你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a></li>
+ * <li>类加载的时候,会使用 {@link ResourceBundleUtil} 来读取<code> config/httpconcat </code> 配置文件中的
  * {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_CSS} css模板 以及 {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_JS} JS模板<br>
- * </p>
- * 
- * <p>
- * 注意: 请确保文件路径中有配置文件,以及正确的key,如果获取不到,会 throw {@link IllegalArgumentException}
- * </p>
+ * </li>
+ * <li>请确保文件路径中有配置文件,以及正确的key,如果获取不到,会 throw {@link IllegalArgumentException}</li>
+ * </ol>
+ * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see HttpConcatTag
