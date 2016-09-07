@@ -16,6 +16,7 @@
 package com.feilong.taglib.display.pager;
 
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
+import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;
 import static com.feilong.taglib.display.pager.command.PagerType.NO_REDIRECT;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -47,7 +48,8 @@ import com.feilong.tools.velocity.VelocityUtil;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
-import static com.feilong.core.util.ResourceBundleUtil.readToMap;
+import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
+import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * 分页工具类.
@@ -209,9 +211,9 @@ public final class PagerBuilder{
             return EMPTY;
         }
         // ****************设置变量参数************************************************************
-        Map<String, Object> vmParamMap = new HashMap<String, Object>();
+        Map<String, Object> vmParamMap = new HashMap<>();
         vmParamMap.put(PagerConstants.VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
-        vmParamMap.put(PagerConstants.VM_KEY_I18NMAP, buildI18nMap(pagerParams));
+        vmParamMap.put(PagerConstants.VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
 
         String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(pagerParams.getVmPath(), vmParamMap);
 
@@ -376,8 +378,8 @@ public final class PagerBuilder{
      *            the pager params
      * @param pager
      *            the pager
-     * @param startAndEndIteratorIndexs
-     *            the start and end iterator indexs
+     * @param startAndEndIndexPair
+     *            the start and end index pair
      * @return key是分页页码,value是解析之后的链接
      * @since 1.4.0
      */
@@ -463,18 +465,6 @@ public final class PagerBuilder{
             indexSet.add(i);
         }
         return indexSet;
-    }
-
-    /**
-     * Builds the i18n map 国际化.
-     * 
-     * @param pagerParams
-     *            the pager params
-     * @return the map
-     * @since 1.0.5
-     */
-    private static Map<String, String> buildI18nMap(PagerParams pagerParams){
-        return readToMap(PagerConstants.I18N_FEILONG_PAGER, pagerParams.getLocale());
     }
 
     //****************************************************************************************************
