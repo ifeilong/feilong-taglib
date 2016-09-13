@@ -27,8 +27,12 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
- * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.<br>
- * <br>
+ * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.
+ * 
+ * <p>
+ * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
+ * </p>
+ * 
  * <p>
  * 作用:遵循Yahoo!前端优化准则第一条:减少HTTP请求发送次数<br>
  * 这一功能可以组合Javascript 以及 Css文件<br>

@@ -15,13 +15,13 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;
@@ -30,9 +30,14 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.bean.ConvertUtil.toLocale;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * 分页标签.
+ * 
+ * <p>
+ * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager">feilongDisplay-pager</a>
+ * </p>
  * 
  * <h3>特点:</h3>
  * 
@@ -194,7 +199,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      * @since 1.7.2
      */
     private void afterBuildContent(String htmlContent){
-        String name = ObjectUtil.defaultIfNullOrEmpty(pagerHtmlAttributeName, PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
+        String name = defaultIfNullOrEmpty(pagerHtmlAttributeName, DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
         pageContext.setAttribute(name, htmlContent);// 解析之后的变量设置在 pageContext作用域中
     }
 

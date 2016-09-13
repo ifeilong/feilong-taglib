@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
+
 import java.util.Map;
 
 import javax.servlet.jsp.tagext.TagData;
@@ -25,10 +27,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.lang.ObjectUtil;
 import com.feilong.taglib.BaseTEI;
-import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.tools.jsonlib.JsonUtil;
+
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * The Class PagerTagExtraInfo.
@@ -51,9 +53,9 @@ public class PagerTagExtraInfo extends BaseTEI{
         //如果不设置 使用 ${feilongPagerHtml1 } 是正常的
         //但是如果使用 <%=feilongPagerHtml1%> 会提示 feilongPagerHtml1 cannot be resolved to a variable
 
-        String pagerHtmlAttributeName = ObjectUtil.defaultIfNullOrEmpty(
+        String pagerHtmlAttributeName = defaultIfNullOrEmpty(
                         tagData.getAttributeString("pagerHtmlAttributeName"),
-                        PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
+                        DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
 
         VariableInfo variableInfo = new VariableInfo(pagerHtmlAttributeName, String.class.getName(), true, VariableInfo.AT_END);
         return ConvertUtil.toArray(variableInfo);
