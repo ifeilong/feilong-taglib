@@ -21,6 +21,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.feilong.core.CharsetType;
 import com.feilong.taglib.display.CacheParam;
 import com.feilong.taglib.display.pager.PagerBuilder;
 
@@ -346,7 +347,7 @@ public class PagerParams implements Serializable,CacheParam{
      * 设置 编码集.
      * 
      * @param charsetType
-     *            the charsetType to set
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      */
     public void setCharsetType(String charsetType){
         this.charsetType = charsetType;

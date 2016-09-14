@@ -22,6 +22,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.feilong.core.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;
@@ -332,7 +333,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      * Sets the url编码.
      * 
      * @param charsetType
-     *            the charsetType to set
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量
      */
     public void setCharsetType(String charsetType){
         this.charsetType = charsetType;
