@@ -62,11 +62,12 @@ feilong taglib jar你可以在 [仓库]( https://github.com/venusdrogon/feilong-
 		<dependencies>
 			....
 			
-		    <dependency>
+			<!--feilong-taglib -->
+			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-taglib</artifactId>
-		    		<version>${version.feilong-platform}</version>
-		    </dependency>
+				<version>${version.feilong-platform}</version>
+			</dependency>
 			....
 		</dependencies>
 		
