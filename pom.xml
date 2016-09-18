@@ -7,10 +7,11 @@
 		<version>1.9.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.feilong.platform.taglib</groupId>
-	<artifactId>parent</artifactId>
-	<packaging>pom</packaging>
-	<name>feilong-taglib-parent</name>
+	<groupId>com.feilong.platform</groupId>
+	<artifactId>feilong-taglib</artifactId>
+
+	<name>feilong-taglib</name>
+
 	<description>${project.name} ${project.version} API</description>
 
 	<!-- 软件配置管理SCM (Software Configuration Management), 如cvs ,svn ,git -->
@@ -19,11 +20,6 @@
 		<connection>scm:git:https://github.com/venusdrogon/feilong-taglib</connection>
 		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-taglib.git</developerConnection>
 	</scm>
-
-	<modules>
-		<module>feilong-taglib-common</module>
-		<module>feilong-taglib-display</module>
-	</modules>
 
 	<dependencies>
 		<dependency>
@@ -50,6 +46,28 @@
 			<optional>true</optional><!-- 日志系统根据每个项目 决定 -->
 		</dependency>
 
+		<!-- velocity -->
+		<dependency>
+			<groupId>com.feilong.platform.tools</groupId>
+			<artifactId>feilong-tools-velocity</artifactId>
+		</dependency>
+
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>com.feilong.platform.tools</groupId>
+			<artifactId>feilong-tools-barcode</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
+
+		<!--用于 com.feilong.taglib.display.barcode.BarcodeTag -->
+		<dependency>
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-accessor</artifactId>
+			<version>${version.feilong-platform}</version>
+			<optional>true</optional>
+		</dependency>
+
 		<!--*******************servlet-api && jsp-api************************* -->
 		<!-- servlet-api -->
 		<dependency>
@@ -60,6 +78,12 @@
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-core-extension</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
