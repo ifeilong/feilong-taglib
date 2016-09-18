@@ -22,7 +22,6 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -333,11 +332,11 @@ public final class PagerBuilder{
      * @return the iterator index and href map
      * @since 1.8.1 change method param
      */
-    private static LinkedHashMap<Integer, String> getIteratorIndexAndHrefMap(
+    private static Map<Integer, String> getIteratorIndexAndHrefMap(
                     Map<Integer, String> indexAndHrefMap,
                     int startIteratorIndex,
                     int endIteratorIndex){
-        LinkedHashMap<Integer, String> map = newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
+        Map<Integer, String> map = newLinkedHashMap(endIteratorIndex - startIteratorIndex + 1);
         for (int i = startIteratorIndex; i <= endIteratorIndex; ++i){
             map.put(i, indexAndHrefMap.get(i));
         }

@@ -16,7 +16,7 @@
 package com.feilong.taglib.display.pager.command;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * PagerVMParam 可以在 vm中 取到的值.
@@ -28,30 +28,30 @@ import java.util.LinkedHashMap;
 public class PagerVMParam implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long              serialVersionUID = -6666715430016900907L;
+    private static final long    serialVersionUID = 1515094555029332845L;
 
     /** 总行数,总结果数. */
-    private Integer                        totalCount;
+    private Integer              totalCount;
 
     /** 当前页码. */
-    private Integer                        currentPageNo;
+    private Integer              currentPageNo;
 
     /** 总页数. */
-    private Integer                        allPageNo;
+    private Integer              allPageNo;
 
     /**
      * 上一页页码.
      * 
      * @since 1.4.0
      */
-    private Integer                        prePageNo;
+    private Integer              prePageNo;
 
     /**
      * 下一页页码.
      * 
      * @since 1.4.0
      */
-    private Integer                        nextPageNo;
+    private Integer              nextPageNo;
 
     //********************************************************************************************
 
@@ -60,35 +60,39 @@ public class PagerVMParam implements Serializable{
      * 
      * @since 1.0.6
      */
-    private String                         pageParamName;
+    private String               pageParamName;
 
     //**********************************************************************************************
 
     /** 上一页链接. */
-    private String                         preUrl;
+    private String               preUrl;
 
     /** 下一页链接. */
-    private String                         nextUrl;
+    private String               nextUrl;
 
     /** 第一页的链接. */
-    private String                         firstUrl;
+    private String               firstUrl;
 
     /** 最后一页的链接. */
-    private String                         lastUrl;
+    private String               lastUrl;
 
     //**********************************************************************************************
 
     /** 开始迭代索引编号. */
-    private Integer                        startIteratorIndex;
+    private Integer              startIteratorIndex;
 
     /** 结束迭代索引编号. */
-    private Integer                        endIteratorIndex;
+    private Integer              endIteratorIndex;
 
-    /** 循环 迭代索引map key是编号,value 是页面链接. */
-    private LinkedHashMap<Integer, String> iteratorIndexMap;
+    /**
+     * 循环迭代索引map,key是编号,value是页面链接.
+     * 
+     * @since 1.9.0 change LinkedHashMap to Map
+     */
+    private Map<Integer, String> iteratorIndexMap;
 
     /** The pager url template. */
-    private PagerUrlTemplate               pagerUrlTemplate;
+    private PagerUrlTemplate     pagerUrlTemplate;
 
     //************************************************************************************************
 
@@ -97,10 +101,10 @@ public class PagerVMParam implements Serializable{
      * 
      * @since 1.4.0
      */
-    private PagerType                      pagerType        = PagerType.REDIRECT;
+    private PagerType            pagerType        = PagerType.REDIRECT;
 
     /** 设置的皮肤. */
-    private String                         skin;
+    private String               skin;
 
     /**
      * 最多显示页数,(-1或者不设置,默认显示所有页数).
@@ -115,7 +119,7 @@ public class PagerVMParam implements Serializable{
      * 新浪微博的时间轴也只给出了10页,同样的折中处理.
      * </p>
      */
-    private Integer                        maxShowPageNo;
+    private Integer              maxShowPageNo;
 
     //*******************************************************************************************
 
@@ -349,25 +353,6 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * Gets the 循环 迭代索引map key是编号,value 是页面链接.
-     * 
-     * @return the iteratorIndexMap
-     */
-    public LinkedHashMap<Integer, String> getIteratorIndexMap(){
-        return iteratorIndexMap;
-    }
-
-    /**
-     * Sets the 循环 迭代索引map key是编号,value 是页面链接.
-     * 
-     * @param iteratorIndexMap
-     *            the iteratorIndexMap to set
-     */
-    public void setIteratorIndexMap(LinkedHashMap<Integer, String> iteratorIndexMap){
-        this.iteratorIndexMap = iteratorIndexMap;
-    }
-
-    /**
      * Gets the pager url template.
      * 
      * @return the pagerUrlTemplate
@@ -467,4 +452,24 @@ public class PagerVMParam implements Serializable{
     public void setNextPageNo(Integer nextPageNo){
         this.nextPageNo = nextPageNo;
     }
+
+    /**
+     * 获得 循环迭代索引map,key是编号,value是页面链接.
+     *
+     * @return the iteratorIndexMap
+     */
+    public Map<Integer, String> getIteratorIndexMap(){
+        return iteratorIndexMap;
+    }
+
+    /**
+     * 设置 循环迭代索引map,key是编号,value是页面链接.
+     *
+     * @param iteratorIndexMap
+     *            the iteratorIndexMap to set
+     */
+    public void setIteratorIndexMap(Map<Integer, String> iteratorIndexMap){
+        this.iteratorIndexMap = iteratorIndexMap;
+    }
+
 }
