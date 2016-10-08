@@ -29,7 +29,7 @@ public final class PagerConstants{
     /** 默认的皮肤 <code>{@value}</code>. */
     public static final String DEFAULT_SKIN                           = "digg";
 
-    /** 默认分页参数名称 <code>{@value}</code>. */
+    /** 默认分页页码参数名称 <code>{@value}</code>. */
     public static final String DEFAULT_PAGE_PARAM_NAME                = "pageNo";
 
     /** 默认分页使用的vm 脚本 <code>{@value}</code>. */
@@ -39,16 +39,12 @@ public final class PagerConstants{
     /** 默认将解析出来的htm 的存放在 request 作用域里面的变量 <code>{@value}</code>. */
     public static final String DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME = "feilongPagerHtml";
 
-    // ******************************************************************************
-
-    /** url 中特殊变量,如果带有这个变量 将不解析vm,调试使用问题所在 <code>{@value}</code> . */
-    public static final String DEFAULT_PARAM_DEBUG_NOT_PARSEVM        = "debugNotParseVM";
-
-    /** url 中特殊变量,如果带有这个变量 将不解析vm,调试使用问题所在 <code>{@value}</code> . */
-    public static final String DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE  = "true";
-
     /**
-     * 模板链接页码,一般url正常的url不会出现这个分页码<code>{@value}</code>.
+     * 模板链接页码.
+     * 
+     * <p>
+     * 通常用于vm渲染,ajax替换,一般url正常的url不会出现这个分页码<code>{@value}</code>.
+     * </p>
      *
      * @since 1.0.5
      */
@@ -58,14 +54,30 @@ public final class PagerConstants{
     /** 最多显示分页码 <code>{@value}</code>. */
     public static final int    DEFAULT_LIMITED_MAX_PAGENO             = -1;
 
+    // --------------特殊变量----------------------------------------------------------------------
+
+    /** <code>(调试使用)</code> url 中特殊变量,如果带有这个变量将不解析vm,便于通过日志等来查找发生的问题 <code>{@value}</code> . */
+    public static final String DEFAULT_PARAM_DEBUG_NOT_PARSEVM        = "debugNotParseVM";
+
+    /** <code>(调试使用)</code> url 中特殊变量,如果带有这个变量将不解析vm,便于通过日志等来查找发生的问题 <code>{@value}</code> . */
+    public static final String DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE  = "true";
+
     // ******************************************************************************
     /**
-     * vm里面 pagerVMParam变量名称 <code>{@value}</code>,在vm里面,你可以使用 ${pagerVMParam.xxx} 来获取数据.
+     * vm里面 {@link PagerVMParam}对象的变量名称 <code>{@value}</code>.
+     * 
+     * <p>
+     * 在vm里面,你可以使用 <code>${pagerVMParam.xxx}</code> 来获取数据
+     * </p>
      */
     public static final String VM_KEY_PAGERVMPARAM                    = "pagerVMParam";
 
     /**
-     * vm里面i18n变量名称 <code>{@value}</code>,在vm里面,你可以使用 ${i18nMap.xxx} 来获取数据.
+     * vm里面i18n变量名称 <code>{@value}</code>.
+     * 
+     * <p>
+     * 在vm里面,你可以使用 <code>${i18nMap.xxx}</code> 来获取数据.
+     * </p>
      */
     public static final String VM_KEY_I18NMAP                         = "i18nMap";
 

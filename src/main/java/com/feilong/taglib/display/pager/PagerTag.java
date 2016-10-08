@@ -16,6 +16,8 @@
 package com.feilong.taglib.display.pager;
 
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM;
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Locale;
@@ -243,8 +245,8 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      */
     private static boolean getDebugIsNotParseVM(HttpServletRequest request){
         // debugNotParseVM=true参数可以来控制 是否解析vm模板,以便测试
-        String parameter = request.getParameter(PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM);
-        return PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
+        String parameter = request.getParameter(DEFAULT_PARAM_DEBUG_NOT_PARSEVM);
+        return DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
     }
 
     //***************************************************************************

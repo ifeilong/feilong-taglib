@@ -17,6 +17,8 @@ package com.feilong.taglib.display.pager;
 
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;
+import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_I18NMAP;
+import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_PAGERVMPARAM;
 import static com.feilong.taglib.display.pager.command.PagerType.NO_REDIRECT;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
@@ -102,14 +104,15 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
  * 基于如果传入的参数 {@link PagerParams}是一样的 {@link PagerParams#hashCode()} &&{@link PagerParams#equals(Object)},那么分页结果也应该是相同的<br>
  * 因此,如果对性能有很高的要求的话,可以使用cache
  * </p>
- * </blockquote>
  * 
- * <h3>缓存清理:</h3>
+ * <h4>缓存清理:</h4>
  * 
  * <blockquote>
  * <p>
  * 当vm模板内容更改,需要清理缓存,由于pagerCache 是基于JVM内存级的,因此重启应用即会生效
  * </p>
+ * </blockquote>
+ * 
  * </blockquote>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
@@ -210,8 +213,8 @@ public final class PagerBuilder{
         }
         // ****************设置变量参数************************************************************
         Map<String, Object> vmParamMap = new HashMap<>();
-        vmParamMap.put(PagerConstants.VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
-        vmParamMap.put(PagerConstants.VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
+        vmParamMap.put(VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
+        vmParamMap.put(VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
 
         String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(pagerParams.getVmPath(), vmParamMap);
 
