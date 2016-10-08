@@ -18,7 +18,7 @@ package com.feilong.taglib.display.pager.command;
 import java.io.Serializable;
 
 /**
- * {@link Pager} {@code &&} 解析的分页html 代码.
+ * {@link Pager}(包含数据集) {@code &&} 解析的分页html 代码.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @param <T>
@@ -30,26 +30,26 @@ public class PagerAndContent<T> implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 4989412502718346094L;
 
-    /** The pager. */
+    /** 分页数据(包含数据集). */
     private Pager<T>          pager;
 
-    /** The html. */
+    /** 渲染出来的分页html代码. */
     private String            content;
 
     /**
-     * The Constructor.
+     * Instantiates a new pager and content.
      */
     public PagerAndContent(){
         super();
     }
 
     /**
-     * The Constructor.
+     * Instantiates a new pager and content.
      *
      * @param pager
-     *            the pager
+     *            分页数据(包含数据集)
      * @param content
-     *            the content
+     *            渲染出来的分页html代码
      */
     public PagerAndContent(Pager<T> pager, String content){
         super();
@@ -58,7 +58,7 @@ public class PagerAndContent<T> implements Serializable{
     }
 
     /**
-     * 获得 the pager.
+     * 获得 分页数据(包含数据集).
      *
      * @return the pager
      */
@@ -67,7 +67,7 @@ public class PagerAndContent<T> implements Serializable{
     }
 
     /**
-     * 设置 the pager.
+     * 设置 分页数据(包含数据集).
      *
      * @param pager
      *            the pager to set
@@ -77,7 +77,7 @@ public class PagerAndContent<T> implements Serializable{
     }
 
     /**
-     * 获得 the html.
+     * 获得 渲染出来的分页html代码.
      *
      * @return the content
      */
@@ -86,7 +86,7 @@ public class PagerAndContent<T> implements Serializable{
     }
 
     /**
-     * 设置 the html.
+     * 设置 渲染出来的分页html代码.
      *
      * @param content
      *            the content to set
@@ -94,4 +94,5 @@ public class PagerAndContent<T> implements Serializable{
     public void setContent(String content){
         this.content = content;
     }
+
 }

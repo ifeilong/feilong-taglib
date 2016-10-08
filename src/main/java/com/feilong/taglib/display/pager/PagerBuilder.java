@@ -51,41 +51,41 @@ import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
- * 分页工具类.
+ * 分页构造器.
+ * 
  * <p>
- * 该类主要是将url相关数据转成vm需要的数据,解析成字符串返回.
+ * 该类主要是将url相关数据转成vm需要的数据,并解析成字符串返回.
  * </p>
  * 
- * 
- * <h3>日志</h3>
+ * <h3>日志:</h3>
  * 
  * <blockquote>
  * <p>
- * 内部会分别对入参 {@link PagerParams} 和构造vm参数,记录<b>debug</b>级别的log,<br>
- * 如果不需要care这部分log,可以在LOGGER.xml中配置:
+ * 内部会分别对入参 {@link PagerParams} 和构造vm参数,记录 <b>debug</b> 级别的log,<br>
+ * 如果不需要care这部分log,可以在日志配置文件中配置,将log输出的级别调高
+ * </p>
+ * 
+ * <h4>log4j.xml</h4>
  * 
  * <pre class="code">
  * {@code
- *  <category name="com.feilong.taglib.display.pager.PagerUtil">
+ *  <category name="com.feilong.taglib.display.pager.PagerBuilder">
  *      <priority value="info" />
  *  </category>
  * }
  * </pre>
  * 
- * 或者在logback.xml中配置
+ * <h4>logback.xml</h4>
  * 
  * <pre class="code">
  * {@code
- *      <logger name="com.feilong.taglib.display.pager.PagerUtil" level="info" />
+ *      <logger name="com.feilong.taglib.display.pager.PagerBuilder" level="info" />
  * }
  * </pre>
  * 
- * 将log输出的级别调高
- * 
- * </p>
  * </blockquote>
  * 
- * <h3>VM中支持国际化</h3>
+ * <h3>VM中支持国际化:</h3>
  * 
  * <blockquote>
  * <p>
@@ -94,7 +94,7 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
  * </p>
  * </blockquote>
  * 
- * <h3>缓存</h3>
+ * <h3>缓存:</h3>
  * 
  * <blockquote>
  * <p>
@@ -104,8 +104,7 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
  * </p>
  * </blockquote>
  * 
- * 
- * <h3>缓存清理</h3>
+ * <h3>缓存清理:</h3>
  * 
  * <blockquote>
  * <p>

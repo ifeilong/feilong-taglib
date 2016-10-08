@@ -31,11 +31,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
-/**
- * The Class PagerUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class IndexAndHrefMapTest extends BasePagerTest{
 
     /** The Constant LOGGER. */

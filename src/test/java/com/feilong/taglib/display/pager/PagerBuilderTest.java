@@ -30,15 +30,10 @@ import com.feilong.taglib.display.pager.command.PagerType;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
-/**
- * The Class PagerUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class PagerUtilTest extends BasePagerTest{
+public class PagerBuilderTest extends BasePagerTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(PagerUtilTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PagerBuilderTest.class);
 
     /**
      * Test get pager content.

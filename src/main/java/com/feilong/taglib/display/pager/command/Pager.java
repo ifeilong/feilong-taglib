@@ -15,19 +15,26 @@
  */
 package com.feilong.taglib.display.pager.command;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * 分页 实体.
+ * 分页实体(分页数据计算的核心类).
  * 
  * <p>
- * 可用于 数据库的分页封装,也可用于前端分页的封装.
+ * 可用于数据库的分页封装,也可用于前端分页的封装.
  * </p>
  * 
- * 通过简单的构造方法示例, 你可以得到下面的数据:
+ * <h3>方法说明:</h3>
  * 
  * <blockquote>
+ * 
+ * <p>
+ * 通过简单的构造方法示例, 你可以得到下面的数据:
+ * </p>
+ * 
  * <table border="1" cellspacing="0" cellpadding="4" summary="">
  * <tr style="background-color:#ccccff">
  * <th align="left">字段</th>
@@ -41,7 +48,7 @@ import java.util.List;
  * 
  * <tr valign="top" style="background-color:#eeeeff">
  * <td>{@link #getOriginatingAllPageNo()}</td>
- * <td>获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的,(通过这个值 可以实现一些特殊的功能,一般用不到)</td>
+ * <td>获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的,(通过这个值可以实现一些特殊的功能,一般用不到)</td>
  * </tr>
  * 
  * <tr valign="top">
@@ -56,8 +63,9 @@ import java.util.List;
  * 
  * <tr valign="top">
  * <td>{@link #getOriginatingNextPageNo()}</td>
- * <td>在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到)</td>
+ * <td>在原始的总页数 基础上进行解析的下一页页码(通过这个值可以实现一些特殊的功能,一般用不到)</td>
  * </tr>
+ * 
  * </table>
  * </blockquote>
  *
@@ -144,8 +152,8 @@ public final class Pager<T> implements Serializable{
      *         </ul>
      */
     public int getAllPageNo(){
-        boolean isMaxShowPageNoDecorate = null != maxShowPageNo && maxShowPageNo != PagerConstants.DEFAULT_LIMITED_MAX_PAGENO
-                        && maxShowPageNo > 0;
+        boolean isMaxShowPageNoDecorate = null != maxShowPageNo && maxShowPageNo != DEFAULT_LIMITED_MAX_PAGENO && maxShowPageNo > 0;
+        //获得原始的总页数
         int originatingAllPageNo = getOriginatingAllPageNo();
 
         if (!isMaxShowPageNoDecorate){
@@ -155,7 +163,11 @@ public final class Pager<T> implements Serializable{
     }
 
     /**
-     * 获得原始的总页数(不经过 {@link #maxShowPageNo}) 修饰过的 ,(通过这个值 可以实现一些特殊的功能,一般用不到).
+     * 获得原始的总页数(不经过 {@link #maxShowPageNo})修饰过的.
+     * 
+     * <p>
+     * 通过这个值可以实现一些特殊的功能,一般用不到
+     * </p>
      * 
      * @return 如果{@code count == 0},直接返回0<br>
      *         如果{@code count < pageSize}, 直接返回1<br>
@@ -177,7 +189,7 @@ public final class Pager<T> implements Serializable{
     /**
      * 上一页页码.
      * 
-     * @return 如果{@code currentPageNo-1<=1} 返回1<br>
+     * @return 如果{@code currentPageNo-1 <= 1} 返回1<br>
      *         否则返回 currentPageNo - 1
      */
     public int getPrePageNo(){
@@ -199,9 +211,13 @@ public final class Pager<T> implements Serializable{
     }
 
     /**
-     * 在 原始的总页数 基础上 进行解析的下一页页码(通过这个值 可以实现一些特殊的功能,一般用不到).
+     * 在原始的总页数基础上进行解析的下一页页码.
+     * 
+     * <p>
+     * 通过这个值可以实现一些特殊的功能,一般用不到
+     * </p>
      *
-     * @return 如果 currentPageNo+1{@code >=} {@link #getOriginatingAllPageNo()} 返回 {@link #getOriginatingAllPageNo()}<br>
+     * @return 如果 currentPageNo+1 {@code >=} {@link #getOriginatingAllPageNo()} 返回 {@link #getOriginatingAllPageNo()}<br>
      *         否则返回 currentPageNo+1
      */
     public int getOriginatingNextPageNo(){
