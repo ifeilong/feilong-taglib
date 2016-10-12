@@ -51,7 +51,7 @@ public final class TagCacheManager{
      * 该cache里面value不会存放null/empty
      * </p>
      */
-    private static final Map<CacheParam, String> CACHE        = new ConcurrentHashMap<CacheParam, String>();
+    private static final Map<CacheParam, String> CACHE        = new ConcurrentHashMap<>();
 
     /** Don't let anyone instantiate this class. */
     private TagCacheManager(){

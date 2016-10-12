@@ -57,7 +57,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
                 //				2000000 
         };
 
-        //		Map<Integer, Object> map1 = new LinkedHashMap<Integer, Object>();
+        //		Map<Integer, Object> map1 = new LinkedHashMap<>();
 
         HttpConcatParam httpConcatParam2 = getHttpConcatParam();
         String writeContent = HttpConcatUtil.getWriteContent(httpConcatParam2);
@@ -67,7 +67,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
             System.gc();
             long start = Runtime.getRuntime().freeMemory();
 
-            HashMap<HttpConcatParam, String> map = new HashMap<HttpConcatParam, String>();
+            HashMap<HttpConcatParam, String> map = new HashMap<>();
             for (int i = 0; i < j; i++){
                 httpConcatParam2.setDomain("" + i);
                 map.put(httpConcatParam2, writeContent);

@@ -133,7 +133,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      * @return the string
      */
     protected String buildBarcodeImageSrc(HttpServletRequest request){
-        Map<String, String> paramsMap = new HashMap<String, String>();
+        Map<String, String> paramsMap = new HashMap<>();
         paramsMap.put(BarcodeRequestParams.BARCODE_ID, barcodeId);
 
         String servletPath = "/feilongbarcode";

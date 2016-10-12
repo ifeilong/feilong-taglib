@@ -66,7 +66,7 @@ public class BreadCrumbUtilTest{
         list.add(new BreadCrumbEntity<Number>(99, "Root1", "Root1_title", "/test1.htm", 100));
         list.add(new BreadCrumbEntity<Number>(6, "Root6", "Root6_title", "/test6.htm", 2));
 
-        //TreeMap<Number, BreadCrumbEntity> treeMap = new TreeMap<Number, BreadCrumbEntity>();
+        //TreeMap<Number, BreadCrumbEntity> treeMap = new TreeMap<>();
 
         sortList(list, new BreadCrumbEntityComparator());
 
@@ -137,7 +137,7 @@ public class BreadCrumbUtilTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        List<BreadCrumbEntity<Number>> allParentSiteMapEntityList = siteMapTag.getAllParentSiteMapEntityList(path, siteMapEntities);
-        //        Map<String, Object> contextKeyValues = new HashMap<String, Object>();
+        //        Map<String, Object> contextKeyValues = new HashMap<>();
         //        contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         //        contextKeyValues.put("connector", ">");
         //        String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);

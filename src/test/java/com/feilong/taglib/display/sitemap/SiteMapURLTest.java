@@ -48,7 +48,7 @@ public class SiteMapURLTest{
     @Test
     public void test() throws IllegalArgumentException,IOException{
         String templateInClassPath = "velocity/sitemap.vm";
-        Map<String, Object> contextKeyValues = new HashMap<String, Object>();
+        Map<String, Object> contextKeyValues = new HashMap<>();
 
         List<SiteMapURL> siteMapURLList = new ArrayList<SiteMapURL>();
         SiteMapURL siteMapURL = new SiteMapURL();

@@ -125,7 +125,7 @@ public class BreadCrumbUtil{
         breadCrumbVMParams.setConnector(breadCrumbParams.getConnector());
 
         //***************************************************************************************
-        Map<String, Object> contextKeyValues = new HashMap<String, Object>();
+        Map<String, Object> contextKeyValues = new HashMap<>();
         contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
         String siteMapString = VELOCITY_UTIL.parseTemplateWithClasspathResourceLoader(breadCrumbParams.getVmPath(), contextKeyValues);
