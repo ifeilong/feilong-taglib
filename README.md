@@ -78,8 +78,7 @@ feilong taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/fe
 
 # :memo: 说明
 
-1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
-1. 基于`maven3.3`构建;
+1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 1.5.0及以上版本需要`jdk1.7`及以上环境(1.5.0以下版本需要`jdk1.6`及以上环境);
 
 # :panda_face: About
