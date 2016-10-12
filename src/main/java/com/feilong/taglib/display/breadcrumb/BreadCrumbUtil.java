@@ -241,7 +241,7 @@ public class BreadCrumbUtil{
             return breadCrumbEntityList;
         }
         // 每次成一个新的
-        List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList = new ArrayList<BreadCrumbEntity<T>>();
+        List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList = new ArrayList<>();
         allParentBreadCrumbEntityList = constructParentBreadCrumbEntityList(
                         currentBreadCrumbEntity,
                         breadCrumbEntityList,

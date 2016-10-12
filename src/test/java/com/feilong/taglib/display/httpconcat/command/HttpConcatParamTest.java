@@ -70,12 +70,12 @@ public class HttpConcatParamTest extends BaseHttpConcatTest{
         pagerParams1.setDomain(domain);
         assertEquals(true, pagerParams1.equals(pagerParams2));
 
-        ArrayList<String> itemSrcList = new ArrayList<String>();
+        ArrayList<String> itemSrcList = new ArrayList<>();
         itemSrcList.add("1.js");
         pagerParams1.setItemSrcList(itemSrcList);
         assertEquals(false, pagerParams1.equals(pagerParams2));
 
-        itemSrcList = new ArrayList<String>();
+        itemSrcList = new ArrayList<>();
         itemSrcList.add("1.js");
         pagerParams2.setItemSrcList(itemSrcList);
         assertEquals(true, pagerParams1.equals(pagerParams2));

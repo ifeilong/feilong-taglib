@@ -53,7 +53,7 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
      */
     @Test
     public void performanceTest(){
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
 
         list.add(2);
         list.add(10);

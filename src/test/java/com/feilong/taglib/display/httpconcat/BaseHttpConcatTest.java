@@ -50,7 +50,7 @@ public abstract class BaseHttpConcatTest{
         //httpConcatParam.setDomain("http://www.feilong.com");
         httpConcatParam1.setRoot("/js" + i + "/");
         httpConcatParam1.setHttpConcatSupport(true);
-        List<String> itemSrcList = new ArrayList<String>();
+        List<String> itemSrcList = new ArrayList<>();
         itemSrcList.add("public/js/common.js");
 
         itemSrcList.add("public/js/jquery.lazyload.min.js");

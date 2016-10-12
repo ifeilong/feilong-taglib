@@ -378,7 +378,7 @@ public final class HttpConcatUtil{
         String[] items = StringUtil.split(blockContent.trim(), StringUtils.LF);
         int length = items.length;
 
-        List<String> list = new ArrayList<String>(length);
+        List<String> list = new ArrayList<>(length);
         for (int i = 0; i < length; ++i){
             String item = items[i];
             // 忽视空行

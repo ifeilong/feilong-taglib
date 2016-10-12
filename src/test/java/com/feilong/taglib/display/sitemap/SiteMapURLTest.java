@@ -50,7 +50,7 @@ public class SiteMapURLTest{
         String templateInClassPath = "velocity/sitemap.vm";
         Map<String, Object> contextKeyValues = new HashMap<>();
 
-        List<SiteMapURL> siteMapURLList = new ArrayList<SiteMapURL>();
+        List<SiteMapURL> siteMapURLList = new ArrayList<>();
         SiteMapURL siteMapURL = new SiteMapURL();
         siteMapURL.setChangefreq(ChangeFreq.daily);
         siteMapURL.setLastmod(new Date());
