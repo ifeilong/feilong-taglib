@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
- * The Class PagerCacheManager.
+ * 标签缓存管理器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "com.google.common.cache.Cache"
