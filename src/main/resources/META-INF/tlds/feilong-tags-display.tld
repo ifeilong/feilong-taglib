@@ -87,24 +87,21 @@
 			<rtexprvalue>true</rtexprvalue>
 			<description>url分页页码参数,默认 pageNo.</description>
 		</attribute>
-		<attribute>
-			<name>maxIndexPages</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<description>最多显示多少个导航页码</description>
-		</attribute>
+
 		<attribute>
 			<name>skin</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>皮肤,默认有24种常用皮肤,默认皮肤 digg</description>
 		</attribute>
+
 		<attribute>
 			<name>vmPath</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>分页解析的vm模版,默认路径 velocity/feilong-default-pager.vm</description>
 		</attribute>
+
 		<attribute>
 			<name>locale</name>
 			<required>false</required>
@@ -113,12 +110,14 @@
 				<![CDATA[设置 Locale环境, 支持java.util.Locale或 String 类型 ,默认使用 request.getLocale()]]>
 			</description>
 		</attribute>
+
 		<attribute>
 			<name>charsetType</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>url编码,默认UTF-8</description>
 		</attribute>
+
 		<attribute>
 			<name>pagerHtmlAttributeName</name>
 			<required>false</required>
@@ -130,6 +129,7 @@
 				]]>
 			</description>
 		</attribute>
+
 		<attribute>
 			<name>maxShowPageNo</name>
 			<required>false</required>
@@ -143,6 +143,26 @@
 				]]>
 			</description>
 		</attribute>
+
+		<!-- since 1.9.2 -->
+		<attribute>
+			<name>dynamicNavigationPageNumberConfig</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[
+					动态显示导航页码数量.默认:1000=6&100=8&1=10
+					<p>1.设置规则类似于url的参数规则</p>
+					<p>2.默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</p>
+					<p>3.分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量<br>
+					比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+					</p>
+					<p>4.顺序不限制,不需要值大的写前面,程序会自动转成 {@link TreeMap}</p>
+					<p>5.当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</p>
+				]]>
+			</description>
+		</attribute>
+
 	</tag>
 
 	<!-- *******************httpConcat********************* -->

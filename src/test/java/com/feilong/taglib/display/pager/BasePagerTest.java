@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG;
+
 import java.util.Locale;
 
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -46,7 +48,6 @@ public abstract class BasePagerTest{
         int count = 1024;
         int currentPageNo = -1;
         int pageSize = 10;
-        int maxIndexPages = 8;
         String skin = PagerConstants.DEFAULT_SKIN;
         //		String pageUrl = "http://localhost:8888/pager.htm?a=b&b=c&d=a&name=jinxin";
         String pageUrl = "http://item.blanja.com/items/search?oneNav=1190&priceTo=&twoNav=101706&priceFrom=100&pageNo=1&keyWords=Samsung";
@@ -63,7 +64,7 @@ public abstract class BasePagerTest{
         PagerParams pagerParams = new PagerParams(count, pageUrl);
         pagerParams.setCurrentPageNo(currentPageNo);
         pagerParams.setPageSize(pageSize);
-        pagerParams.setMaxIndexPages(maxIndexPages);
+        pagerParams.setDynamicNavigationPageNumberConfig(DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG);
         pagerParams.setSkin(skin);
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);

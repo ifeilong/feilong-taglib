@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_NAVIGATION_PAGE_NUMBER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_TEMPLATE_PAGE_NO;
 import static com.feilong.taglib.display.pager.command.PagerConstants.I18N_FEILONG_PAGER;
 import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_I18NMAP;
@@ -46,11 +47,14 @@ import com.feilong.taglib.display.pager.command.PagerVMParam;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.velocity.VelocityUtil;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.toMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
+import static com.feilong.core.util.SortUtil.sortMapByKeyDesc;
 
 /**
  * 分页构造器.
@@ -169,7 +173,8 @@ public final class PagerBuilder{
      * 
      * @param pagerParams
      *            构造分页需要的请求参数
-     * @return 如果 {@link PagerParams#getTotalCount()}{@code <=0} 返回 {@link StringUtils#EMPTY} <br>
+     * @return 如果 <code>pagerParams</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 {@link PagerParams#getTotalCount()}{@code <=0} 返回 {@link StringUtils#EMPTY} <br>
      *         否则 生成分页html代码
      */
     public static String buildContent(PagerParams pagerParams){
@@ -181,8 +186,8 @@ public final class PagerBuilder{
         }
 
         //**********************************************************************************************
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
         }
 
         String content = TagCacheManager.getContentFromCache(pagerParams);
@@ -218,8 +223,8 @@ public final class PagerBuilder{
 
         String content = new VelocityUtil().parseTemplateWithClasspathResourceLoader(pagerParams.getVmPath(), vmParamMap);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.format(vmParamMap), content);
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("parse:[{}],use vmParamMap:{},content result:{}", pagerParams.getVmPath(), JsonUtil.format(vmParamMap), content);
         }
         return content;
     }
@@ -240,10 +245,10 @@ public final class PagerBuilder{
         int allPageNo = pager.getAllPageNo();
         int currentPageNo = pager.getCurrentPageNo();
         // 最多显示多少个导航页码
-        Integer maxIndexPages = buildMaxIndexPages(allPageNo, pagerParams.getMaxIndexPages());
+        Integer maxNavigationPageNumbers = buildMaxNavigationPageNumbers(currentPageNo, pagerParams.getDynamicNavigationPageNumberConfig());
 
         // ***********************************************************************
-        Pair<Integer, Integer> startAndEndIndexPair = buildStartAndEndIndexPair(allPageNo, currentPageNo, maxIndexPages); //获得开始和结束的索引
+        Pair<Integer, Integer> startAndEndIndexPair = buildStartAndEndIndexPair(allPageNo, currentPageNo, maxNavigationPageNumbers); //获得开始和结束的索引
 
         // ****************************************************************************************
         // 获得所有页码的连接.
@@ -397,7 +402,7 @@ public final class PagerBuilder{
         String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
         // *************************************************************************
         Set<Integer> indexSet = buildAllUseIndexSet(pager, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight());
-        Map<Integer, String> returnMap = new HashMap<Integer, String>();
+        Map<Integer, String> returnMap = new HashMap<>();
         for (Integer index : indexSet){
             String link = pagerType == NO_REDIRECT ? templateEncodedUrl
                             : templateEncodedUrl.replace(targetForReplace, pageParamName + "=" + index);
@@ -509,43 +514,57 @@ public final class PagerBuilder{
     }
 
     /**
-     * 获得最大显示的分页码数量.
-     * 
-     * <p>
-     * 如果页码大于1000的时候,如果还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长 ,可能打乱页面布局<br>
-     * 所以maxIndexPages是<=0或者null,那么根据allpageNo,采用自动调节长度功能
-     * </p>
-     * 
-     * <h3>目前自动规则:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>当大于1000的页码 显示6个,即 1001,1002,1003,1004,1005,1006 类似于这样的;</li>
-     * <li>当大于100的页码 显示8个,即 101,102,103,104,105,106,107,108 类似于这样的;</li>
-     * <li>其余,默认显示10条</li>
-     * </ul>
-     * </blockquote>
-     * 
-     * @param allPageNo
-     *            分页总总页数
-     * @param maxIndexPages
-     *            表示手动指定一个固定的显示码<br>
-     *            如果不指定,或者<=0 那么就采用自动调节的显示码
-     * @return 最大分页码数量
-     * @deprecated 需要重构,将来可能会拥有更好的扩展性
+     * Builds the max navigation page numbers.
+     *
+     * @param currentPageNo
+     *            the current page no
+     * @param dynamicNavigationPageNumberConfig
+     *            the dynamic navigation page number config
+     * @return 如果 <code>dynamicNavigationPageNumberConfig</code>是null或者empty,直接返回 {@link PagerConstants#DEFAULT_NAVIGATION_PAGE_NUMBER}<br>
+     *         如果 <code>dynamicNavigationPageNumberConfig</code>转换的map是null或者empty,返回 {@link PagerConstants#DEFAULT_NAVIGATION_PAGE_NUMBER}
+     *         <br>
+     *         如果 <code>currentPageNo</code> {@code >=} <code>dynamicNavigationPageNumberConfig</code>转换的map的key,返回 value <br>
+     * @since 1.9.2
      */
-    @Deprecated
-    private static int buildMaxIndexPages(int allPageNo,Integer maxIndexPages){
-        if (isNullOrEmpty(maxIndexPages) || maxIndexPages <= 0){
-            // 总页数超过1000的时候,自动调节导航数量的作用
-            if (allPageNo > 1000){
-                return 6;
-            }
-            if (allPageNo > 100){
-                return 8;
-            }
-            return 10;// 默认为10
+    private static Integer buildMaxNavigationPageNumbers(int currentPageNo,String dynamicNavigationPageNumberConfig){
+        if (isNullOrEmpty(dynamicNavigationPageNumberConfig)){
+            return DEFAULT_NAVIGATION_PAGE_NUMBER;
         }
-        return maxIndexPages;// 不是<= 0 或者null,直接返回指定的
+
+        //按照key 倒序之后的map
+        Map<Integer, Integer> navigationPageNumberMap = toNavigationPageNumberMap(dynamicNavigationPageNumberConfig);
+        if (isNullOrEmpty(navigationPageNumberMap)){
+            return DEFAULT_NAVIGATION_PAGE_NUMBER;
+        }
+
+        //****************************************************************************
+        for (Map.Entry<Integer, Integer> entry : navigationPageNumberMap.entrySet()){
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+
+            if (currentPageNo >= key){
+                return value;
+            }
+        }
+        return DEFAULT_NAVIGATION_PAGE_NUMBER;
+    }
+
+    /**
+     * 转成导航页码的map.
+     *
+     * @param dynamicNavigationPageNumberConfig
+     *            the dynamic navigation page number config
+     * @return the map
+     * @since 1.9.2
+     */
+    private static Map<Integer, Integer> toNavigationPageNumberMap(String dynamicNavigationPageNumberConfig){
+        // 1 将字符串转成 map Map<String, String>
+        Map<String, String> singleValueMap = ParamUtil.toSingleValueMap(dynamicNavigationPageNumberConfig, UTF8);
+
+        // 2 转成 Map<Integer, Integer>
+        Map<Integer, Integer> integerMap = toMap(singleValueMap, Integer.class, Integer.class);
+
+        //3  排序
+        return sortMapByKeyDesc(integerMap);
     }
 }

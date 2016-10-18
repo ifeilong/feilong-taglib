@@ -49,7 +49,7 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
  * <li>支持velocity模版,支持自定义velocity模版</li>
  * <li>自动识别是否是forwoad页面分页连接</li>
  * <li>分页页码,当前页码永远居中</li>
- * <li>分页页码支持根据页码数字自动显示分页码个数,见参数说明里面的{@link #maxIndexPages}参数</li>
+ * <li>分页页码支持根据页码数字自动显示分页码个数,见参数说明里面的{@link #dynamicNavigationPageNumberConfig}参数</li>
  * <li>经过大型项目检验,通用安全扫描</li>
  * <li>支持国际化(1.0.5 new feature)</li>
  * <li>内置文本框页码输入快速跳转(1.0.5 new feature)</li>
@@ -91,7 +91,7 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupport{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -3523064037264688170L;
+    private static final long serialVersionUID                  = -3523064037264688170L;
 
     /** 数据总数. */
     private Integer           count;
@@ -99,18 +99,18 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     // *******************************************************************
 
     /** 每页显示多少行,默认20. */
-    private Integer           pageSize         = PagerConstants.DEFAULT_PAGESIZE;
+    private Integer           pageSize                          = PagerConstants.DEFAULT_PAGESIZE;
 
     // *******************************************************************
 
     /** url页码参数,默认 pageNo. */
-    private String            pageParamName    = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
+    private String            pageParamName                     = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
 
     /** The vm path. */
-    private String            vmPath           = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
+    private String            vmPath                            = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /** 皮肤,默认digg. */
-    private String            skin             = PagerConstants.DEFAULT_SKIN;
+    private String            skin                              = PagerConstants.DEFAULT_SKIN;
 
     // *************************************************************************************************
     /**
@@ -128,10 +128,10 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      * 
      * @since 1.0.5
      */
-    private Integer           maxShowPageNo    = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
+    private Integer           maxShowPageNo                     = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
-     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 .
+     * 设置{@link Locale} 环境, 支持 {@link java.util.Locale} 或 {@link String} 类型的实例 .
      *
      * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
      * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
@@ -144,11 +144,11 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     private Object            locale;
 
     /**
-     * url编码.
+     * url编码(默认是 {@link CharsetType#UTF8}).
      * 
      * @since 1.0.5
      */
-    private String            charsetType      = UTF8;
+    private String            charsetType                       = UTF8;
 
     /**
      * vm被解析出来的文本,会被存在在这个变量中,作用域为pageContext,以便重复使用.
@@ -166,14 +166,45 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     private String            pagerHtmlAttributeName;
 
     // *****************************end**************************************************
-    /**
-     * 最多显示多少个导航页码.
-     * 
-     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
-     */
-    @Deprecated
-    private Integer           maxIndexPages;
 
+    /**
+     * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
+     * 
+     * <h3>背景:</h3>
+     * <blockquote>
+     * <p>
+     * 一般的分页标签是固定的分页页码数量,一般是10个,如果当前页码页码大于1000的时候,还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长
+     * ,可能打乱页面布局.因此使用动态显示导航页码数量
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 示例:1000=6&100=8&1=10
+     * </p>
+     * 
+     * <ol>
+     * <li>含义:当当前页码{@code >=}1000的时候,显示6个页码;当当前页码{@code >=}100的时候显示8个页码;当当前页码{@code >=}1的时候,显示10个页码</li>
+     * <li>设置规则类似于url的参数规则</li>
+     * <li>分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量
+     * <p>
+     * 比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+     * </p>
+     * </li>
+     * <li>顺序不限制,不需要值大的写前面,程序会自动排序,比如你可以写成 1=10&100=8&1000=6</li>
+     * <li>如果参数里面有相同名字的key,那么转换的时候取第一个值,比如<span style="color:red">1000</span>=6&<span style="color:red">1000</span>
+     * =7&100=8&1=10,有效数据为1000=6&100=8&1=10</li>
+     * <li>默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</li>
+     * <li>当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.9.2
+     */
+    private String            dynamicNavigationPageNumberConfig = PagerConstants.DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG;
     // *****************************end*************************************************
 
     /**
@@ -186,24 +217,12 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     @Override
     public String buildContent(HttpServletRequest request){
         PagerParams pagerParams = buildPagerParams(request);
-
         String htmlContent = PagerBuilder.buildContent(pagerParams);
 
-        afterBuildContent(htmlContent);
-
-        return htmlContent;
-    }
-
-    /**
-     * After build content.
-     *
-     * @param htmlContent
-     *            the html
-     * @since 1.7.2
-     */
-    private void afterBuildContent(String htmlContent){
         String name = defaultIfNullOrEmpty(pagerHtmlAttributeName, DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME);
         pageContext.setAttribute(name, htmlContent);// 解析之后的变量设置在 pageContext作用域中
+
+        return htmlContent;
     }
 
     /**
@@ -230,7 +249,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         pagerParams.setSkin(skin);
-        pagerParams.setMaxIndexPages(maxIndexPages);
+        pagerParams.setDynamicNavigationPageNumberConfig(dynamicNavigationPageNumberConfig);
         pagerParams.setDebugIsNotParseVM(getDebugIsNotParseVM(request));
         return pagerParams;
     }
@@ -269,16 +288,6 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      */
     public void setPageSize(Integer pageSize){
         this.pageSize = pageSize;
-    }
-
-    /**
-     * Sets the 最多显示多少个导航页码.
-     * 
-     * @param maxIndexPages
-     *            the maxIndexPages to set
-     */
-    public void setMaxIndexPages(Integer maxIndexPages){
-        this.maxIndexPages = maxIndexPages;
     }
 
     /**
@@ -360,7 +369,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     }
 
     /**
-     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 .
+     * 设置{@link Locale} 环境, 支持 {@link java.util.Locale} 或 {@link String} 类型的实例 .
      *
      * @param locale
      *            the locale to set
@@ -368,5 +377,48 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     @Override
     public void setLocale(Object locale){
         this.locale = locale;
+    }
+
+    /**
+     * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
+     * 
+     * <h3>背景:</h3>
+     * <blockquote>
+     * <p>
+     * 一般的分页标签是固定的分页页码数量,一般是10个,如果当前页码页码大于1000的时候,还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长
+     * ,可能打乱页面布局.因此使用动态显示导航页码数量
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 示例:1000=6&100=8&1=10
+     * </p>
+     * 
+     * <ol>
+     * <li>含义:当当前页码{@code >=}1000的时候,显示6个页码;当当前页码{@code >=}100的时候显示8个页码;当当前页码{@code >=}1的时候,显示10个页码</li>
+     * <li>设置规则类似于url的参数规则</li>
+     * <li>分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量
+     * <p>
+     * 比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+     * </p>
+     * </li>
+     * <li>顺序不限制,不需要值大的写前面,程序会自动排序,比如你可以写成 1=10&100=8&1000=6</li>
+     * <li>如果参数里面有相同名字的key,那么转换的时候取第一个值,比如<span style="color:red">1000</span>=6&<span style="color:red">1000</span>
+     * =7&100=8&1=10,有效数据为1000=6&100=8&1=10</li>
+     * <li>默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</li>
+     * <li>当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param dynamicNavigationPageNumberConfig
+     *            the new 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG})
+     * @since 1.9.2
+     */
+    public void setDynamicNavigationPageNumberConfig(String dynamicNavigationPageNumberConfig){
+        this.dynamicNavigationPageNumberConfig = dynamicNavigationPageNumberConfig;
     }
 }

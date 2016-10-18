@@ -41,13 +41,13 @@ import static com.feilong.core.CharsetType.UTF8;
 public class PagerParams implements Serializable,CacheParam{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 7310948528499709685L;
+    private static final long serialVersionUID                  = 7310948528499709685L;
 
     /** 总数据条数. */
     private Integer           totalCount;
 
     /** 每页显示多少条. */
-    private Integer           pageSize         = PagerConstants.DEFAULT_PAGESIZE;
+    private Integer           pageSize                          = PagerConstants.DEFAULT_PAGESIZE;
 
     /** 当前第几页. */
     private Integer           currentPageNo;
@@ -57,7 +57,7 @@ public class PagerParams implements Serializable,CacheParam{
      * 
      * @since 1.4.0
      */
-    private PagerType         pagerType        = PagerType.REDIRECT;
+    private PagerType         pagerType                         = PagerType.REDIRECT;
 
     //******************************************************************************
 
@@ -65,13 +65,13 @@ public class PagerParams implements Serializable,CacheParam{
     private String            pageUrl;
 
     /** 皮肤:可选. */
-    private String            skin             = PagerConstants.DEFAULT_SKIN;
+    private String            skin                              = PagerConstants.DEFAULT_SKIN;
 
     /** 分页参数名称. */
-    private String            pageParamName    = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
+    private String            pageParamName                     = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
 
     /** vm的路径. */
-    private String            vmPath           = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
+    private String            vmPath                            = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /**
      * 最多显示页数,(-1或者不设置,默认显示所有页数).
@@ -88,14 +88,14 @@ public class PagerParams implements Serializable,CacheParam{
      * 
      * @since 1.0.5
      */
-    private Integer           maxShowPageNo    = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
+    private Integer           maxShowPageNo                     = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
      * 编码集.
      * 
      * @since 1.0.5
      */
-    private String            charsetType      = UTF8;
+    private String            charsetType                       = UTF8;
 
     /**
      * 获得此 Java 虚拟机实例的当前默认语言环境值. <br>
@@ -103,18 +103,51 @@ public class PagerParams implements Serializable,CacheParam{
      * 
      * @since 1.0.5
      */
-    private Locale            locale           = Locale.getDefault();
+    private Locale            locale                            = Locale.getDefault();
 
     /** debug 模式. */
     private boolean           debugIsNotParseVM;
 
     /**
-     * 最大 分页码数量.
+     * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
      * 
-     * @deprecated 参数名字取得不好,在将来的版本会更改替换,不建议使用这个参数
+     * <h3>背景:</h3>
+     * <blockquote>
+     * <p>
+     * 一般的分页标签是固定的分页页码数量,一般是10个,如果当前页码页码大于1000的时候,还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长
+     * ,可能打乱页面布局.因此使用动态显示导航页码数量
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 示例:1000=6&100=8&1=10
+     * </p>
+     * 
+     * <ol>
+     * <li>含义:当当前页码{@code >=}1000的时候,显示6个页码;当当前页码{@code >=}100的时候显示8个页码;当当前页码{@code >=}1的时候,显示10个页码</li>
+     * <li>设置规则类似于url的参数规则</li>
+     * <li>分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量
+     * <p>
+     * 比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+     * </p>
+     * </li>
+     * <li>顺序不限制,不需要值大的写前面,程序会自动排序,比如你可以写成 1=10&100=8&1000=6</li>
+     * <li>如果参数里面有相同名字的key,那么转换的时候取第一个值,比如<span style="color:red">1000</span>=6&<span style="color:red">1000</span>
+     * =7&100=8&1=10,有效数据为1000=6&100=8&1=10</li>
+     * <li>默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</li>
+     * <li>当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</li>
+     * </ol>
+     * </blockquote>
+     * 
+     * @since 1.9.2
      */
-    @Deprecated
-    private Integer           maxIndexPages;
+    private String            dynamicNavigationPageNumberConfig = PagerConstants.DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG;
+
+    //-----------------------------------------------------------------------------------------
 
     /**
      * The Constructor.
@@ -198,25 +231,6 @@ public class PagerParams implements Serializable,CacheParam{
      */
     public void setCurrentPageNo(Integer currentPageNo){
         this.currentPageNo = currentPageNo;
-    }
-
-    /**
-     * 获得 最大 分页码数量.
-     * 
-     * @return the maxIndexPages
-     */
-    public Integer getMaxIndexPages(){
-        return maxIndexPages;
-    }
-
-    /**
-     * 设置 最大 分页码数量.
-     * 
-     * @param maxIndexPages
-     *            the maxIndexPages to set
-     */
-    public void setMaxIndexPages(Integer maxIndexPages){
-        this.maxIndexPages = maxIndexPages;
     }
 
     /**
@@ -412,6 +426,91 @@ public class PagerParams implements Serializable,CacheParam{
         return pagerType;
     }
 
+    /**
+     * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
+     * 
+     * <h3>背景:</h3>
+     * <blockquote>
+     * <p>
+     * 一般的分页标签是固定的分页页码数量,一般是10个,如果当前页码页码大于1000的时候,还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长
+     * ,可能打乱页面布局.因此使用动态显示导航页码数量
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 示例:1000=6&100=8&1=10
+     * </p>
+     * 
+     * <ol>
+     * <li>含义:当当前页码{@code >=}1000的时候,显示6个页码;当当前页码{@code >=}100的时候显示8个页码;当当前页码{@code >=}1的时候,显示10个页码</li>
+     * <li>设置规则类似于url的参数规则</li>
+     * <li>分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量
+     * <p>
+     * 比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+     * </p>
+     * </li>
+     * <li>顺序不限制,不需要值大的写前面,程序会自动排序,比如你可以写成 1=10&100=8&1000=6</li>
+     * <li>如果参数里面有相同名字的key,那么转换的时候取第一个值,比如<span style="color:red">1000</span>=6&<span style="color:red">1000</span>
+     * =7&100=8&1=10,有效数据为1000=6&100=8&1=10</li>
+     * <li>默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</li>
+     * <li>当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @return the 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG})
+     * @since 1.9.2
+     */
+    public String getDynamicNavigationPageNumberConfig(){
+        return dynamicNavigationPageNumberConfig;
+    }
+
+    /**
+     * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
+     * 
+     * <h3>背景:</h3>
+     * <blockquote>
+     * <p>
+     * 一般的分页标签是固定的分页页码数量,一般是10个,如果当前页码页码大于1000的时候,还是10条页码的显示(如1001,1002,1003,1004,1005,1006,1007,1008,1009,1010),那么页面分页会很长
+     * ,可能打乱页面布局.因此使用动态显示导航页码数量
+     * </p>
+     * </blockquote>
+     * 
+     * <h3>规则:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 示例:1000=6&100=8&1=10
+     * </p>
+     * 
+     * <ol>
+     * <li>含义:当当前页码{@code >=}1000的时候,显示6个页码;当当前页码{@code >=}100的时候显示8个页码;当当前页码{@code >=}1的时候,显示10个页码</li>
+     * <li>设置规则类似于url的参数规则</li>
+     * <li>分隔之后,key是当前页码参考值,value是显示页码数量,如果当前页码大于等于key的时候,那么页码的数量会显示值的数量
+     * <p>
+     * 比如上例中,如果当前页码是1001,那么分页页码会显示成6个, 而如果当前页码是5,那么会显示10个页码
+     * </p>
+     * </li>
+     * <li>顺序不限制,不需要值大的写前面,程序会自动排序,比如你可以写成 1=10&100=8&1000=6</li>
+     * <li>如果参数里面有相同名字的key,那么转换的时候取第一个值,比如<span style="color:red">1000</span>=6&<span style="color:red">1000</span>
+     * =7&100=8&1=10,有效数据为1000=6&100=8&1=10</li>
+     * <li>默认是 1000=6&100=8&1=10,如果设置为empty或者blank, 那么表示不使用动态显示的功能,永远显示10个页码</li>
+     * <li>当然如果你需要不管什么时候都显示10个,除了将此值设置为empty或者blank外,你还可以设置为 <code>1000=10&100=10&1=10</code>,值设置为相同</li>
+     * </ol>
+     * </blockquote>
+     *
+     * @param dynamicNavigationPageNumberConfig
+     *            the new 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG})
+     * @since 1.9.2
+     */
+    public void setDynamicNavigationPageNumberConfig(String dynamicNavigationPageNumberConfig){
+        this.dynamicNavigationPageNumberConfig = dynamicNavigationPageNumberConfig;
+    }
+
     /*
      * (non-Javadoc)
      * 
@@ -454,7 +553,7 @@ public class PagerParams implements Serializable,CacheParam{
                         .append(debugIsNotParseVM)//
 
                         .append(currentPageNo)//
-                        .append(maxIndexPages)//
+                        .append(dynamicNavigationPageNumberConfig)//
                         .append(maxShowPageNo)//
                         .append(pageSize)//
                         .append(totalCount)//
@@ -498,7 +597,7 @@ public class PagerParams implements Serializable,CacheParam{
 
                         .append(this.debugIsNotParseVM, pagerParams.getDebugIsNotParseVM())//
                         .append(this.currentPageNo, pagerParams.getCurrentPageNo())//
-                        .append(this.maxIndexPages, pagerParams.getMaxIndexPages())//
+                        .append(this.dynamicNavigationPageNumberConfig, pagerParams.getDynamicNavigationPageNumberConfig())//
                         .append(this.maxShowPageNo, pagerParams.getMaxShowPageNo())//
                         .append(this.pageSize, pagerParams.getPageSize())//
                         .append(this.totalCount, pagerParams.getTotalCount())//
