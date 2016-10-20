@@ -107,7 +107,7 @@ public class PagerVMParam implements Serializable{
     private String               skin;
 
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
      * 比如淘宝,不管搜索东西多少,最多显示100页
@@ -200,7 +200,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
      * 比如淘宝,不管搜索东西多少,最多显示100页
@@ -219,7 +219,7 @@ public class PagerVMParam implements Serializable{
     }
 
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
      * 比如淘宝,不管搜索东西多少,最多显示100页

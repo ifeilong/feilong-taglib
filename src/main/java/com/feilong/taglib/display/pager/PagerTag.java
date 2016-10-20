@@ -106,7 +106,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     /** url页码参数,默认 pageNo. */
     private String            pageParamName                     = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
 
-    /** The vm path. */
+    /** 基于classpath 下面的velocity模版文件路径. */
     private String            vmPath                            = PagerConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
     /** 皮肤,默认digg. */
@@ -114,7 +114,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
 
     // *************************************************************************************************
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
      * 比如淘宝,不管搜索东西多少,最多显示100页
@@ -301,7 +301,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     }
 
     /**
-     * Sets the vm path.
+     * 基于classpath 下面的velocity模版文件路径.
      * 
      * @param vmPath
      *            the vmPath to set
@@ -321,7 +321,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     }
 
     /**
-     * 最多显示页数,(-1或者不设置,默认显示所有页数).
+     * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
      * <p>
      * 比如淘宝,不管搜索东西多少,最多显示100页
