@@ -42,7 +42,9 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
  * 你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager">feilongDisplay-pager</a>
  * </p>
  * 
- * <h3>特点:</h3>
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
  * 
  * <ol>
  * <li>支持皮肤切换</li>
@@ -57,35 +59,58 @@ import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
  * <li>支持Ajax 分页 ,见参数 {@link PagerParams#pagerType} (1.4.0 new feature)</li>
  * </ol>
  * 
+ * </blockquote>
+ * 
  * <h3>使用方式:</h3>
  * 
- * <pre class="code">
+ * <blockquote>
+ * 
+ * <dl>
+ * <dt>步骤1.JSP引用自定义标签</dt>
+ * <dd>
  * {@code
+ *  <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
+ * }
+ * </dd>
  * 
- *  步骤1.JSP引用自定义标签
- *      <%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
+ * <dt>步骤2.使用自定义标签</dt>
+ * <dd>
+ * 精简写法:
  * 
- *  步骤2.使用自定义标签
- *  
- *      精简写法:
- *          <feilongDisplay:pager count="1000"/>
- *          此时其余参数缺省,均使用默认值
- *      
- *      所有参数都赋值的写法:
+ * {@code
+ *  <feilongDisplay:pager count="1000"/>
+ * }
+ * 
+ * 此时其余参数缺省,均使用默认值
+ * 
+ * </dd>
+ * 
+ * <dd>所有参数都赋值的写法:
+ * 
+ * <pre class="code">
+ * {@code  
  *          <feilongDisplay:pager count="1000" 
  *              charsetType="utf-8" 
- *              maxIndexPages="3" 
+ *              dynamicNavigationPageNumberConfig="1000=6&100=8&1=10"
  *              pageParamName="page" 
  *              pageSize="10"
- *              locale="}${requestScope['org.springframework.web.servlet.i18n.CookieLocaleResolver.LOCALE']}{@code" 
+ *              locale="zh_CN" 
+ *              maxShowPageNo="-1"
  *              vmPath="velocity/feilong-default-pager.vm" 
  *              skin="scott"
  *              pagerHtmlAttributeName="feilongPagerHtml1" />
- *              每个参数的含义,请参见下面参数表格部分
  * }
+ * 
  * </pre>
  * 
+ * 每个参数的含义,请参见 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager#params">分页参数</a>
+ * </dd>
+ * </dl>
+ * 
+ * </blockquote>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager">feilongDisplay-pager</a>
  * @since 1.0.0
  */
 public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupport{
