@@ -6,11 +6,6 @@
 	
     	pagerVMParam	:	包含各种显示数字/链接 参数
     	i18nMap			:	包含国际化信息
-	
-    @author <a href="mailto:venusdrogon@163.com">金鑫</a>
-    @version 1.0.0 2010-2-3 下午01:03:14
-    @version 1.0.5 May 3, 2014 1:44:08 PM
-    @since 1.0.0
 *#
 <div class="div_feilongPager ${pagerVMParam.skin}">
 	##总数
@@ -69,13 +64,14 @@
 
 <script type="text/javascript">
     $(function() {
-	##回车事件
+		##快速跳转文本框的回车事件
 		$(".feilongGotoInput").keydown( function() { 
 			if (event.keyCode == 13) { 
 				pagerJump($(this));
 			}
 		});
 		
+		##快速跳转按钮的点击事件
 		$(".pagerButton").click(function(){
 			pagerJump($(".feilongGotoInput"));
 		});
