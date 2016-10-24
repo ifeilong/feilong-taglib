@@ -84,5 +84,20 @@
 			<artifactId>feilong-core-extension</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		<dependency>
+			<groupId>com.feilong.chart</groupId>
+			<artifactId>feilong-chart-core</artifactId>
+			<version>${version.feilong-platform}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.feilong.chart</groupId>
+			<artifactId>feilong-chart-amcharts</artifactId>
+			<version>${version.feilong-platform}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

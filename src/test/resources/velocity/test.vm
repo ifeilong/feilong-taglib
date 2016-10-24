@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-Type" content="text/html;charset=utf-8" />
+
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\jquery\jquery-1.7.1.min.js"></script>
+
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\amcharts.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\funnel.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\gauge.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\pie.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\radar.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\serial.js"></script>
+<script type="text/javascript" src="http://rs.feilong.com:8888/res\feilong\js\plugins\amcharts_3.17.3.free\amcharts\xy.js"></script>
+
+<script type="text/javascript" src="http://rs.feilong.com:8888/res/feilong/js/feilong/feilong-amcharts3.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="http://rs.feilong.com:8888/train\css\baseTrain.css" />
+<link rel="stylesheet" type="text/css" href="http://rs.feilong.com:8888/train\css\report.css" />
+
+<script type="text/javascript">
+var chartConfig_waitForTraining={
+		    	chartDivId:"waitForTrainingChartdiv",
+		    	dataProvider: ${dataProvider},
+		    	
+		    	titleField:"name",
+		    	valueField:"value",
+				legend:{position:""},
+				
+		    	chartTitle:"性能测试",
+		    	colorField:"color"
+		    }; 
+		    
+AmCharts.ready(function() {
+    createAmSerialChartByJsonFormat1(chartConfig_waitForTraining);
+});		    
+</script>
+
+
+</head>
+<body>
+	<div id="content">
+			<div id="waitForTrainingChartdiv" style="height:400px"></div>
+	</div>
+</body>
+</html>
