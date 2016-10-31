@@ -1,4 +1,4 @@
-feilong-taglib
+feilong-taglib JSP常用自定义标签集
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -36,7 +36,7 @@ taglib	|说明
 
 # :dragon: Maven使用配置
 
-taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/taglib "仓库") 浏览 
+taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-taglib "仓库") 浏览 
 
 如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
 
