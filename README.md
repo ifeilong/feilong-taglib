@@ -5,7 +5,7 @@ feilong-taglib
 ![build](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/precise-desktop-amd64_default.svg "build") 
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
 
-Reduce development, Release ideas
+> Reduce development, Release ideas (减少开发,释放思想)
 
 #Welcome to feilong-taglib
 
