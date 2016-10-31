@@ -76,6 +76,20 @@ taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-pl
 	</project>
 ```
 
+# 使用示例:
+
+两行代码搞定分页显示
+
+```XML
+
+	<%@ taglib prefix="feilongDisplay" uri="http://java.feilong.com/tags-display"%>
+	....
+	<feilongDisplay:pager count="${count}"/>
+	....
+```
+
+更多说明,参见 [pager](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager "J2EE分页解决方案")
+
 # :memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
