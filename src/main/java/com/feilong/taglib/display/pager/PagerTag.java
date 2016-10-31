@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGESIZE;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE;
@@ -266,7 +267,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         PagerParams pagerParams = new PagerParams(count, pageUrl);
 
         pagerParams.setCurrentPageNo(PagerHelper.getCurrentPageNo(request, pageParamName)); // 当前页码
-        pagerParams.setPageSize(pageSize);
+        pagerParams.setPageSize(pageSize <= 0 ? DEFAULT_PAGESIZE : pageSize);//如果传过来的是empty,如果不处理会报错,参见 https://github.com/venusdrogon/feilong-taglib/issues/7
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
