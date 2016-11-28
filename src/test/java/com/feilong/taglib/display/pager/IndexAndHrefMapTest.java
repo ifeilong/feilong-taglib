@@ -61,7 +61,7 @@ public class IndexAndHrefMapTest extends BasePagerTest{
         Method declaredMethod = PagerBuilder.class.getDeclaredMethod("getAllIndexAndHrefMap", PagerParams.class, Set.class);
         declaredMethod.setAccessible(true);
 
-        Set<Integer> set = new HashSet<Integer>();
+        Set<Integer> set = new HashSet<>();
         set.add(PagerConstants.DEFAULT_TEMPLATE_PAGE_NO);
 
         for (int i = 100; i < 120; ++i){
