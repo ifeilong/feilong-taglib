@@ -18,7 +18,7 @@ package com.feilong.taglib.display.breadcrumb.comparator;
 import java.io.Serializable;
 import java.util.Comparator;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 
