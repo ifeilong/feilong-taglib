@@ -23,7 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
-import com.feilong.test.User;
+import com.feilong.store.member.User;
 
 /**
  * The Class MapMemoryTest.
