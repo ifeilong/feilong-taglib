@@ -157,7 +157,7 @@ public final class PagerBuilder{
         Pager<T> pager = buildPager(pagerParams);
         pager.setItemList(itemList);
 
-        return new PagerAndContent<T>(pager, buildContent(pagerParams));
+        return new PagerAndContent<>(pager, buildContent(pagerParams));
     }
 
     /**
@@ -303,7 +303,7 @@ public final class PagerBuilder{
         int currentPageNo = detectCurrentPageNo(pagerParams);
         int pageSize = pagerParams.getPageSize();
 
-        Pager<T> pager = new Pager<T>(currentPageNo, pageSize, totalCount);
+        Pager<T> pager = new Pager<>(currentPageNo, pageSize, totalCount);
         pager.setMaxShowPageNo(pagerParams.getMaxShowPageNo());
         return pager;
     }
@@ -460,7 +460,7 @@ public final class PagerBuilder{
      * @since 1.8.1 change method param
      */
     private static <T> Set<Integer> buildAllUseIndexSet(Pager<T> pager,int startIteratorIndex,int endIteratorIndex){
-        Set<Integer> indexSet = new HashSet<Integer>();// 所有需要生成url 的 index值
+        Set<Integer> indexSet = new HashSet<>();// 所有需要生成url 的 index值
         indexSet.add(PagerConstants.DEFAULT_TEMPLATE_PAGE_NO);// 模板链接 用于前端操作
         indexSet.add(pager.getPrePageNo());//prePageNo
         indexSet.add(pager.getNextPageNo());//nextPageNo

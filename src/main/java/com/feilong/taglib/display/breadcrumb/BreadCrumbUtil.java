@@ -120,7 +120,7 @@ public class BreadCrumbUtil{
 
         //***************************************************************************************
 
-        BreadCrumbVMParams<Object> breadCrumbVMParams = new BreadCrumbVMParams<Object>();
+        BreadCrumbVMParams<Object> breadCrumbVMParams = new BreadCrumbVMParams<>();
         breadCrumbVMParams.setBreadCrumbEntityList(currentBreadCrumbEntityTreeList);
         breadCrumbVMParams.setConnector(breadCrumbParams.getConnector());
 
