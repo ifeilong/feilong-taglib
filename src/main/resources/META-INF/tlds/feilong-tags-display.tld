@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
-	version="2.1">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd" version="2.1">
 	<!-- 标签库描述符(TLD) -->
 	<!-- TLD文件名必须有扩展名.tld -->
 
@@ -354,11 +353,10 @@
 		</attribute>
 	</tag>
 
-
-
 	<!-- **********************SensitiveTag*********************************** -->
 	<tag>
 		<name>sensitive</name>
+
 		<tag-class>com.feilong.taglib.display.sensitive.SensitiveTag</tag-class>
 		<body-content>empty</body-content>
 		<description>敏感信息过滤标签</description>
@@ -367,6 +365,7 @@
 			<name>value</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
+
 			<description>
 				<![CDATA[待mask字符串.]]>
 			</description>
@@ -374,17 +373,19 @@
 
 		<attribute>
 			<name>type</name>
-			<required>false</required>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
+
 			<description>
 				<![CDATA[类型,可以有 mobile,CHINESENAME,address,email (忽视大小写),具体参见 {@link SensitiveType}]]>
 			</description>
 		</attribute>
 
 		<attribute>
-			<name>maskStr</name>
+			<name>maskChar</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
+
 			<description>
 				<![CDATA[mask的字符，比如*,#等，默认是*]]>
 			</description>

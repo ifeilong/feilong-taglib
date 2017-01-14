@@ -16,17 +16,14 @@
 package com.feilong.taglib.display.sensitive;
 
 /**
- * The Class SensitiveConfig.
+ * 敏感词配置相关.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.1
  */
 public class SensitiveConfig{
 
-    /**
-     * 敏感词类型.
-     * 
-     */
+    /** 敏感词类型. */
     private SensitiveType sensitiveType;
 
     /** 掩码字符,比如*,#等,默认是*. */
@@ -37,7 +34,7 @@ public class SensitiveConfig{
      * Instantiates a new sensitive config.
      *
      * @param sensitiveType
-     *            the sensitive type
+     *            敏感词类型
      */
     public SensitiveConfig(SensitiveType sensitiveType){
         this.sensitiveType = sensitiveType;
@@ -47,9 +44,9 @@ public class SensitiveConfig{
      * Instantiates a new sensitive config.
      *
      * @param sensitiveType
-     *            the sensitive type
+     *            敏感词类型
      * @param maskChar
-     *            the mask char
+     *            掩码字符,比如*,#等,默认是*
      */
     public SensitiveConfig(SensitiveType sensitiveType, char maskChar){
         this.sensitiveType = sensitiveType;

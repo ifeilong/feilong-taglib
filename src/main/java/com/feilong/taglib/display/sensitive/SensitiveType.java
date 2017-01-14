@@ -35,7 +35,7 @@ public enum SensitiveType{
 
         @Override
         protected Integer[] getLeftAndRightNoMaskLengths(String value){
-            //前三位，后四位，其他隐藏<例子:138******1234>
+            //前三位,后四位,其他隐藏<例子:138******1234>
             return toArray(3, 4);
         }
 
@@ -56,7 +56,7 @@ public enum SensitiveType{
     },
 
     /** 家庭地址. */
-    //家庭地址 只显示到地区，不显示详细地址；我们要对个人信息增强保护<例子：北京市海淀区****>
+    //家庭地址 只显示到地区,不显示详细地址；我们要对个人信息增强保护<例子：北京市海淀区****>
     ADDRESS("ADDRESS"){
 
         @Override
@@ -71,7 +71,7 @@ public enum SensitiveType{
     },
 
     /** 邮箱. */
-    //邮箱 邮箱前缀仅显示第一个字母，前缀其他隐藏，用星号代替，@及后面的地址显示<例子:g**@163.com>
+    //邮箱 邮箱前缀仅显示第一个字母,前缀其他隐藏,用星号代替,@及后面的地址显示<例子:g**@163.com>
     EMAIL("EMAIL"){
 
         //ve*****on@163.com
@@ -133,7 +133,7 @@ public enum SensitiveType{
      *
      * @param value
      *            the value
-     * @return 如果返回返回true ，不mask
+     * @return 如果返回返回true ,不mask
      */
     protected boolean isNoNeedMask(@SuppressWarnings("unused") String value){
         return false;

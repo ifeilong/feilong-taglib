@@ -46,14 +46,14 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * 
  * <blockquote>
  * <p>
- * 许多Web应用程序没有正确保护敏感数据，如信用卡，税务ID和身份验证凭据。攻击者可能会窃取或篡改这些弱保护的数据以进行信用卡诈骗、身份窃取，或其他犯罪。敏感数据值需额外的保护，比如在存放或在传输过程中的加密，以及在与浏览器交换时进行特殊的预防措施。
+ * 许多Web应用程序没有正确保护敏感数据,如信用卡,税务ID和身份验证凭据。攻击者可能会窃取或篡改这些弱保护的数据以进行信用卡诈骗、身份窃取,或其他犯罪。敏感数据值需额外的保护,比如在存放或在传输过程中的加密,以及在与浏览器交换时进行特殊的预防措施。
  * </p>
  * 
  * <h4>业务影响:</h4>
  * 
  * <blockquote>
  * <p>
- * 考虑丢失数据和声誉影响造成的商业损失。如果这些数据被泄露，那你要承担的法律责任是什么？另外考虑到对企业造成的声誉影响。
+ * 考虑丢失数据和声誉影响造成的商业损失。如果这些数据被泄露,那你要承担的法律责任是什么？另外考虑到对企业造成的声誉影响。
  * </p>
  * </blockquote>
  * 
@@ -87,8 +87,8 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
     /** 待mask字符串. */
     private String            value;
 
-    /** mask的字符，比如*,#等，默认是*. */
-    private char              maskStr          = '*';
+    /** mask的字符,比如*,#等,默认是*. */
+    private char              maskChar         = '*';
 
     /**
      * 类型,可以有 mobile,CHINESENAME,address,email (忽视大小写),具体参见 {@link SensitiveType}.
@@ -112,7 +112,7 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
             return value;
         }
         SensitiveType sensitiveType = SensitiveType.toSensitiveType(type);
-        return SensitiveUtil.parse(value, new SensitiveConfig(sensitiveType, maskStr));
+        return SensitiveUtil.parse(value, new SensitiveConfig(sensitiveType, maskChar));
     }
 
     // *******************************************************************************
@@ -128,22 +128,22 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
     }
 
     /**
-     * 设置 mask的字符，比如*,#等，默认是*.
-     *
-     * @param maskStr
-     *            the new mask的字符，比如*,#等，默认是*
-     */
-    public void setMaskStr(char maskStr){
-        this.maskStr = maskStr;
-    }
-
-    /**
-     * 设置 类型， 可以有 mobile , chinese name,address,email.
+     * 设置 类型, 可以有 mobile , chinese name,address,email.
      *
      * @param type
-     *            the new 类型， 可以有 mobile , chinese name,address,email
+     *            the new 类型, 可以有 mobile , chinese name,address,email
      */
     public void setType(String type){
         this.type = type;
+    }
+
+    /**
+     * 设置 mask的字符,比如*,#等,默认是*.
+     *
+     * @param maskChar
+     *            the maskChar to set
+     */
+    public void setMaskChar(char maskChar){
+        this.maskChar = maskChar;
     }
 }

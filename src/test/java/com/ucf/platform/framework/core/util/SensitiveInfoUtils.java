@@ -15,7 +15,7 @@ public final class SensitiveInfoUtils {
 
 
     /**
-     * [身份证号] 显示最后四位，其他隐藏。共计18位或者15位。<例子：*************5762>
+     * [身份证号] 显示最后四位,其他隐藏。共计18位或者15位。<例子：*************5762>
      * 
      * @param id
      * @return
@@ -29,7 +29,7 @@ public final class SensitiveInfoUtils {
     }
 
     /**
-     * [固定电话] 后四位，其他隐藏<例子：****1234>
+     * [固定电话] 后四位,其他隐藏<例子：****1234>
      * 
      * @param num
      * @return
@@ -43,7 +43,7 @@ public final class SensitiveInfoUtils {
 
 
     /**
-     * [地址] 只显示到地区，不显示详细地址；我们要对个人信息增强保护<例子：北京市海淀区****>
+     * [地址] 只显示到地区,不显示详细地址；我们要对个人信息增强保护<例子：北京市海淀区****>
      * 
      * @param address
      * @param sensitiveSize
@@ -60,7 +60,7 @@ public final class SensitiveInfoUtils {
 
 
     /**
-     * [银行卡号] 前六位，后四位，其他用星号隐藏每位1个星号<例子:6222600**********1234>
+     * [银行卡号] 前六位,后四位,其他用星号隐藏每位1个星号<例子:6222600**********1234>
      * 
      * @param cardNum
      * @return
@@ -73,7 +73,7 @@ public final class SensitiveInfoUtils {
     }
 
     /**
-     * [公司开户银行联号] 公司开户银行联行号,显示前两位，其他用星号隐藏，每位1个星号<例子:12********>
+     * [公司开户银行联号] 公司开户银行联行号,显示前两位,其他用星号隐藏,每位1个星号<例子:12********>
      * 
      * @param code
      * @return
@@ -86,7 +86,7 @@ public final class SensitiveInfoUtils {
     }
 
     /**
-     * [银行卡有效期] 前1位，后1位，其他隐藏<例子:“0**6”>
+     * [银行卡有效期] 前1位,后1位,其他隐藏<例子:“0**6”>
      * 
      * @param num
      * @return
