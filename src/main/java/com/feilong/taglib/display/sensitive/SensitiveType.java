@@ -87,7 +87,6 @@ public enum SensitiveType{
 
             //vvVVv@163.com
             //vvVVvvv@163.com
-            //vv@  两个字符
             if (5 <= index && index <= 6){
                 return toArray(1, length - index + 1);
             }
