@@ -11,8 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  * @Created on 2014-11-18 下午3:50:15
  * @author liuwentao@ucfgroup.com
  */
-public final class SensitiveInfoUtils {
-
+public final class SensitiveInfoUtils{
 
     /**
      * [身份证号] 显示最后四位,其他隐藏。共计18位或者15位。<例子：*************5762>
@@ -20,8 +19,8 @@ public final class SensitiveInfoUtils {
      * @param id
      * @return
      */
-    public static String idCardNum(String id) {
-        if (StringUtils.isBlank(id)) {
+    public static String idCardNum(String id){
+        if (StringUtils.isBlank(id)){
             return "";
         }
         String num = StringUtils.right(id, 4);
@@ -34,30 +33,12 @@ public final class SensitiveInfoUtils {
      * @param num
      * @return
      */
-    public static String fixedPhone(String num) {
-        if (StringUtils.isBlank(num)) {
+    public static String fixedPhone(String num){
+        if (StringUtils.isBlank(num)){
             return "";
         }
         return StringUtils.leftPad(StringUtils.right(num, 4), StringUtils.length(num), "*");
     }
-
-
-    /**
-     * [地址] 只显示到地区,不显示详细地址；我们要对个人信息增强保护<例子：北京市海淀区****>
-     * 
-     * @param address
-     * @param sensitiveSize
-     *            敏感信息长度
-     * @return
-     */
-    public static String address(String address, int sensitiveSize) {
-        if (StringUtils.isBlank(address)) {
-            return "";
-        }
-        int length = StringUtils.length(address);
-        return StringUtils.rightPad(StringUtils.left(address, length - sensitiveSize), length, "*");
-    }
-
 
     /**
      * [银行卡号] 前六位,后四位,其他用星号隐藏每位1个星号<例子:6222600**********1234>
@@ -65,11 +46,14 @@ public final class SensitiveInfoUtils {
      * @param cardNum
      * @return
      */
-    public static String bankCard(String cardNum) {
-        if (StringUtils.isBlank(cardNum)) {
+    public static String bankCard(String cardNum){
+        if (StringUtils.isBlank(cardNum)){
             return "";
         }
-        return StringUtils.left(cardNum, 6).concat(StringUtils.removeStart(StringUtils.leftPad(StringUtils.right(cardNum, 4), StringUtils.length(cardNum), "*"), "******"));
+        return StringUtils.left(cardNum, 6).concat(
+                        StringUtils.removeStart(
+                                        StringUtils.leftPad(StringUtils.right(cardNum, 4), StringUtils.length(cardNum), "*"),
+                                        "******"));
     }
 
     /**
@@ -78,8 +62,8 @@ public final class SensitiveInfoUtils {
      * @param code
      * @return
      */
-    public static String cnapsCode(String code) {
-        if (StringUtils.isBlank(code)) {
+    public static String cnapsCode(String code){
+        if (StringUtils.isBlank(code)){
             return "";
         }
         return StringUtils.rightPad(StringUtils.left(code, 2), StringUtils.length(code), "*");
@@ -91,11 +75,12 @@ public final class SensitiveInfoUtils {
      * @param num
      * @return
      */
-    public static String cardValidDate(String date) {
-        if (StringUtils.isBlank(date)) {
+    public static String cardValidDate(String date){
+        if (StringUtils.isBlank(date)){
             return "";
         }
-        return StringUtils.left(date, 1).concat(StringUtils.removeStart(StringUtils.leftPad(StringUtils.right(date, 1), StringUtils.length(date), "*"), "*"));
+        return StringUtils.left(date, 1).concat(
+                        StringUtils.removeStart(StringUtils.leftPad(StringUtils.right(date, 1), StringUtils.length(date), "*"), "*"));
     }
 
     /**
@@ -104,16 +89,14 @@ public final class SensitiveInfoUtils {
      * @param num
      * @return
      */
-    public static String all(String date) {
-        if (StringUtils.isBlank(date)) {
+    public static String all(String date){
+        if (StringUtils.isBlank(date)){
             return "";
         }
         return StringUtils.repeat("*", StringUtils.length(date));
     }
 
- 
-
-    public static enum SensitiveType {
+    public static enum SensitiveType{
         /**
          * 中文名
          */
@@ -131,14 +114,7 @@ public final class SensitiveInfoUtils {
          * 手机号
          */
         MOBILE_PHONE,
-        /**
-         * 地址
-         */
-        ADDRESS,
-        /**
-         * 电子邮件
-         */
-        EMAIL,
+
         /**
          * 银行卡
          */
