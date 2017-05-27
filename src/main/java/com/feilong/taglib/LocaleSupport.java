@@ -18,7 +18,7 @@ package com.feilong.taglib;
 import java.util.Locale;
 
 /**
- * The Interface LocaleSupport.
+ * 标识支持 locale 语言环境的标签 support.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport
