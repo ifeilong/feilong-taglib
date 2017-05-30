@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
@@ -28,9 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.servlet.http.RequestUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 输出内容的标签.
@@ -67,7 +66,10 @@ abstract class AbstractWriteContentTag extends BaseTag{
 
         // 开始执行的部分
         Object writeContent = this.buildContent(request);
-        print(writeContent);
+
+        if (null != writeContent){
+            print(writeContent);
+        }
 
         if (LOGGER.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
