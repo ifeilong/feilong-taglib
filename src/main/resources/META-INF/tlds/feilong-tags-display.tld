@@ -299,8 +299,43 @@
 		</attribute>
 
 	</tag>
+	<!-- **********************LoadBundleTag*********************************** -->
+	<tag>
+		<name>loadBundle</name>
+		<tag-class>com.feilong.taglib.display.loadbundle.LoadBundleTag</tag-class>
+		<body-content>empty</body-content>
+		<description>将i18n配置文件,转成map,加载到request 作用域, 实现国际化功能,简化开发</description>
 
-	<!-- **********************OptionTag*********************************** -->
+		<attribute>
+			<name>baseName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu ]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>locale</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[设置 Locale环境, 支持java.util.Locale或 String 类型 ,默认使用 request.getLocale()]]>
+			</description>
+		</attribute>
+
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				<![CDATA[存储在request作用域 里面的属性名称]]>
+			</description>
+		</attribute>
+
+	</tag>
+
+	<!-- **********************BarcodeTag*********************************** -->
 	<tag>
 		<name>barcode</name>
 		<tag-class>com.feilong.taglib.display.barcode.BarcodeTag</tag-class>

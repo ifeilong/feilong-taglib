@@ -15,15 +15,13 @@
  */
 package com.feilong.taglib.display;
 
-import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 
 /**
  * 标签缓存管理器.
@@ -51,7 +49,9 @@ public final class TagCacheManager{
      * 该cache里面value不会存放null/empty
      * </p>
      */
-    private static final Map<CacheParam, String> CACHE        = new ConcurrentHashMap<>();
+    private static final Map<CacheParam, Object> CACHE        = new ConcurrentHashMap<>();
+
+    //-----------------------------------------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private TagCacheManager(){
@@ -60,40 +60,77 @@ public final class TagCacheManager{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //-------------------------------------------------------------------------------------------
+
+    /**
+     * Builds the options.
+     *
+     * @param <T>
+     *            the generic type
+     * @param <V>
+     * @param cacheParam
+     *            the option param
+     * @param cacheContentBuilder
+     *            the cache content builder
+     * @return the string
+     * @since 1.10.3
+     */
+    public static <T extends CacheParam, V> V getContent(T cacheParam,CacheContentBuilder<T, V> cacheContentBuilder){
+        V contentValue = getContentFromCache(cacheParam);
+        if (isNotNullOrEmpty(contentValue)){
+            return contentValue;
+        }
+
+        //-------------------------------------------------------------------------------------------
+        contentValue = cacheContentBuilder.build(cacheParam);
+
+        put(cacheParam, contentValue);
+
+        //-------------------------------------------------------------------------------------------
+        return contentValue;
+    }
+
     /**
      * 从缓存中读取.
+     * 
+     * @param <V>
      *
      * @param cacheParam
      *            the pager params
      * @return the content from cache
      */
-    public static String getContentFromCache(CacheParam cacheParam){
-        //缓存
-        if (CACHE_ENABLE){
-            if (CACHE.containsKey(cacheParam)){
-                LOGGER.debug("cache.size:[{}],hashcode:[{}],hit cache,get info from cache", CACHE.size(), cacheParam.hashCode());
-                return CACHE.get(cacheParam);
-            }
-            LOGGER.debug(
-                            "cache.size:[{}],hashcode:[{}],cache not contains [{}],will do parse",
-                            CACHE.size(),
-                            cacheParam.hashCode(),
-                            cacheParam.getClass().getName());
-        }else{
+    private static <V> V getContentFromCache(CacheParam cacheParam){
+        if (!CACHE_ENABLE){
             LOGGER.info("the cache status is disable!");
+            return null;
         }
-        return EMPTY;
+
+        //-----------------------------------------------------------------------------
+
+        int hashCode = cacheParam.hashCode();
+        int size = CACHE.size();
+        String name = cacheParam.getClass().getSimpleName();
+
+        if (CACHE.containsKey(cacheParam)){
+            LOGGER.debug("cacheSize:[{}],[{}](hashcode:[{}]),hit cache,get from cache", size, name, hashCode);
+            return (V) CACHE.get(cacheParam);
+        }
+
+        LOGGER.debug("cacheSize:[{}],cache not contains [{}](hashcode:[{}]),will do parse", size, name, hashCode);
+        return null;
     }
 
     /**
      * 设置.
+     * 
+     * @param <V>
      *
      * @param cacheParam
      *            the pager params
      * @param content
      *            the content
      */
-    public static void put(CacheParam cacheParam,String content){
+    private static <V> void put(CacheParam cacheParam,V content){
         if (CACHE_ENABLE && isNotNullOrEmpty(content)){//设置cache
             CACHE.put(cacheParam, content);
         }

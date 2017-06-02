@@ -41,4 +41,5 @@ public interface LocaleSupport{
     //不能声明成 Serializable类型
     //Unable to convert string "zh_CN" to class "java.io.Serializable" for attribute "locale": Property Editor not registered with the PropertyEditorManager
     void setLocale(Object locale);
+
 }

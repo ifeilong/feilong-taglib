@@ -15,11 +15,12 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGESIZE;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Locale;
 
@@ -29,12 +30,9 @@ import com.feilong.core.CharsetType;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.LocaleSupport;
+import com.feilong.taglib.display.LocaleSupportUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.bean.ConvertUtil.toLocale;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * 分页标签.
@@ -271,7 +269,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         pagerParams.setPageParamName(pageParamName);
         pagerParams.setVmPath(vmPath);
         pagerParams.setCharsetType(charsetType);
-        pagerParams.setLocale(defaultIfNull(toLocale(locale), request.getLocale()));
+        pagerParams.setLocale(LocaleSupportUtil.toLocal(locale, request));
         pagerParams.setMaxShowPageNo(maxShowPageNo);
 
         pagerParams.setSkin(skin);

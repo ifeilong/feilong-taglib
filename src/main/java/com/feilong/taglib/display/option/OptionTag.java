@@ -15,17 +15,11 @@
  */
 package com.feilong.taglib.display.option;
 
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
-
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
-import com.feilong.core.util.ResourceBundleUtil;
-import com.feilong.taglib.AbstractStartWriteContentTag;
-import com.feilong.taglib.LocaleSupport;
-
-import static com.feilong.core.bean.ConvertUtil.toLocale;
+import com.feilong.taglib.AbstractLocaleSupportTag;
+import com.feilong.taglib.display.LocaleSupportUtil;
+import com.feilong.taglib.display.TagCacheManager;
 
 /**
  * 用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发.
@@ -155,27 +149,10 @@ import static com.feilong.core.bean.ConvertUtil.toLocale;
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option">feilongDisplay-option</a>
  * @since 1.5.4
  */
-public class OptionTag extends AbstractStartWriteContentTag implements LocaleSupport{
+public class OptionTag extends AbstractLocaleSupportTag{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4523036188885941366L;
-
-    /**
-     * 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu .
-     */
-    private String            baseName;
-
-    /**
-     * 设置{@link Locale} 环境, 支持 <code>java.util.Locale</code> 或 String 类型的实例 ,如果是null,将默认使用 <code>request.getLocale()</code>.
-     *
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
-     * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
-     * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
-     * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
-     * @since 1.7.2 change Object type
-     */
-    private Object            locale;
 
     /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
     private String            selectedKey;
@@ -189,20 +166,17 @@ public class OptionTag extends AbstractStartWriteContentTag implements LocaleSup
     protected Object buildContent(HttpServletRequest request){
         OptionParam optionParam = new OptionParam();
         optionParam.setBaseName(baseName);
-        optionParam.setLocale(defaultIfNull(toLocale(locale), request.getLocale()));
+        optionParam.setLocale(LocaleSupportUtil.toLocal(locale, request));
         optionParam.setSelectedKey(selectedKey);
-        return OptionBuilder.buildContent(optionParam);
+
+        return TagCacheManager.getContent(optionParam, OptionCacheContentBuilder.INSTANCE);
     }
 
     /**
-     * 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu .
-     * 
-     * @param baseName
-     *            the baseName to set
+     * @param request
+     * @return
+     * @since 1.10.3
      */
-    public void setBaseName(String baseName){
-        this.baseName = baseName;
-    }
 
     /**
      * 设置 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
@@ -213,16 +187,4 @@ public class OptionTag extends AbstractStartWriteContentTag implements LocaleSup
     public void setSelectedKey(String selectedKey){
         this.selectedKey = selectedKey;
     }
-
-    /**
-     * 设置{@link Locale} 环境, 支持 java.util.Locale 或 String 类型的实例 ,如果是null,将默认使用 <code>request.getLocale()</code>.
-     *
-     * @param locale
-     *            the locale to set
-     */
-    @Override
-    public void setLocale(Object locale){
-        this.locale = locale;
-    }
-
 }

@@ -20,12 +20,9 @@ import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
 import java.util.Map;
 
-import com.feilong.taglib.display.TagCacheManager;
+import com.feilong.taglib.display.CacheContentBuilder;
+import com.feilong.taglib.display.LocaleSupportUtil;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
-import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 /**
  * 用来构造输出 option内容.
@@ -33,51 +30,30 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
-public class OptionBuilder{
+public class OptionCacheContentBuilder implements CacheContentBuilder<OptionParam, String>{
 
     /** option 格式 <code>{@value}</code>. */
-    private static final String OPTION_PATTERN  = "<option value=\"{}\"{}>{}</option>";
+    private static final String                                  OPTION_PATTERN  = "<option value=\"{}\"{}>{}</option>";
 
     /** 选中的字符串 <code>{@value}</code>. */
-    private static final String SELECTED_STRING = " selected=\"selected\"";
+    private static final String                                  SELECTED_STRING = " selected=\"selected\"";
 
-    /** Don't let anyone instantiate this class. */
-    private OptionBuilder(){
-        //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
-        //see 《Effective Java》 2nd
-        throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
+    /** Static instance. */
+    // the static instance works for all types
+    public static final CacheContentBuilder<OptionParam, String> INSTANCE        = new OptionCacheContentBuilder();
 
-    /**
-     * Builds the options.
-     *
-     * @param optionParam
-     *            the option param
-     * @return the string
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.taglib.display.CacheContentBuilder#build(com.feilong.taglib.display.CacheParam)
      */
-    public static String buildContent(OptionParam optionParam){
-        String content = TagCacheManager.getContentFromCache(optionParam);
-        if (isNotNullOrEmpty(content)){
-            return content;
-        }
-
-        content = buildContentMain(optionParam);
-        TagCacheManager.put(optionParam, content);
-        return content;
-    }
-
-    /**
-     * Builds the content main.
-     *
-     * @param optionParam
-     *            the option param
-     * @return the string
-     */
-    private static String buildContentMain(OptionParam optionParam){
+    @Override
+    public String build(OptionParam optionParam){
         StringBuilder sb = new StringBuilder();
 
         //获得 key value map.
-        Map<String, String> map = toMap(getResourceBundle(optionParam.getBaseName(), optionParam.getLocale()));
+        Map<String, String> map = LocaleSupportUtil.build(optionParam);
+
         for (Map.Entry<String, String> entry : map.entrySet()){
             String option = buildOption(entry.getKey(), entry.getValue(), optionParam.getSelectedKey());
             sb.append(option).append(LINE_SEPARATOR);
@@ -105,4 +81,5 @@ public class OptionBuilder{
         //而 显示的时候,使用 spring message 标签显示
         return Slf4jUtil.format(OPTION_PATTERN, key, selectedStatus, value);
     }
+
 }

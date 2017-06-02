@@ -15,14 +15,7 @@
  */
 package com.feilong.taglib.display.option;
 
-import java.io.Serializable;
-import java.util.Locale;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import com.feilong.core.util.ResourceBundleUtil;
-import com.feilong.taglib.display.CacheParam;
+import com.feilong.taglib.display.loadbundle.LoadBundleParam;
 
 /**
  * The Class OptionParam.
@@ -30,59 +23,13 @@ import com.feilong.taglib.display.CacheParam;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
  */
-public class OptionParam implements Serializable,CacheParam{
+public class OptionParam extends LoadBundleParam{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -1089625974739932822L;
 
-    /**
-     * 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu .
-     */
-    private String            baseName;
-
-    /** 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}. */
-    private Locale            locale;
-
     /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
     private String            selectedKey;
-
-    /**
-     * 获得 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.
-     *
-     * @return the baseName
-     */
-    public String getBaseName(){
-        return baseName;
-    }
-
-    /**
-     * 设置 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.
-     *
-     * @param baseName
-     *            the baseName to set
-     */
-    public void setBaseName(String baseName){
-        this.baseName = baseName;
-    }
-
-    /**
-     * 获得 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}.
-     *
-     * @return the locale
-     */
-    public Locale getLocale(){
-        return locale;
-    }
-
-    /**
-     * 设置 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}.
-     *
-     * @param locale
-     *            the locale to set
-     */
-    public void setLocale(Locale locale){
-        this.locale = locale;
-    }
 
     /**
      * 获得 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
@@ -102,25 +49,4 @@ public class OptionParam implements Serializable,CacheParam{
     public void setSelectedKey(String selectedKey){
         this.selectedKey = selectedKey;
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode(){
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object obj){
-        return EqualsBuilder.reflectionEquals(this, obj);
-    }
-
 }
