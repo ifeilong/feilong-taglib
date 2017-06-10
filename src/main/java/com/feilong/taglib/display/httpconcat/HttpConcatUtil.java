@@ -15,6 +15,10 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
 import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -34,15 +38,10 @@ import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.text.MessageFormatUtil;
-import com.feilong.core.util.CollectionsUtil;
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.tools.jsonlib.JsonUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.util.MapUtil.newHashMap;
 
 /**
  * http concat的核心工具类.
@@ -91,7 +90,10 @@ public final class HttpConcatUtil{
 
     static{
         HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
-        LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
+
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
+        }
     }
 
     /** Don't let anyone instantiate this class. */
@@ -221,12 +223,11 @@ public final class HttpConcatUtil{
      * @return the http concat param
      */
     private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-        // ********************itemSrcList*******************************************************
         // 判断item list
         List<String> itemSrcList = httpConcatParam.getItemSrcList();
 
         // 去重,元素不重复
-        List<String> noRepeatitemList = CollectionsUtil.removeDuplicate(itemSrcList);
+        List<String> noRepeatitemList = removeDuplicate(itemSrcList);
 
         //**************************************************************
         if (isNullOrEmpty(noRepeatitemList)){
@@ -237,8 +238,10 @@ public final class HttpConcatUtil{
         int itemSrcListSize = itemSrcList.size();
 
         if (noRepeatitemListSize != itemSrcListSize){
-            String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}";
-            LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, JsonUtil.format(httpConcatParam));
+            if (LOGGER.isWarnEnabled()){
+                String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}";
+                LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, JsonUtil.format(httpConcatParam));
+            }
         }
         // *******************************************************************
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();

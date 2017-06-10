@@ -85,6 +85,8 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
     /** The Constant log. */
     private static final Logger LOGGER           = LoggerFactory.getLogger(BaseTag.class);
 
+    //---------------------------------------------------------------
+
     /**
      * 获得HttpServletRequest.
      *
@@ -112,6 +114,8 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
         return (HttpServletResponse) pageContext.getResponse();
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Log exception.
      *
@@ -120,10 +124,14 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
      * @since 1.5.5
      */
     protected void logException(Exception e){
-        RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD;
-        Map<String, Object> map = RequestUtil.getRequestInfoMapForLog(getHttpServletRequest(), requestLogSwitch);
-        LOGGER.error(Slf4jUtil.format("request info:{},tag is:[{}]", JsonUtil.format(map), getClass().getSimpleName()), e);
+        if (LOGGER.isErrorEnabled()){
+            RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD;
+            Map<String, Object> map = RequestUtil.getRequestInfoMapForLog(getHttpServletRequest(), requestLogSwitch);
+            LOGGER.error(Slf4jUtil.format("request info:{},tag is:[{}]", JsonUtil.format(map), getClass().getSimpleName()), e);
+        }
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

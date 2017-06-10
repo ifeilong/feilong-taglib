@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.breadcrumb;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.net.URL;
@@ -37,8 +39,6 @@ import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbVMParams;
 import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.velocity.VelocityUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 面包屑渲染核心工具类.
@@ -186,6 +186,8 @@ public class BreadCrumbUtil{
         String currentPath = breadCrumbParams.getCurrentPath();
         List<BreadCrumbEntity<T>> breadCrumbEntityList = breadCrumbParams.getBreadCrumbEntityList();
 
+        //---------------------------------------------------------------
+
         if (isNullOrEmpty(currentPath)){
             //find all
             Map<T, Integer> groupCount = AggregateUtil.groupCount(breadCrumbEntityList, "parentId");
@@ -195,12 +197,20 @@ public class BreadCrumbUtil{
             }
             return sortOutAllParentBreadCrumbEntityList(breadCrumbEntityList);
         }
+
+        //---------------------------------------------------------------
         BreadCrumbEntity<T> currentBreadCrumbEntity = getBreadCrumbEntityByPath(currentPath, breadCrumbEntityList);
 
         if (isNullOrEmpty(currentBreadCrumbEntity)){
-            LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
-            return Collections.emptyList();
+
+            if (LOGGER.isWarnEnabled()){
+                LOGGER.warn("when currentPath is:{},in breadCrumbEntityList,can not find", currentPath, JsonUtil.format(breadCrumbParams));
+            }
+
+            return emptyList();
         }
+
+        //---------------------------------------------------------------
 
         return sortOutAllParentBreadCrumbEntityList(currentBreadCrumbEntity, breadCrumbEntityList);
     }
