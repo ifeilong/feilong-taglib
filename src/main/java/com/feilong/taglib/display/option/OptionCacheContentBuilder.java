@@ -15,8 +15,8 @@
  */
 package com.feilong.taglib.display.option;
 
+import static java.lang.System.lineSeparator;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
 import java.util.Map;
 
@@ -56,7 +56,7 @@ public class OptionCacheContentBuilder implements CacheContentBuilder<OptionPara
 
         for (Map.Entry<String, String> entry : map.entrySet()){
             String option = buildOption(entry.getKey(), entry.getValue(), optionParam.getSelectedKey());
-            sb.append(option).append(LINE_SEPARATOR);
+            sb.append(option).append(lineSeparator());
         }
         return sb.toString();
     }
