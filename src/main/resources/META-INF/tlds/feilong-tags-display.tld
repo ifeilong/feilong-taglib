@@ -170,7 +170,7 @@
 		<name>httpConcat</name>
 		<tag-class>com.feilong.taglib.display.httpconcat.HttpConcatTag</tag-class>
 		<description>http concat功能</description>
-		<body-content>jsp</body-content>
+		<body-content>JSP</body-content>
 		<attribute>
 			<name>type</name>
 			<required>true</required>

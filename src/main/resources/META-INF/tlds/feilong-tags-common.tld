@@ -101,7 +101,7 @@
 	<tag>
 		<name>swicth</name>
 		<tag-class>com.feilong.taglib.common.SwitchTag</tag-class>
-		<body-content>jsp</body-content>
+		<body-content>JSP</body-content>
 		<description>switch</description>
 		<attribute>
 			<name>value</name>
@@ -114,7 +114,7 @@
 	<tag>
 		<name>case</name>
 		<tag-class>com.feilong.taglib.common.SwitchCaseTag</tag-class>
-		<body-content>jsp</body-content>
+		<body-content>JSP</body-content>
 		<description>switch case</description>
 		<attribute>
 			<name>value</name>
@@ -127,7 +127,7 @@
 	<tag>
 		<name>default</name>
 		<tag-class>com.feilong.taglib.common.SwitchDefaultTag</tag-class>
-		<body-content>jsp</body-content>
+		<body-content>JSP</body-content>
 		<description>switch default</description>
 	</tag>
 </taglib>
