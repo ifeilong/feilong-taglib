@@ -15,16 +15,18 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 根据 TENGINE_SUPPORT判断 将参数动态生成tengine插件的形式或者普通js/css的形式.
@@ -53,14 +55,19 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  */
 public class HttpConcatTag extends AbstractEndWriteContentTag{
 
+    /** The Constant log. */
+    private static final Logger LOGGER            = LoggerFactory.getLogger(HttpConcatTag.class);
+
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID  = -3447592871482978718L;
+    private static final long   serialVersionUID  = -3447592871482978718L;
+
+    //---------------------------------------------------------------
 
     /** 类型,是 css 还是 js. */
-    private String            type;
+    private String              type;
 
     /** 版本号. */
-    private String            version;
+    private String              version;
 
     /**
      * 根目录.
@@ -68,15 +75,16 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
      * </p>
      */
-    private String            root;
+    private String              root;
 
     /** 域名,如果没有设置,将自动使用 {@link HttpServletRequest#getContextPath()}. */
-    private String            domain;
+    private String              domain;
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
-    private Boolean           httpConcatSupport = null;
+    private Boolean             httpConcatSupport = null;
 
-    // ***********************************************************************************
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -85,22 +93,34 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     @Override
     protected Object buildContent(HttpServletRequest request){
         String bodyContentSrc = bodyContent.getString();
+
+        //-------------------bodyContentSrc validate---------------------------
         if (isNullOrEmpty(bodyContentSrc)){
+            LOGGER.warn("bodyContentSrc is null or empty, return empty");
             return EMPTY;
         }
 
+        //-------------------type validate-------------------------------------
         if (isNullOrEmpty(type)){
+            LOGGER.warn("type is null or empty, return empty");
             return EMPTY;
         }
 
-        List<String> itemSrcList = HttpConcatUtil.toItemSrcList(bodyContentSrc);
-        if (isNullOrEmpty(itemSrcList)){
-            return EMPTY;
-        }
+        //-------------------domain validate---------------------------------
         if (isNullOrEmpty(domain)){
+            LOGGER.debug("domain is null or empty, will use contextPath");
             domain = getHttpServletRequest().getContextPath();
         }
 
+        //------------------ itemSrcList validate-------------------------------
+
+        List<String> itemSrcList = ItemSrcListResolver.resolve(bodyContentSrc, type, domain);
+        if (isNullOrEmpty(itemSrcList)){
+            LOGGER.warn("itemSrcList is null or empty, return empty");
+            return EMPTY;
+        }
+
+        //--------------------build-------------------------------------------
         HttpConcatParam httpConcatParam = new HttpConcatParam();
         httpConcatParam.setDomain(domain);
         httpConcatParam.setRoot(root);

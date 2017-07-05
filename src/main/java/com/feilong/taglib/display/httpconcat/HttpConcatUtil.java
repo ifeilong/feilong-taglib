@@ -17,6 +17,7 @@ package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ToStringConfig.DEFAULT_CONNECTOR;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
 import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
@@ -24,7 +25,6 @@ import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +74,8 @@ public final class HttpConcatUtil{
     /** http concat 全局配置. */
     private static final HttpConcatGlobalConfig       HTTP_CONCAT_GLOBAL_CONFIG;
 
+    //---------------------------------------------------------------
+
     /**
      * 将结果缓存到map.
      * 
@@ -95,6 +97,8 @@ public final class HttpConcatUtil{
             LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
         }
     }
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatUtil(){
@@ -130,6 +134,8 @@ public final class HttpConcatUtil{
             return EMPTY;
         }
 
+        //---------------------------------------------------------------
+
         //是否使用cache
         boolean isWriteCache = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable();
 
@@ -161,6 +167,8 @@ public final class HttpConcatUtil{
             }
         }
 
+        //---------------------------------------------------------------
+
         String content = buildContent(httpConcatParam);
         // **************************log***************************************************
         LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
@@ -175,6 +183,8 @@ public final class HttpConcatUtil{
                 LOGGER.warn(pattern, cacheKeyHashCode, HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable(), isWriteCache);
             }
         }
+
+        //---------------------------------------------------------------
         return content;
     }
 
@@ -328,7 +338,7 @@ public final class HttpConcatUtil{
         }else{
             sb.append("??");
 
-            ToStringConfig toStringConfig = new ToStringConfig(ToStringConfig.DEFAULT_CONNECTOR);
+            ToStringConfig toStringConfig = new ToStringConfig(DEFAULT_CONNECTOR);
             sb.append(ConvertUtil.toString(itemSrcList, toStringConfig));
         }
         appendVersion(httpConcatParam.getVersion(), sb);
@@ -368,29 +378,6 @@ public final class HttpConcatUtil{
         }else{
             LOGGER.debug("the param version isNullOrEmpty,we suggest you should set version value");
         }
-    }
-
-    /**
-     * 获得 items array.
-     * 
-     * @param blockContent
-     *            内容,目前 以 \n 分隔
-     * @return the items array
-     */
-    public static List<String> toItemSrcList(String blockContent){
-        String[] items = StringUtil.split(blockContent.trim(), StringUtils.LF);
-        int length = items.length;
-
-        List<String> list = new ArrayList<>(length);
-        for (int i = 0; i < length; ++i){
-            String item = items[i];
-            // 忽视空行
-            if (isNotNullOrEmpty(item)){
-                // 去除空格
-                list.add(item.trim());
-            }
-        }
-        return list;
     }
 
     // *****************************************************************************

@@ -19,12 +19,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import com.feilong.taglib.display.httpconcat.ItemSrcListResolverParameterizedTest;
 import com.feilong.taglib.display.sensitive.FeiLongSensitiveUtilSuiteTests;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
                 FeiLongSensitiveUtilSuiteTests.class,
+                ItemSrcListResolverParameterizedTest.class,
         //                
 })
 public class FeiLongTaglibSuiteTests{
