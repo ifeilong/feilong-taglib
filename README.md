@@ -102,6 +102,8 @@ git clone https://github.com/venusdrogon/feilong-taglib.git --depth 1
 mvn install -f feilong-taglib
 ```
 
+**详细参考** https://github.com/venusdrogon/feilong-taglib/wiki/install
+
 ## :memo: 说明
 
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
