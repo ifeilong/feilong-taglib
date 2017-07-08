@@ -96,10 +96,10 @@ taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-pl
 
 ```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
-mvn install -f feilong-platform
+mvn install -f feilong-platform/pom.xml
 
 git clone https://github.com/venusdrogon/feilong-taglib.git --depth 1
-mvn install -f feilong-taglib
+mvn install -f feilong-taglib/pom.xml
 ```
 
 **详细参考** https://github.com/venusdrogon/feilong-taglib/wiki/install
