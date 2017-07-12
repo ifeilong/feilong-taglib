@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat;
+package com.feilong.taglib.display.httpconcat.resolver;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
+import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE_CSS;
+import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE_JS;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.feilong.taglib.display.httpconcat.resolver.ItemSrcListResolver;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
 public class ItemSrcListResolverParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{

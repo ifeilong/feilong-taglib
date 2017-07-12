@@ -15,32 +15,24 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
-import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ToStringConfig.DEFAULT_CONNECTOR;
-import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
 import static com.feilong.core.util.MapUtil.newHashMap;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
-import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.bean.ToStringConfig;
-import com.feilong.core.lang.StringUtil;
-import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.core.util.ResourceBundleUtil;
+import com.feilong.taglib.display.httpconcat.builder.ContentBuilder;
+import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
+import com.feilong.taglib.display.httpconcat.resolver.ItemSrcListResolver;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -59,7 +51,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see HttpConcatTag
- * @see HttpConcatConstants
  * @see HttpConcatParam
  * @see org.apache.commons.collections4.map.LRUMap
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a>
@@ -89,6 +80,8 @@ public final class HttpConcatUtil{
     //TODO change to ConcurrentHashMap
     //这里对线程安全的要求不高,仅仅是插入和读取的操作,即使出了线程安全问题,重新解析js/css标签代码并加载即可
     private static final Map<HttpConcatParam, String> CACHE  = newHashMap(500);
+
+    //---------------------------------------------------------------
 
     static{
         HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
@@ -127,13 +120,6 @@ public final class HttpConcatUtil{
             LOGGER.debug(JsonUtil.format(httpConcatParam));
         }
 
-        // 判断item list
-        List<String> itemSrcList = httpConcatParam.getItemSrcList();
-        if (isNullOrEmpty(itemSrcList)){
-            LOGGER.warn("the param itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
-            return EMPTY;
-        }
-
         //---------------------------------------------------------------
 
         //是否使用cache
@@ -169,7 +155,15 @@ public final class HttpConcatUtil{
 
         //---------------------------------------------------------------
 
-        String content = buildContent(httpConcatParam);
+        List<String> itemSrcList = ItemSrcListResolver
+                        .resolve(httpConcatParam.getContent(), httpConcatParam.getType(), httpConcatParam.getDomain());
+        // 判断item list
+        if (isNullOrEmpty(itemSrcList)){
+            LOGGER.warn("itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
+            return EMPTY;
+        }
+
+        String content = ContentBuilder.buildContent(httpConcatParam, itemSrcList, HTTP_CONCAT_GLOBAL_CONFIG);
         // **************************log***************************************************
         LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
 
@@ -188,216 +182,4 @@ public final class HttpConcatUtil{
         return content;
     }
 
-    /**
-     * 构造content.
-     *
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the string
-     * @since 1.4.1
-     */
-    private static String buildContent(HttpConcatParam httpConcatParam){
-        //如果没有设置就使用默认的全局设置
-        boolean globalConcatSupport = BooleanUtils.toBoolean(HTTP_CONCAT_GLOBAL_CONFIG.getHttpConcatSupport());
-        Boolean concatSupport = defaultIfNull(httpConcatParam.getHttpConcatSupport(), globalConcatSupport);
-
-        // *******************************************************************
-        // 标准化 httpConcatParam,比如list去重,标准化domain等等
-        // 下面的解析均基于standardHttpConcatParam来操作
-        // httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = standardHttpConcatParam(httpConcatParam);
-
-        // *********************************************************************************
-        String type = standardHttpConcatParam.getType();
-        String template = getTemplate(type);
-
-        if (concatSupport){ // concat
-            return MessageFormatUtil.format(template, getConcatLink(standardHttpConcatParam));
-        }
-
-        // 本地开发环境支持的.
-        List<String> itemSrcList = standardHttpConcatParam.getItemSrcList();
-
-        StringBuilder sb = new StringBuilder();
-        for (String itemSrc : itemSrcList){
-            sb.append(MessageFormatUtil.format(template, getNoConcatLink(itemSrc, standardHttpConcatParam)));
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 标准化 httpConcatParam,比如list去重,标准化domain等等.
-     * 
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the http concat param
-     */
-    private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-        // 判断item list
-        List<String> itemSrcList = httpConcatParam.getItemSrcList();
-
-        // 去重,元素不重复
-        List<String> noRepeatitemList = removeDuplicate(itemSrcList);
-
-        //**************************************************************
-        if (isNullOrEmpty(noRepeatitemList)){
-            LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
-            return null;
-        }
-        int noRepeatitemListSize = noRepeatitemList.size();
-        int itemSrcListSize = itemSrcList.size();
-
-        if (noRepeatitemListSize != itemSrcListSize){
-            if (LOGGER.isWarnEnabled()){
-                String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],httpConcatParam:{}";
-                LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, JsonUtil.format(httpConcatParam));
-            }
-        }
-        // *******************************************************************
-        HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
-        standardHttpConcatParam.setItemSrcList(noRepeatitemList);
-        standardHttpConcatParam.setDomain(buildDomain(httpConcatParam));
-        standardHttpConcatParam.setRoot(doWithRoot(httpConcatParam));
-        standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
-        standardHttpConcatParam.setType(httpConcatParam.getType());
-        standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
-
-        // *******************************************************************
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("standardHttpConcatParam:{}", JsonUtil.format(standardHttpConcatParam));
-        }
-        return standardHttpConcatParam;
-
-    }
-
-    /**
-     * Builds the domain.
-     *
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the string
-     * @since 1.8.3
-     */
-    private static String buildDomain(HttpConcatParam httpConcatParam){
-        String domain = httpConcatParam.getDomain();
-        if (isNullOrEmpty(domain)){
-            return EMPTY;
-        }
-
-        // 格式化 domain 成 http://www.feilong.com/ 形式
-        if (!domain.endsWith("/")){
-            return domain + "/";
-        }
-        return domain;
-    }
-
-    /**
-     * Do with root.
-     *
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the string
-     * @since 1.8.3
-     */
-    private static String doWithRoot(HttpConcatParam httpConcatParam){
-        String root = httpConcatParam.getRoot();
-        if (isNullOrEmpty(root)){
-            return EMPTY;
-        }
-
-        // 格式化 root 成 xxxx/xxx/ 形式,
-        if (!root.endsWith("/")){
-            root = root + "/";
-        }
-        if (root.startsWith("/")){
-            root = StringUtil.substring(root, 1);
-        }
-        return root;
-    }
-
-    // *****************************************************************************
-    /**
-     * 获得合并的链接.
-     * 
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the link
-     */
-    private static String getConcatLink(HttpConcatParam httpConcatParam){
-        List<String> itemSrcList = httpConcatParam.getItemSrcList();
-
-        // **********************************************************************************
-        StringBuilder sb = new StringBuilder();
-        sb.append(httpConcatParam.getDomain());
-        sb.append(httpConcatParam.getRoot());
-
-        // 只有一条 输出原生字符串
-        if (itemSrcList.size() == 1){
-            sb.append(itemSrcList.get(0));
-            LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
-        }else{
-            sb.append("??");
-
-            ToStringConfig toStringConfig = new ToStringConfig(DEFAULT_CONNECTOR);
-            sb.append(ConvertUtil.toString(itemSrcList, toStringConfig));
-        }
-        appendVersion(httpConcatParam.getVersion(), sb);
-        return sb.toString();
-    }
-
-    /**
-     * 获得不需要 Concat 的连接.
-     * 
-     * @param itemSrc
-     *            the src
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the string
-     */
-    private static String getNoConcatLink(String itemSrc,HttpConcatParam httpConcatParam){
-        StringBuilder sb = new StringBuilder();
-        sb.append(httpConcatParam.getDomain());
-        sb.append(httpConcatParam.getRoot());
-        sb.append(itemSrc);
-        appendVersion(httpConcatParam.getVersion(), sb);
-        return sb.toString();
-    }
-
-    /**
-     * Append version.
-     * 
-     * @param version
-     *            the version
-     * @param sb
-     *            the sb
-     */
-    private static void appendVersion(String version,StringBuilder sb){
-        if (isNotNullOrEmpty(version)){
-            sb.append("?");
-            sb.append(version);
-        }else{
-            LOGGER.debug("the param version isNullOrEmpty,we suggest you should set version value");
-        }
-    }
-
-    // *****************************************************************************
-
-    /**
-     * 不同的type不同的模板.
-     *
-     * @param type
-     *            类型 {@link HttpConcatConstants#TYPE_CSS} 以及{@link HttpConcatConstants#TYPE_JS}
-     * @return 目前仅支持 {@link HttpConcatConstants#TYPE_CSS} 以及{@link HttpConcatConstants#TYPE_JS},其余不支持,会抛出
-     *         {@link UnsupportedOperationException}
-     */
-    private static String getTemplate(String type){
-        if (TYPE_CSS.equalsIgnoreCase(type)){
-            return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateCss();
-        }
-
-        if (TYPE_JS.equalsIgnoreCase(type)){
-            return HTTP_CONCAT_GLOBAL_CONFIG.getTemplateJs();
-        }
-        throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
-    }
 }

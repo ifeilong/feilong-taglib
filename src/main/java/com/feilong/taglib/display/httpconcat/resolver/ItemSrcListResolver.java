@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat;
+package com.feilong.taglib.display.httpconcat.resolver;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_CSS;
-import static com.feilong.taglib.display.httpconcat.HttpConcatConstants.TYPE_JS;
+import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.LF;
 
@@ -31,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RegexUtil;
+import com.feilong.taglib.display.httpconcat.builder.TemplateFactory;
 
 /**
  * 专门用来提取标签体内容的.
@@ -38,7 +38,7 @@ import com.feilong.core.util.RegexUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
  */
-public class ItemSrcListResolver{
+public final class ItemSrcListResolver{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemSrcListResolver.class);
@@ -94,7 +94,43 @@ public class ItemSrcListResolver{
             //---------------------------------------------------------------
             list.add(parseResult);
         }
-        return list;
+        return rework(blockContent, list);
+    }
+
+    /**
+     * 再加工.
+     * 
+     * <p>
+     * 含去重处理
+     * </p>
+     *
+     * @param blockContent
+     *            the block content
+     * @param itemSrcList
+     *            the item src list
+     * @return the list
+     */
+    private static List<String> rework(String blockContent,List<String> itemSrcList){
+        // 判断item list
+
+        // 去重,元素不重复
+        List<String> noRepeatitemList = removeDuplicate(itemSrcList);
+
+        //**************************************************************
+        if (isNullOrEmpty(noRepeatitemList)){
+            LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
+            return null;
+        }
+        int noRepeatitemListSize = noRepeatitemList.size();
+        int itemSrcListSize = itemSrcList.size();
+
+        if (noRepeatitemListSize != itemSrcListSize){
+            if (LOGGER.isWarnEnabled()){
+                String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],blockContent:{}";
+                LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, blockContent);
+            }
+        }
+        return noRepeatitemList;
     }
 
     /**
@@ -125,14 +161,14 @@ public class ItemSrcListResolver{
         //---------------------------------------------------------------
         String workItem = item.trim();
 
-        if (TYPE_CSS.equalsIgnoreCase(type) && workItem.startsWith("<link ")){
+        if (TemplateFactory.TYPE_CSS.equalsIgnoreCase(type) && workItem.startsWith("<link ")){
             String regexPattern = ".*?href=\"(.*?)\".*?";
             return pickUp(workItem, regexPattern, domain);
         }
 
         //---------------------------------------------------------------
 
-        if (TYPE_JS.equalsIgnoreCase(type) && workItem.startsWith("<script ")){
+        if (TemplateFactory.TYPE_JS.equalsIgnoreCase(type) && workItem.startsWith("<script ")){
             String regexPattern = ".*?src=\"(.*?)\".*?";
             return pickUp(workItem, regexPattern, domain);
         }

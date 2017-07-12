@@ -15,9 +15,14 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static java.lang.System.lineSeparator;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.bean.ToStringConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -48,8 +53,20 @@ public abstract class BaseHttpConcatTest{
         HttpConcatParam httpConcatParam1 = new HttpConcatParam();
         httpConcatParam1.setType("js");
         //httpConcatParam.setDomain("http://www.feilong.com");
-        httpConcatParam1.setRoot("/js" + i + "/");
+        httpConcatParam1.setRoot("/js" + defaultIfNull(i, "") + "/");
         httpConcatParam1.setHttpConcatSupport(true);
+
+        List<String> itemSrcList = buildList();
+        httpConcatParam1.setContent(ConvertUtil.toString(itemSrcList, new ToStringConfig(lineSeparator())));
+        httpConcatParam1.setVersion("20140517");
+        return httpConcatParam1;
+    }
+
+    /**
+     * @return
+     * @since 1.10.4
+     */
+    private List<String> buildList(){
         List<String> itemSrcList = new ArrayList<>();
         itemSrcList.add("public/js/common.js");
 
@@ -74,9 +91,6 @@ public abstract class BaseHttpConcatTest{
         itemSrcList.add("member/js/dialogSignIn.js");
         itemSrcList.add("public/components/faceBook/faceBookInit.js");
         itemSrcList.add("member/messages/message_dialogSignIn_in_ID.js");
-
-        httpConcatParam1.setItemSrcList(itemSrcList);
-        httpConcatParam1.setVersion("20140517");
-        return httpConcatParam1;
+        return itemSrcList;
     }
 }

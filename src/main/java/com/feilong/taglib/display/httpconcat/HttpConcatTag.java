@@ -18,14 +18,13 @@ package com.feilong.taglib.display.httpconcat;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.AbstractEndWriteContentTag;
+import com.feilong.taglib.display.httpconcat.builder.HttpConcatParamBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -112,25 +111,12 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
             domain = getHttpServletRequest().getContextPath();
         }
 
-        //------------------ itemSrcList validate-------------------------------
-
-        List<String> itemSrcList = ItemSrcListResolver.resolve(bodyContentSrc, type, domain);
-        if (isNullOrEmpty(itemSrcList)){
-            LOGGER.warn("itemSrcList is null or empty, return empty");
-            return EMPTY;
-        }
-
-        //--------------------build-------------------------------------------
-        HttpConcatParam httpConcatParam = new HttpConcatParam();
-        httpConcatParam.setDomain(domain);
-        httpConcatParam.setRoot(root);
-        httpConcatParam.setType(type);
-        httpConcatParam.setVersion(version);
-        httpConcatParam.setItemSrcList(itemSrcList);
-        httpConcatParam.setHttpConcatSupport(httpConcatSupport);
+        HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(bodyContentSrc, type, domain, root, version, httpConcatSupport);
 
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

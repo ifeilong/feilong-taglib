@@ -16,12 +16,9 @@
 package com.feilong.taglib.display.httpconcat.command;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import com.feilong.core.bean.ConvertUtil;
 
 /**
  * 封装解析http concat 用到的参数.
@@ -52,8 +49,14 @@ public final class HttpConcatParam implements Serializable{
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
     private Boolean           httpConcatSupport = null;
 
-    /** The item src list. */
-    private List<String>      itemSrcList;
+    /**
+     * 内容(原样内容,内部解析).
+     * 
+     * @since 1.10.4
+     */
+    private String            content;
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 类型css/js.
@@ -134,25 +137,6 @@ public final class HttpConcatParam implements Serializable{
     }
 
     /**
-     * 获得 the item src list.
-     * 
-     * @return the itemSrcList
-     */
-    public List<String> getItemSrcList(){
-        return itemSrcList;
-    }
-
-    /**
-     * 设置 the item src list.
-     * 
-     * @param itemSrcList
-     *            the itemSrcList to set
-     */
-    public void setItemSrcList(List<String> itemSrcList){
-        this.itemSrcList = itemSrcList;
-    }
-
-    /**
      * 获得 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量).
      * 
      * @return the httpConcatSupport
@@ -171,6 +155,29 @@ public final class HttpConcatParam implements Serializable{
     public void setHttpConcatSupport(Boolean httpConcatSupport){
         this.httpConcatSupport = httpConcatSupport;
     }
+
+    /**
+     * 获得 内容(原样内容,内部解析).
+     *
+     * @return the content
+     * @since 1.10.4
+     */
+    public String getContent(){
+        return content;
+    }
+
+    /**
+     * 设置 内容(原样内容,内部解析).
+     *
+     * @param content
+     *            the content to set
+     * @since 1.10.4
+     */
+    public void setContent(String content){
+        this.content = content;
+    }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -202,8 +209,6 @@ public final class HttpConcatParam implements Serializable{
         //你选择一个硬编码,随机选择,不为零,奇数 
         //理想情况下,每个类不同
 
-        String[] itemSrcArray = null != this.itemSrcList ? ConvertUtil.toArray(this.itemSrcList, String.class) : null;
-
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);
         return hashCodeBuilder//
                         .append(this.domain)//
@@ -212,7 +217,7 @@ public final class HttpConcatParam implements Serializable{
                         .append(this.type)//
                         .append(this.version)//
                         .append(this.domain)//
-                        .append(itemSrcArray)//
+                        .append(this.content)//
                         .toHashCode();
     }
 
@@ -241,17 +246,14 @@ public final class HttpConcatParam implements Serializable{
         HttpConcatParam t = (HttpConcatParam) obj;
         EqualsBuilder equalsBuilder = new EqualsBuilder();
 
-        String[] itemSrcArray = null != this.itemSrcList ? ConvertUtil.toArray(this.itemSrcList, String.class) : null;
-        String[] itemSrcArray2 = null != t.getItemSrcList() ? ConvertUtil.toArray(t.getItemSrcList(), String.class) : null;
-
         return equalsBuilder //
-                        //.appendSuper(super.equals(obj))//
                         .append(this.domain, t.getDomain())//
                         .append(this.httpConcatSupport, t.getHttpConcatSupport())//
                         .append(this.root, t.getRoot())//
                         .append(this.type, t.getType())//
                         .append(this.version, t.getVersion())//
-                        .append(itemSrcArray, itemSrcArray2)//
+                        .append(this.content, t.content)//
                         .isEquals();
     }
+
 }

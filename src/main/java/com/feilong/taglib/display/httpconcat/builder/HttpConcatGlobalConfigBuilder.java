@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat;
+package com.feilong.taglib.display.httpconcat.builder;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.bean.ConvertUtil.convert;
 
 import java.util.ResourceBundle;
 
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.tools.slf4j.Slf4jUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.bean.ConvertUtil.convert;
 
 /**
  * The Class HttpConcatGlobalConfigBuilder.
@@ -31,7 +31,7 @@ import static com.feilong.core.bean.ConvertUtil.convert;
  * @since 1.5.0
  * @since 1.8.8 change class Access Modifiers
  */
-class HttpConcatGlobalConfigBuilder{
+public class HttpConcatGlobalConfigBuilder{
 
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
@@ -65,12 +65,14 @@ class HttpConcatGlobalConfigBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the http concat global config.
      *
      * @return the http concat global config
      */
-    static HttpConcatGlobalConfig buildHttpConcatGlobalConfig(){
+    public static HttpConcatGlobalConfig buildHttpConcatGlobalConfig(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
         httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue(KEY_HTTPCONCAT_SUPPORT, Boolean.class));
