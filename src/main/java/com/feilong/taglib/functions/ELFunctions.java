@@ -70,6 +70,8 @@ public final class ELFunctions{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 用于 自定义标签/ 自定义el.
      * 
@@ -81,7 +83,9 @@ public final class ELFunctions{
      *            一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.
      * @param value
      *            任意类型的值,最终toString 判断比较.
-     * @return true, if successful
+     * @return true, if successful <br>
+     *         如果iterator为null/empty,则返回false<br>
+     *         否则迭代 <code>iterator</code>,将元素转成String,和传入参数 <code>value</code>的String值进行比较,如果相等直接返回true
      * @see ConvertUtil#toIterator(Object)
      * @see org.apache.taglibs.standard.tag.common.core.ForEachSupport#supportedTypeForEachIterator(Object)
      */
@@ -92,6 +96,10 @@ public final class ELFunctions{
 
     /**
      * 将对象format成json字符串(不会有pretty输出,会连在一起).
+     * 
+     * <p>
+     * 使用 indentFactor=0, indent=0 来格式化
+     * </p>
      *
      * @param obj
      *            the obj
@@ -104,7 +112,7 @@ public final class ELFunctions{
         }catch (Exception e){
             LOGGER.error("json format:" + obj.toString(), e);
         }
-        //此方法应用于jsp标签,如果抛出异常,可能页面不能持续渲染, 但是不会显示异常页面, 因此,此处,直接返回null
+        //此方法应用于jsp标签,如果抛出异常,可能页面不能持续渲染, 但是不能显示异常页面, 因此此处直接返回 ""
         return EMPTY;
     }
 }
