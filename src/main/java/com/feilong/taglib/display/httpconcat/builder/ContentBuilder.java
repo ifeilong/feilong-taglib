@@ -98,7 +98,7 @@ public class ContentBuilder{
 
         // *******************************************************************
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("standardHttpConcatParam:{}", JsonUtil.format(standardHttpConcatParam));
+            LOGGER.debug("after standard HttpConcatParam info:{}", JsonUtil.format(standardHttpConcatParam));
         }
         return standardHttpConcatParam;
     }

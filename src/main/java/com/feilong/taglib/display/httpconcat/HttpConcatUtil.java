@@ -87,7 +87,7 @@ public final class HttpConcatUtil{
         HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("init [{}],httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
+            LOGGER.info("init httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
         }
     }
 
@@ -117,7 +117,7 @@ public final class HttpConcatUtil{
         Validate.notNull(httpConcatParam, "httpConcatParam can't be null!");
 
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug(JsonUtil.format(httpConcatParam));
+            LOGGER.debug("httpConcatParam info:[{}]", JsonUtil.format(httpConcatParam));
         }
 
         //---------------------------------------------------------------
@@ -148,7 +148,7 @@ public final class HttpConcatUtil{
                 //超过,那么就不记录cache
                 isWriteCache = false;
             }else{
-                String pattern = "hashcode:[{}],httpConcatCache.size:[{}] not contains httpConcatParam,will do parse";
+                String pattern = "hashcode:[{}],httpConcatCache.size:[{}] not contains current httpConcatParam,will do parse";
                 LOGGER.debug(pattern, cacheKeyHashCode, cacheSize);
             }
         }
@@ -165,12 +165,15 @@ public final class HttpConcatUtil{
 
         String content = ContentBuilder.buildContent(httpConcatParam, itemSrcList, HTTP_CONCAT_GLOBAL_CONFIG);
         // **************************log***************************************************
-        LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
+        }
 
         //********************设置cache***********************************************
         if (isWriteCache){
             CACHE.put(httpConcatParam, content);
-            LOGGER.debug("key's hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
+            LOGGER.debug("hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
         }else{
             if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
                 String pattern = "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache";

@@ -107,8 +107,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
 
         //-------------------domain validate---------------------------------
         if (isNullOrEmpty(domain)){
-            LOGGER.debug("domain is null or empty, will use contextPath");
             domain = getHttpServletRequest().getContextPath();
+            LOGGER.debug("domain is null or empty, will use request contextPath:[{}]", domain);
         }
 
         HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(bodyContentSrc, type, domain, root, version, httpConcatSupport);
