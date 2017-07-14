@@ -63,12 +63,23 @@ public class ContentBuilder{
         // httpConcatParam只做入参判断,数据转换,以及cache存取
         HttpConcatParam standardHttpConcatParam = standardHttpConcatParam(httpConcatParam);
 
-        // *********************************************************************************
+        //---------------------------------------------------------------
         String template = TemplateFactory.getTemplate(httpConcatGlobalConfig, standardHttpConcatParam.getType());
 
         boolean concatSupport = defaultIfNull(
                         httpConcatParam.getHttpConcatSupport(),
                         BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport()));
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug(
+                            "after standard HttpConcatParam info:{},itemSrcList info:[{}],concatSupport:[{}]",
+                            JsonUtil.format(standardHttpConcatParam),
+                            JsonUtil.format(itemSrcList),
+                            concatSupport);
+        }
+
+        //---------------------------------------------------------------
         if (concatSupport){ // concat
             return MessageFormatUtil.format(template, ConcatLinkResolver.resolver(standardHttpConcatParam, itemSrcList));
         }
@@ -95,11 +106,7 @@ public class ContentBuilder{
         standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
         standardHttpConcatParam.setType(httpConcatParam.getType());
         standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
-
-        // *******************************************************************
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("after standard HttpConcatParam info:{}", JsonUtil.format(standardHttpConcatParam));
-        }
+        standardHttpConcatParam.setContent(httpConcatParam.getContent());
         return standardHttpConcatParam;
     }
 }
