@@ -18,6 +18,8 @@ package com.feilong.taglib.display.httpconcat.resolver;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * The Class DomainResolver.
  *
@@ -38,7 +40,10 @@ public final class DomainResolver{
      *
      * @param domain
      *            the domain
-     * @return the string
+     * @return 如果 <code>domain</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果 <code>domain</code> 不是以 / 结尾,拼接一个/ <br>
+     *         如果 <code>domain</code> 是以 // 结尾,只保留一个 / <br>
+     *         其他原样返回<br>
      */
     public static String resolver(String domain){
         if (isNullOrEmpty(domain)){
@@ -48,6 +53,11 @@ public final class DomainResolver{
         // 格式化 domain 成 http://www.feilong.com/ 形式
         if (!domain.endsWith("/")){
             return domain + "/";
+        }
+
+        //since 1.10.5
+        if (domain.endsWith("//")){
+            return StringUtils.removeEnd(domain, "//") + "/";
         }
         return domain;
     }

@@ -20,11 +20,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParamEqualsTest;
+import com.feilong.taglib.display.httpconcat.resolver.DomainResolverParameterizedTest;
 import com.feilong.taglib.display.httpconcat.resolver.ItemSrcListResolverParameterizedTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
+                DomainResolverParameterizedTest.class,
                 HttpConcatParamEqualsTest.class,
                 ItemSrcListResolverParameterizedTest.class,
         //                
