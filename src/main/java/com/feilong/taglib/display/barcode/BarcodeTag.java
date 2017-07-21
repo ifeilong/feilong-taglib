@@ -15,6 +15,9 @@
  */
 package com.feilong.taglib.display.barcode;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,9 +29,6 @@ import com.feilong.core.net.ParamUtil;
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.tools.barcode.BarcodeConfig;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 二维码等barcode生成 标签.
@@ -56,7 +56,13 @@ import static com.feilong.core.Validator.isNullOrEmpty;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode">feilongDisplay-barcode wiki</a>
  * @since 1.5.4
+ * @deprecated since 1.10.5 推荐使用js来渲染二维码,
+ *             <p>
+ *             该标签会使用session机制,在页面静态化下以及高并发的场景下会有性能不高;<br>
+ *             并且该标签还需要额外在web.xml中配置servlet
+ *             </p>
  */
+@Deprecated
 public class BarcodeTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */

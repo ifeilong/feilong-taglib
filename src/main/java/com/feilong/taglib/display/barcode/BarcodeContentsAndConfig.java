@@ -24,7 +24,13 @@ import com.feilong.tools.barcode.BarcodeConfig;
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.4
+ * @deprecated since 1.10.5 推荐使用js来渲染二维码,
+ *             <p>
+ *             该标签会使用session机制,在页面静态化下以及高并发的场景下会有性能不高;<br>
+ *             并且该标签还需要额外在web.xml中配置servlet
+ *             </p>
  */
+@Deprecated
 public class BarcodeContentsAndConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
