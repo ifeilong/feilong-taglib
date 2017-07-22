@@ -24,16 +24,14 @@ taglib	|说明
 
 ## :dromedary_camel: Display
 
-包含页面`渲染显示`的标签
-
 taglib	|说明	
 :---- | :---------
 [pager](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-pager "J2EE分页解决方案") 	|J2EE分页解决方案
 [concat](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat "feilongDisplay concat")  	| jsp版本的 "css/js合并以及版本控制"的标签 
 [option](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-option "feilongDisplay-option")  	|用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发
 [loadBundle](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-loadBundle "feilongDisplay-loadBundle")  	|将i18n配置文件,转成map,加载到request 作用域, 实现国际化功能,简化开发
-[barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode")  	|用来在页面生成二维码
 [sensitive](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-sensitive "feilongDisplay sensitive")  	|敏感数据mask标签
+[barcode](https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-barcode "feilongDisplay barcode") `@Deprecated` 	|用来在页面生成二维码
 
 ## :dragon: Maven使用配置
 
