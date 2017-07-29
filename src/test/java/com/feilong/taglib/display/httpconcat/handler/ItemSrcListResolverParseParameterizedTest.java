@@ -28,7 +28,8 @@ import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 /**
  * The Class ItemSrcListResolverParameterizedTest.
  */
-public class ItemSrcListResolverParseParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class ItemSrcListResolverParseParameterizedTest
+                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
      * Data.
@@ -42,6 +43,11 @@ public class ItemSrcListResolverParseParameterizedTest extends AbstractThreePara
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
                                                 TYPE_CSS,
                                                 "http://css.feilong.com:8888/",
+                                                "res/feilong/css/feilong-all.css" },
+                                              {
+                                                "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888//res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
+                                                TYPE_CSS,
+                                                "http://css.feilong.com:8888//",
                                                 "res/feilong/css/feilong-all.css" },
 
                                               {

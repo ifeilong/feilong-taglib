@@ -32,7 +32,7 @@ import com.feilong.taglib.display.httpconcat.builder.ContentBuilder;
 import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-import com.feilong.taglib.display.httpconcat.resolver.ItemSrcListResolver;
+import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
