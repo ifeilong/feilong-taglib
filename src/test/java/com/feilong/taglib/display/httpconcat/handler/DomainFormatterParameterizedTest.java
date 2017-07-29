@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -31,11 +31,11 @@ import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.5
  */
-public class DomainResolverParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class DomainFormatterParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DomainResolverParameterizedTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DomainFormatterParameterizedTest.class);
 
-    @Parameters(name = "index:{index}: DomainResolver.resolver({0})={1}")
+    @Parameters(name = "index:{index}: DomainResolver.format({0})={1}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               { "", EMPTY },
@@ -52,6 +52,6 @@ public class DomainResolverParameterizedTest extends AbstractOneParamAndOneResul
 
     @Test
     public void testResolver(){
-        assertEquals(expectedValue, DomainResolver.resolver(input1));
+        assertEquals(expectedValue, DomainFormatter.format(input1));
     }
 }

@@ -26,9 +26,9 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-import com.feilong.taglib.display.httpconcat.resolver.ConcatLinkResolver;
-import com.feilong.taglib.display.httpconcat.resolver.DomainResolver;
-import com.feilong.taglib.display.httpconcat.resolver.RootResolver;
+import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
+import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
+import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
 import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
@@ -101,8 +101,8 @@ public class ContentBuilder{
      */
     private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
-        standardHttpConcatParam.setDomain(DomainResolver.resolver(httpConcatParam.getDomain()));
-        standardHttpConcatParam.setRoot(RootResolver.resolver(httpConcatParam.getRoot()));
+        standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
+        standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
         standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
         standardHttpConcatParam.setType(httpConcatParam.getType());
         standardHttpConcatParam.setVersion(httpConcatParam.getVersion());

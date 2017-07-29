@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;

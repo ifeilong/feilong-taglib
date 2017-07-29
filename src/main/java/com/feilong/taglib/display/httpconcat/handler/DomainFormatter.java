@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -26,37 +26,42 @@ import org.apache.commons.lang3.StringUtils;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
  */
-public final class DomainResolver{
+public final class DomainFormatter{
 
     /** Don't let anyone instantiate this class. */
-    private DomainResolver(){
+    private DomainFormatter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
     /**
-     * Builds the domain.
+     * 格式化 domain 成 http://www.feilong.com/ 形式.
      *
      * @param domain
      *            the domain
      * @return 如果 <code>domain</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
-     *         如果 <code>domain</code> 不是以 / 结尾,拼接一个/ <br>
-     *         如果 <code>domain</code> 是以 // 结尾,只保留一个 / <br>
+     *         如果 <code>domain</code> 不是以 单斜杆 / 结尾,拼接一个 单斜杆 / <br>
+     *         如果 <code>domain</code> 是以 双斜杠 // 结尾,只保留一个 / <br>
      *         其他原样返回<br>
      */
-    public static String resolver(String domain){
+    public static String format(String domain){
         if (isNullOrEmpty(domain)){
             return EMPTY;
         }
 
-        // 格式化 domain 成 http://www.feilong.com/ 形式
-        if (!domain.endsWith("/")){
+        //如果域名不是以 单斜杆结尾, 那么拼接一个单斜杆
+        boolean isNotEndWithSingleSlash = !domain.endsWith("/");
+        if (isNotEndWithSingleSlash){
             return domain + "/";
         }
 
         //since 1.10.5
-        if (domain.endsWith("//")){
+        //<script type="text/javascript" src="http://www.feilong.com/??http://img.adidas.com.cn/scripts/pdp/common.js,scripts/pdp/sub_salesProperties.js,scripts/pdp/pdp.js?2017"></script>
+
+        //如果域名是以 双斜杆结尾, 那么转成单斜杆
+        boolean isEndWithDoubleSlash = domain.endsWith("//");
+        if (isEndWithDoubleSlash){
             return StringUtils.removeEnd(domain, "//") + "/";
         }
         return domain;

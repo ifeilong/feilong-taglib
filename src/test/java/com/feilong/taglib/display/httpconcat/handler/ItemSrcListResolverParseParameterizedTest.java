@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE_CSS;
@@ -23,10 +23,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.taglib.display.httpconcat.resolver.ItemSrcListResolver;
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-public class ItemSrcListResolverParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+/**
+ * The Class ItemSrcListResolverParameterizedTest.
+ */
+public class ItemSrcListResolverParseParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
      * Data.
@@ -80,7 +82,7 @@ public class ItemSrcListResolverParameterizedTest extends AbstractThreeParamsAnd
     }
 
     /**
-     * Test get day of year.
+     * Test build.
      */
     @Test
     public void testBuild(){

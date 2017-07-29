@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.bean.ToStringConfig.DEFAULT_CONNECTOR;
 
 import java.util.List;
 
@@ -45,6 +44,8 @@ public final class ConcatLinkResolver{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得合并的链接.
      *
@@ -65,9 +66,7 @@ public final class ConcatLinkResolver{
             LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
         }else{
             sb.append("??");
-
-            ToStringConfig toStringConfig = new ToStringConfig(DEFAULT_CONNECTOR);
-            sb.append(ConvertUtil.toString(itemSrcList, toStringConfig));
+            sb.append(ConvertUtil.toString(itemSrcList, ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG));
         }
         appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
@@ -90,6 +89,8 @@ public final class ConcatLinkResolver{
         appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Append version.

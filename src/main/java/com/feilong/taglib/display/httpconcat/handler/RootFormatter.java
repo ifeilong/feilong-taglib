@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display.httpconcat.resolver;
+package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.lang.StringUtil;
 
@@ -26,32 +28,40 @@ import com.feilong.core.lang.StringUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
  */
-public final class RootResolver{
+public final class RootFormatter{
 
     /** Don't let anyone instantiate this class. */
-    private RootResolver(){
+    private RootFormatter(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * Do with root.
+     * 格式化 root 成 xxxx/xxx/ 形式,.
      *
      * @param root
      *            the root
-     * @return the string
+     * @return 如果 <code>root</code> 是null或者empty,返回 {@link StringUtils#EMPTY}<br>
+     *         如果不是以 单斜杆结尾,那么加上一个单斜杆 <br>
+     *         如果是以 单斜杆开头,去掉开头的单斜杆 <br>
      */
-    public static String resolver(String root){
+    public static String format(String root){
         if (isNullOrEmpty(root)){
             return EMPTY;
         }
 
-        // 格式化 root 成 xxxx/xxx/ 形式,
-        if (!root.endsWith("/")){
+        // 如果不是以 单斜杆结尾,那么加上一个单斜杆 
+        boolean isNotEndWithSingleSlash = !root.endsWith("/");
+        if (isNotEndWithSingleSlash){
             root = root + "/";
         }
-        if (root.startsWith("/")){
+
+        //如果是以 单斜杆开头,去掉开头的单斜杆
+        boolean isStartsWithSingleSlash = root.startsWith("/");
+        if (isStartsWithSingleSlash){
             root = StringUtil.substring(root, 1);
         }
         return root;
