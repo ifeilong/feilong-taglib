@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.taglib.AbstractLocaleSupportTag;
 import com.feilong.taglib.display.LocaleSupportUtil;
-import com.feilong.taglib.display.TagCacheManager;
+import com.feilong.taglib.display.SimpleTagParamCacheManager;
 
 /**
  * 将i18n配置文件,转成map,加载到request 作用域, 实现国际化功能,简化开发.
@@ -52,7 +52,7 @@ public class LoadBundleTag extends AbstractLocaleSupportTag{
         loadBundleParam.setLocale(LocaleSupportUtil.toLocal(locale, request));
 
         //----------------------------------------------------------------------------------------
-        Map<String, String> map = TagCacheManager.getContent(loadBundleParam, LoadBundleBuilder.INSTANCE);
+        Map<String, String> map = SimpleTagParamCacheManager.getContent(loadBundleParam, LoadBundleBuilder.INSTANCE);
 
         request.setAttribute(var, map);
 

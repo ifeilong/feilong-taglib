@@ -116,8 +116,8 @@ public final class HttpConcatUtil{
     public static String getWriteContent(HttpConcatParam httpConcatParam){
         Validate.notNull(httpConcatParam, "httpConcatParam can't be null!");
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("httpConcatParam info:[{}]", JsonUtil.format(httpConcatParam));
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("httpConcatParam info:[{}]", JsonUtil.format(httpConcatParam));
         }
 
         //---------------------------------------------------------------

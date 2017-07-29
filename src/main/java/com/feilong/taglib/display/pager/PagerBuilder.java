@@ -24,7 +24,7 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.taglib.display.TagCacheManager;
+import com.feilong.taglib.display.SimpleTagParamCacheManager;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerAndContent;
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -167,6 +167,6 @@ public final class PagerBuilder{
             LOGGER.trace("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
         }
 
-        return TagCacheManager.getContent(pagerParams, PagerCacheContentBuilder.INSTANCE);
+        return SimpleTagParamCacheManager.getContent(pagerParams, PagerCacheContentBuilder.INSTANCE);
     }
 }

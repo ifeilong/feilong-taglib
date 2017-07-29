@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.taglib.AbstractLocaleSupportTag;
 import com.feilong.taglib.display.LocaleSupportUtil;
-import com.feilong.taglib.display.TagCacheManager;
+import com.feilong.taglib.display.SimpleTagParamCacheManager;
 
 /**
  * 用来基于 i18n配置文件,渲染select option选项,实现国际化功能,简化开发.
@@ -169,7 +169,7 @@ public class OptionTag extends AbstractLocaleSupportTag{
         optionParam.setLocale(LocaleSupportUtil.toLocal(locale, request));
         optionParam.setSelectedKey(selectedKey);
 
-        return TagCacheManager.getContent(optionParam, OptionCacheContentBuilder.INSTANCE);
+        return SimpleTagParamCacheManager.getContent(optionParam, OptionCacheContentBuilder.INSTANCE);
     }
 
     /**

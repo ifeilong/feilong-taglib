@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -29,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
+import com.feilong.core.lang.ClassUtil;
 import com.feilong.servlet.http.RequestUtil;
 
 /**
@@ -64,9 +66,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
 
         HttpServletRequest request = getHttpServletRequest();
 
-        // 开始执行的部分
-        Object writeContent = this.buildContent(request);
-
+        Object writeContent = buildContentIfUseCache(request);
         if (null != writeContent){
             print(writeContent);
         }
@@ -77,6 +77,38 @@ abstract class AbstractWriteContentTag extends BaseTag{
             String useTime = formatDuration(beginDate);
             LOGGER.debug("[{}],[{}]{},use time:[{}]", getClass().getSimpleName(), RequestUtil.getRequestURL(request), tagLog, useTime);
         }
+    }
+
+    /**
+     * @param request
+     * @return
+     * @since 1.10.5
+     */
+    protected Object buildContentIfUseCache(HttpServletRequest request){
+        Class<? extends AbstractWriteContentTag> klass = getClass();
+
+        //---------------------------------------------------------------
+        boolean isCacheTag = ClassUtil.isAssignableFrom(CacheTag.class, klass);
+
+        String cacheKey = !isCacheTag ? null : ((CacheTag) this).buildCacheTagKey();
+
+        if (isCacheTag){//如果使用cache ,从cache 里面取
+            Object contentFromCache = SimpleTagStringCacheManager.get(cacheKey);
+            if (isNotNullOrEmpty(contentFromCache)){
+                return contentFromCache;
+            }
+        }
+
+        //---------------------------------------------------------------
+        // 开始执行的部分
+        Object writeContent = this.buildContent(request);
+
+        if (isCacheTag){
+            if (isNotNullOrEmpty(writeContent)){
+                SimpleTagStringCacheManager.put(cacheKey, writeContent);
+            }
+        }
+        return writeContent;
     }
 
     /**

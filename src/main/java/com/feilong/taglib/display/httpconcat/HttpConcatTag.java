@@ -20,10 +20,12 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.AbstractEndWriteContentTag;
+import com.feilong.taglib.CacheTag;
 import com.feilong.taglib.display.httpconcat.builder.HttpConcatParamBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
@@ -52,7 +54,7 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.2
  */
-public class HttpConcatTag extends AbstractEndWriteContentTag{
+public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTag{
 
     /** The Constant log. */
     private static final Logger LOGGER            = LoggerFactory.getLogger(HttpConcatTag.class);
@@ -104,7 +106,6 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
             LOGGER.warn("type is null or empty, return empty");
             return EMPTY;
         }
-
         //-------------------domain validate---------------------------------
         if (isNullOrEmpty(domain)){
             domain = getHttpServletRequest().getContextPath();
@@ -112,11 +113,19 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
         }
 
         HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(bodyContentSrc, type, domain, root, version, httpConcatSupport);
-
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
 
     //---------------------------------------------------------------
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.feilong.taglib.AbstractWriteContentTag#buildCacheTagKey()
+     */
+    @Override
+    public String buildCacheTagKey(){
+        return StringUtils.join(type, domain, root, version, httpConcatSupport, bodyContent.getString());
+    }
 
     /*
      * (non-Javadoc)
@@ -180,4 +189,5 @@ public class HttpConcatTag extends AbstractEndWriteContentTag{
     public void setHttpConcatSupport(Boolean httpConcatSupport){
         this.httpConcatSupport = httpConcatSupport;
     }
+
 }

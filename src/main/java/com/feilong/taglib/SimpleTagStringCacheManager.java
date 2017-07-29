@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.taglib.display;
+package com.feilong.taglib;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 
@@ -29,32 +29,32 @@ import org.slf4j.LoggerFactory;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "com.google.common.cache.Cache"
  * @see org.apache.commons.collections4.map.LRUMap
- * @since 1.5.4
+ * @since 1.10.5
  */
 //XXX 将来可能会有更好的做法
-public final class TagCacheManager{
+public final class SimpleTagStringCacheManager{
 
     /** The Constant LOGGER. */
-    private static final Logger                  LOGGER       = LoggerFactory.getLogger(TagCacheManager.class);
+    private static final Logger              LOGGER       = LoggerFactory.getLogger(SimpleTagStringCacheManager.class);
 
     /**
      * 设置缓存是否开启.
      */
-    private static final boolean                 CACHE_ENABLE = true;
+    private static final boolean             CACHE_ENABLE = true;
 
     /**
      * 将结果缓存到map.
      * <p>
-     * key是入参对象,value是解析完的字符串<br>
+     * key是相关字符串,value是解析完的字符串<br>
      * 该cache里面value不会存放null/empty
      * </p>
      */
-    private static final Map<CacheParam, Object> CACHE        = new ConcurrentHashMap<>();
+    private static final Map<String, Object> CACHE        = new ConcurrentHashMap<>();
 
     //-----------------------------------------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
-    private TagCacheManager(){
+    private SimpleTagStringCacheManager(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -65,41 +65,11 @@ public final class TagCacheManager{
     /**
      * Builds the options.
      *
-     * @param <T>
-     *            the generic type
-     * @param <V>
-     * @param cacheParam
-     *            the option param
-     * @param cacheContentBuilder
-     *            the cache content builder
+     * @param key
+     *            the key
      * @return the string
-     * @since 1.10.3
      */
-    public static <T extends CacheParam, V> V getContent(T cacheParam,CacheContentBuilder<T, V> cacheContentBuilder){
-        V contentValue = getContentFromCache(cacheParam);
-        if (isNotNullOrEmpty(contentValue)){
-            return contentValue;
-        }
-
-        //-------------------------------------------------------------------------------------------
-        contentValue = cacheContentBuilder.build(cacheParam);
-
-        put(cacheParam, contentValue);
-
-        //-------------------------------------------------------------------------------------------
-        return contentValue;
-    }
-
-    /**
-     * 从缓存中读取.
-     * 
-     * @param <V>
-     *
-     * @param cacheParam
-     *            the pager params
-     * @return the content from cache
-     */
-    private static <V> V getContentFromCache(CacheParam cacheParam){
+    public static Object get(String key){
         if (!CACHE_ENABLE){
             LOGGER.info("the cache status is disable!");
             return null;
@@ -107,30 +77,26 @@ public final class TagCacheManager{
 
         //-----------------------------------------------------------------------------
 
-        int hashCode = cacheParam.hashCode();
         int size = CACHE.size();
-        String name = cacheParam.getClass().getSimpleName();
 
-        if (CACHE.containsKey(cacheParam)){
-            LOGGER.debug("cacheSize:[{}],[{}](hashcode:[{}]),hit cache,get from cache", size, name, hashCode);
-            return (V) CACHE.get(cacheParam);
+        if (CACHE.containsKey(key)){
+            LOGGER.debug("cacheSize:[{}],key:[{}],hit cache,get from cache", size, key);
+            return CACHE.get(key);
         }
 
-        LOGGER.debug("cacheSize:[{}],cache not contains [{}](hashcode:[{}]),will do parse", size, name, hashCode);
+        LOGGER.debug("cacheSize:[{}],not contains [{}],will do parse", size, key);
         return null;
     }
 
     /**
      * 设置.
-     * 
-     * @param <V>
      *
      * @param cacheParam
      *            the pager params
      * @param content
      *            the content
      */
-    private static <V> void put(CacheParam cacheParam,V content){
+    public static void put(String cacheParam,Object content){
         if (CACHE_ENABLE && isNotNullOrEmpty(content)){//设置cache
             CACHE.put(cacheParam, content);
         }
