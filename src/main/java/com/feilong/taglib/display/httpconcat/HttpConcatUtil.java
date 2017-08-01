@@ -87,7 +87,7 @@ public final class HttpConcatUtil{
         HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info("init httpConfig:[{}]", HttpConcatUtil.class.getSimpleName(), JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
+            LOGGER.info("init http concat config:[{}]", JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
         }
     }
 
