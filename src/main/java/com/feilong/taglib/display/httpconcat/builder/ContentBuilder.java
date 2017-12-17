@@ -24,12 +24,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.text.MessageFormatUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class ContentBuilder.

@@ -40,6 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.net.ParamUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.CacheContentBuilder;
 import com.feilong.taglib.display.pager.command.Pager;
 import com.feilong.taglib.display.pager.command.PagerConstants;
@@ -47,7 +48,6 @@ import com.feilong.taglib.display.pager.command.PagerParams;
 import com.feilong.taglib.display.pager.command.PagerType;
 import com.feilong.taglib.display.pager.command.PagerUrlTemplate;
 import com.feilong.taglib.display.pager.command.PagerVMParam;
-import com.feilong.tools.jsonlib.JsonUtil;
 import com.feilong.tools.velocity.VelocityUtil;
 
 /**

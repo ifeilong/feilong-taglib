@@ -28,12 +28,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.ResourceBundleUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.httpconcat.builder.ContentBuilder;
 import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * http concat的核心工具类.

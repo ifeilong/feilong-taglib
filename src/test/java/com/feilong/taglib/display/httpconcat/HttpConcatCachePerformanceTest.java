@@ -31,8 +31,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.coreextension.io.SerializableUtil;
 import com.feilong.io.FileUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
-import com.feilong.tools.jsonlib.JsonUtil;
 
 /**
  * The Class MapMemoryTest.
