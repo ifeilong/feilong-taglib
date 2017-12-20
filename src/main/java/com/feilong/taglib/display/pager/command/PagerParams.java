@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager.command;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -24,8 +26,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.feilong.core.CharsetType;
 import com.feilong.taglib.display.CacheParam;
 import com.feilong.taglib.display.pager.PagerBuilder;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * 方法参数.
@@ -59,7 +59,7 @@ public class PagerParams implements Serializable,CacheParam{
      */
     private PagerType         pagerType                         = PagerType.REDIRECT;
 
-    //******************************************************************************
+    //---------------------------------------------------------------
 
     /** 分页的 基础 url. */
     private String            pageUrl;
@@ -531,13 +531,13 @@ public class PagerParams implements Serializable,CacheParam{
 
         //hashCode在上面扮演的角色为寻域(寻找某个对象在集合中区域位置)
 
-        //************************************************************************************
+        //---------------------------------------------------------------
         //可替代地,存在使用反射来确定测试中的字段的方法.
         //因为这些字段通常是私有的,该方法中,reflectionHashCode,使用AccessibleObject.setAccessible改变字段的可见性.
         //这点会在一个安全管理器失败,除非相应的权限设置是否正确.
         //它也比明确地测试速度较慢. 
         //HashCodeBuilder.reflectionHashCode(this);
-        //************************************************************************************
+        //---------------------------------------------------------------
         //你选择一个硬编码,随机选择,不为零,奇数 
         //理想情况下 每个类不同
         HashCodeBuilder hashCodeBuilder = new HashCodeBuilder(3, 5);

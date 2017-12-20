@@ -129,7 +129,7 @@ public final class Pager<T> implements Serializable{
         this.count = count;
     }
 
-    //**********************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 总页数({@link #maxShowPageNo} 参与装饰).
@@ -181,7 +181,7 @@ public final class Pager<T> implements Serializable{
         }else if (count < pageSize){
             return 1;
         }
-        // ***********************************
+        //---------------------------------------------------------------
         // 除后的页数
         int i = count / pageSize;
         return count % pageSize == 0 ? i : i + 1;
@@ -228,7 +228,8 @@ public final class Pager<T> implements Serializable{
         return nextPage >= originatingAllPageNo ? originatingAllPageNo : nextPage;
     }
 
-    // **************************************************************************
+    //---------------------------------------------------------------
+
     /**
      * Gets the 当前页码.
      * 

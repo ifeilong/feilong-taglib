@@ -136,7 +136,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     protected String buildExtraKeyInfoToLog(){
         return "[type=" + type + "]";
     }
-    // **************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * Sets the 类型css/js.

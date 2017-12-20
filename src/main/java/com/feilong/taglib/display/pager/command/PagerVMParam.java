@@ -53,7 +53,7 @@ public class PagerVMParam implements Serializable{
      */
     private Integer              nextPageNo;
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 分页参数名称 .
@@ -62,7 +62,7 @@ public class PagerVMParam implements Serializable{
      */
     private String               pageParamName;
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
 
     /** 上一页链接. */
     private String               preUrl;
@@ -76,7 +76,7 @@ public class PagerVMParam implements Serializable{
     /** 最后一页的链接. */
     private String               lastUrl;
 
-    //**********************************************************************************************
+    //---------------------------------------------------------------
 
     /** 开始迭代索引编号. */
     private Integer              startIteratorIndex;
@@ -94,7 +94,7 @@ public class PagerVMParam implements Serializable{
     /** The pager url template. */
     private PagerUrlTemplate     pagerUrlTemplate;
 
-    //************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * The pager type.
@@ -121,7 +121,7 @@ public class PagerVMParam implements Serializable{
      */
     private Integer              maxShowPageNo;
 
-    //*******************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Gets the 设置的皮肤.

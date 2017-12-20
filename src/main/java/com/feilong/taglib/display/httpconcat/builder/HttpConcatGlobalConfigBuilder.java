@@ -42,7 +42,7 @@ public class HttpConcatGlobalConfigBuilder{
     /** <code>{@value}</code>. */
     private static final String         KEY_HTTPCONCAT_SUPPORT       = "httpconcat.support";
 
-    //**************************************************************
+    //---------------------------------------------------------------
 
     /** <code>{@value}</code>. */
     private static final String         KEY_TEMPLATE_CSS             = "httpconcat.template.css";
@@ -56,7 +56,7 @@ public class HttpConcatGlobalConfigBuilder{
     /** <code>{@value}</code>. */
     private static final String         KEY_DEFAULT_CACHE_SIZE_LIMIT = "httpconcat.defaultCacheSizeLimit";
 
-    //**************************************************************
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatGlobalConfigBuilder(){

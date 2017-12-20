@@ -15,14 +15,14 @@
  */
 package com.feilong.taglib.display.sensitive;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.json.jsonlib.JsonUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 敏感词工具类.
@@ -71,7 +71,7 @@ public class SensitiveUtil{
             return value;
         }
 
-        //************************************************************
+        //---------------------------------------------------------------
         Integer[] leftAndRightNoMaskLengths = sensitiveType.getLeftAndRightNoMaskLengths(value);
 
         //左边不需要mask的长度
@@ -80,7 +80,7 @@ public class SensitiveUtil{
         //右边不需要mask的长度
         int rightNoMaskLength = leftAndRightNoMaskLengths[1];
 
-        //************************************************************
+        //---------------------------------------------------------------
         StringBuilder sb = new StringBuilder();
 
         sb.append(StringUtils.left(value, leftNoMaskLength));

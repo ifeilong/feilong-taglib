@@ -42,7 +42,7 @@ public final class PagerConstants{
     /** 默认分页使用的vm 脚本 <code>{@value}</code>. */
     public static final String DEFAULT_TEMPLATE_IN_CLASSPATH                 = "velocity/feilong-default-pager.vm";
 
-    // **************************************************************************************
+    //---------------------------------------------------------------
     /** 默认将解析出来的htm 的存放在 request 作用域里面的变量 <code>{@value}</code>. */
     public static final String DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME        = "feilongPagerHtml";
 
@@ -76,7 +76,7 @@ public final class PagerConstants{
     /** <code>(调试使用)</code> url 中特殊变量,如果带有这个变量将不解析vm,便于通过日志等来查找发生的问题 <code>{@value}</code> . */
     public static final String DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE         = "true";
 
-    // ******************************************************************************
+    //---------------------------------------------------------------
     /**
      * vm里面 {@link PagerVMParam}对象的变量名称 <code>{@value}</code>.
      * 

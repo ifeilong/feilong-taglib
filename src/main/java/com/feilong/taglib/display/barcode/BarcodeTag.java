@@ -68,7 +68,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID     = 7891625772743297912L;
 
-    //**************************************************************************************
+    //---------------------------------------------------------------
     /** 用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突. */
     private String            barcodeId;
 
@@ -88,7 +88,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      */
     private Integer           encodeHintTypeMargin = 1;
 
-    //**************************************************************************************
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -162,7 +162,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         return new BarcodeContentsAndConfig(useContents, barcodeConfig);
     }
 
-    //************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 设置 生成二维码的内容,如果不设置默认是当前请求的url地址.

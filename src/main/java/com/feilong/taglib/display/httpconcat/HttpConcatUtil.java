@@ -100,7 +100,8 @@ public final class HttpConcatUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // *****************************************************************************
+    //---------------------------------------------------------------
+
     /**
      * 获得解析的内容.
      *
@@ -126,7 +127,7 @@ public final class HttpConcatUtil{
         boolean isWriteCache = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable();
 
         int cacheKeyHashCode = httpConcatParam.hashCode();
-        //*************************************************************************************
+        //---------------------------------------------------------------
         //缓存
         if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
             //返回此映射中的键-值映射关系数.如果该映射包含的元素大于 Integer.MAX_VALUE,则返回 Integer.MAX_VALUE. 
@@ -165,13 +166,15 @@ public final class HttpConcatUtil{
         }
 
         String content = ContentBuilder.buildContent(httpConcatParam, itemSrcList, HTTP_CONCAT_GLOBAL_CONFIG);
-        // **************************log***************************************************
+
+        //--------------------------log-------------------------------------
 
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("returnValue:[{}],length:[{}]", content, content.length());
         }
 
-        //********************设置cache***********************************************
+        //--------------------------设置cache-------------------------------------
+
         if (isWriteCache){
             CACHE.put(httpConcatParam, content);
             LOGGER.debug("hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());

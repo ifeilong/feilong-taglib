@@ -116,7 +116,7 @@ public final class ItemSrcListResolver{
         // 去重,元素不重复
         List<String> noRepeatitemList = removeDuplicate(itemSrcList);
 
-        //**************************************************************
+        //---------------------------------------------------------------
         if (isNullOrEmpty(noRepeatitemList)){
             LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
             return null;

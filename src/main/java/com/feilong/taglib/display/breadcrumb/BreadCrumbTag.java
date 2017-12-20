@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.breadcrumb;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.List;
@@ -28,8 +29,6 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbConstants;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbEntity;
 import com.feilong.taglib.display.breadcrumb.command.BreadCrumbParams;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 面包屑标签.
@@ -128,7 +127,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     /** The Constant LOGGER. */
     private static final Logger            LOGGER           = LoggerFactory.getLogger(BreadCrumbTag.class);
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
     /** breadCrumbEntityList,用户所有可以访问的菜单url List,不要求已经排完序. */
     private List<BreadCrumbEntity<Object>> breadCrumbEntityList;
 
@@ -141,7 +140,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
     /** vm的路径. */
     private String                         vmPath           = BreadCrumbConstants.DEFAULT_TEMPLATE_IN_CLASSPATH;
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 实现自定义站点地图数据提供程序的途径.
@@ -167,7 +166,7 @@ public class BreadCrumbTag extends AbstractStartWriteContentTag{
         return BreadCrumbUtil.getBreadCrumbContent(breadCrumbParams);
     }
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
     /**
      * Construct bread crumb entity list.
      *

@@ -15,11 +15,11 @@
  */
 package com.feilong.taglib.display.sensitive;
 
+import static com.feilong.core.bean.ConvertUtil.toArray;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.lang.EnumUtil;
-
-import static com.feilong.core.bean.ConvertUtil.toArray;
 
 /**
  * 敏感字类型.
@@ -102,7 +102,7 @@ public enum SensitiveType{
         }
     };
 
-    //******************************************************************
+    //---------------------------------------------------------------
 
     /** The type. */
     private String type;
@@ -117,7 +117,7 @@ public enum SensitiveType{
         this.type = type;
     }
 
-    //******************************************************************
+    //---------------------------------------------------------------
     /**
      * 获得左侧以及右侧不需要mask 字符长度.
      *
@@ -138,7 +138,7 @@ public enum SensitiveType{
         return false;
     }
 
-    //******************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Gets the sensitive type.

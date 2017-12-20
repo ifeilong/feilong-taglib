@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.common;
 
+import static com.feilong.core.date.DateUtil.toDate;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.Date;
@@ -22,8 +23,6 @@ import java.util.Date;
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.AbstractConditionalTag;
-
-import static com.feilong.core.date.DateUtil.toDate;
 
 /**
  * 判断一个日期,是否在一个时间区间内.
@@ -47,14 +46,16 @@ public class IsInTimeTag extends AbstractConditionalTag{
     /** 一个时间,如果为null,则使用当前时间. */
     private Date              date             = null;
 
-    // **********************************************************************************
+    //---------------------------------------------------------------
+
     /** 开始时间,beginDate和 beginDateString 二者只能选择其一. */
     private Date              beginDate;
 
     /** 结束时间,endDate和 endDateString 二者只能选择其一. */
     private Date              endDate;
 
-    // **********************************************************************************
+    //---------------------------------------------------------------
+
     /** 开始时间,beginDate和 beginDateString 二者只能选择其一. */
     private String            beginDateString;
 

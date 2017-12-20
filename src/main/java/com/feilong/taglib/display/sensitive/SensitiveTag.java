@@ -15,13 +15,13 @@
  */
 package com.feilong.taglib.display.sensitive;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.taglib.AbstractStartWriteContentTag;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 敏感数据mask标签.
@@ -97,7 +97,7 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
      */
     private String            type;
 
-    //************************************************************
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -115,7 +115,7 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
         return SensitiveUtil.parse(value, new SensitiveConfig(sensitiveType, maskChar));
     }
 
-    // *******************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 设置 待mask字符串.

@@ -115,7 +115,7 @@ public final class PagerBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
-    // *****************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 通常用于ajax分页.
@@ -162,7 +162,7 @@ public final class PagerBuilder{
             return EMPTY;// 如果总数不>0 则直接返回 empty,页面分页地方显示空白
         }
 
-        //**********************************************************************************************
+        //---------------------------------------------------------------
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("input [pagerParams] info:{}", JsonUtil.format(pagerParams));
         }

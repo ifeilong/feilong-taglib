@@ -106,7 +106,7 @@ public class BreadCrumbUtil{
             LOGGER.debug("input breadCrumbParams info:[{}]", JsonUtil.format(breadCrumbParams));
         }
 
-        //***************************************************************************************
+        //---------------------------------------------------------------
         List<BreadCrumbEntity<Object>> currentBreadCrumbEntityTreeList = lookUpCurrentBreadCrumbEntityTreeList(breadCrumbParams);
 
         if (isNullOrEmpty(currentBreadCrumbEntityTreeList)){
@@ -118,13 +118,13 @@ public class BreadCrumbUtil{
                         currentBreadCrumbEntityTreeList,
                         breadCrumbParams.getUrlPrefix());
 
-        //***************************************************************************************
+        //---------------------------------------------------------------
 
         BreadCrumbVMParams<Object> breadCrumbVMParams = new BreadCrumbVMParams<>();
         breadCrumbVMParams.setBreadCrumbEntityList(currentBreadCrumbEntityTreeList);
         breadCrumbVMParams.setConnector(breadCrumbParams.getConnector());
 
-        //***************************************************************************************
+        //---------------------------------------------------------------
         Map<String, Object> contextKeyValues = new HashMap<>();
         contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
@@ -229,7 +229,7 @@ public class BreadCrumbUtil{
         return sortOutAllParentBreadCrumbEntityList(currentBreadCrumbEntity, breadCrumbEntityList);
     }
 
-    //*******************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 按照父子关系排序好的 list.
@@ -288,7 +288,8 @@ public class BreadCrumbUtil{
         allParentBreadCrumbEntityList.add(breadCrumbEntity);
         T parentId = breadCrumbEntity.getParentId();
 
-        // ****************************************************
+        //---------------------------------------------------------------
+
         for (BreadCrumbEntity<T> loopBreadCrumbEntity : siteMapEntities){
             // 当前的id和传入的breadCrumbEntity equals
             if (loopBreadCrumbEntity.getId().equals(parentId)){

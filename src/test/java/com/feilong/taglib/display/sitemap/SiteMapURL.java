@@ -15,6 +15,9 @@
  */
 package com.feilong.taglib.display.sitemap;
 
+import static com.feilong.core.DatePattern.COMMON_DATE;
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,10 +26,6 @@ import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
-
-import static com.feilong.core.DatePattern.COMMON_DATE;
 
 /**
  * robots.txt 里面定义的 sitemap.xml url list部分 <br>
@@ -168,7 +167,7 @@ public class SiteMapURL implements Serializable{
      */
     private Float             priority;
 
-    //*********************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 页面的url(只读属性),经过escape和长度判断.
      * 
@@ -200,7 +199,7 @@ public class SiteMapURL implements Serializable{
         return isNullOrEmpty(lastmod) ? null : DateUtil.toString(lastmod, COMMON_DATE);
     }
 
-    //*******************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Gets the uRL of the page.

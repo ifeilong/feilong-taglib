@@ -74,7 +74,9 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
             LOGGER.debug("param [debugIsNotParseVM] is [true],use return empty~");
             return EMPTY;
         }
-        // ****************设置变量参数************************************************************
+
+        //-----------------------设置变量参数----------------------------------------
+
         Map<String, Object> vmParamMap = new HashMap<>();
         vmParamMap.put(VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
         vmParamMap.put(VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
@@ -104,23 +106,23 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         // 最多显示多少个导航页码
         Integer maxNavigationPageNumbers = buildMaxNavigationPageNumbers(currentPageNo, pagerParams.getDynamicNavigationPageNumberConfig());
 
-        // ***********************************************************************
+        //---------------------------------------------------------------
         Pair<Integer, Integer> startAndEndIndexPair = buildStartAndEndIndexPair(allPageNo, currentPageNo, maxNavigationPageNumbers); //获得开始和结束的索引
 
-        // ****************************************************************************************
+        //---------------------------------------------------------------
         // 获得所有页码的连接.
         Map<Integer, String> allUseIndexAndHrefMap = buildAllUseIndexAndHrefMap(pagerParams, pager, startAndEndIndexPair);
 
-        // ****************************************************************************************
+        //---------------------------------------------------------------
         int prePageNo = pager.getPrePageNo();
         int nextPageNo = pager.getNextPageNo();
 
-        // ********************************************************************************************
+        //---------------------------------------------------------------
         PagerVMParam pagerVMParam = new PagerVMParam();
         pagerVMParam.setSkin(pagerParams.getSkin());// 皮肤
         pagerVMParam.setPagerType(pagerParams.getPagerType());//分页类型
 
-        // ****************************************************************************************
+        //---------------------------------------------------------------
         pagerVMParam.setTotalCount(pagerParams.getTotalCount());// 总行数,总结果数
 
         pagerVMParam.setCurrentPageNo(currentPageNo);// 当前页
@@ -131,12 +133,12 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         pagerVMParam.setStartIteratorIndex(startAndEndIndexPair.getLeft());// 导航开始页码
         pagerVMParam.setEndIteratorIndex(startAndEndIndexPair.getRight());// 导航结束页码
 
-        // ****************************************************************************************
+        //---------------------------------------------------------------
         pagerVMParam.setPreUrl(allUseIndexAndHrefMap.get(prePageNo)); // 上一页链接
         pagerVMParam.setNextUrl(allUseIndexAndHrefMap.get(nextPageNo));// 下一页链接
         pagerVMParam.setFirstUrl(allUseIndexAndHrefMap.get(1));// firstPageNo 第一页的链接
         pagerVMParam.setLastUrl(allUseIndexAndHrefMap.get(pager.getAllPageNo()));//lastPageNo 最后一页的链接
-        // ****************************************************************************************
+        //---------------------------------------------------------------
 
         pagerVMParam.setPagerUrlTemplate(buildPagerUrlTemplate(allUseIndexAndHrefMap));
         pagerVMParam.setPageParamName(pagerParams.getPageParamName());
@@ -181,7 +183,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         return pagerUrlTemplate;
     }
 
-    //*************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 要循环的 index和 end 索引 =href map.
@@ -254,7 +256,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         CharSequence targetForReplace = pageParamName + "=" + DEFAULT_TEMPLATE_PAGE_NO;
 
         String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
-        // *************************************************************************
+        //---------------------------------------------------------------
         Set<Integer> indexSet = buildAllUseIndexSet(pager, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight());
         Map<Integer, String> returnMap = new HashMap<>();
         for (Integer index : indexSet){
@@ -326,7 +328,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         return indexSet;
     }
 
-    //****************************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得开始和结束的索引.
@@ -352,7 +354,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         // 当前页右侧导航数
         int rightCount = (fenTwo % 2 == 0) ? leftCount : (leftCount + 1);
 
-        //**************************************************************************************
+        //---------------------------------------------------------------
         // 当前页<=(左边页数+1)
         if (currentPageNo <= (leftCount + 1)){
             return Pair.of(1, maxIndexPages); // 此时迭代结束为maxIndexPages
@@ -389,7 +391,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
             return DEFAULT_NAVIGATION_PAGE_NUMBER;
         }
 
-        //****************************************************************************
+        //---------------------------------------------------------------
         for (Map.Entry<Integer, Integer> entry : navigationPageNumberMap.entrySet()){
             Integer key = entry.getKey();
             Integer value = entry.getValue();

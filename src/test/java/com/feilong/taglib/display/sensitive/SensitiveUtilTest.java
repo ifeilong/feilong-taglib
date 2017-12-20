@@ -26,20 +26,20 @@ import org.junit.Test;
  */
 public class SensitiveUtilTest{
 
-    //*************************************************************
+    //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testParseNullSensitiveConfigType(){
         SensitiveUtil.parse("赵云", new SensitiveConfig(null, '#'));
     }
 
-    //*************************************************************
+    //---------------------------------------------------------------
     @Test(expected = NullPointerException.class)
     public void testParseNullSensitiveConfig(){
         SensitiveUtil.parse("赵云", null);
     }
 
-    //*************************************************************
+    //---------------------------------------------------------------
     @Test
     public void testParseNullValue(){
         assertEquals(null, SensitiveUtil.parse(null, null));

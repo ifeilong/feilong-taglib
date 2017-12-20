@@ -120,12 +120,12 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     /** 数据总数. */
     private Integer           count;
 
-    // *******************************************************************
+    //---------------------------------------------------------------
 
     /** 每页显示多少行,默认20. */
     private Integer           pageSize                          = PagerConstants.DEFAULT_PAGESIZE;
 
-    // *******************************************************************
+    //---------------------------------------------------------------
 
     /** url页码参数,默认 pageNo. */
     private String            pageParamName                     = PagerConstants.DEFAULT_PAGE_PARAM_NAME;
@@ -136,7 +136,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     /** 皮肤,默认digg. */
     private String            skin                              = PagerConstants.DEFAULT_SKIN;
 
-    // *************************************************************************************************
+    //---------------------------------------------------------------
     /**
      * 显示最大的页码数,(-1或者不设置,默认显示所有页数).
      * 
@@ -189,7 +189,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      */
     private String            pagerHtmlAttributeName;
 
-    // *****************************end**************************************************
+    //---------------------------------------------------------------
 
     /**
      * 动态显示导航页码数量(默认是 {@link PagerConstants#DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG}).
@@ -229,7 +229,8 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      * @since 1.9.2
      */
     private String            dynamicNavigationPageNumberConfig = PagerConstants.DEFAULT_DYNAMIC_NAVIGATION_PAGE_NUMBER_CONFIG;
-    // *****************************end*************************************************
+
+    //-------------------------end--------------------------------------
 
     /**
      * Write content.
@@ -261,7 +262,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         // 当前全路径
         String pageUrl = RequestUtil.getRequestFullURL(request, charsetType);
 
-        // ****************************************************************************
+        //---------------------------------------------------------------
         PagerParams pagerParams = new PagerParams(count, pageUrl);
 
         pagerParams.setCurrentPageNo(PagerHelper.getCurrentPageNo(request, pageParamName)); // 当前页码
@@ -292,7 +293,7 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         return DEFAULT_PARAM_DEBUG_NOT_PARSEVM_VALUE.equals(parameter);
     }
 
-    //***************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * Sets the 数据总数.
