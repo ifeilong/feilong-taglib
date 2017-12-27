@@ -15,7 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
-import java.util.HashMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.util.Map;
 
 import org.junit.Test;
@@ -61,7 +62,7 @@ public class PagerCachePerformanceTest{
         // 先垃圾回收
         System.gc();
         long start = Runtime.getRuntime().freeMemory();
-        Map map = new HashMap();
+        Map map = newHashMap();
 
         for (int i = 0; i < j; i++){
             //map.put(i, a);

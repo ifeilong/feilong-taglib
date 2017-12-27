@@ -15,10 +15,12 @@
  */
 package com.feilong.taglib.display.sitemap;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +29,6 @@ import org.junit.Test;
 
 import com.feilong.io.IOWriteUtil;
 import com.feilong.tools.velocity.VelocityUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class Test1.
@@ -48,9 +48,9 @@ public class SiteMapURLTest{
     @Test
     public void test() throws IllegalArgumentException,IOException{
         String templateInClassPath = "velocity/sitemap.vm";
-        Map<String, Object> contextKeyValues = new HashMap<>();
+        Map<String, Object> contextKeyValues = newHashMap();
 
-        List<SiteMapURL> siteMapURLList = new ArrayList<>();
+        List<SiteMapURL> siteMapURLList = newArrayList();
         SiteMapURL siteMapURL = new SiteMapURL();
         siteMapURL.setChangefreq(ChangeFreq.daily);
         siteMapURL.setLastmod(new Date());

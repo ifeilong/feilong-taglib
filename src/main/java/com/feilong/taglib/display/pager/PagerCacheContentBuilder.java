@@ -18,6 +18,7 @@ package com.feilong.taglib.display.pager;
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 import static com.feilong.core.util.ResourceBundleUtil.getResourceBundle;
 import static com.feilong.core.util.ResourceBundleUtil.toMap;
@@ -30,7 +31,6 @@ import static com.feilong.taglib.display.pager.command.PagerConstants.VM_KEY_PAG
 import static com.feilong.taglib.display.pager.command.PagerType.NO_REDIRECT;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -77,7 +77,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
 
         //-----------------------设置变量参数----------------------------------------
 
-        Map<String, Object> vmParamMap = new HashMap<>();
+        Map<String, Object> vmParamMap = newHashMap();
         vmParamMap.put(VM_KEY_PAGERVMPARAM, buildPagerVMParam(pagerParams));
         vmParamMap.put(VM_KEY_I18NMAP, toMap(getResourceBundle(I18N_FEILONG_PAGER, pagerParams.getLocale())));
 
@@ -258,7 +258,7 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         String templateEncodedUrl = getTemplateEncodedUrl(pagerParams, pageParamName, pagerType);
         //---------------------------------------------------------------
         Set<Integer> indexSet = buildAllUseIndexSet(pager, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight());
-        Map<Integer, String> returnMap = new HashMap<>();
+        Map<Integer, String> returnMap = newHashMap();
         for (Integer index : indexSet){
             String link = pagerType == NO_REDIRECT ? templateEncodedUrl
                             : templateEncodedUrl.replace(targetForReplace, pageParamName + "=" + index);

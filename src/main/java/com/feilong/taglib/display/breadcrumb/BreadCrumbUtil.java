@@ -16,13 +16,13 @@
 package com.feilong.taglib.display.breadcrumb;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -125,7 +125,7 @@ public class BreadCrumbUtil{
         breadCrumbVMParams.setConnector(breadCrumbParams.getConnector());
 
         //---------------------------------------------------------------
-        Map<String, Object> contextKeyValues = new HashMap<>();
+        Map<String, Object> contextKeyValues = newHashMap();
         contextKeyValues.put(VM_KEY_BREADCRUMB, breadCrumbVMParams);
 
         String siteMapString = VELOCITY_UTIL.parseTemplateWithClasspathResourceLoader(breadCrumbParams.getVmPath(), contextKeyValues);
@@ -251,7 +251,7 @@ public class BreadCrumbUtil{
             return breadCrumbEntityList;
         }
         // 每次成一个新的
-        List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList = new ArrayList<>();
+        List<BreadCrumbEntity<T>> allParentBreadCrumbEntityList = newArrayList();
         allParentBreadCrumbEntityList = constructParentBreadCrumbEntityList(
                         currentBreadCrumbEntity,
                         breadCrumbEntityList,

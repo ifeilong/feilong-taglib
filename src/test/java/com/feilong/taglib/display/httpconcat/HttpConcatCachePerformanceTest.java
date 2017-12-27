@@ -16,10 +16,11 @@
 package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.core.util.MapUtil.newLinkedHashMap;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +66,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
                 //				2000000 
         };
 
-        //		Map<Integer, Object> map1 = new LinkedHashMap<>();
+        //		Map<Integer, Object> map1 = newLinkedHashMap();
 
         HttpConcatParam httpConcatParam2 = getHttpConcatParam();
         String writeContent = HttpConcatUtil.getWriteContent(httpConcatParam2);
@@ -75,7 +76,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
             System.gc();
             long start = Runtime.getRuntime().freeMemory();
 
-            HashMap<HttpConcatParam, String> map = new HashMap<>();
+            HashMap<HttpConcatParam, String> map = newHashMap();
             for (int i = 0; i < j; i++){
                 httpConcatParam2.setDomain("" + i);
                 map.put(httpConcatParam2, writeContent);
@@ -98,7 +99,7 @@ public class HttpConcatCachePerformanceTest extends BaseHttpConcatTest{
 
     @Test
     public void performanceTest(){
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = newArrayList();
 
         list.add(2);
         list.add(10);

@@ -17,8 +17,8 @@ package com.feilong.taglib.display.barcode;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -139,7 +139,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
      * @return the string
      */
     protected String buildBarcodeImageSrc(HttpServletRequest request){
-        Map<String, String> paramsMap = new HashMap<>();
+        Map<String, String> paramsMap = newHashMap();
         paramsMap.put(BarcodeRequestParams.BARCODE_ID, barcodeId);
 
         String servletPath = "/feilongbarcode";

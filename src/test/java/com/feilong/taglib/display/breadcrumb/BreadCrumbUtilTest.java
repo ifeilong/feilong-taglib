@@ -15,9 +15,9 @@
  */
 package com.feilong.taglib.display.breadcrumb;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.SortUtil.sortList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class BreadCrumbUtilTest{
     private static final Logger                   LOGGER               = LoggerFactory.getLogger(BreadCrumbUtilTest.class);
 
     /** The site map entities. */
-    private static List<BreadCrumbEntity<Number>> breadCrumbEntityList = new ArrayList<>();
+    private static List<BreadCrumbEntity<Number>> breadCrumbEntityList = newArrayList();
 
     static{
         breadCrumbEntityList.add(new BreadCrumbEntity<Number>(1, "Root1", "Root1_title", "/test1.htm", 0));
@@ -59,7 +59,7 @@ public class BreadCrumbUtilTest{
      */
     @Test
     public void testBreadCrumbUtilTest(){
-        List<BreadCrumbEntity<Number>> list = new ArrayList<>();
+        List<BreadCrumbEntity<Number>> list = newArrayList();
 
         list.add(new BreadCrumbEntity<Number>(2, "Root2", "Root2_title", "/test2.htm", 99));
         list.add(new BreadCrumbEntity<Number>(8, "Root8", "Root8_title", "/test8.htm", 6));
@@ -78,7 +78,7 @@ public class BreadCrumbUtilTest{
      */
     @Test
     public void testGetBreadCrumbContent(){
-        List<BreadCrumbEntity<Number>> list = new ArrayList<>();
+        List<BreadCrumbEntity<Number>> list = newArrayList();
         list.add(new BreadCrumbEntity<Number>(1, "Root1", "Root1_title", "/test1.htm", 0));
         list.add(new BreadCrumbEntity<Number>(3, "Root3", "Root3_title", "/test3.htm", 1));
         list.add(new BreadCrumbEntity<Number>(4, "Root4", "Root4_title", "/test4.htm", 2));
@@ -137,7 +137,7 @@ public class BreadCrumbUtilTest{
         //        String path = "/test8.htm";
         //        BreadCrumbTag siteMapTag = new BreadCrumbTag();
         //        List<BreadCrumbEntity<Number>> allParentSiteMapEntityList = siteMapTag.getAllParentSiteMapEntityList(path, siteMapEntities);
-        //        Map<String, Object> contextKeyValues = new HashMap<>();
+        //        Map<String, Object> contextKeyValues =newHashMap();
         //        contextKeyValues.put("siteMapEntityList", allParentSiteMapEntityList);
         //        contextKeyValues.put("connector", ">");
         //        String siteMapString = new VelocityUtil().parseTemplateWithClasspathResourceLoader("velocity/sitemap.vm", contextKeyValues);

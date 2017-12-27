@@ -15,10 +15,10 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.lang.System.lineSeparator;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
@@ -67,7 +67,7 @@ public abstract class BaseHttpConcatTest{
      * @since 1.10.4
      */
     private List<String> buildList(){
-        List<String> itemSrcList = new ArrayList<>();
+        List<String> itemSrcList = newArrayList();
         itemSrcList.add("public/js/common.js");
 
         itemSrcList.add("public/js/jquery.lazyload.min.js");
