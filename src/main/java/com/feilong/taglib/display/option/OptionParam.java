@@ -31,6 +31,8 @@ public class OptionParam extends LoadBundleParam{
     /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
     private String            selectedKey;
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.
      *

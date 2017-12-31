@@ -35,6 +35,8 @@ public class LoadBundleParam implements Serializable,CacheParam{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -4955427699742568979L;
 
+    //---------------------------------------------------------------
+
     /**
      * 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.properties那么baseName就是去掉后缀,并且去掉语言的值:i18n/edu .
      */
@@ -43,12 +45,16 @@ public class LoadBundleParam implements Serializable,CacheParam{
     /** 国际化当前语言,如果不传,那么使用默认的 {@link Locale#getDefault()}. */
     private Locale            locale;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new bundle param.
      */
     public LoadBundleParam(){
         super();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 配置文件的路径, 用于 {@link ResourceBundleUtil},比如如果在i18n文件下面有 edu-en.
@@ -87,6 +93,8 @@ public class LoadBundleParam implements Serializable,CacheParam{
     public void setLocale(Locale locale){
         this.locale = locale;
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
