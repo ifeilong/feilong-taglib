@@ -28,7 +28,7 @@ import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 
 import com.feilong.io.IOWriteUtil;
-import com.feilong.tools.velocity.VelocityUtil;
+import com.feilong.velocity.VelocityUtil;
 
 /**
  * The Class Test1.
