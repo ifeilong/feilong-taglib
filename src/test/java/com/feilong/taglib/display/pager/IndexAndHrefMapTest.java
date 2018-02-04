@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
@@ -29,27 +31,11 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
 import com.feilong.taglib.display.pager.command.PagerParams;
 
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
-
 public class IndexAndHrefMapTest extends BasePagerTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexAndHrefMapTest.class);
 
-    /**
-     * Gets the all index and href map.
-     * 
-     * @throws IllegalArgumentException
-     *             the illegal argument exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     * @throws InvocationTargetException
-     *             the invocation target exception
-     * @throws SecurityException
-     *             the security exception
-     * @throws NoSuchMethodException
-     *             the no such method exception
-     */
     @Test
     public void getAllIndexAndHrefMap() throws IllegalArgumentException,IllegalAccessException,InvocationTargetException,SecurityException,
                     NoSuchMethodException{
