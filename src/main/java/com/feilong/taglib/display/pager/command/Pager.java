@@ -79,6 +79,8 @@ public final class Pager<T> implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -903770720729924696L;
 
+    //---------------------------------------------------------------
+
     /** 当前页码. */
     private Integer           currentPageNo;
 
@@ -105,6 +107,8 @@ public final class Pager<T> implements Serializable{
      * </p>
      */
     private Integer           maxShowPageNo;
+
+    //---------------------------------------------------------------
 
     /**
      * The Constructor.
