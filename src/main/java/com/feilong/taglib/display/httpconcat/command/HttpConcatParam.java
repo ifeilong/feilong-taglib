@@ -31,6 +31,8 @@ public final class HttpConcatParam implements Serializable{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID  = 288232184048495608L;
 
+    //---------------------------------------------------------------
+
     /** 类型css/js. */
     private String            type;
 
@@ -38,8 +40,11 @@ public final class HttpConcatParam implements Serializable{
     private String            version;
 
     /**
-     * 根目录<br>
+     * 根目录.
+     * 
+     * <p>
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
+     * </p>
      */
     private String            root;
 
@@ -48,6 +53,8 @@ public final class HttpConcatParam implements Serializable{
 
     /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
     private Boolean           httpConcatSupport = null;
+
+    //---------------------------------------------------------------
 
     /**
      * 内容(原样内容,内部解析).
@@ -97,8 +104,10 @@ public final class HttpConcatParam implements Serializable{
     }
 
     /**
-     * 获得 根目录<br>
+     * 根目录.
+     * <p>
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
+     * </p>
      * 
      * @return the root
      */
@@ -107,8 +116,10 @@ public final class HttpConcatParam implements Serializable{
     }
 
     /**
-     * 设置 根目录<br>
+     * 根目录.
+     * <p>
      * 如果设置root为'/script' 会拼成http://staging.nikestore.com.cn/script/??jquery/jquery-1.4.2.min.js?2013022801
+     * </p>
      * 
      * @param root
      *            the root to set

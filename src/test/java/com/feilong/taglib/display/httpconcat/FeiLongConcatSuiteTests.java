@@ -21,8 +21,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParamEqualsTest;
 import com.feilong.taglib.display.httpconcat.handler.DomainFormatterParameterizedTest;
-import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolverParseParameterizedTest;
-import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolverParseTest;
+import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParameterizedTest;
+import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParseTest;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatterParameterizedTest;
 
 @RunWith(Suite.class)
@@ -33,8 +33,8 @@ import com.feilong.taglib.display.httpconcat.handler.RootFormatterParameterizedT
 
                 HttpConcatParamEqualsTest.class,
 
-                ItemSrcListResolverParseTest.class,
-                ItemSrcListResolverParseParameterizedTest.class,
+                ItemSrcExtractorParseTest.class,
+                ItemSrcExtractorParameterizedTest.class,
         //                
 })
 public class FeiLongConcatSuiteTests{

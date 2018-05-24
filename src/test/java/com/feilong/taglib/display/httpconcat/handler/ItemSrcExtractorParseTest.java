@@ -17,38 +17,38 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import org.junit.Test;
 
-public class ItemSrcListResolverParseTest{
+public class ItemSrcExtractorParseTest{
 
     @Test(expected = NullPointerException.class)
     public void testItemSrcListResolverTestItemNull(){
-        ItemSrcListResolver.parse(null, "js", "");
+        ItemSrcExtractor.extract(null, "js", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestItemEmpty(){
-        ItemSrcListResolver.parse("", "js", "");
+        ItemSrcExtractor.extract("", "js", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestItemBlank(){
-        ItemSrcListResolver.parse(" ", "js", "");
+        ItemSrcExtractor.extract(" ", "js", "");
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testItemSrcListResolverTestTypeNull(){
-        ItemSrcListResolver.parse("feilong.js", null, "");
+        ItemSrcExtractor.extract("feilong.js", null, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestTypeEmpty(){
-        ItemSrcListResolver.parse("feilong.js", "", "");
+        ItemSrcExtractor.extract("feilong.js", "", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestTypeBlank(){
-        ItemSrcListResolver.parse("feilong.js", " ", "");
+        ItemSrcExtractor.extract("feilong.js", " ", "");
     }
 
 }

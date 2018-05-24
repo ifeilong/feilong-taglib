@@ -28,7 +28,7 @@ import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 /**
  * The Class ItemSrcListResolverParameterizedTest.
  */
-public class ItemSrcListResolverParseParameterizedTest
+public class ItemSrcExtractorParameterizedTest
                 extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
@@ -92,7 +92,7 @@ public class ItemSrcListResolverParseParameterizedTest
      */
     @Test
     public void testBuild(){
-        String result = ItemSrcListResolver.parse(input1, input2, input3);
+        String result = ItemSrcExtractor.extract(input1, input2, input3);
         assertEquals(expectedValue, result);
     }
 
