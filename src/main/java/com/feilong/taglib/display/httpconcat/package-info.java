@@ -1,9 +1,12 @@
 /**
  * 从原来的 bs tengineConnect css js请求合并标签移植.
  * 
+ * <p>
  * 目前适用于 :
  * tengine ngx_http_concat_module
  * apache mod_concat
+ * </p>
+ * 
  * <br>
  * 请求参数需要用两个问号('??')例如:http://example.com/??style1.css,style2.css,foo/style3.css
  * <br>

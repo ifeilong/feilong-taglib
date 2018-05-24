@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.feilong.core.lang.StringUtil;
 
 /**
- * The Class DomainResolver.
+ * Root 格式化.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
@@ -53,11 +53,15 @@ public final class RootFormatter{
             return EMPTY;
         }
 
+        //---------------------------------------------------------------
+
         // 如果不是以 单斜杆结尾,那么加上一个单斜杆 
         boolean isNotEndWithSingleSlash = !root.endsWith("/");
         if (isNotEndWithSingleSlash){
             root = root + "/";
         }
+
+        //---------------------------------------------------------------
 
         //如果是以 单斜杆开头,去掉开头的单斜杆
         boolean isStartsWithSingleSlash = root.startsWith("/");
@@ -66,5 +70,4 @@ public final class RootFormatter{
         }
         return root;
     }
-
 }

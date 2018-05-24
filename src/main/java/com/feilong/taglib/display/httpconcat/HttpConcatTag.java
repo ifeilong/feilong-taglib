@@ -112,6 +112,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
             LOGGER.debug("domain is null or empty, will use request contextPath:[{}]", domain);
         }
 
+        //---------------------------------------------------------------
+
         HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(bodyContentSrc, type, domain, root, version, httpConcatSupport);
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }

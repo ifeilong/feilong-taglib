@@ -52,6 +52,8 @@ public class HttpConcatGlobalConfig{
      */
     private int     defaultCacheSizeLimit;
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 the template css.
      *

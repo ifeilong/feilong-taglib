@@ -21,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * The Class DomainResolver.
+ * Domain 值格式化.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
@@ -34,6 +34,8 @@ public final class DomainFormatter{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 格式化 domain 成 http://www.feilong.com/ 形式.
@@ -50,20 +52,25 @@ public final class DomainFormatter{
             return EMPTY;
         }
 
+        //---------------------------------------------------------------
+
         //如果域名不是以 单斜杆结尾, 那么拼接一个单斜杆
         boolean isNotEndWithSingleSlash = !domain.endsWith("/");
         if (isNotEndWithSingleSlash){
             return domain + "/";
         }
 
+        //---------------------------------------------------------------
+
         //since 1.10.5
         //<script type="text/javascript" src="http://www.feilong.com/??http://img.adidas.com.cn/scripts/pdp/common.js,scripts/pdp/sub_salesProperties.js,scripts/pdp/pdp.js?2017"></script>
 
-        //如果域名是以 双斜杆结尾, 那么转成单斜杆
+        //如果域名是以双斜杆结尾, 那么转成单斜杆
         boolean isEndWithDoubleSlash = domain.endsWith("//");
         if (isEndWithDoubleSlash){
             return StringUtils.removeEnd(domain, "//") + "/";
         }
+
         return domain;
     }
 }

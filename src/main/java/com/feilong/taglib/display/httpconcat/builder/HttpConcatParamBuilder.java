@@ -18,7 +18,7 @@ package com.feilong.taglib.display.httpconcat.builder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
- * The Class HttpConcatParamBuilder.
+ * {@link HttpConcatParam} 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
