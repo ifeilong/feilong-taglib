@@ -15,12 +15,12 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.bean.ConvertUtil.toInteger;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.feilong.servlet.http.RequestUtil;
 import com.feilong.taglib.display.pager.command.PagerConstants;
-
-import static com.feilong.core.bean.ConvertUtil.toInteger;
 
 /**
  * 分页helper.
@@ -36,6 +36,8 @@ public final class PagerHelper{
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得当前分页数字,不带这个参数或者转换异常 返回1.

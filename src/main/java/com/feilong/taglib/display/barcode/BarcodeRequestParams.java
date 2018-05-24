@@ -32,6 +32,8 @@ class BarcodeRequestParams{
     /** <code>{@value}</code>. */
     static final String BARCODE_ID = "barcodeid";
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private BarcodeRequestParams(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.

@@ -15,28 +15,29 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.bean.ConvertUtil.convert;
 
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.Validate;
+
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
-import com.feilong.tools.slf4j.Slf4jUtil;
 
 /**
- * The Class HttpConcatGlobalConfigBuilder.
+ * {@link HttpConcatGlobalConfig} 构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.5.0
  * @since 1.8.8 change class Access Modifiers
  */
-public class HttpConcatGlobalConfigBuilder{
+public final class HttpConcatGlobalConfigBuilder{
 
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
     private static final String         CONFIG_FILE                  = "config/httpconcat";
 
+    /** The Constant HTTPCONCAT_RESOURCEBUNDLE. */
     private static final ResourceBundle HTTPCONCAT_RESOURCEBUNDLE    = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
 
     /** <code>{@value}</code>. */
@@ -68,11 +69,12 @@ public class HttpConcatGlobalConfigBuilder{
     //---------------------------------------------------------------
 
     /**
-     * Builds the http concat global config.
+     * Builds the.
      *
      * @return the http concat global config
+     * @since 1.11.1 rename
      */
-    public static HttpConcatGlobalConfig buildHttpConcatGlobalConfig(){
+    public static HttpConcatGlobalConfig build(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
         httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue(KEY_HTTPCONCAT_SUPPORT, Boolean.class));
@@ -84,6 +86,8 @@ public class HttpConcatGlobalConfigBuilder{
 
         return httpConcatGlobalConfig;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 required value.
@@ -103,10 +107,8 @@ public class HttpConcatGlobalConfigBuilder{
      */
     private static <T> T getRequiredValue(String keyName,Class<T> typeClass){
         String value = ResourceBundleUtil.getValue(HTTPCONCAT_RESOURCEBUNDLE, keyName);
-        if (isNullOrEmpty(value)){
-            String messagePattern = "can't find key:[{}] in file:[{}],pls ensure you have put the correct configuration";
-            throw new NullPointerException(Slf4jUtil.format(messagePattern, keyName, CONFIG_FILE));
-        }
+
+        Validate.notBlank(value, "can't find key:[%s] in [%s],pls ensure you have put the correct configuration", keyName, CONFIG_FILE);
         return convert(value, typeClass);
     }
 }

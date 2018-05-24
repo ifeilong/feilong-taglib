@@ -84,7 +84,7 @@ public final class HttpConcatUtil{
     //---------------------------------------------------------------
 
     static{
-        HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.buildHttpConcatGlobalConfig();
+        HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.build();
 
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("init http concat config:[{}]", JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
@@ -108,6 +108,7 @@ public final class HttpConcatUtil{
      * @param httpConcatParam
      *            the http concat param
      * @return
+     *         如果 <code>httpConcatParam</code> 是null,抛出 {@link NullPointerException}<br>
      *         <ul>
      *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,返回 {@link StringUtils#EMPTY}</li>
      *         <li>如果支持 concat,那么生成concat字符串</li>
@@ -116,24 +117,21 @@ public final class HttpConcatUtil{
      */
     public static String getWriteContent(HttpConcatParam httpConcatParam){
         Validate.notNull(httpConcatParam, "httpConcatParam can't be null!");
-
         if (LOGGER.isTraceEnabled()){
             LOGGER.trace("httpConcatParam info:[{}]", JsonUtil.format(httpConcatParam));
         }
 
         //---------------------------------------------------------------
-
         //是否使用cache
         boolean isWriteCache = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable();
 
-        int cacheKeyHashCode = httpConcatParam.hashCode();
-        //---------------------------------------------------------------
         //缓存
         if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
             //返回此映射中的键-值映射关系数.如果该映射包含的元素大于 Integer.MAX_VALUE,则返回 Integer.MAX_VALUE. 
             int cacheSize = CACHE.size();
 
             String content = CACHE.get(httpConcatParam);
+            int cacheKeyHashCode = httpConcatParam.hashCode();
             //包含
             if (null != content){
                 LOGGER.debug("hashcode:[{}],get httpConcat info from httpConcatCache,cache.size:[{}]", cacheKeyHashCode, cacheSize);
@@ -156,7 +154,6 @@ public final class HttpConcatUtil{
         }
 
         //---------------------------------------------------------------
-
         List<String> itemSrcList = ItemSrcListResolver
                         .resolve(httpConcatParam.getContent(), httpConcatParam.getType(), httpConcatParam.getDomain());
         // 判断item list
@@ -165,8 +162,29 @@ public final class HttpConcatUtil{
             return EMPTY;
         }
 
-        String content = ContentBuilder.buildContent(httpConcatParam, itemSrcList, HTTP_CONCAT_GLOBAL_CONFIG);
+        //---------------------------------------------------------------
 
+        String content = ContentBuilder.buildContent(itemSrcList, httpConcatParam, HTTP_CONCAT_GLOBAL_CONFIG);
+
+        after(content, isWriteCache, httpConcatParam);
+
+        return content;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * After.
+     *
+     * @param content
+     *            the content
+     * @param isWriteCache
+     *            the is write cache
+     * @param httpConcatParam
+     *            the http concat param
+     * @since 1.11.1
+     */
+    private static void after(String content,boolean isWriteCache,HttpConcatParam httpConcatParam){
         //--------------------------log-------------------------------------
 
         if (LOGGER.isDebugEnabled()){
@@ -174,19 +192,18 @@ public final class HttpConcatUtil{
         }
 
         //--------------------------设置cache-------------------------------------
-
+        int hashCode = httpConcatParam.hashCode();
         if (isWriteCache){
             CACHE.put(httpConcatParam, content);
-            LOGGER.debug("hashcode:[{}] put to cache,cache size:[{}]", httpConcatParam.hashCode(), CACHE.size());
-        }else{
-            if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
-                String pattern = "hashcode:[{}],DEFAULT_CACHEENABLE:[{}],but isWriteCache:[{}],so http concat result not put to cache";
-                LOGGER.warn(pattern, cacheKeyHashCode, HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable(), isWriteCache);
-            }
+            LOGGER.debug("hashcode:[{}] put to cache,cache size:[{}]", hashCode, CACHE.size());
+            return;
         }
 
         //---------------------------------------------------------------
-        return content;
+        //不可以写cache
+        if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
+            LOGGER.warn("hashcode:[{}],DEFAULT_CACHEENABLE:[true],but writeCache:[false],so httpConcat result not put to cache", hashCode);
+        }
     }
 
 }

@@ -86,11 +86,11 @@ import com.feilong.tools.slf4j.Slf4jUtil;
 @Deprecated
 public class BarcodeServlet extends HttpServlet{
 
-    /** The Constant log. */
-    private static final Logger LOGGER           = LoggerFactory.getLogger(BarcodeServlet.class);
-
     /** The Constant serialVersionUID. */
     private static final long   serialVersionUID = 231074760785325078L;
+
+    /** The Constant log. */
+    private static final Logger LOGGER           = LoggerFactory.getLogger(BarcodeServlet.class);
 
     /*
      * (non-Javadoc)
@@ -112,6 +112,8 @@ public class BarcodeServlet extends HttpServlet{
         //③ render
         render(barcodeContentsAndConfig, response);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Encode.

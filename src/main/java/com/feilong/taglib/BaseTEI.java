@@ -83,7 +83,7 @@ public abstract class BaseTEI extends TagExtraInfo{
      * @see javax.servlet.jsp.tagext.TagData#getAttributes()
      * @since 1.4.0
      */
-    protected Map<String, Object> getTagDataAttributeMap(TagData tagData){
+    protected static Map<String, Object> getTagDataAttributeMap(TagData tagData){
         Map<String, Object> map = new TreeMap<>();
         Enumeration<String> attributes = tagData.getAttributes();
         while (attributes.hasMoreElements()){

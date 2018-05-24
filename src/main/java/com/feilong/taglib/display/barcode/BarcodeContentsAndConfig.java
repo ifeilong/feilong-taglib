@@ -42,6 +42,8 @@ public class BarcodeContentsAndConfig implements Serializable{
     /** The barcode config. */
     private BarcodeConfig     barcodeConfig;
 
+    //---------------------------------------------------------------
+
     /**
      * The Constructor.
      */

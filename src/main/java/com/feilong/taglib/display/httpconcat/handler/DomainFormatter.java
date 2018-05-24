@@ -53,21 +53,17 @@ public final class DomainFormatter{
         }
 
         //---------------------------------------------------------------
-
-        //如果域名不是以 单斜杆结尾, 那么拼接一个单斜杆
-        boolean isNotEndWithSingleSlash = !domain.endsWith("/");
-        if (isNotEndWithSingleSlash){
+        //如果域名不是以 单斜杆 结尾, 那么拼接一个单斜杆
+        if (!domain.endsWith("/")){
             return domain + "/";
         }
 
         //---------------------------------------------------------------
-
         //since 1.10.5
         //<script type="text/javascript" src="http://www.feilong.com/??http://img.adidas.com.cn/scripts/pdp/common.js,scripts/pdp/sub_salesProperties.js,scripts/pdp/pdp.js?2017"></script>
 
         //如果域名是以双斜杆结尾, 那么转成单斜杆
-        boolean isEndWithDoubleSlash = domain.endsWith("//");
-        if (isEndWithDoubleSlash){
+        if (domain.endsWith("//")){
             return StringUtils.removeEnd(domain, "//") + "/";
         }
 

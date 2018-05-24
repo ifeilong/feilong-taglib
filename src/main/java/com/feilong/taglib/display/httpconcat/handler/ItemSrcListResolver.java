@@ -17,20 +17,16 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
-import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.LF;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
-import com.feilong.core.util.RegexUtil;
-import com.feilong.taglib.display.httpconcat.builder.TemplateFactory;
 
 /**
  * 专门用来提取标签体内容的.
@@ -53,7 +49,7 @@ public final class ItemSrcListResolver{
     //---------------------------------------------------------------
 
     /**
-     * 获得 items array.
+     * Resolve.
      *
      * @param blockContent
      *            内容,目前 以 \n 分隔
@@ -72,7 +68,6 @@ public final class ItemSrcListResolver{
 
         //---------------------------------------------------------------
         String[] items = StringUtil.split(blockContent.trim(), LF);
-
         int length = items.length;
 
         //---------------------------------------------------------------
@@ -84,18 +79,18 @@ public final class ItemSrcListResolver{
             }
 
             //---------------------------------------------------------------
-            // 去除空格
-            String parseResult = parse(item, type, domain);
-            if (isNullOrEmpty(parseResult)){
+            String src = ItemSrcExtractor.extract(item, type, domain);
+            if (isNullOrEmpty(src)){
                 LOGGER.warn("item parse result is null or empty,[{}]", item);
                 continue;
             }
 
-            //---------------------------------------------------------------
-            list.add(parseResult);
+            list.add(src);
         }
         return rework(blockContent, list);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 再加工.
@@ -111,8 +106,6 @@ public final class ItemSrcListResolver{
      * @return the list
      */
     private static List<String> rework(String blockContent,List<String> itemSrcList){
-        // 判断item list
-
         // 去重,元素不重复
         List<String> noRepeatitemList = removeDuplicate(itemSrcList);
 
@@ -121,6 +114,8 @@ public final class ItemSrcListResolver{
             LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
             return null;
         }
+
+        //---------------------------------------------------------------
         int noRepeatitemListSize = noRepeatitemList.size();
         int itemSrcListSize = itemSrcList.size();
 
@@ -131,87 +126,5 @@ public final class ItemSrcListResolver{
             }
         }
         return noRepeatitemList;
-    }
-
-    /**
-     * 解析 item 里面的内容.
-     * 
-     * <ul>
-     * <li>item 不能是 blank</li>
-     * <li>如果 type 是css, 并且以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
-     * <li>如果 type 是js, 并且以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
-     * <li>如果都不是,那么直接返回 trim 过的 item</li>
-     * </ul>
-     *
-     * @param item
-     *            the item
-     * @param type
-     *            the type
-     * @param domain
-     *            the domain
-     * @return 如果 <code>item</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>item</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>type</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>type</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     */
-    static String parse(String item,String type,String domain){
-        Validate.notBlank(item, "item can't be blank!");
-        Validate.notBlank(type, "type can't be blank!");
-
-        //---------------------------------------------------------------
-        String workItem = item.trim();
-
-        if (TemplateFactory.TYPE_CSS.equalsIgnoreCase(type) && workItem.startsWith("<link ")){
-            String regexPattern = ".*?href=\"(.*?)\".*?";
-            return pickUp(workItem, regexPattern, domain);
-        }
-
-        //---------------------------------------------------------------
-
-        if (TemplateFactory.TYPE_JS.equalsIgnoreCase(type) && workItem.startsWith("<script ")){
-            String regexPattern = ".*?src=\"(.*?)\".*?";
-            return pickUp(workItem, regexPattern, domain);
-        }
-
-        return workItem;
-    }
-
-    /**
-     * 基于正则表达式来提取内部的路径地址.
-     * 
-     * <h3>说明:</h3>
-     * <blockquote>
-     * <ul>
-     * <li>如果提取出来的内容是以 {@code domain} 开头的, 将会去除</li>
-     * <li>如果提取出来的内容有 {@code ?} 部分, 将会去除</li>
-     * </ul>
-     * </blockquote>
-     *
-     * @param workItem
-     *            the work item
-     * @param regexPattern
-     *            the regex pattern
-     * @param domain
-     *            the domain
-     * @return 如果 <code>workItem</code> 不符合regexPattern,那么返回 {@link StringUtils#EMPTY}<br>
-     */
-    private static String pickUp(String workItem,String regexPattern,String domain){
-        String value = RegexUtil.group(regexPattern, workItem, 1);
-        if (isNullOrEmpty(value)){
-            return EMPTY;
-        }
-        value = value.trim(); //去空
-
-        //------------去除 domain---------------------------------------------------
-        if (value.startsWith(domain)){
-            value = StringUtils.substringAfter(value, domain);
-        }
-
-        //------------去除 ?---------------------------------------------------
-        if (value.contains("?")){
-            return StringUtils.substringBefore(value, "?");
-        }
-
-        return value;
     }
 }

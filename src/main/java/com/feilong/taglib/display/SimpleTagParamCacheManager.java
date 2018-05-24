@@ -94,6 +94,8 @@ public final class SimpleTagParamCacheManager{
         return contentValue;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 从缓存中读取.
      * 
@@ -123,6 +125,8 @@ public final class SimpleTagParamCacheManager{
         LOGGER.debug("cacheSize:[{}],cache not contains [{}](hashcode:[{}]),will do parse", size, name, hashCode);
         return null;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 设置.

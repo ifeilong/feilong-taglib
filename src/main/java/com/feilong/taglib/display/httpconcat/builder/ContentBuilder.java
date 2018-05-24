@@ -28,11 +28,9 @@ import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
-import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
-import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
 
 /**
- * The Class ContentBuilder.
+ * 内容构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
@@ -49,71 +47,100 @@ public class ContentBuilder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 构造content.
-     *
-     * @param httpConcatParam
-     *            the http concat param
+     * 
      * @param itemSrcList
      *            the item src list
+     * @param httpConcatParam
+     *            the http concat param
      * @param httpConcatGlobalConfig
      *            the http concat global config
+     *
      * @return the string
      * @since 1.4.1
      */
     public static String buildContent(
-                    HttpConcatParam httpConcatParam,
                     List<String> itemSrcList,
+                    HttpConcatParam httpConcatParam,
                     HttpConcatGlobalConfig httpConcatGlobalConfig){
-        // 标准化 httpConcatParam,比如list去重,标准化domain等等
-        // 下面的解析均基于standardHttpConcatParam来操作
-        // httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = standardHttpConcatParam(httpConcatParam);
+        // 下面的解析均基于standardHttpConcatParam来操作,httpConcatParam只做入参判断,数据转换,以及cache存取
+        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder.standardHttpConcatParam(httpConcatParam);
 
         //---------------------------------------------------------------
-        String template = TemplateFactory.getTemplate(httpConcatGlobalConfig, standardHttpConcatParam.getType());
-
-        boolean concatSupport = defaultIfNull(
-                        httpConcatParam.getHttpConcatSupport(),
-                        BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport()));
-
-        //---------------------------------------------------------------
+        boolean concatSupport = concatSupport(httpConcatParam, httpConcatGlobalConfig);
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(
-                            "after standard HttpConcatParam info:{},itemSrcList info:[{}],concatSupport:[{}]",
+                            "after standard HttpConcatParam info:[{}],itemSrcList info:[{}],concatSupport:[{}]",
                             JsonUtil.format(standardHttpConcatParam),
                             JsonUtil.format(itemSrcList),
                             concatSupport);
         }
 
         //---------------------------------------------------------------
+        String template = TemplateFactory.getTemplate(httpConcatGlobalConfig, standardHttpConcatParam.getType());
         if (concatSupport){ // concat
-            return MessageFormatUtil.format(template, ConcatLinkResolver.resolver(standardHttpConcatParam, itemSrcList));
+            return handlerConcat(itemSrcList, template, standardHttpConcatParam);
         }
+        return handlerNoConcat(itemSrcList, template, standardHttpConcatParam);
+    }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 拼接.
+     *
+     * @param itemSrcList
+     *            the item src list
+     * @param template
+     *            the template
+     * @param standardHttpConcatParam
+     *            the standard http concat param
+     * @return the string
+     * @since 1.11.1
+     */
+    private static String handlerConcat(List<String> itemSrcList,String template,HttpConcatParam standardHttpConcatParam){
+        return MessageFormatUtil.format(template, ConcatLinkResolver.resolver(itemSrcList, standardHttpConcatParam));
+    }
+
+    /**
+     * 不拼接.
+     *
+     * @param itemSrcList
+     *            the item src list
+     * @param template
+     *            the template
+     * @param standardHttpConcatParam
+     *            the standard http concat param
+     * @return the string
+     * @since 1.11.1
+     */
+    private static String handlerNoConcat(List<String> itemSrcList,String template,HttpConcatParam standardHttpConcatParam){
         // 本地开发环境支持的.
         StringBuilder sb = new StringBuilder();
         for (String itemSrc : itemSrcList){
-            sb.append(MessageFormatUtil.format(template, ConcatLinkResolver.getNoConcatLink(itemSrc, standardHttpConcatParam)));
+            sb.append(MessageFormatUtil.format(template, ConcatLinkResolver.resolverNoConcatLink(itemSrc, standardHttpConcatParam)));
         }
         return sb.toString();
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 标准化 httpConcatParam,比如list去重,标准化domain等等.
-     * 
+     * Concat support.
+     *
      * @param httpConcatParam
      *            the http concat param
-     * @return the http concat param
+     * @param httpConcatGlobalConfig
+     *            the http concat global config
+     * @return true, if successful
+     * @since 1.11.1
      */
-    private static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-        HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
-        standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
-        standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
-        standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
-        standardHttpConcatParam.setType(httpConcatParam.getType());
-        standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
-        standardHttpConcatParam.setContent(httpConcatParam.getContent());
-        return standardHttpConcatParam;
+    private static boolean concatSupport(HttpConcatParam httpConcatParam,HttpConcatGlobalConfig httpConcatGlobalConfig){
+        return defaultIfNull(
+                        httpConcatParam.getHttpConcatSupport(), //
+                        BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport()));
     }
 }

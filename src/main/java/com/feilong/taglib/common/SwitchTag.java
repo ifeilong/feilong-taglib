@@ -34,6 +34,8 @@ public class SwitchTag extends BaseTag{
     /** swith的值. */
     private String            value            = "";
 
+    //---------------------------------------------------------------
+
     /*
      * 当遇到switch标签时,所有的子标签都不执行.
      * 
@@ -50,6 +52,8 @@ public class SwitchTag extends BaseTag{
         flag = false;
         return EVAL_BODY_INCLUDE;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 该方法有子标签调用,表示是否可以执行自身的标签..

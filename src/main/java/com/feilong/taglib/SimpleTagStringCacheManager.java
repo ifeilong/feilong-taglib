@@ -88,6 +88,8 @@ public final class SimpleTagStringCacheManager{
         return null;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 设置.
      *

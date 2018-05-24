@@ -36,6 +36,8 @@ public class PagerAndContent<T> implements Serializable{
     /** 渲染出来的分页html代码. */
     private String            content;
 
+    //---------------------------------------------------------------
+
     /**
      * Instantiates a new pager and content.
      */
@@ -56,6 +58,8 @@ public class PagerAndContent<T> implements Serializable{
         this.pager = pager;
         this.content = content;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得 分页数据(包含数据集).

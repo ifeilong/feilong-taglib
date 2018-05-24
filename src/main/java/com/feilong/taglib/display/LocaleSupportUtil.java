@@ -42,6 +42,8 @@ public final class LocaleSupportUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 locale 转成 {@link Locale}.
      *
@@ -54,6 +56,8 @@ public final class LocaleSupportUtil{
     public static Locale toLocal(Object locale,HttpServletRequest request){
         return defaultIfNull(toLocale(locale), request.getLocale());
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the.

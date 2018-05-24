@@ -56,16 +56,14 @@ public final class RootFormatter{
         //---------------------------------------------------------------
 
         // 如果不是以 单斜杆结尾,那么加上一个单斜杆 
-        boolean isNotEndWithSingleSlash = !root.endsWith("/");
-        if (isNotEndWithSingleSlash){
+        if (!root.endsWith("/")){
             root = root + "/";
         }
 
         //---------------------------------------------------------------
 
         //如果是以 单斜杆开头,去掉开头的单斜杆
-        boolean isStartsWithSingleSlash = root.startsWith("/");
-        if (isStartsWithSingleSlash){
+        if (root.startsWith("/")){
             root = StringUtil.substring(root, 1);
         }
         return root;

@@ -79,6 +79,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * @param request
      * @return
@@ -110,6 +112,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
         }
         return writeContent;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 标签体内容.

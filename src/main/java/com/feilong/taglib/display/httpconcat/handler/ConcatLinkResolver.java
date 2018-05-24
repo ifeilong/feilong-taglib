@@ -16,6 +16,7 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.bean.ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG;
 
 import java.util.List;
 
@@ -23,11 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.core.bean.ToStringConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
- * The Class ConcatLinkResolver.
+ * 拼接链接.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
@@ -36,6 +36,8 @@ public final class ConcatLinkResolver{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ConcatLinkResolver.class);
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private ConcatLinkResolver(){
@@ -48,29 +50,26 @@ public final class ConcatLinkResolver{
 
     /**
      * 获得合并的链接.
-     *
-     * @param httpConcatParam
-     *            the http concat param
+     * 
      * @param itemSrcList
      *            the item src list
+     * @param httpConcatParam
+     *            the http concat param
      * @return the link
+     * @since 1.11.1 change param order
      */
-    public static String resolver(HttpConcatParam httpConcatParam,List<String> itemSrcList){
-        StringBuilder sb = new StringBuilder();
-        sb.append(httpConcatParam.getDomain());
-        sb.append(httpConcatParam.getRoot());
-
-        // 只有一条 输出原生字符串
+    public static String resolver(List<String> itemSrcList,HttpConcatParam httpConcatParam){
+        // 只有一条,输出原生字符串
         if (itemSrcList.size() == 1){
-            sb.append(itemSrcList.get(0));
-            LOGGER.debug("itemSrcList size==1,will generate primary {}.", httpConcatParam.getType());
-        }else{
-            sb.append("??");
-            sb.append(ConvertUtil.toString(itemSrcList, ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG));
+            LOGGER.debug("itemSrcList size==1,will generate primary [{}].", httpConcatParam.getType());
+            return resolver(itemSrcList.get(0), httpConcatParam);
         }
-        appendVersion(httpConcatParam.getVersion(), sb);
-        return sb.toString();
+
+        return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), httpConcatParam);
+
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得不需要 Concat 的连接.
@@ -80,12 +79,31 @@ public final class ConcatLinkResolver{
      * @param httpConcatParam
      *            the http concat param
      * @return the string
+     * @since 1.11.1 rename
      */
-    public static String getNoConcatLink(String itemSrc,HttpConcatParam httpConcatParam){
+    public static String resolverNoConcatLink(String itemSrc,HttpConcatParam httpConcatParam){
+        return resolver(itemSrc, httpConcatParam);
+    }
+
+    /**
+     * Resolver.
+     *
+     * @param appendContent
+     *            the append content
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the string
+     */
+    private static String resolver(String appendContent,HttpConcatParam httpConcatParam){
         StringBuilder sb = new StringBuilder();
         sb.append(httpConcatParam.getDomain());
         sb.append(httpConcatParam.getRoot());
-        sb.append(itemSrc);
+
+        //---------------------------------------------------------------
+
+        sb.append(appendContent);
+
+        //---------------------------------------------------------------
         appendVersion(httpConcatParam.getVersion(), sb);
         return sb.toString();
     }
@@ -93,7 +111,7 @@ public final class ConcatLinkResolver{
     //---------------------------------------------------------------
 
     /**
-     * Append version.
+     * 追加版本号.
      * 
      * @param version
      *            the version
@@ -108,5 +126,4 @@ public final class ConcatLinkResolver{
             LOGGER.debug("the param version isNullOrEmpty,we suggest you should set version value");
         }
     }
-
 }

@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.common;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.Iterator;
@@ -22,8 +23,6 @@ import java.util.Objects;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.taglib.AbstractConditionalTag;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 包含父类.
@@ -42,6 +41,8 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
     /** 任意类型的值,最终toString 判断比较. */
     protected Object          value            = null;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -51,6 +52,8 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
     public boolean condition(){
         return containsByStringValue();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Contains by string value.
@@ -62,6 +65,8 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
         Iterator<?> iterator = ConvertUtil.toIterator(collection);
         return containsByStringValue(iterator, value);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 迭代{@link Iterator},判断元素的字符串格式是否和传入的值<code>value</code>的字符串格式相等.
@@ -84,6 +89,8 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
         if (isNullOrEmpty(iterator)){
             return false;
         }
+
+        //---------------------------------------------------------------
         while (iterator.hasNext()){
             Object object = iterator.next();
             //注意:如果null,java.util.Objects#toString(Object),返回 "null" 和  java.lang.String#valueOf(Object) 一样
@@ -96,6 +103,8 @@ public abstract class AbstractContainsSupport extends AbstractConditionalTag{
         }
         return false;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Sets the 一个集合,将会被转成Iterator,可以为逗号隔开的字符串,会被分隔成Iterator.

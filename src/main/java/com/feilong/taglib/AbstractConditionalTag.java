@@ -41,6 +41,8 @@ public abstract class AbstractConditionalTag extends BaseTag{
         return condition() ? EVAL_BODY_INCLUDE : SKIP_BODY;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 自定义条件.
      *

@@ -32,16 +32,18 @@ import com.feilong.tools.slf4j.Slf4jUtil;
  */
 public class OptionCacheContentBuilder implements CacheContentBuilder<OptionParam, String>{
 
+    /** Static instance. */
+    // the static instance works for all types
+    public static final CacheContentBuilder<OptionParam, String> INSTANCE        = new OptionCacheContentBuilder();
+
+    //---------------------------------------------------------------
     /** option 格式 <code>{@value}</code>. */
     private static final String                                  OPTION_PATTERN  = "<option value=\"{}\"{}>{}</option>";
 
     /** 选中的字符串 <code>{@value}</code>. */
     private static final String                                  SELECTED_STRING = " selected=\"selected\"";
 
-    /** Static instance. */
-    // the static instance works for all types
-    public static final CacheContentBuilder<OptionParam, String> INSTANCE        = new OptionCacheContentBuilder();
-
+    //---------------------------------------------------------------
     /*
      * (non-Javadoc)
      * 
@@ -60,6 +62,8 @@ public class OptionCacheContentBuilder implements CacheContentBuilder<OptionPara
         }
         return sb.toString();
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the option.

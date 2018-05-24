@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.pager;
 
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.taglib.display.pager.command.PagerConstants.DEFAULT_PAGE_ATTRIBUTE_PAGER_HTML_NAME;
 
 import java.util.Map;
@@ -29,8 +30,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.BaseTEI;
-
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * The Class PagerTagExtraInfo.
@@ -60,6 +59,8 @@ public class PagerTagExtraInfo extends BaseTEI{
         VariableInfo variableInfo = new VariableInfo(pagerHtmlAttributeName, String.class.getName(), true, VariableInfo.AT_END);
         return ConvertUtil.toArray(variableInfo);
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)

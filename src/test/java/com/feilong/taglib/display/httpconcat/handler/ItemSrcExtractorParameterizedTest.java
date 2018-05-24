@@ -25,11 +25,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
 
-/**
- * The Class ItemSrcListResolverParameterizedTest.
- */
-public class ItemSrcExtractorParameterizedTest
-                extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class ItemSrcExtractorParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
 
     /**
      * Data.
@@ -87,13 +83,9 @@ public class ItemSrcExtractorParameterizedTest
         return toList(objects);
     }
 
-    /**
-     * Test build.
-     */
     @Test
     public void testBuild(){
-        String result = ItemSrcExtractor.extract(input1, input2, input3);
-        assertEquals(expectedValue, result);
+        assertEquals(expectedValue, ItemSrcExtractor.extract(input1, input2, input3));
     }
 
 }

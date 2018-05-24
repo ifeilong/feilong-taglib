@@ -33,6 +33,8 @@ public class SwitchCaseTag extends BaseTag{
     /** 值. */
     private String            value;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -54,6 +56,8 @@ public class SwitchCaseTag extends BaseTag{
         }
         return SKIP_BODY;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Sets the 值.

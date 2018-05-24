@@ -16,6 +16,8 @@
 package com.feilong.taglib.display.httpconcat.builder;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
+import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
+import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
 
 /**
  * {@link HttpConcatParam} 构造器.
@@ -61,5 +63,25 @@ public final class HttpConcatParamBuilder{
         httpConcatParam.setContent(blockContent.trim());
         httpConcatParam.setHttpConcatSupport(httpConcatSupport);
         return httpConcatParam;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 标准化 httpConcatParam,比如list去重,标准化domain等等.
+     * 
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the http concat param
+     */
+    public static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
+        HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
+        standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
+        standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
+        standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
+        standardHttpConcatParam.setType(httpConcatParam.getType());
+        standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
+        standardHttpConcatParam.setContent(httpConcatParam.getContent());
+        return standardHttpConcatParam;
     }
 }

@@ -108,6 +108,8 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         return buildImgTag(imageSrc);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 构造img标签,用来在页面显示二维码图片.
      *

@@ -41,6 +41,8 @@ public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag
         return EVAL_BODY_BUFFERED;
     }
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 

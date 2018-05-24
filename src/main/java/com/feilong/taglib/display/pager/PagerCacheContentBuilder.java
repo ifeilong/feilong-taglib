@@ -63,6 +63,8 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
     // the static instance works for all types
     public static final CacheContentBuilder<PagerParams, String> INSTANCE = new PagerCacheContentBuilder();
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -88,6 +90,8 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
         }
         return content;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the pager vm param.
@@ -146,6 +150,8 @@ public class PagerCacheContentBuilder implements CacheContentBuilder<PagerParams
                         getIteratorIndexAndHrefMap(allUseIndexAndHrefMap, startAndEndIndexPair.getLeft(), startAndEndIndexPair.getRight()));
         return pagerVMParam;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Builds the pager.

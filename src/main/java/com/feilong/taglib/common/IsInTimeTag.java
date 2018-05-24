@@ -65,6 +65,8 @@ public class IsInTimeTag extends AbstractConditionalTag{
     /** 如果 使用的 beginDateString 和 endDateString ,其format模式. */
     private String            pattern;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -77,6 +79,8 @@ public class IsInTimeTag extends AbstractConditionalTag{
         return null != beginDate ? DateUtil.isInTime(compareDate, beginDate, endDate)
                         : isInTime(compareDate, beginDateString, endDateString, pattern);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断指定日期 <code>date</code>是否在两个时间之间.
@@ -100,6 +104,8 @@ public class IsInTimeTag extends AbstractConditionalTag{
         Date endTimeDate = toDate(endTime, datePattern);
         return DateUtil.isInTime(date, beginTimeDate, endTimeDate);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Sets the 一个时间,如果为null,则使用当前时间.

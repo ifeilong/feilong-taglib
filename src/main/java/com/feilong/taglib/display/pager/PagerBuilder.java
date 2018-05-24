@@ -137,6 +137,8 @@ public final class PagerBuilder{
         return new PagerAndContent<>(pager, buildContent(pagerParams));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 解析VM模板,生成分页HTML代码.
      * 

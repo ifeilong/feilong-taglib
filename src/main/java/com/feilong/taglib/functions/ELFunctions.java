@@ -94,6 +94,8 @@ public final class ELFunctions{
         return AbstractContainsSupport.containsByStringValue(iterator, value);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将对象format成json字符串(不会有pretty输出,会连在一起).
      * 

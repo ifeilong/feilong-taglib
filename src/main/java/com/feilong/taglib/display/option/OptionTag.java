@@ -157,6 +157,8 @@ public class OptionTag extends AbstractLocaleSupportTag{
     /** 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中. */
     private String            selectedKey;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 
@@ -172,11 +174,7 @@ public class OptionTag extends AbstractLocaleSupportTag{
         return SimpleTagParamCacheManager.getContent(optionParam, OptionCacheContentBuilder.INSTANCE);
     }
 
-    /**
-     * @param request
-     * @return
-     * @since 1.10.3
-     */
+    //---------------------------------------------------------------
 
     /**
      * 设置 选中的key,可以不传,那么没有option会是选中状态,如果设置了,那么对应的key option的状态是 选中.

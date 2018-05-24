@@ -250,6 +250,8 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
         return htmlContent;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Builds the pager params.
      *
