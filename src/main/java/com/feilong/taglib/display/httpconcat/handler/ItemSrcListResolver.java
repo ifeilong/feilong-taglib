@@ -75,6 +75,14 @@ public final class ItemSrcListResolver{
             }
 
             //---------------------------------------------------------------
+
+            //since 1.11.1
+            //<!-- 公共 CSS 部分开始 -->
+            if (item.trim().startsWith("<!--")){// 忽视html注释行
+                continue;
+            }
+
+            //---------------------------------------------------------------
             String itemSrc = ItemSrcExtractor.extract(item, domain);
             if (isNullOrEmpty(itemSrc)){
                 LOGGER.warn("item parse result is null or empty,[{}]", item);
