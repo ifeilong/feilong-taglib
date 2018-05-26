@@ -88,6 +88,22 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
 
     //---------------------------------------------------------------
 
+    /**
+     * 加工后的版本号(not input param).
+     * 
+     * 
+     * 
+     * @since 1.11.1
+     */
+    private String              rebuildVersion;
+
+    /**
+     * 加工后的域名(not input param).
+     * 
+     * @since 1.11.1
+     */
+    private String              rebuildDomain;
+
     /*
      * (non-Javadoc)
      * 
@@ -104,13 +120,13 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
         }
 
         //---------------------------------------------------------------
-        HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(//
-                        bodyContentSrc,
-                        type,
-                        DomainRebuilder.rebuild(domain, request),
-                        root,
-                        VersionRebuilder.rebuild(version, this.pageContext),
-                        httpConcatSupport);
+        //重新赋值, 便于buildCacheTagKey 使用cache
+        //注意 自定义标签是单例的, 不能直接使用domain来重新赋值
+        rebuildDomain = DomainRebuilder.rebuild(domain, request);
+        rebuildVersion = VersionRebuilder.rebuild(version, this.pageContext);
+
+        HttpConcatParam httpConcatParam = HttpConcatParamBuilder
+                        .build(bodyContentSrc, type, rebuildDomain, root, rebuildVersion, httpConcatSupport);
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
 
@@ -122,7 +138,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
      */
     @Override
     public String buildCacheTagKey(){
-        return StringUtils.join(type, domain, root, version, httpConcatSupport, bodyContent.getString());
+        return StringUtils.join(type, rebuildDomain, root, rebuildVersion, httpConcatSupport, bodyContent.getString());
     }
 
     //---------------------------------------------------------------

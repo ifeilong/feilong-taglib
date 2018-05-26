@@ -135,7 +135,7 @@ public class VersionRebuilder{
             return EMPTY;
         }
         //---------------------------------------------------------------
-        LOGGER.warn("find versionValue:[{}],nameInScope:[{}], searchScope:[{}]", versionValue, versionNameInScope, versionSearchScope);
+        LOGGER.debug("in Scope:[{}] find name:[{}],versionValue:[{}]", versionSearchScope, versionNameInScope, versionValue);
         return versionValue;
     }
 }
