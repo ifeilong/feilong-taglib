@@ -92,6 +92,17 @@ public class HttpConcatGlobalConfig{
      * @since 1.11.1
      */
     private String  versionEncode;
+
+    /**
+     * 当version 值是指定value的时候, 每次自动变.
+     * 
+     * <p>
+     * httpconcat.version.autoRefresh.value
+     * </p>
+     * 
+     * @since 1.11.1
+     */
+    private String  versionAutoRefreshValue;
     //---------------------------------------------------------------
 
     /**
@@ -336,5 +347,34 @@ public class HttpConcatGlobalConfig{
      */
     public void setDomain(String domain){
         this.domain = domain;
+    }
+
+    /**
+     * 当version 值是指定value的时候, 每次自动变.
+     * 
+     * <p>
+     * httpconcat.version.autoRefresh.value
+     * </p>
+     *
+     * @return the versionAutoRefreshValue
+     * @since 1.11.1
+     */
+    public String getVersionAutoRefreshValue(){
+        return versionAutoRefreshValue;
+    }
+
+    /**
+     * 当version 值是指定value的时候, 每次自动变.
+     * 
+     * <p>
+     * httpconcat.version.autoRefresh.value
+     * </p>
+     *
+     * @param versionAutoRefreshValue
+     *            the versionAutoRefreshValue to set
+     * @since 1.11.1
+     */
+    public void setVersionAutoRefreshValue(String versionAutoRefreshValue){
+        this.versionAutoRefreshValue = versionAutoRefreshValue;
     }
 }

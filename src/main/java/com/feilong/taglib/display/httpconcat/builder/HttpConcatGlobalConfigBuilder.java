@@ -84,6 +84,7 @@ public final class HttpConcatGlobalConfigBuilder{
         httpConcatGlobalConfig.setVersionEncode(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.encode"));
         httpConcatGlobalConfig.setVersionNameInScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.nameInScope"));
         httpConcatGlobalConfig.setVersionSearchScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.search.scope"));
+        httpConcatGlobalConfig.setVersionAutoRefreshValue(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.autoRefresh.value"));
 
         httpConcatGlobalConfig.setDomain(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.domain"));
 
