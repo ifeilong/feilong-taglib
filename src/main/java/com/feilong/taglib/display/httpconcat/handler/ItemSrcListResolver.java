@@ -53,18 +53,14 @@ public final class ItemSrcListResolver{
      *
      * @param blockContent
      *            内容,目前 以 \n 分隔
-     * @param type
-     *            the type
      * @param domain
      *            the domain
      * @return 如果 <code>blockContent</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>blockContent</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>type</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>type</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.11.1 remove type param
      */
-    public static List<String> resolve(String blockContent,String type,String domain){
+    public static List<String> resolve(String blockContent,String domain){
         Validate.notBlank(blockContent, "blockContent can't be blank!");
-        Validate.notBlank(type, "type can't be blank!");
 
         //---------------------------------------------------------------
         String[] items = StringUtil.split(blockContent.trim(), LF);
@@ -79,13 +75,13 @@ public final class ItemSrcListResolver{
             }
 
             //---------------------------------------------------------------
-            String src = ItemSrcExtractor.extract(item, type, domain);
-            if (isNullOrEmpty(src)){
+            String itemSrc = ItemSrcExtractor.extract(item, domain);
+            if (isNullOrEmpty(itemSrc)){
                 LOGGER.warn("item parse result is null or empty,[{}]", item);
                 continue;
             }
 
-            list.add(src);
+            list.add(itemSrc);
         }
         return rework(blockContent, list);
     }
@@ -107,24 +103,21 @@ public final class ItemSrcListResolver{
      */
     private static List<String> rework(String blockContent,List<String> itemSrcList){
         // 去重,元素不重复
-        List<String> noRepeatitemList = removeDuplicate(itemSrcList);
+        List<String> noRepeatItemList = removeDuplicate(itemSrcList);
 
         //---------------------------------------------------------------
-        if (isNullOrEmpty(noRepeatitemList)){
+        if (isNullOrEmpty(noRepeatItemList)){
             LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
             return null;
         }
 
         //---------------------------------------------------------------
-        int noRepeatitemListSize = noRepeatitemList.size();
+        int noRepeatitemListSize = noRepeatItemList.size();
         int itemSrcListSize = itemSrcList.size();
 
-        if (noRepeatitemListSize != itemSrcListSize){
-            if (LOGGER.isWarnEnabled()){
-                String pattern = "noRepeatitemList.size():[{}] != itemSrcList.size():[{}],blockContent:{}";
-                LOGGER.warn(pattern, noRepeatitemListSize, itemSrcListSize, blockContent);
-            }
+        if (noRepeatitemListSize != itemSrcListSize && LOGGER.isWarnEnabled()){
+            LOGGER.warn("noRepeatList.size:[{}]!= srcList.size:[{}],blockContent:{}", noRepeatitemListSize, itemSrcListSize, blockContent);
         }
-        return noRepeatitemList;
+        return noRepeatItemList;
     }
 }

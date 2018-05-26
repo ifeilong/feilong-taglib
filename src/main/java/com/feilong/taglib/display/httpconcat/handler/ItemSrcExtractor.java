@@ -22,7 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.util.RegexUtil;
-import com.feilong.taglib.display.httpconcat.builder.TemplateFactory;
 
 /**
  * 路径提取器.
@@ -46,8 +45,8 @@ public class ItemSrcExtractor{
      * 
      * <ul>
      * <li><code>item</code> 不能是 blank</li>
-     * <li>如果 <code>type</code> 是css, 且以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
-     * <li>如果 <code>type</code> 是js, 且以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
+     * <li>如果 <code>item</code> 以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
+     * <li>如果 <code>item</code> 以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
      * <li>如果都不是,那么直接 trim <code>item</code> 并返回</li>
      * </ul>
      * 
@@ -58,7 +57,6 @@ public class ItemSrcExtractor{
      * <pre class="code">
      * 
      * item     =   {@code <script type="text/javascript" src="scripts/pdp/sub_salesProperties.js?2015"></script>}
-     * type     =   js,
      * domain   =   http://css.feilong.com:8888
      * 
      * </pre>
@@ -80,7 +78,6 @@ public class ItemSrcExtractor{
      * 
      * item     =   {@code <link rel="stylesheet" href="http://css.feilong.com:8888/res/feilong/css/feilong-all.css?version=12345666" type=
     "text/css"></link>}
-     * type     =   css,
      * domain   =   http://css.feilong.com:8888/
      * 
      * </pre>
@@ -95,30 +92,26 @@ public class ItemSrcExtractor{
      *
      * @param item
      *            the item
-     * @param type
-     *            类型,css还是js
      * @param domain
      *            the domain
      * @return 如果 <code>item</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>item</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>type</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>type</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.11.1 remove type param
      */
-    static String extract(String item,String type,String domain){
+    static String extract(String item,String domain){
         Validate.notBlank(item, "item can't be blank!");
-        Validate.notBlank(type, "type can't be blank!");
 
         //---------------------------------------------------------------
         String workItem = item.trim();
 
         //如果以 <link 开头
-        if (TemplateFactory.TYPE_CSS.equalsIgnoreCase(type) && workItem.startsWith("<link ")){
+        if (workItem.startsWith("<link ")){
             return pickUp(workItem, ".*?href=\"(.*?)\".*?", domain);
         }
 
         //---------------------------------------------------------------
         //如果以 <script 开头
-        if (TemplateFactory.TYPE_JS.equalsIgnoreCase(type) && workItem.startsWith("<script ")){
+        if (workItem.startsWith("<script ")){
             return pickUp(workItem, ".*?src=\"(.*?)\".*?", domain);
         }
 

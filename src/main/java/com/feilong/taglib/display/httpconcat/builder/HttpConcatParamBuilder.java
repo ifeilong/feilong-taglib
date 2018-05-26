@@ -15,9 +15,12 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
+import java.util.List;
+
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
+import com.feilong.taglib.display.httpconcat.handler.TypeFormatter;
 
 /**
  * {@link HttpConcatParam} 构造器.
@@ -32,6 +35,30 @@ public final class HttpConcatParamBuilder{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 标准化 httpConcatParam,比如标准化domain等等.
+     * 
+     * @param itemSrcList
+     *            the item src list
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the http concat param
+     */
+    public static HttpConcatParam standardHttpConcatParam(List<String> itemSrcList,HttpConcatParam httpConcatParam){
+        HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
+
+        standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
+        standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
+        standardHttpConcatParam.setType(TypeFormatter.format(httpConcatParam.getType(), itemSrcList));
+        standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
+
+        standardHttpConcatParam.setContent(httpConcatParam.getContent());
+        standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
+        return standardHttpConcatParam;
     }
 
     //---------------------------------------------------------------
@@ -63,25 +90,5 @@ public final class HttpConcatParamBuilder{
         httpConcatParam.setContent(blockContent.trim());
         httpConcatParam.setHttpConcatSupport(httpConcatSupport);
         return httpConcatParam;
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 标准化 httpConcatParam,比如list去重,标准化domain等等.
-     * 
-     * @param httpConcatParam
-     *            the http concat param
-     * @return the http concat param
-     */
-    public static HttpConcatParam standardHttpConcatParam(HttpConcatParam httpConcatParam){
-        HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
-        standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
-        standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
-        standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
-        standardHttpConcatParam.setType(httpConcatParam.getType());
-        standardHttpConcatParam.setVersion(httpConcatParam.getVersion());
-        standardHttpConcatParam.setContent(httpConcatParam.getContent());
-        return standardHttpConcatParam;
     }
 }

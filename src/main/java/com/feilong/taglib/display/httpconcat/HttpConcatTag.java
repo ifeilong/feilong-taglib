@@ -81,7 +81,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     /** 域名,如果没有设置,将自动使用 {@link HttpServletRequest#getContextPath()}. */
     private String              domain;
 
-    /** 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量). */
+    /** 是否支持 http concat(如果设置这个参数,本次渲染将会覆盖全局变量). */
     private Boolean             httpConcatSupport = null;
 
     //---------------------------------------------------------------
@@ -101,21 +101,36 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
             return EMPTY;
         }
 
-        //-------------------type validate-------------------------------------
-        if (isNullOrEmpty(type)){
-            LOGGER.warn("type is null or empty, return empty");
-            return EMPTY;
-        }
-        //-------------------domain validate---------------------------------
-        if (isNullOrEmpty(domain)){
-            domain = getHttpServletRequest().getContextPath();
-            LOGGER.debug("domain is null or empty, will use request contextPath:[{}]", domain);
-        }
-
         //---------------------------------------------------------------
-
-        HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(bodyContentSrc, type, domain, root, version, httpConcatSupport);
+        HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(//
+                        bodyContentSrc,
+                        type,
+                        rebuildDomain(domain, getHttpServletRequest()),
+                        root,
+                        version,
+                        httpConcatSupport);
         return HttpConcatUtil.getWriteContent(httpConcatParam);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 如果domain 是null或者 empty 那么会使用 {@link javax.servlet.http.HttpServletRequest#getContextPath()}.
+     *
+     * @param domain
+     *            the domain
+     * @param request
+     *            the request
+     * @return the string
+     * @since 1.11.1
+     */
+    private static String rebuildDomain(String domain,HttpServletRequest request){
+        if (isNullOrEmpty(domain)){
+            String contextPath = request.getContextPath();
+            LOGGER.debug("domain is null or empty, will use request contextPath:[{}]", contextPath);
+            return contextPath;
+        }
+        return domain;
     }
 
     //---------------------------------------------------------------
@@ -128,6 +143,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     public String buildCacheTagKey(){
         return StringUtils.join(type, domain, root, version, httpConcatSupport, bodyContent.getString());
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
@@ -184,7 +201,7 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     }
 
     /**
-     * 设置 是否支持 http concat(如果设置这个参数,本次渲染,将会覆盖全局变量).
+     * 设置 是否支持 http concat(如果设置这个参数,本次渲染将会覆盖全局变量).
      *
      * @param httpConcatSupport
      *            the httpConcatSupport to set

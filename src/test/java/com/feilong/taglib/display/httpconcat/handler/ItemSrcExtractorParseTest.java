@@ -21,34 +21,17 @@ public class ItemSrcExtractorParseTest{
 
     @Test(expected = NullPointerException.class)
     public void testItemSrcListResolverTestItemNull(){
-        ItemSrcExtractor.extract(null, "js", "");
+        ItemSrcExtractor.extract(null, "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestItemEmpty(){
-        ItemSrcExtractor.extract("", "js", "");
+        ItemSrcExtractor.extract("", "");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testItemSrcListResolverTestItemBlank(){
-        ItemSrcExtractor.extract(" ", "js", "");
-    }
-
-    //---------------------------------------------------------------
-
-    @Test(expected = NullPointerException.class)
-    public void testItemSrcListResolverTestTypeNull(){
-        ItemSrcExtractor.extract("feilong.js", null, "");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testItemSrcListResolverTestTypeEmpty(){
-        ItemSrcExtractor.extract("feilong.js", "", "");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testItemSrcListResolverTestTypeBlank(){
-        ItemSrcExtractor.extract("feilong.js", " ", "");
+        ItemSrcExtractor.extract(" ", "");
     }
 
 }

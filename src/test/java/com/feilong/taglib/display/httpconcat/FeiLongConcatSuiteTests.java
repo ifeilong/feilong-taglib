@@ -24,12 +24,15 @@ import com.feilong.taglib.display.httpconcat.handler.DomainFormatterParameterize
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParameterizedTest;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParseTest;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatterParameterizedTest;
+import com.feilong.taglib.display.httpconcat.handler.TypeFormatterTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
                 RootFormatterParameterizedTest.class,
                 DomainFormatterParameterizedTest.class,
+
+                TypeFormatterTest.class,
 
                 HttpConcatParamEqualsTest.class,
 

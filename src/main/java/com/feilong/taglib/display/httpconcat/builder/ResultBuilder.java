@@ -30,18 +30,19 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 
 /**
- * 内容构造器.
+ * 结果构造器.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.4
+ * @since 1.11.1 rename
  */
-public class ContentBuilder{
+public class ResultBuilder{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ContentBuilder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResultBuilder.class);
 
     /** Don't let anyone instantiate this class. */
-    private ContentBuilder(){
+    private ResultBuilder(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
@@ -55,25 +56,23 @@ public class ContentBuilder{
      * @param itemSrcList
      *            the item src list
      * @param httpConcatParam
-     *            the http concat param
+     *            封装解析http concat 用到的参数.
      * @param httpConcatGlobalConfig
-     *            the http concat global config
+     *            http concat 全局配置.
      *
      * @return the string
      * @since 1.4.1
+     * @since 1.11.1 rename
      */
-    public static String buildContent(
-                    List<String> itemSrcList,
-                    HttpConcatParam httpConcatParam,
-                    HttpConcatGlobalConfig httpConcatGlobalConfig){
+    public static String build(List<String> itemSrcList,HttpConcatParam httpConcatParam,HttpConcatGlobalConfig httpConcatGlobalConfig){
         // 下面的解析均基于standardHttpConcatParam来操作,httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder.standardHttpConcatParam(httpConcatParam);
+        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder.standardHttpConcatParam(itemSrcList, httpConcatParam);
 
         //---------------------------------------------------------------
         boolean concatSupport = concatSupport(httpConcatParam, httpConcatGlobalConfig);
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(
-                            "after standard HttpConcatParam info:[{}],itemSrcList info:[{}],concatSupport:[{}]",
+                            "after standard info:[{}],itemSrcList:[{}],concatSupport:[{}]",
                             JsonUtil.format(standardHttpConcatParam),
                             JsonUtil.format(itemSrcList),
                             concatSupport);

@@ -16,45 +16,34 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
-import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE_CSS;
-import static com.feilong.taglib.display.httpconcat.builder.TemplateFactory.TYPE_JS;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractThreeParamsAndOneResultParameterizedTest;
+import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
 
-public class ItemSrcExtractorParameterizedTest extends AbstractThreeParamsAndOneResultParameterizedTest<String, String, String, String>{
+public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, String, String>{
 
-    /**
-     * Data.
-     *
-     * @return the iterable
-     */
-    @Parameters(name = "index:{index}: ItemSrcListResolver.build({0},{1})={2}")
+    @Parameters(name = "index:{index}: ItemSrcExtractor.extract({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
                                               {
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
-                                                TYPE_CSS,
                                                 "http://css.feilong.com:8888/",
                                                 "res/feilong/css/feilong-all.css" },
                                               {
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888//res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
-                                                TYPE_CSS,
                                                 "http://css.feilong.com:8888//",
                                                 "res/feilong/css/feilong-all.css" },
 
                                               {
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css?version=12345666\" type=\"text/css\"></link>",
-                                                TYPE_CSS,
                                                 "http://css.feilong.com:8888/",
                                                 "res/feilong/css/feilong-all.css" },
 
                                               {
                                                 "<link rel=\"stylesheet\" href=\"res/feilong/css/feilong-all.css?version=12345666\" type=\"text/css\"></link>",
-                                                TYPE_CSS,
                                                 "http://css.feilong.com:8888/",
                                                 "res/feilong/css/feilong-all.css" },
 
@@ -62,13 +51,11 @@ public class ItemSrcExtractorParameterizedTest extends AbstractThreeParamsAndOne
 
                                               {
                                                 "<script type=\"text/javascript\" src=\"scripts/pdp/sub_salesProperties.js?2015\"></script>",
-                                                TYPE_JS,
                                                 "http://css.feilong.com:8888/",
                                                 "scripts/pdp/sub_salesProperties.js" },
 
                                               {
                                                 "<script type=\"text/javascript\" src=\"http://css.feilong.com:8888/scripts/pdp/sub_salesProperties.js?2015\"></script>",
-                                                TYPE_JS,
                                                 "http://css.feilong.com:8888/",
                                                 "scripts/pdp/sub_salesProperties.js" },
                 //
@@ -85,7 +72,7 @@ public class ItemSrcExtractorParameterizedTest extends AbstractThreeParamsAndOne
 
     @Test
     public void testBuild(){
-        assertEquals(expectedValue, ItemSrcExtractor.extract(input1, input2, input3));
+        assertEquals(expectedValue, ItemSrcExtractor.extract(input1, input2));
     }
 
 }

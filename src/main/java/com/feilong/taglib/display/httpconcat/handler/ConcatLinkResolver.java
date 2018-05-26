@@ -85,6 +85,8 @@ public final class ConcatLinkResolver{
         return resolver(itemSrc, httpConcatParam);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * Resolver.
      *
@@ -123,7 +125,7 @@ public final class ConcatLinkResolver{
             sb.append("?");
             sb.append(version);
         }else{
-            LOGGER.debug("the param version isNullOrEmpty,we suggest you should set version value");
+            LOGGER.warn("HttpConcatParam version isNullOrEmpty,suggest you should set version value");
         }
     }
 }
