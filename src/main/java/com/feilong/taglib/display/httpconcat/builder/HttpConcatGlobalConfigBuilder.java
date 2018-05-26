@@ -35,29 +35,10 @@ public final class HttpConcatGlobalConfigBuilder{
 
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
-    private static final String         CONFIG_FILE                  = "config/httpconcat";
+    private static final String         CONFIG_FILE               = "config/httpconcat";
 
     /** The Constant HTTPCONCAT_RESOURCEBUNDLE. */
-    private static final ResourceBundle HTTPCONCAT_RESOURCEBUNDLE    = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
-
-    /** <code>{@value}</code>. */
-    private static final String         KEY_HTTPCONCAT_SUPPORT       = "httpconcat.support";
-
-    //---------------------------------------------------------------
-
-    /** <code>{@value}</code>. */
-    private static final String         KEY_TEMPLATE_CSS             = "httpconcat.template.css";
-
-    /** <code>{@value}</code>. */
-    private static final String         KEY_TEMPLATE_JS              = "httpconcat.template.js";
-
-    /** <code>{@value}</code>. */
-    private static final String         KEY_DEFAULT_CACHE_ENABLE     = "httpconcat.defaultCacheEnable";
-
-    /** <code>{@value}</code>. */
-    private static final String         KEY_DEFAULT_CACHE_SIZE_LIMIT = "httpconcat.defaultCacheSizeLimit";
-
-    //---------------------------------------------------------------
+    private static final ResourceBundle HTTPCONCAT_RESOURCEBUNDLE = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatGlobalConfigBuilder(){
@@ -77,12 +58,16 @@ public final class HttpConcatGlobalConfigBuilder{
     public static HttpConcatGlobalConfig build(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
-        httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue(KEY_HTTPCONCAT_SUPPORT, Boolean.class));
-        httpConcatGlobalConfig.setTemplateCss(getRequiredValue(KEY_TEMPLATE_CSS, String.class));
-        httpConcatGlobalConfig.setTemplateJs(getRequiredValue(KEY_TEMPLATE_JS, String.class));
+        httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue("httpconcat.support", Boolean.class));
+        httpConcatGlobalConfig.setTemplateCss(getRequiredValue("httpconcat.template.css", String.class));
+        httpConcatGlobalConfig.setTemplateJs(getRequiredValue("httpconcat.template.js", String.class));
 
-        httpConcatGlobalConfig.setDefaultCacheEnable(getRequiredValue(KEY_DEFAULT_CACHE_ENABLE, Boolean.class));
-        httpConcatGlobalConfig.setDefaultCacheSizeLimit(getRequiredValue(KEY_DEFAULT_CACHE_SIZE_LIMIT, Integer.class));
+        httpConcatGlobalConfig.setDefaultCacheEnable(getRequiredValue("httpconcat.defaultCacheEnable", Boolean.class));
+        httpConcatGlobalConfig.setDefaultCacheSizeLimit(getRequiredValue("httpconcat.defaultCacheSizeLimit", Integer.class));
+
+        httpConcatGlobalConfig.setVersionEncode(getRequiredValue("httpconcat.version.encode", String.class));
+        httpConcatGlobalConfig.setVersionNameInScope(getRequiredValue("httpconcat.version.nameInScope", String.class));
+        httpConcatGlobalConfig.setVersionSearchScope(getRequiredValue("httpconcat.version.search.scope", String.class));
 
         return httpConcatGlobalConfig;
     }

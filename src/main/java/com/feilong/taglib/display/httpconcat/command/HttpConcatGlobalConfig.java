@@ -55,6 +55,46 @@ public class HttpConcatGlobalConfig{
     //---------------------------------------------------------------
 
     /**
+     * 
+     * httpconcat version 作用域里面变量名字.
+     * 
+     * <p>
+     * 
+     * // # 如果没有配置或者是空,那么不会去作用域中查找<br>
+     * // httpconcat.version.nameInScope=httpconcatVersion
+     * </p>
+     * 
+     * @since 1.11.1
+     */
+    private String  versionNameInScope;
+
+    /**
+     * version 名字在哪个作用域.
+     * 
+     * <p>
+     * // # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
+     * // httpconcat.version.search.scope=
+     * </p>
+     * 
+     * @since 1.11.1
+     */
+    private String  versionSearchScope;
+
+    /**
+     * version值的加密格式,值可以是 md5 或者sha1 (忽视大小写).
+     * 
+     * <p>
+     * # 如果没有配置, 那么显示原样内容<br>
+     * # 如果需要这个功能, 需要依赖 feilong-security jar<br>
+     * httpconcat.version.encode=
+     * </p>
+     * 
+     * @since 1.11.1
+     */
+    private String  versionEncode;
+    //---------------------------------------------------------------
+
+    /**
      * 获得 the template css.
      *
      * @return the templateCss
@@ -167,5 +207,104 @@ public class HttpConcatGlobalConfig{
      */
     public void setDefaultCacheSizeLimit(int defaultCacheSizeLimit){
         this.defaultCacheSizeLimit = defaultCacheSizeLimit;
+    }
+
+    /**
+     * 
+     * httpconcat version 作用域里面变量名字.
+     * 
+     * <p>
+     * 
+     * // # 如果没有配置或者是空,那么不会去作用域中查找<br>
+     * // httpconcat.version.nameInScope=httpconcatVersion
+     * </p>
+     * 
+     * @return the versionNameInScope
+     * @since 1.11.1
+     */
+    public String getVersionNameInScope(){
+        return versionNameInScope;
+    }
+
+    /**
+     * 
+     * httpconcat version 作用域里面变量名字.
+     * 
+     * <p>
+     * 
+     * // # 如果没有配置或者是空,那么不会去作用域中查找<br>
+     * // httpconcat.version.nameInScope=httpconcatVersion
+     * </p>
+     * 
+     * @param versionNameInScope
+     *            the versionNameInScope to set
+     * @since 1.11.1
+     */
+    public void setVersionNameInScope(String versionNameInScope){
+        this.versionNameInScope = versionNameInScope;
+    }
+
+    /**
+     * version 名字在哪个作用域.
+     * 
+     * <p>
+     * // # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
+     * // httpconcat.version.search.scope=
+     * </p>
+     * 
+     * @return the versionSearchScope
+     * @since 1.11.1
+     */
+    public String getVersionSearchScope(){
+        return versionSearchScope;
+    }
+
+    /**
+     * version 名字在哪个作用域.
+     * 
+     * <p>
+     * // # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
+     * // httpconcat.version.search.scope=
+     * </p>
+     * 
+     * @param versionSearchScope
+     *            the versionSearchScope to set
+     * @since 1.11.1
+     */
+    public void setVersionSearchScope(String versionSearchScope){
+        this.versionSearchScope = versionSearchScope;
+    }
+
+    /**
+     * version值的加密格式,值可以是 md5 或者sha1 (忽视大小写).
+     * 
+     * <p>
+     * # 如果没有配置, 那么显示原样内容<br>
+     * # 如果需要这个功能, 需要依赖 feilong-security jar<br>
+     * httpconcat.version.encode=
+     * </p>
+     * 
+     * @return the versionEncode
+     * @since 1.11.1
+     */
+    public String getVersionEncode(){
+        return versionEncode;
+    }
+
+    /**
+     * version值的加密格式,值可以是 md5 或者sha1 (忽视大小写).
+     * 
+     * <p>
+     * # 如果没有配置, 那么显示原样内容<br>
+     * # 如果需要这个功能, 需要依赖 feilong-security jar<br>
+     * httpconcat.version.encode=
+     * </p>
+     * 
+     * @param versionEncode
+     *            the versionEncode to set
+     * @since 1.11.1
+     */
+    public void setVersionEncode(String versionEncode){
+        this.versionEncode = versionEncode;
     }
 }

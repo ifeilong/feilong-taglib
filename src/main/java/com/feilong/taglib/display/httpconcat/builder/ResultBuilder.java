@@ -66,7 +66,8 @@ public class ResultBuilder{
      */
     public static String build(List<String> itemSrcList,HttpConcatParam httpConcatParam,HttpConcatGlobalConfig httpConcatGlobalConfig){
         // 下面的解析均基于standardHttpConcatParam来操作,httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder.standardHttpConcatParam(itemSrcList, httpConcatParam);
+        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder
+                        .standardHttpConcatParam(itemSrcList, httpConcatParam, httpConcatGlobalConfig);
 
         //---------------------------------------------------------------
         boolean concatSupport = concatSupport(httpConcatParam, httpConcatGlobalConfig);
