@@ -171,9 +171,11 @@
 		<tag-class>com.feilong.taglib.display.httpconcat.HttpConcatTag</tag-class>
 		<description>http concat功能</description>
 		<body-content>JSP</body-content>
+		
 		<attribute>
 			<name>type</name>
-			<required>true</required>
+			<!-- since 1.11.1 no required -->
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<description>
 				<![CDATA[ 类型css/js ]]>
