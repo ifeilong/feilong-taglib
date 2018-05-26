@@ -85,6 +85,8 @@ public final class HttpConcatGlobalConfigBuilder{
         httpConcatGlobalConfig.setVersionNameInScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.nameInScope"));
         httpConcatGlobalConfig.setVersionSearchScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.search.scope"));
 
+        httpConcatGlobalConfig.setDomain(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.domain"));
+
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("init http concat config:[{}]", JsonUtil.format(httpConcatGlobalConfig));
         }

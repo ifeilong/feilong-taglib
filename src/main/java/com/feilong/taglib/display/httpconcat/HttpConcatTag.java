@@ -129,12 +129,21 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
      * @since 1.11.1
      */
     private static String rebuildDomain(String domain,HttpServletRequest request){
-        if (isNullOrEmpty(domain)){
+        //如果不是空, 那么返回 设置的domain
+        if (isNotNullOrEmpty(domain)){
+            return domain;
+        }
+
+        //---------------------------------------------------------------
+        String globalDomain = GLOBAL_CONFIG.getDomain();
+        if (isNullOrEmpty(globalDomain)){
             String contextPath = request.getContextPath();
-            LOGGER.debug("domain is null or empty, will use request contextPath:[{}]", contextPath);
+            LOGGER.debug("domain is null or empty, use request contextPath:[{}]", contextPath);
             return contextPath;
         }
-        return domain;
+
+        LOGGER.trace("domain is null or empty, use globalDomain:[{}]", globalDomain);
+        return globalDomain;
     }
 
     //---------------------------------------------------------------

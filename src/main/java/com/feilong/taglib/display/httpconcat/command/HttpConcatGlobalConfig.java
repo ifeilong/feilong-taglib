@@ -95,6 +95,15 @@ public class HttpConcatGlobalConfig{
     //---------------------------------------------------------------
 
     /**
+     * 全局的域名.
+     * 
+     * @since 1.11.1
+     */
+    private String  domain;
+
+    //---------------------------------------------------------------
+
+    /**
      * 获得 the template css.
      *
      * @return the templateCss
@@ -306,5 +315,26 @@ public class HttpConcatGlobalConfig{
      */
     public void setVersionEncode(String versionEncode){
         this.versionEncode = versionEncode;
+    }
+
+    /**
+     * 获得 全局的域名.
+     *
+     * @return the domain
+     * @since 1.11.1
+     */
+    public String getDomain(){
+        return domain;
+    }
+
+    /**
+     * 设置 全局的域名.
+     *
+     * @param domain
+     *            the domain to set
+     * @since 1.11.1
+     */
+    public void setDomain(String domain){
+        this.domain = domain;
     }
 }
