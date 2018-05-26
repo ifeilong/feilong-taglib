@@ -15,10 +15,13 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.AbstractEndWriteContentTag;
 import com.feilong.taglib.CacheTag;
+import com.feilong.taglib.TagUtils;
 import com.feilong.taglib.display.httpconcat.builder.HttpConcatParamBuilder;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
@@ -105,9 +109,9 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
         HttpConcatParam httpConcatParam = HttpConcatParamBuilder.build(//
                         bodyContentSrc,
                         type,
-                        rebuildDomain(domain, getHttpServletRequest()),
+                        rebuildDomain(domain, request),
                         root,
-                        version,
+                        rebuildVersion(version, this.pageContext),
                         httpConcatSupport);
         return HttpConcatUtil.getWriteContent(httpConcatParam);
     }
@@ -131,6 +135,57 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
             return contextPath;
         }
         return domain;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Rebuild version.
+     *
+     * @param version
+     *            the version
+     * @param pageContext
+     *            the page context
+     * @return the string
+     */
+    private static String rebuildVersion(String version,PageContext pageContext){
+        //不是空 那么直接返回
+        if (isNotNullOrEmpty(version)){
+            return version;
+        }
+
+        //---------------------------------------------------------------
+        //没有指定名字,直接返回
+        String versionNameInScope = GLOBAL_CONFIG.getVersionNameInScope();
+        if (isNullOrEmpty(versionNameInScope)){
+            LOGGER.debug("version is null or empty, but can not find versionNameInScope in GLOBAL_CONFIG");
+            return EMPTY;
+        }
+
+        //---------------------------------------------------------------
+        String versionSearchScope = GLOBAL_CONFIG.getVersionSearchScope();
+
+        String versionValue = "";
+        //没有指定scope 那么从pageContext中查找
+        if (isNullOrEmpty(versionSearchScope)){
+            versionValue = (String) pageContext.findAttribute(versionNameInScope);
+        }else{
+            //如果指定了, 那么从指定的scope中获取
+            versionValue = (String) pageContext.getAttribute(versionNameInScope, TagUtils.getScope(versionSearchScope));
+        }
+
+        //---------------------------------------------------------------
+        //如果找不到值, 那么返回 empty
+        if (isNullOrEmpty(versionValue)){
+            LOGGER.warn(
+                            "in GLOBAL_CONFIG,versionNameInScope:[{}] searchScope:[{}],but can't get value",
+                            versionNameInScope,
+                            versionSearchScope);
+            return EMPTY;
+        }
+        //---------------------------------------------------------------
+        LOGGER.warn("find versionValue:[{}],nameInScope:[{}], searchScope:[{}]", versionValue, versionNameInScope, versionSearchScope);
+        return versionValue;
     }
 
     //---------------------------------------------------------------

@@ -17,6 +17,7 @@ package com.feilong.taglib.display.httpconcat;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.MapUtil.newConcurrentHashMap;
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.util.List;
@@ -29,9 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.ResourceBundleUtil;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder;
 import com.feilong.taglib.display.httpconcat.builder.ResultBuilder;
-import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
 
@@ -42,8 +41,7 @@ import com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver;
  * <blockquote>
  * <ol>
  * <li>你可以访问 wiki 查看更多 <a href="https://github.com/venusdrogon/feilong-taglib/wiki/feilongDisplay-concat">feilongDisplay-concat</a></li>
- * <li>类加载的时候,会使用 {@link ResourceBundleUtil} 来读取<code> config/httpconcat </code> 配置文件中的
- * {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_CSS} css模板 以及 {@link HttpConcatGlobalConfigBuilder#KEY_TEMPLATE_JS} JS模板<br>
+ * <li>类加载的时候,会使用 {@link ResourceBundleUtil} 来读取<code> config/httpconcat </code> 配置文件中的 css模板 以及 JS模板<br>
  * </li>
  * <li>请确保文件路径中有配置文件,以及正确的key,如果获取不到,会 throw {@link IllegalArgumentException}</li>
  * </ol>
@@ -62,9 +60,6 @@ public final class HttpConcatUtil{
     /** The Constant LOGGER. */
     private static final Logger                       LOGGER = LoggerFactory.getLogger(HttpConcatUtil.class);
 
-    /** http concat 全局配置. */
-    private static final HttpConcatGlobalConfig       HTTP_CONCAT_GLOBAL_CONFIG;
-
     //---------------------------------------------------------------
 
     /**
@@ -78,16 +73,6 @@ public final class HttpConcatUtil{
      * @since 1.0.7
      */
     private static final Map<HttpConcatParam, String> CACHE  = newConcurrentHashMap(500);
-
-    //---------------------------------------------------------------
-
-    static{
-        HTTP_CONCAT_GLOBAL_CONFIG = HttpConcatGlobalConfigBuilder.build();
-
-        if (LOGGER.isInfoEnabled()){
-            LOGGER.info("init http concat config:[{}]", JsonUtil.format(HTTP_CONCAT_GLOBAL_CONFIG));
-        }
-    }
 
     //---------------------------------------------------------------
 
@@ -121,9 +106,7 @@ public final class HttpConcatUtil{
 
         //---------------------------------------------------------------
         //是否使用cache
-        Boolean cacheEnable = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable();
-
-        //缓存
+        Boolean cacheEnable = GLOBAL_CONFIG.getDefaultCacheEnable();
         if (cacheEnable){
             int cacheSize = CACHE.size();
             int cacheKeyHashCode = httpConcatParam.hashCode();
@@ -145,7 +128,7 @@ public final class HttpConcatUtil{
         }
 
         //---------------------------------------------------------------
-        String content = ResultBuilder.build(itemSrcList, httpConcatParam, HTTP_CONCAT_GLOBAL_CONFIG);
+        String content = ResultBuilder.build(itemSrcList, httpConcatParam, GLOBAL_CONFIG);
 
         //---------------------------------------------------------------
         after(content, isWriteCache(cacheEnable, httpConcatParam), httpConcatParam);
@@ -176,7 +159,7 @@ public final class HttpConcatUtil{
         //---------------------------------------------------------------
 
         //超出cache 数量
-        int defaultSizeLimit = HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheSizeLimit();
+        int defaultSizeLimit = GLOBAL_CONFIG.getDefaultCacheSizeLimit();
         boolean outOfCacheItemSizeLimit = cacheSize >= defaultSizeLimit;
         if (!outOfCacheItemSizeLimit){
             return true;
@@ -216,7 +199,7 @@ public final class HttpConcatUtil{
 
         //---------------------------------------------------------------
         //不可以写cache
-        if (HTTP_CONCAT_GLOBAL_CONFIG.getDefaultCacheEnable()){
+        if (GLOBAL_CONFIG.getDefaultCacheEnable()){
             LOGGER.warn("hashcode:[{}],DEFAULT_CACHEENABLE:[true],but writeCache:[false],so httpConcat result not put to cache", hashCode);
         }
     }

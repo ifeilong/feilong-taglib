@@ -16,12 +16,16 @@
 package com.feilong.taglib.display.httpconcat.builder;
 
 import static com.feilong.core.bean.ConvertUtil.convert;
+import static com.feilong.core.util.ResourceBundleUtil.getValue;
 
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.util.ResourceBundleUtil;
+import com.feilong.json.jsonlib.JsonUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 
 /**
@@ -33,12 +37,24 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
  */
 public final class HttpConcatGlobalConfigBuilder{
 
+    /** The Constant log. */
+    private static final Logger                LOGGER                    = LoggerFactory.getLogger(HttpConcatGlobalConfigBuilder.class);
+
+    //---------------------------------------------------------------
+
     /** 配置文件 <code>{@value}</code>. */
     //XXX support different environment
-    private static final String         CONFIG_FILE               = "config/httpconcat";
+    private static final String                CONFIG_FILE               = "config/httpconcat";
 
     /** The Constant HTTPCONCAT_RESOURCEBUNDLE. */
-    private static final ResourceBundle HTTPCONCAT_RESOURCEBUNDLE = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
+    private static final ResourceBundle        HTTPCONCAT_RESOURCEBUNDLE = ResourceBundleUtil.getResourceBundle(CONFIG_FILE);
+
+    //---------------------------------------------------------------
+
+    /** Static instance. */
+    public static final HttpConcatGlobalConfig GLOBAL_CONFIG             = HttpConcatGlobalConfigBuilder.build();
+
+    //---------------------------------------------------------------
 
     /** Don't let anyone instantiate this class. */
     private HttpConcatGlobalConfigBuilder(){
@@ -55,7 +71,7 @@ public final class HttpConcatGlobalConfigBuilder{
      * @return the http concat global config
      * @since 1.11.1 rename
      */
-    public static HttpConcatGlobalConfig build(){
+    private static HttpConcatGlobalConfig build(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
         httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue("httpconcat.support", Boolean.class));
@@ -65,10 +81,13 @@ public final class HttpConcatGlobalConfigBuilder{
         httpConcatGlobalConfig.setDefaultCacheEnable(getRequiredValue("httpconcat.defaultCacheEnable", Boolean.class));
         httpConcatGlobalConfig.setDefaultCacheSizeLimit(getRequiredValue("httpconcat.defaultCacheSizeLimit", Integer.class));
 
-        httpConcatGlobalConfig.setVersionEncode(getRequiredValue("httpconcat.version.encode", String.class));
-        httpConcatGlobalConfig.setVersionNameInScope(getRequiredValue("httpconcat.version.nameInScope", String.class));
-        httpConcatGlobalConfig.setVersionSearchScope(getRequiredValue("httpconcat.version.search.scope", String.class));
+        httpConcatGlobalConfig.setVersionEncode(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.encode"));
+        httpConcatGlobalConfig.setVersionNameInScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.nameInScope"));
+        httpConcatGlobalConfig.setVersionSearchScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.search.scope"));
 
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info("init http concat config:[{}]", JsonUtil.format(httpConcatGlobalConfig));
+        }
         return httpConcatGlobalConfig;
     }
 
