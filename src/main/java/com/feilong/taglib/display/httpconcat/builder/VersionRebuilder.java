@@ -79,7 +79,11 @@ public class VersionRebuilder{
 
         //当version 值是指定value的时候,每次自动变
         if (isNotNullOrEmpty(versionAutoRefreshValue) && StringUtils.equals(versionValue, versionAutoRefreshValue)){
-            return "" + DateUtil.getTime(new Date());
+            long time = DateUtil.getTime(new Date());
+
+            String result = "" + time;
+            LOGGER.debug("versionAutoRefreshValue config:[{}],new value is:[{}]", versionAutoRefreshValue, result);
+            return result;
         }
         return versionValue;
     }
