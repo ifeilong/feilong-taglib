@@ -123,7 +123,9 @@ public final class HttpConcatUtil{
         //---------------------------------------------------------------
         List<String> itemSrcList = ItemSrcListResolver.resolve(httpConcatParam.getContent(), httpConcatParam.getDomain());
         if (isNullOrEmpty(itemSrcList)){
-            LOGGER.warn("itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty]");
+            LOGGER.warn(
+                            "itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty],httpConcatParam info:[{}]",
+                            JsonUtil.format(httpConcatParam));
             return EMPTY;
         }
 

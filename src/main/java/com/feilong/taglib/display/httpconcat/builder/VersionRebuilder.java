@@ -109,7 +109,7 @@ public class VersionRebuilder{
         //没有指定名字,直接返回
         String versionNameInScope = GLOBAL_CONFIG.getVersionNameInScope();
         if (isNullOrEmpty(versionNameInScope)){
-            LOGGER.debug("version is null or empty, but can not find versionNameInScope in GLOBAL_CONFIG");
+            LOGGER.debug("version is null or empty,and can't find versionNameInScope in GLOBAL_CONFIG,return empty!!");
             return EMPTY;
         }
 

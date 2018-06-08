@@ -71,12 +71,11 @@ public final class SimpleTagStringCacheManager{
      */
     public static Object get(String key){
         if (!CACHE_ENABLE){
-            LOGGER.info("the cache status is disable!");
+            LOGGER.info("when to get key:[{}] data from cache, but cache's status is disable!", key);
             return null;
         }
 
         //-----------------------------------------------------------------------------
-
         int size = CACHE.size();
 
         if (CACHE.containsKey(key)){
