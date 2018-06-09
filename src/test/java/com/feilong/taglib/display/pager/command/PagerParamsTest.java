@@ -15,13 +15,12 @@
  */
 package com.feilong.taglib.display.pager.command;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class PagerParamsTest.
@@ -35,9 +34,10 @@ public class PagerParamsTest{
     private static final Logger LOGGER = LoggerFactory.getLogger(PagerParamsTest.class);
 
     /**
-     * Test method for {@link com.feilong.taglib.display.pager.command.PagerParams#hashCode()}.
+     * Test hash code.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testHashCode(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
 
@@ -47,9 +47,9 @@ public class PagerParamsTest{
     }
 
     /**
-     * Test method for {@link com.feilong.taglib.display.pager.command.PagerParams#equals(java.lang.Object)}.
+     * Test equals object.
      */
-    @SuppressWarnings("cast")
+    @SuppressWarnings({ "cast", "static-method" })
     @Test
     public void testEqualsObject(){
         PagerParams pagerParams1 = new PagerParams(0, "a");
