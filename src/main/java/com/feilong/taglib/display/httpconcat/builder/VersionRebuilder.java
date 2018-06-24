@@ -32,7 +32,7 @@ import com.feilong.core.date.DateUtil;
 import com.feilong.taglib.TagUtils;
 
 /**
- * The Class VersionRebuilder.
+ * version 号再加工.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */

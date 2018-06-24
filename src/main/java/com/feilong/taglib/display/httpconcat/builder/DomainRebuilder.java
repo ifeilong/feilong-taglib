@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class DomainRebuilder.
+ * domain 再加工.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.1
