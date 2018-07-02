@@ -62,7 +62,6 @@ public final class TemplateFactory{
         }
 
         //---------------------------------------------------------------
-
-        throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support js or css");
+        throw new UnsupportedOperationException("type:[" + type + "] not support!,current time,only support [js] or [css]");
     }
 }
