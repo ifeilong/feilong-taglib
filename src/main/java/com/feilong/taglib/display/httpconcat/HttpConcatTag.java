@@ -104,6 +104,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
      */
     private String              rebuildDomain;
 
+    //---------------------------------------------------------------
+
     /*
      * (non-Javadoc)
      * 

@@ -58,6 +58,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
     /** The Constant serialVersionUID. */
     private static final long   serialVersionUID = 8215127553271356734L;
 
+    //---------------------------------------------------------------
+
     /**
      * Execute.
      */
@@ -66,11 +68,14 @@ abstract class AbstractWriteContentTag extends BaseTag{
 
         HttpServletRequest request = getHttpServletRequest();
 
+        //---------------------------------------------------------------
+
         Object writeContent = buildContentIfUseCache(request);
         if (null != writeContent){
             print(writeContent);
         }
 
+        //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             String buildExtraKeyInfoToLog = buildExtraKeyInfoToLog();
             String tagLog = isNullOrEmpty(buildExtraKeyInfoToLog) ? "" : "," + buildExtraKeyInfoToLog;
@@ -82,8 +87,11 @@ abstract class AbstractWriteContentTag extends BaseTag{
     //---------------------------------------------------------------
 
     /**
+     * Builds the content if use cache.
+     *
      * @param request
-     * @return
+     *            the request
+     * @return the object
      * @since 1.10.5
      */
     protected Object buildContentIfUseCache(HttpServletRequest request){
@@ -104,7 +112,6 @@ abstract class AbstractWriteContentTag extends BaseTag{
         //---------------------------------------------------------------
         // 开始执行的部分
         Object writeContent = this.buildContent(request);
-
         if (isCacheTag){
             if (isNotNullOrEmpty(writeContent)){
                 SimpleTagStringCacheManager.put(cacheKey, writeContent);

@@ -127,7 +127,11 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
         if (LOGGER.isErrorEnabled()){
             RequestLogSwitch requestLogSwitch = RequestLogSwitch.NORMAL_WITH_IDENTITY_INCLUDE_FORWARD;
             Map<String, Object> map = RequestUtil.getRequestInfoMapForLog(getHttpServletRequest(), requestLogSwitch);
-            LOGGER.error(Slf4jUtil.format("request info:{},tag is:[{}]", JsonUtil.format(map), getClass().getSimpleName()), e);
+
+            //---------------------------------------------------------------
+            String pattern = "request info:{},tag is:[{}],but need render page,pls check!";
+            String message = Slf4jUtil.format(pattern, JsonUtil.format(map), getClass().getSimpleName());
+            LOGGER.error(message, e);
         }
     }
 
@@ -142,6 +146,8 @@ public abstract class BaseTag extends BodyTagSupport implements TryCatchFinally{
     public void doCatch(Throwable t) throws Throwable{
         LOGGER.error("[" + getClass().getSimpleName() + "]", t);
     }
+
+    //---------------------------------------------------------------
 
     /*
      * (non-Javadoc)
