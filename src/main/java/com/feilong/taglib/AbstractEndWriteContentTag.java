@@ -17,6 +17,8 @@ package com.feilong.taglib;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * 拿到标签体中间的内容,解析之后,输出内容显示.
  *
@@ -51,6 +53,11 @@ public abstract class AbstractEndWriteContentTag extends AbstractWriteContentTag
     @Override
     public int doEndTag() throws JspException{
         try{
+            //since 1.11.5 添加校验
+            Validate.notNull(bodyContent, "EndWriteContentTag bodyContent can't be null!");
+
+            //---------------------------------------------------------------
+
             execute();
         }catch (Exception e){// 默认处理异常,让页面正常执行,但是以错误log显示
             logException(e);
