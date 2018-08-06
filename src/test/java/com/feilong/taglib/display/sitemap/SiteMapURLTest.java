@@ -87,7 +87,7 @@ public class SiteMapURLTest{
         siteMapURLList.add(null);
 
         contextKeyValues.put("siteMapURLList", siteMapURLList);
-        String aString = new VelocityUtil().parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
+        String aString = VelocityUtil.INSTANCE.parseTemplateWithClasspathResourceLoader(templateInClassPath, contextKeyValues);
         //xstre
         String filePath = SystemUtils.USER_HOME + "/feilong/sitemap.xml";
 

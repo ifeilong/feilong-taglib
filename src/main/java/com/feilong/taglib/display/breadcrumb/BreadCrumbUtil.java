@@ -73,7 +73,7 @@ public class BreadCrumbUtil{
     private static final Logger       LOGGER            = LoggerFactory.getLogger(BreadCrumbUtil.class);
 
     /** The Constant VELOCITY_UTIL. */
-    private static final VelocityUtil VELOCITY_UTIL     = new VelocityUtil();
+    private static final VelocityUtil VELOCITY_UTIL     = VelocityUtil.INSTANCE;
 
     /** The Constant VM_KEY_BREADCRUMB. */
     private static final String       VM_KEY_BREADCRUMB = "breadCrumbVMParams";
