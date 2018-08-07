@@ -51,12 +51,15 @@ public final class VersionEncodeUtil{
      * @return the string
      */
     static String encode(String version,String versionEncode){
+        //后缀
+        String suffix = VersionEncodeUtil.class.getName();
+
         if ("md5".equalsIgnoreCase(versionEncode)){
-            return MD5Util.encode(version + VersionFormatter.class.getName());
+            return MD5Util.encode(version + suffix);
         }
 
         if ("sha1".equalsIgnoreCase(versionEncode)){
-            return SHA1Util.encode(version + VersionFormatter.class.getName());
+            return SHA1Util.encode(version + suffix);
         }
 
         LOGGER.warn("versionEncode:[{}] ,not md5 and not sha1", versionEncode);
