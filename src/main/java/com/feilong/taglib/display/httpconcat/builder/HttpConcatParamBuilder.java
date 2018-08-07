@@ -17,7 +17,6 @@ package com.feilong.taglib.display.httpconcat.builder;
 
 import java.util.List;
 
-import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.DomainFormatter;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatter;
@@ -48,19 +47,16 @@ public final class HttpConcatParamBuilder{
      *            the item src list
      * @param httpConcatParam
      *            the http concat param
-     * @param httpConcatGlobalConfig
      * @return the http concat param
      */
-    public static HttpConcatParam standardHttpConcatParam(
-                    List<String> itemSrcList,
-                    HttpConcatParam httpConcatParam,
-                    HttpConcatGlobalConfig httpConcatGlobalConfig){
+    public static HttpConcatParam standardHttpConcatParam(List<String> itemSrcList,HttpConcatParam httpConcatParam){
         HttpConcatParam standardHttpConcatParam = new HttpConcatParam();
 
         standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
         standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
         standardHttpConcatParam.setType(TypeFormatter.format(httpConcatParam.getType(), itemSrcList));
-        standardHttpConcatParam.setVersion(VersionFormatter.format(httpConcatParam.getVersion(), httpConcatGlobalConfig));
+        standardHttpConcatParam
+                        .setVersion(VersionFormatter.format(httpConcatParam.getVersion()));
 
         standardHttpConcatParam.setContent(httpConcatParam.getContent());
         standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());

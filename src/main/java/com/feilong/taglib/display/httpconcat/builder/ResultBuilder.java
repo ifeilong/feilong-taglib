@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.util.List;
@@ -25,7 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.text.MessageFormatUtil;
 import com.feilong.json.jsonlib.JsonUtil;
-import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 import com.feilong.taglib.display.httpconcat.handler.ConcatLinkResolver;
 
@@ -57,20 +57,17 @@ public class ResultBuilder{
      *            the item src list
      * @param httpConcatParam
      *            封装解析http concat 用到的参数.
-     * @param httpConcatGlobalConfig
-     *            http concat 全局配置.
-     *
      * @return the string
      * @since 1.4.1
      * @since 1.11.1 rename
+     * @since 1.12.6 remove httpConcatGlobalConfig param
      */
-    public static String build(List<String> itemSrcList,HttpConcatParam httpConcatParam,HttpConcatGlobalConfig httpConcatGlobalConfig){
+    public static String build(List<String> itemSrcList,HttpConcatParam httpConcatParam){
         // 下面的解析均基于standardHttpConcatParam来操作,httpConcatParam只做入参判断,数据转换,以及cache存取
-        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder
-                        .standardHttpConcatParam(itemSrcList, httpConcatParam, httpConcatGlobalConfig);
+        HttpConcatParam standardHttpConcatParam = HttpConcatParamBuilder.standardHttpConcatParam(itemSrcList, httpConcatParam);
 
         //---------------------------------------------------------------
-        boolean concatSupport = concatSupport(httpConcatParam, httpConcatGlobalConfig);
+        boolean concatSupport = concatSupport(httpConcatParam);
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug(
                             "after standard info:[{}],itemSrcList:[{}],concatSupport:[{}]",
@@ -80,7 +77,7 @@ public class ResultBuilder{
         }
 
         //---------------------------------------------------------------
-        String template = TemplateFactory.getTemplate(httpConcatGlobalConfig, standardHttpConcatParam.getType());
+        String template = TemplateFactory.getTemplate(standardHttpConcatParam.getType());
         if (concatSupport){ // concat
             return handlerConcat(itemSrcList, template, standardHttpConcatParam);
         }
@@ -133,14 +130,12 @@ public class ResultBuilder{
      *
      * @param httpConcatParam
      *            the http concat param
-     * @param httpConcatGlobalConfig
-     *            the http concat global config
      * @return true, if successful
      * @since 1.11.1
      */
-    private static boolean concatSupport(HttpConcatParam httpConcatParam,HttpConcatGlobalConfig httpConcatGlobalConfig){
+    private static boolean concatSupport(HttpConcatParam httpConcatParam){
         return defaultIfNull(
                         httpConcatParam.getHttpConcatSupport(), //
-                        BooleanUtils.toBoolean(httpConcatGlobalConfig.getHttpConcatSupport()));
+                        BooleanUtils.toBoolean(GLOBAL_CONFIG.getHttpConcatSupport()));
     }
 }

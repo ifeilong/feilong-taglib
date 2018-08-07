@@ -15,7 +15,7 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
-import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 
 /**
  * A factory for creating Template objects.
@@ -44,21 +44,20 @@ public final class TemplateFactory{
 
     /**
      * 不同的type不同的模板.
-     *
-     * @param httpConcatGlobalConfig
-     *            the http concat global config
+     * 
      * @param type
      *            类型 {@link #TYPE_CSS} 以及{@link #TYPE_JS}
+     *
      * @return 目前仅支持 {@link #TYPE_CSS} 以及{@link #TYPE_JS},其余不支持,会抛出
      *         {@link UnsupportedOperationException}
      */
-    public static String getTemplate(HttpConcatGlobalConfig httpConcatGlobalConfig,String type){
+    public static String getTemplate(String type){
         if (TYPE_CSS.equalsIgnoreCase(type)){
-            return httpConcatGlobalConfig.getTemplateCss();
+            return GLOBAL_CONFIG.getTemplateCss();
         }
 
         if (TYPE_JS.equalsIgnoreCase(type)){
-            return httpConcatGlobalConfig.getTemplateJs();
+            return GLOBAL_CONFIG.getTemplateJs();
         }
 
         //---------------------------------------------------------------

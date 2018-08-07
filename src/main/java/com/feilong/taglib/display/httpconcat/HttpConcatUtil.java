@@ -130,7 +130,7 @@ public final class HttpConcatUtil{
         }
 
         //---------------------------------------------------------------
-        String content = ResultBuilder.build(itemSrcList, httpConcatParam, GLOBAL_CONFIG);
+        String content = ResultBuilder.build(itemSrcList, httpConcatParam);
 
         //---------------------------------------------------------------
         after(content, isWriteCache(cacheEnable, httpConcatParam), httpConcatParam);

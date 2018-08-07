@@ -16,8 +16,7 @@
 package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
-
-import com.feilong.taglib.display.httpconcat.command.HttpConcatGlobalConfig;
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 
 /**
  * version 值格式化.
@@ -42,18 +41,16 @@ public final class VersionFormatter{
      *
      * @param version
      *            the version
-     * @param httpConcatGlobalConfig
-     *            the http concat global config
      * @return 如果 version 没有值,那么直接返回<br>
      *         如果 version 有值,那么:<br>
      */
-    public static String format(String version,HttpConcatGlobalConfig httpConcatGlobalConfig){
+    public static String format(String version){
         if (isNullOrEmpty(version)){
             return version;
         }
 
         //---------------------------------------------------------------
-        String versionEncode = httpConcatGlobalConfig.getVersionEncode();
+        String versionEncode = GLOBAL_CONFIG.getVersionEncode();
         if (isNullOrEmpty(versionEncode)){
             return version;
         }
