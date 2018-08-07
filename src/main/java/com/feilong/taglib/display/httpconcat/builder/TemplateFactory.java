@@ -47,7 +47,6 @@ public final class TemplateFactory{
      * 
      * @param type
      *            类型 {@link #TYPE_CSS} 以及{@link #TYPE_JS}
-     *
      * @return 目前仅支持 {@link #TYPE_CSS} 以及{@link #TYPE_JS},其余不支持,会抛出
      *         {@link UnsupportedOperationException}
      */
