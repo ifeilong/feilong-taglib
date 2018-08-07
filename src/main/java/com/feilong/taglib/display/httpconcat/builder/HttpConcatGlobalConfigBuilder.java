@@ -74,18 +74,24 @@ public final class HttpConcatGlobalConfigBuilder{
     private static HttpConcatGlobalConfig build(){
         HttpConcatGlobalConfig httpConcatGlobalConfig = new HttpConcatGlobalConfig();
 
+        //support
         httpConcatGlobalConfig.setHttpConcatSupport(getRequiredValue("httpconcat.support", Boolean.class));
+
+        //template
         httpConcatGlobalConfig.setTemplateCss(getRequiredValue("httpconcat.template.css", String.class));
         httpConcatGlobalConfig.setTemplateJs(getRequiredValue("httpconcat.template.js", String.class));
 
+        //cache
         httpConcatGlobalConfig.setDefaultCacheEnable(getRequiredValue("httpconcat.defaultCacheEnable", Boolean.class));
         httpConcatGlobalConfig.setDefaultCacheSizeLimit(getRequiredValue("httpconcat.defaultCacheSizeLimit", Integer.class));
 
+        //verson
         httpConcatGlobalConfig.setVersionEncode(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.encode"));
         httpConcatGlobalConfig.setVersionNameInScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.nameInScope"));
         httpConcatGlobalConfig.setVersionSearchScope(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.search.scope"));
         httpConcatGlobalConfig.setVersionAutoRefreshValue(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.version.autoRefresh.value"));
 
+        //domain
         httpConcatGlobalConfig.setDomain(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.domain"));
 
         if (LOGGER.isInfoEnabled()){

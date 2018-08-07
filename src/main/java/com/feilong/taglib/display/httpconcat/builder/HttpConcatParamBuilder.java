@@ -55,8 +55,7 @@ public final class HttpConcatParamBuilder{
         standardHttpConcatParam.setDomain(DomainFormatter.format(httpConcatParam.getDomain()));
         standardHttpConcatParam.setRoot(RootFormatter.format(httpConcatParam.getRoot()));
         standardHttpConcatParam.setType(TypeFormatter.format(httpConcatParam.getType(), itemSrcList));
-        standardHttpConcatParam
-                        .setVersion(VersionFormatter.format(httpConcatParam.getVersion()));
+        standardHttpConcatParam.setVersion(VersionFormatter.format(httpConcatParam.getVersion()));
 
         standardHttpConcatParam.setContent(httpConcatParam.getContent());
         standardHttpConcatParam.setHttpConcatSupport(httpConcatParam.getHttpConcatSupport());
