@@ -55,14 +55,16 @@ public final class ConcatLinkResolver{
      *            the item src list
      * @param httpConcatParam
      *            the http concat param
-     * @return the link
+     * @return 如果 <code>itemSrcList size==1</code>,那么直接渲染成普通的链接<br>
+     *         <code>itemSrcList</code>中有null或者empty元素,那么在渲染的时候,会忽略<br>
      * @since 1.11.1 change param order
      */
     public static String resolver(List<String> itemSrcList,HttpConcatParam httpConcatParam){
         // 只有一条,输出原生字符串
         if (itemSrcList.size() == 1){
-            LOGGER.debug("itemSrcList size==1,will generate primary [{}].", httpConcatParam.getType());
-            return resolver(itemSrcList.get(0), httpConcatParam);
+            String itemSrc = itemSrcList.get(0);
+            LOGGER.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, httpConcatParam.getType());
+            return resolver(itemSrc, httpConcatParam);
         }
 
         return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), httpConcatParam);
@@ -125,7 +127,7 @@ public final class ConcatLinkResolver{
             sb.append("?");
             sb.append(version);
         }else{
-            LOGGER.warn("HttpConcatParam version isNullOrEmpty,suggest you should set version value");
+            LOGGER.warn("HttpConcatParam version isNullOrEmpty,suggest you should set version value,StringBuilder info:[{}]", sb);
         }
     }
 }
