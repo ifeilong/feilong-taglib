@@ -54,6 +54,50 @@ public class ConcatLinkResolverTest{
     //---------------------------------------------------------------
 
     @Test
+    public void testDefaultPartition2(){
+        HttpConcatParam httpConcatParam = buildHttpConcatParam();
+
+        assertEquals(
+                        "http://www.feilong.com/??1.js,2.js,3.js,4.js,5.js,6.js,7.js,8.js,9.js\nhttp://www.feilong.com/??10.js,11.js,12.js\n",
+                        ConcatLinkResolver.resolver(
+                                        toList(
+                                                        "1.js",
+                                                        "2.js",
+                                                        "3.js",
+                                                        "4.js",
+                                                        "5.js",
+                                                        "6.js",
+                                                        "7.js",
+                                                        "8.js",
+                                                        "9.js",
+                                                        "10.js",
+                                                        "11.js",
+                                                        "12.js"),
+                                        httpConcatParam));
+    }
+
+    //---------------------------------------------------------------
+    @Test
+    public void testPartition(){
+        HttpConcatParam httpConcatParam = buildHttpConcatParam();
+
+        assertEquals(
+                        "http://www.feilong.com/??a.js,b.js\nhttp://www.feilong.com/??a/b.js,b/a.js\n",
+                        ConcatLinkResolver.resolverPartitionResult(toList("a.js", "b.js", "a/b.js", "b/a.js"), 2, httpConcatParam));
+    }
+
+    @Test
+    public void testPartition1(){
+        HttpConcatParam httpConcatParam = buildHttpConcatParam();
+
+        assertEquals(
+                        "http://www.feilong.com/??a.js,b.js\nhttp://www.feilong.com/a/b.js\n",
+                        ConcatLinkResolver.resolverPartitionResult(toList("a.js", "b.js", "a/b.js"), 2, httpConcatParam));
+    }
+
+    //---------------------------------------------------------------
+
+    @Test
     public void testNullElement(){
         HttpConcatParam httpConcatParam = buildHttpConcatParam();
 

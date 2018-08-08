@@ -16,6 +16,7 @@
 package com.feilong.taglib.display.httpconcat.builder;
 
 import static com.feilong.core.bean.ConvertUtil.convert;
+import static com.feilong.core.bean.ConvertUtil.toInteger;
 import static com.feilong.core.util.ResourceBundleUtil.getValue;
 
 import java.util.ResourceBundle;
@@ -93,6 +94,9 @@ public final class HttpConcatGlobalConfigBuilder{
 
         //domain
         httpConcatGlobalConfig.setDomain(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.domain"));
+
+        //autoPartitionSize
+        httpConcatGlobalConfig.setAutoPartitionSize(toInteger(getValue(HTTPCONCAT_RESOURCEBUNDLE, "httpconcat.autoPartitionSize")));
 
         if (LOGGER.isInfoEnabled()){
             LOGGER.info("init http concat config:[{}]", JsonUtil.format(httpConcatGlobalConfig));

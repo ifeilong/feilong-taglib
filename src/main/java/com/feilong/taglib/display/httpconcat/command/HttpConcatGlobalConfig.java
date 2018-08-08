@@ -23,14 +23,20 @@ package com.feilong.taglib.display.httpconcat.command;
  */
 public class HttpConcatGlobalConfig{
 
+    //----------------template-----------------------------------------------
+
     /** The template css. */
     private String  templateCss;
 
     /** The template js. */
     private String  templateJs;
 
+    //---------------------------------------------------------------
+
     /** 是否支持 HTTP_CONCAT (全局参数). */
     private Boolean httpConcatSupport;
+
+    //---------------cache------------------------------------------------
 
     /** 设置缓存是否开启. */
     private Boolean defaultCacheEnable;
@@ -52,7 +58,7 @@ public class HttpConcatGlobalConfig{
      */
     private int     defaultCacheSizeLimit;
 
-    //---------------------------------------------------------------
+    //----------------version-----------------------------------------------
 
     /**
      * 
@@ -111,6 +117,66 @@ public class HttpConcatGlobalConfig{
      * @since 1.11.1
      */
     private String  domain;
+
+    //----------------autoPartitionSize-----------------------------------------------
+
+    /**
+     * 自动分片大小.
+     * 
+     * <h3>功能及作用:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如下的代码
+     * </p>
+     * 
+     * <pre class="code">
+    
+    {@code 
+    
+    <feilongDisplay:httpConcat>
+        <script type="text/javascript" src="/resources/libs/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/iscroll/iscroll.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
+    
+        <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
+        <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
+    
+        <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/spice/js/kvScroll/jquery.kvScroll.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/swiper/js/swiper.min.js"></script>
+    
+        <script type="text/javascript" src="/resources/libs/spice/js/tinyscrollbar/jquery.tinyscrollbar.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/spice/js/dropdown/jquery.dropdown.min.js"></script>
+        <script type="text/javascript" src="/resources/libs/spice/js/lazyLoad/jquery.lazyLoad.min.js"></script>
+    
+    
+        <script type="text/javascript" src="/resources/js/common/MathContext.js"></script>
+        <script type="text/javascript" src="/resources/js/common/BigDecimal.js"></script>
+        <script type="text/javascript" src="/resources/js/common/common.js"></script>
+        <script type="text/javascript" src="/resources/js/common.js"></script>
+        <script type="text/javascript" src="/resources/js/common/currency.js"></script>
+        <script type="text/javascript" src="/resources/js/common/currencyforCoupon.js"></script>
+        <script type="text/javascript" src="/resources/js/common/i18nUtil.js"></script>
+        <script type="text/javascript" src="/resources/js/common/dateFormat.js"></script>
+        <script type="text/javascript" src="/resources/js/common/ajax-extend.js"></script>
+        <script type="text/javascript" src="/resources/js/common/ajax-abortOnRetry.js"></script>
+        <script type="text/javascript" src="/resources/js/common/header.js"></script>
+        <script type="text/javascript" src="/resources/js/scriptBridgenative.js"></script>
+        <script type="text/javascript" src="/resources/js/app-bridge.js"></script>
+    </feilongDisplay:httpConcat>
+    }
+     * </pre>
+     * 
+     * 直接拼接的结果会是 <b>??/resources/libs/jquery/jquery.min.js,/resources/js/common/MathContext.js,xxxxx</b> , concat数量会超过 nginx 默认的值 10个, 此时可以在
+     * httpconcat.properties 将 httpconcat.autoPartitionSize=9 设置合理值, 之后页面渲染会自动分片成 多段
+     * </blockquote>
+     * 
+     * @since 1.12.6
+     */
+    private Integer autoPartitionSize;
 
     //---------------------------------------------------------------
 
@@ -376,5 +442,128 @@ public class HttpConcatGlobalConfig{
      */
     public void setVersionAutoRefreshValue(String versionAutoRefreshValue){
         this.versionAutoRefreshValue = versionAutoRefreshValue;
+    }
+
+    /**
+     * 自动分片大小.
+     * 
+     * <h3>功能及作用:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如下的代码
+     * </p>
+     * 
+     * <pre class="code">
+     *     
+     *     {@code 
+     *     
+     *     <feilongDisplay:httpConcat>
+     *         <script type="text/javascript" src="/resources/libs/jquery/jquery.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/iscroll/iscroll.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
+     *         <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/kvScroll/jquery.kvScroll.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/swiper/js/swiper.min.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/spice/js/tinyscrollbar/jquery.tinyscrollbar.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/dropdown/jquery.dropdown.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/lazyLoad/jquery.lazyLoad.min.js"></script>
+     *     
+     *     
+     *         <script type="text/javascript" src="/resources/js/common/MathContext.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/BigDecimal.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/common.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/currency.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/currencyforCoupon.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/i18nUtil.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/dateFormat.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/ajax-extend.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/ajax-abortOnRetry.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/header.js"></script>
+     *         <script type="text/javascript" src="/resources/js/scriptBridgenative.js"></script>
+     *         <script type="text/javascript" src="/resources/js/app-bridge.js"></script>
+     *     </feilongDisplay:httpConcat>
+     *     }
+     * </pre>
+     * 
+     * 直接拼接的结果会是 <b>??/resources/libs/jquery/jquery.min.js,/resources/js/common/MathContext.js,xxxxx</b> , concat数量会超过 nginx 默认的值 10个, 此时可以在
+     * httpconcat.properties 将 httpconcat.autoPartitionSize=9 设置合理值, 之后页面渲染会自动分片成 多段
+     * </blockquote>
+     *
+     * @return the 自动分片大小
+     * @since 1.12.6
+     */
+    public Integer getAutoPartitionSize(){
+        return autoPartitionSize;
+    }
+
+    /**
+     * 自动分片大小.
+     * 
+     * <h3>功能及作用:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <p>
+     * 如下的代码
+     * </p>
+     * 
+     * <pre class="code">
+     *     
+     *     {@code 
+     *     
+     *     <feilongDisplay:httpConcat>
+     *         <script type="text/javascript" src="/resources/libs/jquery/jquery.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/iscroll/iscroll.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.min.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/jquery/jquery-ui-1.10.3.custom.js"></script>
+     *         <script type="text/javascript" src="/resources/js/loxia2/jquery.loxiacore-2.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/spice/js/placeholder/jquery.placeholder.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/jquery.spice.tools.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/kvScroll/jquery.kvScroll.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/swiper/js/swiper.min.js"></script>
+     *     
+     *         <script type="text/javascript" src="/resources/libs/spice/js/tinyscrollbar/jquery.tinyscrollbar.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/dropdown/jquery.dropdown.min.js"></script>
+     *         <script type="text/javascript" src="/resources/libs/spice/js/lazyLoad/jquery.lazyLoad.min.js"></script>
+     *     
+     *     
+     *         <script type="text/javascript" src="/resources/js/common/MathContext.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/BigDecimal.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/common.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/currency.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/currencyforCoupon.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/i18nUtil.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/dateFormat.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/ajax-extend.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/ajax-abortOnRetry.js"></script>
+     *         <script type="text/javascript" src="/resources/js/common/header.js"></script>
+     *         <script type="text/javascript" src="/resources/js/scriptBridgenative.js"></script>
+     *         <script type="text/javascript" src="/resources/js/app-bridge.js"></script>
+     *     </feilongDisplay:httpConcat>
+     *     }
+     * </pre>
+     * 
+     * 直接拼接的结果会是 <b>??/resources/libs/jquery/jquery.min.js,/resources/js/common/MathContext.js,xxxxx</b> , concat数量会超过 nginx 默认的值 10个, 此时可以在
+     * httpconcat.properties 将 httpconcat.autoPartitionSize=9 设置合理值, 之后页面渲染会自动分片成 多段
+     * </blockquote>
+     *
+     * @param autoPartitionSize
+     *            the new 自动分片大小
+     * @since 1.12.6
+     */
+    public void setAutoPartitionSize(Integer autoPartitionSize){
+        this.autoPartitionSize = autoPartitionSize;
     }
 }

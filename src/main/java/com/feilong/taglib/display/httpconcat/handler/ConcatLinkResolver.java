@@ -17,9 +17,12 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG;
+import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
+import static java.lang.System.lineSeparator;
 
 import java.util.List;
 
+import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,24 +54,61 @@ public final class ConcatLinkResolver{
     /**
      * 获得合并的链接.
      * 
+     * <p>
+     * 去重,删空等操作,已经在 {@link ItemSrcListResolver} 做过了
+     * </p>
+     *
      * @param itemSrcList
      *            the item src list
      * @param httpConcatParam
      *            the http concat param
      * @return 如果 <code>itemSrcList size==1</code>,那么直接渲染成普通的链接<br>
      *         <code>itemSrcList</code>中有null或者empty元素,那么在渲染的时候,会忽略<br>
+     * @see com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver
      * @since 1.11.1 change param order
      */
     public static String resolver(List<String> itemSrcList,HttpConcatParam httpConcatParam){
         // 只有一条,输出原生字符串
-        if (itemSrcList.size() == 1){
+        int itemSrcListSize = itemSrcList.size();
+        if (itemSrcListSize == 1){
             String itemSrc = itemSrcList.get(0);
             LOGGER.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, httpConcatParam.getType());
             return resolver(itemSrc, httpConcatParam);
         }
 
-        return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), httpConcatParam);
+        //---------------------------------------------------------------
+        Integer autoPartitionSize = GLOBAL_CONFIG.getAutoPartitionSize();
+        //不需要分片
+        if (null == autoPartitionSize || itemSrcListSize <= autoPartitionSize){
+            return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), httpConcatParam);
+        }
+        return resolverPartitionResult(itemSrcList, autoPartitionSize, httpConcatParam);
+    }
 
+    //---------------------------------------------------------------
+
+    /**
+     * Resolver partition result.
+     *
+     * @param itemSrcList
+     *            the item src list
+     * @param eachSublistSize
+     *            the a
+     * @param httpConcatParam
+     *            the http concat param
+     * @return the string
+     * @since 1.12.6
+     */
+    static String resolverPartitionResult(List<String> itemSrcList,Integer eachSublistSize,HttpConcatParam httpConcatParam){
+        //将 list 分成 N 份
+        List<List<String>> groupList = ListUtils.partition(itemSrcList, eachSublistSize);
+
+        StringBuilder sb = new StringBuilder();
+        for (List<String> list : groupList){
+            sb.append(resolver(list, httpConcatParam));
+            sb.append(lineSeparator());
+        }
+        return sb.toString();
     }
 
     //---------------------------------------------------------------
