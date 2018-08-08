@@ -17,12 +17,9 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.bean.ToStringConfig.IGNORE_NULL_OR_EMPTY_CONFIG;
-import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
-import static java.lang.System.lineSeparator;
 
 import java.util.List;
 
-import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,38 +74,7 @@ public final class ConcatLinkResolver{
         }
 
         //---------------------------------------------------------------
-        Integer autoPartitionSize = GLOBAL_CONFIG.getAutoPartitionSize();
-        //不需要分片
-        if (null == autoPartitionSize || itemSrcListSize <= autoPartitionSize){
-            return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), standardHttpConcatParam);
-        }
-        return resolverPartitionResult(itemSrcList, autoPartitionSize, standardHttpConcatParam);
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * Resolver partition result.
-     *
-     * @param itemSrcList
-     *            the item src list
-     * @param eachSublistSize
-     *            the a
-     * @param standardHttpConcatParam
-     *            the http concat param
-     * @return the string
-     * @since 1.12.6
-     */
-    static String resolverPartitionResult(List<String> itemSrcList,Integer eachSublistSize,HttpConcatParam standardHttpConcatParam){
-        //将 list 分成 N 份
-        List<List<String>> groupList = ListUtils.partition(itemSrcList, eachSublistSize);
-
-        StringBuilder sb = new StringBuilder();
-        for (List<String> list : groupList){
-            sb.append(resolver(list, standardHttpConcatParam));
-            sb.append(lineSeparator());
-        }
-        return sb.toString();
+        return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), standardHttpConcatParam);
     }
 
     //---------------------------------------------------------------
