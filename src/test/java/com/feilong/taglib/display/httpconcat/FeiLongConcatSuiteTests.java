@@ -27,6 +27,7 @@ import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParameteriz
 import com.feilong.taglib.display.httpconcat.handler.ItemSrcExtractorParseTest;
 import com.feilong.taglib.display.httpconcat.handler.RootFormatterParameterizedTest;
 import com.feilong.taglib.display.httpconcat.handler.TypeFormatterTest;
+import com.feilong.taglib.display.httpconcat.handler.VersionFormatterTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ //
@@ -43,6 +44,7 @@ import com.feilong.taglib.display.httpconcat.handler.TypeFormatterTest;
 
                 TemplateFactoryTest.class,
                 ConcatLinkResolverTest.class,
+                VersionFormatterTest.class,
         //                
 })
 public class FeiLongConcatSuiteTests{

@@ -60,29 +60,29 @@ public final class ConcatLinkResolver{
      *
      * @param itemSrcList
      *            the item src list
-     * @param httpConcatParam
+     * @param standardHttpConcatParam
      *            the http concat param
      * @return 如果 <code>itemSrcList size==1</code>,那么直接渲染成普通的链接<br>
      *         <code>itemSrcList</code>中有null或者empty元素,那么在渲染的时候,会忽略<br>
      * @see com.feilong.taglib.display.httpconcat.handler.ItemSrcListResolver
      * @since 1.11.1 change param order
      */
-    public static String resolver(List<String> itemSrcList,HttpConcatParam httpConcatParam){
+    public static String resolver(List<String> itemSrcList,HttpConcatParam standardHttpConcatParam){
         // 只有一条,输出原生字符串
         int itemSrcListSize = itemSrcList.size();
         if (itemSrcListSize == 1){
             String itemSrc = itemSrcList.get(0);
-            LOGGER.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, httpConcatParam.getType());
-            return resolver(itemSrc, httpConcatParam);
+            LOGGER.debug("itemSrcList:[{}], size==1,will generate primary [{}].", itemSrc, standardHttpConcatParam.getType());
+            return resolver(itemSrc, standardHttpConcatParam);
         }
 
         //---------------------------------------------------------------
         Integer autoPartitionSize = GLOBAL_CONFIG.getAutoPartitionSize();
         //不需要分片
         if (null == autoPartitionSize || itemSrcListSize <= autoPartitionSize){
-            return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), httpConcatParam);
+            return resolver("??" + ConvertUtil.toString(itemSrcList, IGNORE_NULL_OR_EMPTY_CONFIG), standardHttpConcatParam);
         }
-        return resolverPartitionResult(itemSrcList, autoPartitionSize, httpConcatParam);
+        return resolverPartitionResult(itemSrcList, autoPartitionSize, standardHttpConcatParam);
     }
 
     //---------------------------------------------------------------
@@ -94,18 +94,18 @@ public final class ConcatLinkResolver{
      *            the item src list
      * @param eachSublistSize
      *            the a
-     * @param httpConcatParam
+     * @param standardHttpConcatParam
      *            the http concat param
      * @return the string
      * @since 1.12.6
      */
-    static String resolverPartitionResult(List<String> itemSrcList,Integer eachSublistSize,HttpConcatParam httpConcatParam){
+    static String resolverPartitionResult(List<String> itemSrcList,Integer eachSublistSize,HttpConcatParam standardHttpConcatParam){
         //将 list 分成 N 份
         List<List<String>> groupList = ListUtils.partition(itemSrcList, eachSublistSize);
 
         StringBuilder sb = new StringBuilder();
         for (List<String> list : groupList){
-            sb.append(resolver(list, httpConcatParam));
+            sb.append(resolver(list, standardHttpConcatParam));
             sb.append(lineSeparator());
         }
         return sb.toString();
@@ -118,13 +118,13 @@ public final class ConcatLinkResolver{
      * 
      * @param itemSrc
      *            the src
-     * @param httpConcatParam
+     * @param standardHttpConcatParam
      *            the http concat param
      * @return the string
      * @since 1.11.1 rename
      */
-    public static String resolverNoConcatLink(String itemSrc,HttpConcatParam httpConcatParam){
-        return resolver(itemSrc, httpConcatParam);
+    public static String resolverNoConcatLink(String itemSrc,HttpConcatParam standardHttpConcatParam){
+        return resolver(itemSrc, standardHttpConcatParam);
     }
 
     //---------------------------------------------------------------
@@ -134,21 +134,21 @@ public final class ConcatLinkResolver{
      *
      * @param appendContent
      *            the append content
-     * @param httpConcatParam
+     * @param standardHttpConcatParam
      *            the http concat param
      * @return the string
      */
-    private static String resolver(String appendContent,HttpConcatParam httpConcatParam){
+    private static String resolver(String appendContent,HttpConcatParam standardHttpConcatParam){
         StringBuilder sb = new StringBuilder();
-        sb.append(httpConcatParam.getDomain());
-        sb.append(httpConcatParam.getRoot());
+        sb.append(standardHttpConcatParam.getDomain());
+        sb.append(standardHttpConcatParam.getRoot());
 
         //---------------------------------------------------------------
 
         sb.append(appendContent);
 
         //---------------------------------------------------------------
-        appendVersion(httpConcatParam.getVersion(), sb);
+        appendVersion(standardHttpConcatParam.getVersion(), sb);
         return sb.toString();
     }
 

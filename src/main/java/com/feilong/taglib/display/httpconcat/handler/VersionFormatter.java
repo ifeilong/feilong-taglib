@@ -17,6 +17,11 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder;
 
 /**
  * version 值格式化.
@@ -41,12 +46,14 @@ public final class VersionFormatter{
      *
      * @param version
      *            the version
-     * @return 如果 version 没有值,那么直接返回<br>
-     *         如果 version 有值,那么:<br>
+     * @return 如果 version 是null或者是 empty,那么直接返回 {@link StringUtils#EMPTY}<br>
+     *         如果 version 有值,判断 {@link HttpConcatGlobalConfigBuilder#GLOBAL_CONFIG} versionEncode 配置, 如果没有配置, 那么直接返回 version参数<br>
+     *         如果有值, 那么将调用 {@link VersionEncodeUtil#encode(String, String)}<br>
+     * @see com.feilong.taglib.display.httpconcat.handler.VersionEncodeUtil#encode(String, String)
      */
     public static String format(String version){
         if (isNullOrEmpty(version)){
-            return version;
+            return EMPTY;
         }
 
         //---------------------------------------------------------------
