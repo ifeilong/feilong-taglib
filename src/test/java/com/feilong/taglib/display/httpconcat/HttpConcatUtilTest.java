@@ -52,4 +52,16 @@ public class HttpConcatUtilTest extends BaseHttpConcatTest{
         httpConcatParam.setVersion("20140517");
         HttpConcatUtil.getWriteContent(httpConcatParam);
     }
+
+    @Test
+    public void testGetWriteContent12(){
+        HttpConcatParam httpConcatParam = new HttpConcatParam();
+        //        httpConcatParam.setType("js");
+        //        httpConcatParam.setRoot("/js/");
+        httpConcatParam.setHttpConcatSupport(true);
+        httpConcatParam.setContent("<script type=\"text/javascript\" src=\"//img.mapemall.com/resources/js/plp.js\"></script>");
+        httpConcatParam.setDomain("//img.mapemall.com");
+
+        LOGGER.debug(HttpConcatUtil.getWriteContent(httpConcatParam));
+    }
 }

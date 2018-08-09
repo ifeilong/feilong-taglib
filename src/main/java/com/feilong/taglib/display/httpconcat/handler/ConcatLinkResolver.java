@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.lang.StringUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -90,6 +91,17 @@ public final class ConcatLinkResolver{
      * @since 1.11.1 rename
      */
     public static String resolverNoConcatLink(String itemSrc,HttpConcatParam standardHttpConcatParam){
+        String domain = standardHttpConcatParam.getDomain();
+        String root = standardHttpConcatParam.getRoot();
+
+        //前面有值
+        boolean hasPre = isNotNullOrEmpty(domain) || isNotNullOrEmpty(root);
+        if (hasPre){
+            //如果是以 itemSrc 单斜杆开头,去掉开头的单斜杆
+            if (itemSrc.startsWith("/")){
+                return resolver(StringUtil.substring(itemSrc, 1), standardHttpConcatParam);
+            }
+        }
         return resolver(itemSrc, standardHttpConcatParam);
     }
 
