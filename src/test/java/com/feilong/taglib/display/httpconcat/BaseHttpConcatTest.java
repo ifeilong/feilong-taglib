@@ -33,6 +33,10 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  */
 public abstract class BaseHttpConcatTest{
 
+    protected static final String vmFloder = "/Users/feilong/workspace/feilong/feilong-taglib/src/test/resources/velocity/";
+
+    //---------------------------------------------------------------
+
     /**
      * 获得 http concat param.
      *
@@ -61,6 +65,8 @@ public abstract class BaseHttpConcatTest{
         httpConcatParam1.setVersion("20140517");
         return httpConcatParam1;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * @return
