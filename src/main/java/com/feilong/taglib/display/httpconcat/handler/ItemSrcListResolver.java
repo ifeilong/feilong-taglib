@@ -17,6 +17,7 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
+import static java.util.Collections.emptyList;
 import static org.apache.commons.lang3.StringUtils.LF;
 
 import java.util.ArrayList;
@@ -57,41 +58,57 @@ public final class ItemSrcListResolver{
      *            the domain
      * @return 如果 <code>blockContent</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>blockContent</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         使用换行符,转成字符串数组,如果 <code>数组</code> 是null或者是empty,抛出 {@link IllegalArgumentException}<br>
      * @since 1.11.1 remove type param
      */
     public static List<String> resolve(String blockContent,String domain){
         Validate.notBlank(blockContent, "blockContent can't be blank!");
 
         //---------------------------------------------------------------
+        //可能有内容, 数组不是null或者empty
         String[] items = StringUtil.split(blockContent.trim(), LF);
         int length = items.length;
-
-        //---------------------------------------------------------------
         List<String> list = new ArrayList<>(length);
         for (int i = 0; i < length; ++i){
             String item = items[i];
-            if (isNullOrEmpty(item)){// 忽视空行
+
+            //是否忽略
+            if (isIgnore(item)){
                 continue;
             }
 
             //---------------------------------------------------------------
-
-            //since 1.11.1
-            //<!-- 公共 CSS 部分开始 -->
-            if (item.trim().startsWith("<!--")){// 忽视html注释行
-                continue;
-            }
-
-            //---------------------------------------------------------------
-            String itemSrc = ItemSrcExtractor.extract(item, domain);
-            if (isNullOrEmpty(itemSrc)){
-                LOGGER.warn("item parse result is null or empty,[{}]", item);
-                continue;
-            }
-
-            list.add(itemSrc);
+            list.add(ItemSrcExtractor.extract(item, domain));
+        }
+        //---------------------------------------------------------------
+        if (isNullOrEmpty(list)){
+            return emptyList();
         }
         return rework(blockContent, list);
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 是否忽略.
+     * 
+     * @param item
+     * @return
+     * @since 1.12.8
+     */
+    private static boolean isIgnore(String item){
+        if (isNullOrEmpty(item)){// 忽视空行
+            return true;
+        }
+
+        //---------------------------------------------------------------
+
+        //since 1.11.1
+        //<!-- 公共 CSS 部分开始 -->
+        if (item.trim().startsWith("<!--")){// 忽视html注释行
+            return true;
+        }
+        return false;
     }
 
     //---------------------------------------------------------------

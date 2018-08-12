@@ -91,8 +91,8 @@ public final class HttpConcatUtil{
      * @param httpConcatParam
      *            the http concat param
      * @return
-     *         如果 <code>httpConcatParam</code> 是null,抛出 {@link NullPointerException}<br>
      *         <ul>
+     *         <li>如果 <code>httpConcatParam</code> 是null,抛出 {@link NullPointerException}</li>
      *         <li>如果 isNullOrEmpty httpConcatParam.getItemSrcList() ,返回 {@link StringUtils#EMPTY}</li>
      *         <li>如果支持 concat,那么生成concat字符串</li>
      *         <li>如果不支持 concat,那么生成多行js/css 原生的字符串</li>
@@ -123,9 +123,11 @@ public final class HttpConcatUtil{
         //---------------------------------------------------------------
         List<String> itemSrcList = ItemSrcListResolver.resolve(httpConcatParam.getContent(), httpConcatParam.getDomain());
         if (isNullOrEmpty(itemSrcList)){
-            LOGGER.warn(
-                            "itemSrcList isNullOrEmpty,need itemSrcList to create links,return [empty],httpConcatParam info:[{}]",
-                            JsonUtil.format(httpConcatParam));
+            if (LOGGER.isWarnEnabled()){
+                LOGGER.warn(
+                                "need itemSrcList to create links but isNullOrEmpty,return [empty],httpConcatParam info:[{}]",
+                                JsonUtil.format(httpConcatParam));
+            }
             return EMPTY;
         }
 
