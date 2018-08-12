@@ -16,6 +16,8 @@
 
 package com.feilong.taglib;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.lang3.Validate;
@@ -100,5 +102,39 @@ public final class TagUtils{
         }
 
         return PageContext.PAGE_SCOPE;
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * Find attribute value.
+     * 
+     * @param <T>
+     *
+     * @param pageContext
+     *            the page context
+     * @param attributeName
+     *            the version name in scope
+     * @param scope
+     *            the version search scope
+     * @return 如果 <code>pageContext</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.12.8
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T findAttributeValue(PageContext pageContext,String attributeName,String scope){
+        Validate.notNull(pageContext, "pageContext can't be null!");
+        Validate.notBlank(attributeName, "attributeName can't be blank!");
+
+        //---------------------------------------------------------------
+
+        //没有指定scope 那么从pageContext中查找
+        if (isNullOrEmpty(scope)){
+            return (T) pageContext.findAttribute(attributeName);
+        }
+
+        //如果指定了, 那么从指定的scope中获取
+        return (T) pageContext.getAttribute(attributeName, TagUtils.getScope(scope));
     }
 }

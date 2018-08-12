@@ -72,7 +72,8 @@ public class VersionRebuilder{
      *
      * @param versionValue
      *            the version value
-     * @return the string
+     * @return 如果 <code>versionValue</code> 等于全局配置的参数值,那么每次自动刷新,适用于开发环境<br>
+     *         否则原样返回
      */
     static String doWithAutoRefresh(String versionValue){
         String versionAutoRefreshValue = GLOBAL_CONFIG.getVersionAutoRefreshValue();
@@ -115,15 +116,7 @@ public class VersionRebuilder{
 
         //---------------------------------------------------------------
         String versionSearchScope = GLOBAL_CONFIG.getVersionSearchScope();
-
-        String versionValue = "";
-        //没有指定scope 那么从pageContext中查找
-        if (isNullOrEmpty(versionSearchScope)){
-            versionValue = (String) pageContext.findAttribute(versionNameInScope);
-        }else{
-            //如果指定了, 那么从指定的scope中获取
-            versionValue = (String) pageContext.getAttribute(versionNameInScope, TagUtils.getScope(versionSearchScope));
-        }
+        String versionValue = TagUtils.findAttributeValue(pageContext, versionNameInScope, versionSearchScope);
 
         //---------------------------------------------------------------
         //如果找不到值, 那么返回 empty
