@@ -536,7 +536,7 @@ public class PagerParams implements Serializable,CacheParam{
         //因为这些字段通常是私有的,该方法中,reflectionHashCode,使用AccessibleObject.setAccessible改变字段的可见性.
         //这点会在一个安全管理器失败,除非相应的权限设置是否正确.
         //它也比明确地测试速度较慢. 
-        //HashCodeBuilder.reflectionHashCode(this);
+        //HashCodeBuilder.reflectionHashCode(this)
         //---------------------------------------------------------------
         //你选择一个硬编码,随机选择,不为零,奇数 
         //理想情况下 每个类不同
@@ -581,7 +581,7 @@ public class PagerParams implements Serializable,CacheParam{
         //存在使用反射来确定测试中的字段的方法.因为这些字段通常是私有的,该方法中,reflectionEquals,使用AccessibleObject.setAccessible改变字段的可见性.
         //这点会在一个安全管理器失败,除非相应的权限设置是否正确.
         //它也比明确地测试速度较慢. 
-        //EqualsBuilder.reflectionEquals(this, obj);
+        //EqualsBuilder.reflectionEquals(this, obj)
 
         PagerParams pagerParams = (PagerParams) obj;
         EqualsBuilder equalsBuilder = new EqualsBuilder();

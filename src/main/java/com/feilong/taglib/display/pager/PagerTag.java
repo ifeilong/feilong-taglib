@@ -155,13 +155,15 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
     private Integer           maxShowPageNo                     = PagerConstants.DEFAULT_LIMITED_MAX_PAGENO;
 
     /**
-     * 设置{@link Locale} 环境, 支持 {@link java.util.Locale} 或 {@link String} 类型的实例 .
-     *
+     * 设置{@link Locale} 环境, 支持 {@link java.util.Locale} 或 {@link String} 类型的实例.
+     * 
      * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#value
      * @see org.apache.taglibs.standard.tag.common.fmt.SetLocaleSupport#parseLocale(String, String)
      * @see org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport#parseLocale
      * @see org.apache.taglibs.standard.tag.rt.fmt.ParseNumberTag#setParseLocale(Object)
      * @see org.apache.taglibs.standard.tag.rt.fmt.ParseDateTag#setParseLocale(Object)
+     * @see com.feilong.taglib.display.LocaleSupportUtil#toLocal(Object, HttpServletRequest)
+     * @see com.feilong.core.bean.ConvertUtil#toLocale(Object)
      * @since 1.0.5
      * @since 1.7.2 change Object type
      */
@@ -400,6 +402,8 @@ public class PagerTag extends AbstractStartWriteContentTag implements LocaleSupp
      *
      * @param locale
      *            the locale to set
+     * @see com.feilong.taglib.display.LocaleSupportUtil#toLocal(Object, HttpServletRequest)
+     * @see com.feilong.core.bean.ConvertUtil#toLocale(Object)
      */
     @Override
     public void setLocale(Object locale){
