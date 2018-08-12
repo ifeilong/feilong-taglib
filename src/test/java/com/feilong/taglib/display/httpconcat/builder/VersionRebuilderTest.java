@@ -15,11 +15,11 @@
  */
 package com.feilong.taglib.display.httpconcat.builder;
 
+import static com.feilong.core.bean.ConvertUtil.toLong;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -28,15 +28,14 @@ import org.slf4j.LoggerFactory;
  */
 public class VersionRebuilderTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(VersionRebuilderTest.class);
-
     @Test
     public void test(){
-        assertEquals("aa", VersionRebuilder.doWithAutoRefresh("aaa"));
+        assertEquals("aaa", VersionRebuilder.doWithAutoRefresh("aaa"));
     }
 
     @Test
     public void test1(){
-        LOGGER.debug(VersionRebuilder.doWithAutoRefresh("default_Version_Maven_Install_Will_Replace"));
+        String doWithAutoRefresh = VersionRebuilder.doWithAutoRefresh("default_Version_Maven_Install_Will_Replace");
+        assertTrue(toLong(doWithAutoRefresh) > 1534094489181L);
     }
 }
