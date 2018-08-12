@@ -15,6 +15,7 @@
  */
 package com.feilong.taglib.display.httpconcat;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static java.lang.System.lineSeparator;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.core.bean.ToStringConfig;
+import com.feilong.io.IOReaderUtil;
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
 /**
@@ -34,6 +36,17 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 public abstract class BaseHttpConcatTest{
 
     protected static final String vmFloder = "/Users/feilong/workspace/feilong/feilong-taglib/src/test/resources/velocity/";
+
+    //---------------------------------------------------------------
+
+    /**
+     * @param filePath
+     * @return
+     * @since 1.12.8
+     */
+    protected static String read(String filePath){
+        return IOReaderUtil.readFileToString(vmFloder + filePath, UTF8);
+    }
 
     //---------------------------------------------------------------
 

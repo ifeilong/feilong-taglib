@@ -112,10 +112,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
         //---------------------------------------------------------------
         // 开始执行的部分
         Object writeContent = this.buildContent(request);
-        if (isCacheTag){
-            if (isNotNullOrEmpty(writeContent)){
-                SimpleTagStringCacheManager.put(cacheKey, writeContent);
-            }
+        if (isCacheTag && isNotNullOrEmpty(writeContent)){
+            SimpleTagStringCacheManager.put(cacheKey, writeContent);
         }
         return writeContent;
     }
@@ -157,6 +155,8 @@ abstract class AbstractWriteContentTag extends BaseTag{
             throw new UncheckedIOException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 将文字输出到页面.

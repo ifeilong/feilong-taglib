@@ -15,23 +15,27 @@
  */
 package com.feilong.taglib;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.junit.Test;
 
-import com.feilong.taglib.display.httpconcat.FeiLongConcatSuiteTests;
-import com.feilong.taglib.display.sensitive.FeiLongSensitiveUtilSuiteTests;
+/**
+ * 
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.12.8
+ */
+public class TagUtilsTest{
 
-@RunWith(Suite.class)
-@SuiteClasses({ //
+    @Test(expected = NullPointerException.class)
+    public void testTagUtilsTestNull(){
+        TagUtils.getScope(null);
+    }
 
-                FeiLongSensitiveUtilSuiteTests.class,
-                FeiLongConcatSuiteTests.class,
+    @Test(expected = IllegalArgumentException.class)
+    public void testTagUtilsTestEmpty(){
+        TagUtils.getScope("");
+    }
 
-                TagUtilsTest.class,
-                TagUtilsParameterizedTest.class,
-        //                
-})
-public class FeiLongTaglibSuiteTests{
-
+    @Test(expected = IllegalArgumentException.class)
+    public void testTagUtilsTestBlank(){
+        TagUtils.getScope(" ");
+    }
 }

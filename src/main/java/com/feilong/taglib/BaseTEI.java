@@ -95,12 +95,12 @@ public abstract class BaseTEI extends TagExtraInfo{
 
     //---------------------------------------------------------------
 
-    /**
-     * @deprecated JSP 2.0 and higher containers call validate() instead of isValid()
-     */
-    @Override
-    @Deprecated
-    public boolean isValid(TagData tagData){
-        return super.isValid(tagData);
-    }
+    //    /**
+    //     * @deprecated JSP 2.0 and higher containers call validate() instead of isValid()
+    //     */
+    //    @Override
+    //    @Deprecated
+    //    public boolean isValid(TagData tagData){
+    //        return super.isValid(tagData);
+    //    }
 }
