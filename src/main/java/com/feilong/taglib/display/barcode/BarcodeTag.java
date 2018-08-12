@@ -66,27 +66,36 @@ import com.feilong.tools.barcode.BarcodeConfig;
 public class BarcodeTag extends AbstractStartWriteContentTag{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID     = 7891625772743297912L;
+    private static final long   serialVersionUID     = 7891625772743297912L;
+
+    /**
+     * 默认路径.
+     * 
+     * @since 1.12.8
+     */
+    private static final String DEFAULT_SERVLET_PATH = "/feilongbarcode";
 
     //---------------------------------------------------------------
     /** 用来标识唯一的barcode,这样同一个页面如果出现不同的barcode不会冲突. */
-    private String            barcodeId;
+    private String              barcodeId;
 
     /** 生成二维码的内容,如果不设置默认是当前请求的url地址. */
-    private String            contents;
+    private String              contents;
 
     /** Barcode 宽度,默认是300. */
-    private Integer           width                = 300;
+    private Integer             width                = 300;
 
     /** Barcode 高度,默认是300. */
-    private Integer           height               = 300;
+    private Integer             height               = 300;
+
+    //---------------------------------------------------------------
 
     /**
      * 指定边距,单位像素 .
      * 
      * @see com.google.zxing.EncodeHintType#MARGIN
      */
-    private Integer           encodeHintTypeMargin = 1;
+    private Integer             encodeHintTypeMargin = 1;
 
     //---------------------------------------------------------------
 
@@ -144,8 +153,7 @@ public class BarcodeTag extends AbstractStartWriteContentTag{
         Map<String, String> paramsMap = newHashMap();
         paramsMap.put(BarcodeRequestParams.BARCODE_ID, barcodeId);
 
-        String servletPath = "/feilongbarcode";
-        return request.getContextPath() + servletPath + "?" + ParamUtil.toQueryStringUseSingleValueMap(paramsMap);
+        return request.getContextPath() + DEFAULT_SERVLET_PATH + "?" + ParamUtil.toQueryStringUseSingleValueMap(paramsMap);
     }
 
     /**
