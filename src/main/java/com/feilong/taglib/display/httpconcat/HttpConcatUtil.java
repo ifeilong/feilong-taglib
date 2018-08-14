@@ -106,7 +106,7 @@ public final class HttpConcatUtil{
 
         //---------------------------------------------------------------
         //是否使用cache
-        Boolean cacheEnable = GLOBAL_CONFIG.getDefaultCacheEnable();
+        boolean cacheEnable = GLOBAL_CONFIG.getDefaultCacheEnable();
         if (cacheEnable){
             int cacheSize = CACHE.size();
             int cacheKeyHashCode = httpConcatParam.hashCode();
@@ -152,7 +152,7 @@ public final class HttpConcatUtil{
      * @return true, if is write cache
      * @since 1.11.1
      */
-    private static boolean isWriteCache(Boolean cacheEnable,HttpConcatParam httpConcatParam){
+    private static boolean isWriteCache(boolean cacheEnable,HttpConcatParam httpConcatParam){
         if (!cacheEnable){
             return false;
         }

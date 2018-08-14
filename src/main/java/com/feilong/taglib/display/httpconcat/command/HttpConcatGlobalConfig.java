@@ -38,8 +38,12 @@ public class HttpConcatGlobalConfig{
 
     //---------------cache------------------------------------------------
 
-    /** 设置缓存是否开启. */
-    private Boolean defaultCacheEnable;
+    /**
+     * 设置缓存是否开启.
+     * 
+     * @since 1.12.8 change to boolean from Boolean
+     */
+    private boolean defaultCacheEnable;
 
     /**
      * cache size 限制,仅当 {@link #DEFAULT_CACHEENABLE}开启生效, 当cache数达到 {@link #DEFAULT_CACHESIZELIMIT},将不会再缓存结果
@@ -237,12 +241,15 @@ public class HttpConcatGlobalConfig{
         this.httpConcatSupport = httpConcatSupport;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 default cache enable.
      *
      * @return the defaultCacheEnable
+     * @since 1.12.8 change to boolean from Boolean
      */
-    public Boolean getDefaultCacheEnable(){
+    public boolean getDefaultCacheEnable(){
         return defaultCacheEnable;
     }
 
@@ -251,10 +258,13 @@ public class HttpConcatGlobalConfig{
      *
      * @param defaultCacheEnable
      *            the defaultCacheEnable to set
+     * @since 1.12.8 change to boolean from Boolean
      */
-    public void setDefaultCacheEnable(Boolean defaultCacheEnable){
+    public void setDefaultCacheEnable(boolean defaultCacheEnable){
         this.defaultCacheEnable = defaultCacheEnable;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * cache size 限制,仅当 {@link #defaultCacheEnable}开启生效, 当cache数达到 {@link #defaultCacheEnable},将不会再缓存结果

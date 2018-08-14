@@ -21,6 +21,7 @@ import static com.feilong.core.util.ResourceBundleUtil.getValue;
 
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +84,8 @@ public final class HttpConcatGlobalConfigBuilder{
         httpConcatGlobalConfig.setTemplateJs(getRequiredValue("httpconcat.template.js", String.class));
 
         //cache
-        httpConcatGlobalConfig.setDefaultCacheEnable(getRequiredValue("httpconcat.defaultCacheEnable", Boolean.class));
+        httpConcatGlobalConfig
+                        .setDefaultCacheEnable(BooleanUtils.toBoolean(getRequiredValue("httpconcat.defaultCacheEnable", Boolean.class)));
         httpConcatGlobalConfig.setDefaultCacheSizeLimit(getRequiredValue("httpconcat.defaultCacheSizeLimit", Integer.class));
 
         //verson
