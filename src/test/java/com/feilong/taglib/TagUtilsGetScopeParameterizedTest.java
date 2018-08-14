@@ -23,7 +23,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
 
-public class TagUtilsParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class TagUtilsGetScopeParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
 
     @Parameters(name = "index:{index}: TagUtils.getScope({0})={1}")
     public static Iterable<Object[]> data(){

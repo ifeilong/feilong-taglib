@@ -120,6 +120,8 @@ public final class TagUtils{
      * @return 如果 <code>pageContext</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>attributeName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>scope</code> 是null或者 blank,将会调用 {@link javax.servlet.jsp.JspContext#findAttribute(String)}<br>
+     *         如果 <code>scope</code> 不是null或者 blank,将会调用 {@link javax.servlet.jsp.JspContext#getAttribute(String, int)}<br>
      * @since 1.12.8
      */
     @SuppressWarnings("unchecked")

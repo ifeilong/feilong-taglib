@@ -15,7 +15,6 @@
  */
 package com.feilong.taglib;
 
-import org.apache.taglibs.standard.lang.jstl.test.PageContextImpl;
 import org.junit.Test;
 
 /**
@@ -23,29 +22,7 @@ import org.junit.Test;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.12.8
  */
-public class TagUtilsTest{
-
-    @Test(expected = NullPointerException.class)
-    public void testTagUtilsTestNullPageContext(){
-        TagUtils.findAttributeValue(null, null, "request");
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testTagUtilsTestNullFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), null, "request");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTagUtilsTestEmptyFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), "", "request");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testTagUtilsTestBlankFindAttributeValue(){
-        TagUtils.findAttributeValue(new PageContextImpl(), " ", "request");
-    }
-
-    //---------------------------------------------------------------
+public class TagUtilsGetScopeTest{
 
     @Test(expected = NullPointerException.class)
     public void testTagUtilsTestNull(){

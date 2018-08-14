@@ -28,8 +28,10 @@ import com.feilong.taglib.display.sensitive.FeiLongSensitiveUtilSuiteTests;
                 FeiLongSensitiveUtilSuiteTests.class,
                 FeiLongConcatSuiteTests.class,
 
-                TagUtilsTest.class,
-                TagUtilsParameterizedTest.class,
+                TagUtilsFindAttributeValueTest.class,
+
+                TagUtilsGetScopeTest.class,
+                TagUtilsGetScopeParameterizedTest.class,
         //                
 })
 public class FeiLongTaglibSuiteTests{
