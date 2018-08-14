@@ -85,6 +85,7 @@ public abstract class BaseTEI extends TagExtraInfo{
      */
     protected static Map<String, Object> getTagDataAttributeMap(TagData tagData){
         Map<String, Object> map = new TreeMap<>();
+
         Enumeration<String> attributes = tagData.getAttributes();
         while (attributes.hasMoreElements()){
             String key = attributes.nextElement();
@@ -92,15 +93,4 @@ public abstract class BaseTEI extends TagExtraInfo{
         }
         return map;
     }
-
-    //---------------------------------------------------------------
-
-    //    /**
-    //     * @deprecated JSP 2.0 and higher containers call validate() instead of isValid()
-    //     */
-    //    @Override
-    //    @Deprecated
-    //    public boolean isValid(TagData tagData){
-    //        return super.isValid(tagData);
-    //    }
 }
