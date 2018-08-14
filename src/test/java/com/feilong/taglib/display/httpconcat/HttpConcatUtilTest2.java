@@ -18,6 +18,8 @@ package com.feilong.taglib.display.httpconcat;
 import static com.feilong.taglib.display.httpconcat.HttpConcatUtil.getWriteContent;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
 
@@ -27,20 +29,14 @@ import com.feilong.taglib.display.httpconcat.command.HttpConcatParam;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.7
  */
-public class HttpConcatUtilTest extends BaseHttpConcatTest{
+public class HttpConcatUtilTest2 extends BaseHttpConcatTest{
 
-    /**
-     * Test get write content1.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testGetWriteContent1(){
-        HttpConcatParam httpConcatParam = new HttpConcatParam();
-        httpConcatParam.setType("js");
-        httpConcatParam.setRoot("/js/");
-        httpConcatParam.setHttpConcatSupport(true);
-        httpConcatParam.setContent(null);
-        httpConcatParam.setVersion("20140517");
-        getWriteContent(httpConcatParam);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(HttpConcatUtilTest2.class);
+
+    @Test
+    public void testGetWriteContent(){
+        HttpConcatParam httpConcatParam = super.getHttpConcatParam();
+        LOGGER.debug(getWriteContent(httpConcatParam));
     }
-
 }

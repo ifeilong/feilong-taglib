@@ -28,6 +28,8 @@ public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneRe
     @Parameters(name = "index:{index}: ItemSrcExtractor.extract({0},{1})={2}")
     public static Iterable<Object[]> data(){
         Object[][] objects = new Object[][] { //
+
+                                              //replace domain
                                               {
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
                                                 "http://css.feilong.com:8888/",
@@ -36,7 +38,13 @@ public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneRe
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888//res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
                                                 "http://css.feilong.com:8888//",
                                                 "res/feilong/css/feilong-all.css" },
+                                              {
+                                                "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css\" type=\"text/css\"></link>",
+                                                "http://css.feilong.com:8888",
+                                                "res/feilong/css/feilong-all.css" },
 
+                                              //---------------------------------------------------------------
+                                              //css
                                               {
                                                 "<link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css?version=12345666\" type=\"text/css\"></link>",
                                                 "http://css.feilong.com:8888/",
@@ -47,8 +55,20 @@ public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneRe
                                                 "http://css.feilong.com:8888/",
                                                 "res/feilong/css/feilong-all.css" },
 
+                                              //space
+                                              {
+                                                " <link rel=\"stylesheet\" href=\"http://css.feilong.com:8888/res/feilong/css/feilong-all.css?version=12345666\" type=\"text/css\"></link>",
+                                                "http://css.feilong.com:8888/",
+                                                "res/feilong/css/feilong-all.css" },
+
+                                              {
+                                                "<link rel=\"stylesheet\" href=\"res/feilong/css/feilong-all.css?version=12345666\" type=\"text/css\"></link> ",
+                                                "http://css.feilong.com:8888/",
+                                                "res/feilong/css/feilong-all.css" },
+
                                               //---------------------------------------------------------------
 
+                                              //js
                                               {
                                                 "<script type=\"text/javascript\" src=\"scripts/pdp/sub_salesProperties.js?2015\"></script>",
                                                 "http://css.feilong.com:8888/",
@@ -58,6 +78,34 @@ public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneRe
                                                 "<script type=\"text/javascript\" src=\"http://css.feilong.com:8888/scripts/pdp/sub_salesProperties.js?2015\"></script>",
                                                 "http://css.feilong.com:8888/",
                                                 "scripts/pdp/sub_salesProperties.js" },
+
+                                              //space
+                                              {
+                                                " <script type=\"text/javascript\" src=\"scripts/pdp/sub_salesProperties.js?2015\"></script>",
+                                                "http://css.feilong.com:8888/",
+                                                "scripts/pdp/sub_salesProperties.js" },
+
+                                              {
+                                                "<script type=\"text/javascript\" src=\"http://css.feilong.com:8888/scripts/pdp/sub_salesProperties.js?2015\"></script> ",
+                                                "http://css.feilong.com:8888/",
+                                                "scripts/pdp/sub_salesProperties.js" },
+
+                                              //---------------------------------------------------------------
+
+                                              //no link, no script
+                                              {
+                                                "http://css.feilong.com:8888/scripts/pdp/sub_salesProperties.js",
+                                                "http://css.feilong.com:8888/",
+                                                "http://css.feilong.com:8888/scripts/pdp/sub_salesProperties.js" },
+                                              {
+                                                "scripts/pdp/sub_salesProperties.js",
+                                                "http://css.feilong.com:8888/",
+                                                "scripts/pdp/sub_salesProperties.js" },
+
+                                              { "/scripts/pdp/sub_salesProperties.js", "", "/scripts/pdp/sub_salesProperties.js" },
+                                              { "//scripts/pdp/sub_salesProperties.js", "", "//scripts/pdp/sub_salesProperties.js" },
+                                              { " /scripts/pdp/sub_salesProperties.js", "", "/scripts/pdp/sub_salesProperties.js" },
+                                              { "//scripts/pdp/sub_salesProperties.js ", "", "//scripts/pdp/sub_salesProperties.js" },
                 //
         };
 

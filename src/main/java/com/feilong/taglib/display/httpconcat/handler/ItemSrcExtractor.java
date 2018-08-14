@@ -15,12 +15,14 @@
  */
 package com.feilong.taglib.display.httpconcat.handler;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 
+import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.RegexUtil;
 
 /**
@@ -43,22 +45,13 @@ public class ItemSrcExtractor{
     /**
      * 解析 <code>item</code> 里面的内容.
      * 
-     * <ul>
-     * <li><code>item</code> 不能是 blank</li>
-     * <li>如果 <code>item</code> 以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
-     * <li>如果 <code>item</code> 以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容</li>
-     * <li>如果都不是,那么直接 trim <code>item</code> 并返回</li>
-     * </ul>
-     * 
      * <h3>示例1:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * item     =   {@code <script type="text/javascript" src="scripts/pdp/sub_salesProperties.js?2015"></script>}
      * domain   =   http://css.feilong.com:8888
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -75,11 +68,9 @@ public class ItemSrcExtractor{
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * item     =   {@code <link rel="stylesheet" href="http://css.feilong.com:8888/res/feilong/css/feilong-all.css?version=12345666" type=
     "text/css"></link>}
      * domain   =   http://css.feilong.com:8888/
-     * 
      * </pre>
      * 
      * <b>返回:</b>
@@ -96,6 +87,10 @@ public class ItemSrcExtractor{
      *            the domain
      * @return 如果 <code>item</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>item</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>item</code> 以 {@code "<link "} 开头,那么将提取href 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容<br>
+     *         如果 <code>item</code> 以 {@code "<script "} 开头,那么将提取src 里面的内容,并且去除 domain, 去除 {@code ?} 后面的部分内容<br>
+     *         如果都不是,那么直接 trim <code>item</code> 并返回<br>
+     * 
      * @since 1.11.1 remove type param
      */
     static String extract(String item,String domain){
@@ -159,6 +154,12 @@ public class ItemSrcExtractor{
         }
 
         //---------------------------------------------------------------
+        //since 1.12.8
+        //前面有值
+        //如果是以 itemSrc 单斜杆开头,去掉开头的单斜杆
+        if (isNotNullOrEmpty(domain) && value.startsWith("/")){
+            return StringUtil.substring(value, 1);
+        }
 
         return value;
     }

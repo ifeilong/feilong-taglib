@@ -82,8 +82,15 @@ public final class ItemSrcListResolver{
         }
         //---------------------------------------------------------------
         if (isNullOrEmpty(list)){
+            if (LOGGER.isWarnEnabled()){
+                LOGGER.warn(
+                                "list isNullOrEmpty,need list to create links,now return emptyList(),blockContent info:[{}],domain:[{}]",
+                                blockContent,
+                                domain);
+            }
             return emptyList();
         }
+
         return rework(blockContent, list);
     }
 
@@ -108,6 +115,7 @@ public final class ItemSrcListResolver{
         if (item.trim().startsWith("<!--")){// 忽视html注释行
             return true;
         }
+
         return false;
     }
 
@@ -127,14 +135,10 @@ public final class ItemSrcListResolver{
      * @return the list
      */
     private static List<String> rework(String blockContent,List<String> itemSrcList){
+        Validate.notEmpty(itemSrcList, "itemSrcList can't be null/empty!");
+
         // 去重,元素不重复
         List<String> noRepeatItemList = removeDuplicate(itemSrcList);
-
-        //---------------------------------------------------------------
-        if (isNullOrEmpty(noRepeatItemList)){
-            LOGGER.warn("the param noRepeatitemList isNullOrEmpty,need noRepeatitemList to create links");
-            return null;
-        }
 
         //---------------------------------------------------------------
         int noRepeatitemListSize = noRepeatItemList.size();
