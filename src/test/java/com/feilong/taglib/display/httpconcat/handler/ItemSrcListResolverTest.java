@@ -15,8 +15,10 @@
  */
 package com.feilong.taglib.display.httpconcat.handler;
 
+import static java.util.Collections.emptyList;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
@@ -54,6 +56,12 @@ public class ItemSrcListResolverTest extends BaseHttpConcatTest{
     public void testEmptyLinesTrim(){
         List<String> list = ItemSrcListResolver.resolve(read("concat-empty-line-trim.vm"), "http://www.feilong.com");
         assertThat(list, allOf(hasItem("a.js"), hasItem("b.js")));
+    }
+
+    @Test
+    public void testEmptyLinesTrim1(){
+        List<String> list = ItemSrcListResolver.resolve(read("concat-empty-comment.vm"), "http://www.feilong.com");
+        assertEquals(emptyList(), list);
     }
 
     //---------------------------------------------------------------

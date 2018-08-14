@@ -17,7 +17,9 @@ package com.feilong.taglib.display.httpconcat.handler;
 
 import org.junit.Test;
 
-public class ItemSrcExtractorParseTest{
+import com.feilong.taglib.display.httpconcat.BaseHttpConcatTest;
+
+public class ItemSrcExtractorParseTest extends BaseHttpConcatTest{
 
     @Test(expected = NullPointerException.class)
     public void testItemSrcListResolverTestItemNull(){
