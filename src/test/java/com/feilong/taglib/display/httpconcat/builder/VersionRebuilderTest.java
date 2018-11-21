@@ -45,4 +45,5 @@ public class VersionRebuilderTest{
         String version = "123456";
         assertEquals(version, VersionRebuilder.rebuild(version, new PageContextImpl()));
     }
+
 }
