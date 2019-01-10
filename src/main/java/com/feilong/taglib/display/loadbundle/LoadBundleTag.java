@@ -25,7 +25,31 @@ import com.feilong.taglib.display.SimpleTagParamCacheManager;
 
 /**
  * 将i18n配置文件,转成map,加载到request 作用域, 实现国际化功能,简化开发.
- *
+ * 
+ * <h3>示例:</h3>
+ * 
+ * <blockquote>
+ * <p>
+ * 适用于 需要做国际化的 一组单选框或者复选框,我们以教育水平 (大学,高中,小学等)为例:
+ * </p>
+ * 
+ * <pre>
+{@code
+    <feilongDisplay:loadBundle var="educationMap" baseName="i18n/education" />
+
+    <c:forEach var="educationEntry" items="}${educationMap }{@code">
+        <feilong:isContains value="}${educationEntry.key }{@code" collection="}${paramValues['educationCheckbox1'] }{@code">
+            <input name="educationCheckbox1" type="checkbox" value="}${educationEntry.key }{@code" checked="checked" />
+        </feilong:isContains>
+        <feilong:isNotContains value="}${educationEntry.key }" collection="${paramValues['educationCheckbox1'] }"{@code>
+            <input name="educationCheckbox1" type="checkbox" value="}${educationEntry.key }{@code" />
+        </feilong:isNotContains>
+        }${educationEntry.value }&nbsp;{@code
+        
+    </c:forEach>
+}
+ * </pre>
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.taglibs.standard.tag.rt.fmt.BundleTag
  * @see org.apache.taglibs.standard.tag.rt.fmt.SetBundleTag
