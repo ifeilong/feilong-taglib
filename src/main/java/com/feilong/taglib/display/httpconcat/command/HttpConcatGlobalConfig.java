@@ -309,10 +309,9 @@ public class HttpConcatGlobalConfig{
      * 
      * httpconcat version 作用域里面变量名字.
      * 
-     * <p>
-     * 
-     * // # 如果没有配置或者是空,那么不会去作用域中查找<br>
-     * // httpconcat.version.nameInScope=httpconcatVersion
+     * <p style="color:green">
+     * # 如果没有配置或者是空,那么不会去作用域中查找<br>
+     * httpconcat.version.nameInScope=httpconcatVersion
      * </p>
      * 
      * @return the versionNameInScope
@@ -326,10 +325,9 @@ public class HttpConcatGlobalConfig{
      * 
      * httpconcat version 作用域里面变量名字.
      * 
-     * <p>
-     * 
-     * // # 如果没有配置或者是空,那么不会去作用域中查找<br>
-     * // httpconcat.version.nameInScope=httpconcatVersion
+     * <p style="color:green">
+     * # 如果没有配置或者是空,那么不会去作用域中查找<br>
+     * httpconcat.version.nameInScope=httpconcatVersion
      * </p>
      * 
      * @param versionNameInScope
@@ -343,9 +341,9 @@ public class HttpConcatGlobalConfig{
     /**
      * version 名字在哪个作用域.
      * 
-     * <p>
-     * // # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
-     * // httpconcat.version.search.scope=
+     * <p style="color:green">
+     * # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
+     * httpconcat.version.search.scope=
      * </p>
      * 
      * @return the versionSearchScope
@@ -358,9 +356,9 @@ public class HttpConcatGlobalConfig{
     /**
      * version 名字在哪个作用域.
      * 
-     * <p>
-     * // # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
-     * // httpconcat.version.search.scope=
+     * <p style="color:green">
+     * # 如果没有值那么会依次从系列作用域中去找值 page request session application<br>
+     * httpconcat.version.search.scope=
      * </p>
      * 
      * @param versionSearchScope
@@ -374,7 +372,7 @@ public class HttpConcatGlobalConfig{
     /**
      * version值的加密格式,值可以是 md5 或者sha1 (忽视大小写).
      * 
-     * <p>
+     * <p style="color:green">
      * # 如果没有配置, 那么显示原样内容<br>
      * # 如果需要这个功能, 需要依赖 feilong-security jar<br>
      * httpconcat.version.encode=
@@ -390,7 +388,7 @@ public class HttpConcatGlobalConfig{
     /**
      * version值的加密格式,值可以是 md5 或者sha1 (忽视大小写).
      * 
-     * <p>
+     * <p style="color:green">
      * # 如果没有配置, 那么显示原样内容<br>
      * # 如果需要这个功能, 需要依赖 feilong-security jar<br>
      * httpconcat.version.encode=

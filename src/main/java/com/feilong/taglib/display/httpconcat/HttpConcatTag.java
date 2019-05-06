@@ -178,8 +178,10 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
     }
 
     /**
-     * Sets the 根目录<br>
+     * Sets the 根目录.
+     * <p>
      * 如果设置root为'/script' 会拼成http://staging.
+     * </p>
      * 
      * @param root
      *            the new 根目录<br>

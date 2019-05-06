@@ -60,9 +60,7 @@ public class VersionRebuilder{
      * @return the string
      */
     public static String rebuild(String version,PageContext pageContext){
-        //如果 version 不是null 或者empty 原样返回
         String versionValue = build(version, pageContext);
-
         return doWithAutoRefresh(versionValue);
     }
 
@@ -102,7 +100,7 @@ public class VersionRebuilder{
      * @return 如果 <code>version</code> 不是null 或者empty 原样返回
      */
     private static String build(String version,PageContext pageContext){
-        //不是空 那么直接返回
+        //如果 version 不是null 或者empty 原样返回
         if (isNotNullOrEmpty(version)){
             return version;
         }
