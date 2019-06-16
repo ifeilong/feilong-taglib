@@ -23,11 +23,14 @@ import com.feilong.core.lang.EnumUtil;
 
 /**
  * 敏感字类型.
+ * 
+ * <p>
+ * 0513-8677****
+ * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.1
  */
-//0513-8677****
 public enum SensitiveType{
 
     /** 手机号码. */
@@ -38,7 +41,6 @@ public enum SensitiveType{
             //前三位,后四位,其他隐藏<例子:138******1234>
             return toArray(3, 4);
         }
-
     },
 
     /** 中文姓名. */

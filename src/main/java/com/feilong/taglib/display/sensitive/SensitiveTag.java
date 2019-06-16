@@ -84,6 +84,8 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 6402308838024650287L;
 
+    //---------------------------------------------------------------
+
     /** 待mask字符串. */
     private String            value;
 
@@ -107,7 +109,7 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
     @Override
     protected Object buildContent(HttpServletRequest request){
         Validate.notBlank(type, "type can not null or blank");
-
+        //---------------------------------------------------------------
         if (isNullOrEmpty(value)){
             return value;
         }
