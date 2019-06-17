@@ -45,7 +45,7 @@ public abstract class BaseHttpConcatTest{
      * @since 1.12.8
      */
     protected static String read(String filePath){
-        return IOReaderUtil.readFileToString(vmFloder + filePath, UTF8);
+        return IOReaderUtil.readToString(vmFloder + filePath, UTF8);
     }
 
     //---------------------------------------------------------------
