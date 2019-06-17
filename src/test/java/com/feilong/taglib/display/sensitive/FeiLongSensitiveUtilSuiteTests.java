@@ -29,7 +29,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 SensitiveUtilAddressParameterizedTest.class,
                 SensitiveUtilChineseNameParameterizedTest.class,
                 SensitiveUtilEmailParameterizedTest.class,
+
                 SensitiveUtilMobileParameterizedTest.class,
+                SensitiveUtilMobile33ParameterizedTest.class,
+
                 SensitiveUtilTest.class,
         //                
 })

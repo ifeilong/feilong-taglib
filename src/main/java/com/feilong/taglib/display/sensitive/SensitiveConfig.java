@@ -15,6 +15,8 @@
  */
 package com.feilong.taglib.display.sensitive;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * 敏感词配置相关.
  *
@@ -23,56 +25,67 @@ package com.feilong.taglib.display.sensitive;
  */
 public class SensitiveConfig{
 
-    /** 敏感词类型. */
-    private SensitiveType sensitiveType;
+    /**
+     * 敏感词类型.
+     * 
+     * @since 1.13.3
+     */
+    private String type;
 
     /** 掩码字符,比如*,#等,默认是*. */
-    private char          maskChar = '*';
+    private char   maskChar = '*';
 
     //---------------------------------------------------------------
     /**
      * Instantiates a new sensitive config.
      *
-     * @param sensitiveType
-     *            敏感词类型
+     * @param type
+     *            the type
      */
-    public SensitiveConfig(SensitiveType sensitiveType){
-        this.sensitiveType = sensitiveType;
+    public SensitiveConfig(String type){
+        this.type = type;
+    }
+
+    /**
+     * Instantiates a new sensitive config.
+     *
+     * @param type
+     *            the type
+     * @param maskChar
+     *            掩码字符,比如*,#等,默认是*
+     */
+    public SensitiveConfig(String type, char maskChar){
+        this.type = type;
+        this.maskChar = maskChar;
     }
 
     /**
      * Instantiates a new sensitive config.
      *
      * @param sensitiveType
-     *            敏感词类型
+     *            the sensitive type
+     */
+    //---------------------------------------------------------------
+    public SensitiveConfig(SensitiveType sensitiveType){
+        Validate.notNull(sensitiveType, "sensitiveType can't be null!");
+        this.type = sensitiveType.getType();
+    }
+
+    /**
+     * Instantiates a new sensitive config.
+     *
+     * @param sensitiveType
+     *            the sensitive type
      * @param maskChar
      *            掩码字符,比如*,#等,默认是*
      */
     public SensitiveConfig(SensitiveType sensitiveType, char maskChar){
-        this.sensitiveType = sensitiveType;
+        Validate.notNull(sensitiveType, "sensitiveType can't be null!");
+        this.type = sensitiveType.getType();
         this.maskChar = maskChar;
     }
 
     //---------------------------------------------------------------
-
-    /**
-     * 获得 敏感词类型.
-     *
-     * @return the 敏感词类型
-     */
-    public SensitiveType getSensitiveType(){
-        return sensitiveType;
-    }
-
-    /**
-     * 设置 敏感词类型.
-     *
-     * @param sensitiveType
-     *            the new 敏感词类型
-     */
-    public void setSensitiveType(SensitiveType sensitiveType){
-        this.sensitiveType = sensitiveType;
-    }
 
     /**
      * 获得 掩码字符,比如*,#等,默认是*.
@@ -91,5 +104,26 @@ public class SensitiveConfig{
      */
     public void setMaskChar(char maskChar){
         this.maskChar = maskChar;
+    }
+
+    /**
+     * 获得 敏感词类型.
+     *
+     * @return the type
+     * @since 1.13.3
+     */
+    public String getType(){
+        return type;
+    }
+
+    /**
+     * 设置 敏感词类型.
+     *
+     * @param type
+     *            the type to set
+     * @since 1.13.3
+     */
+    public void setType(String type){
+        this.type = type;
     }
 }

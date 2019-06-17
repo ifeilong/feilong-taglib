@@ -134,8 +134,9 @@ public enum SensitiveType{
      *
      * @param value
      *            the value
-     * @return 如果返回返回true ,不mask
+     * @return 不mask 返回 true ; 否则返回 false
      */
+    @SuppressWarnings("static-method")
     protected boolean isNoNeedMask(@SuppressWarnings("unused") String value){
         return false;
     }

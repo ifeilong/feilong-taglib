@@ -26,11 +26,9 @@ import org.junit.Test;
  */
 public class SensitiveUtilTest{
 
-    //---------------------------------------------------------------
-
     @Test(expected = NullPointerException.class)
     public void testParseNullSensitiveConfigType(){
-        SensitiveUtil.parse("赵云", new SensitiveConfig(null, '#'));
+        SensitiveUtil.parse("赵云", new SensitiveConfig((SensitiveType) null, '#'));
     }
 
     //---------------------------------------------------------------

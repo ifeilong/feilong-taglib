@@ -77,6 +77,7 @@ import com.feilong.taglib.AbstractStartWriteContentTag;
  * @see <a href="https://www.owasp.org/index.php/Top_10_2013-Top_10">Top_10_2013-Top_10</a>
  * @see <a href="http://www.owasp.org.cn/owasp-project/download/mobile-top-10-2013-2">OWASP Top 10 – 2013(新版)</a>
  * @see <a href="https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure">A6-Sensitive_Data_Exposure</a>
+ * @see SensitiveType
  * @since 1.10.1
  */
 public class SensitiveTag extends AbstractStartWriteContentTag{
@@ -113,8 +114,7 @@ public class SensitiveTag extends AbstractStartWriteContentTag{
         if (isNullOrEmpty(value)){
             return value;
         }
-        SensitiveType sensitiveType = SensitiveType.toSensitiveType(type);
-        return SensitiveUtil.parse(value, new SensitiveConfig(sensitiveType, maskChar));
+        return SensitiveUtil.parse(value, new SensitiveConfig(type, maskChar));
     }
 
     //---------------------------------------------------------------
