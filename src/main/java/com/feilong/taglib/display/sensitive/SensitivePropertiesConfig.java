@@ -22,9 +22,6 @@ import static com.feilong.core.util.ResourceBundleUtil.toMap;
 
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.feilong.core.lang.StringUtil;
 
 /**
@@ -35,19 +32,10 @@ import com.feilong.core.lang.StringUtil;
  */
 public final class SensitivePropertiesConfig{
 
-    /** The Constant LOGGER. */
-    private static final Logger              LOGGER               = LoggerFactory.getLogger(SensitivePropertiesConfig.class);
-
-    //---------------------------------------------------------------
-
-    /**
-     * <code>{@value}</code>.
-     */
+    /** <code>{@value}</code>. */
     private static final Map<String, String> SENSITIVE_CONFIG_MAP = toMap(getResourceBundle("config/sensitive"));
 
-    /**
-     * The Constant PREFIX.
-     */
+    /** The Constant PREFIX. */
     private static final String              PREFIX               = "sensitive.";
 
     //---------------------------------------------------------------
