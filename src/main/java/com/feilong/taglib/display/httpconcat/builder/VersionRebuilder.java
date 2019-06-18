@@ -17,10 +17,9 @@ package com.feilong.taglib.display.httpconcat.builder;
 
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.taglib.display.httpconcat.builder.HttpConcatGlobalConfigBuilder.GLOBAL_CONFIG;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-
-import java.util.Date;
 
 import javax.servlet.jsp.PageContext;
 
@@ -79,7 +78,7 @@ public class VersionRebuilder{
 
         //当version 值是指定value的时候,每次自动变
         if (isNotNullOrEmpty(versionAutoRefreshValue) && StringUtils.equals(versionValue, versionAutoRefreshValue)){
-            long time = DateUtil.getTime(new Date());
+            long time = DateUtil.getTime(now());
 
             String result = "" + time;
             LOGGER.debug("versionAutoRefreshValue config:[{}],new value is:[{}]", versionAutoRefreshValue, result);

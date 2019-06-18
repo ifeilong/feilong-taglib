@@ -18,6 +18,7 @@ package com.feilong.taglib;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.IOException;
@@ -64,7 +65,7 @@ abstract class AbstractWriteContentTag extends BaseTag{
      * Execute.
      */
     protected void execute(){
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         HttpServletRequest request = getHttpServletRequest();
 

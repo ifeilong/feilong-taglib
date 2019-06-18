@@ -16,11 +16,11 @@
 package com.feilong.taglib.display.sitemap;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.util.CollectionsUtil.newArrayList;
 import static com.feilong.core.util.MapUtil.newHashMap;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +53,7 @@ public class SiteMapURLTest{
         List<SiteMapURL> siteMapURLList = newArrayList();
         SiteMapURL siteMapURL = new SiteMapURL();
         siteMapURL.setChangefreq(ChangeFreq.daily);
-        siteMapURL.setLastmod(new Date());
+        siteMapURL.setLastmod(now());
         siteMapURL.setLoc(
                         "http://www.example.com/?>>> >>>>>>>>>>>><<<<<<<<<<<<<<<<<&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&'''''''''''''''''''''");
         siteMapURL.setPriority(0.5f);
