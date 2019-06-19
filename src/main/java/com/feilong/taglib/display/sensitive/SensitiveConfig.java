@@ -28,7 +28,7 @@ public class SensitiveConfig{
     /**
      * 敏感词类型.
      * 
-     * @since 1.13.3
+     * @since 1.14.0
      */
     private String type;
 
@@ -110,7 +110,7 @@ public class SensitiveConfig{
      * 获得 敏感词类型.
      *
      * @return the type
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public String getType(){
         return type;
@@ -121,7 +121,7 @@ public class SensitiveConfig{
      *
      * @param type
      *            the type to set
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public void setType(String type){
         this.type = type;

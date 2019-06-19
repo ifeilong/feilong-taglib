@@ -76,7 +76,7 @@ public final class SensitiveUtil{
         Validate.notNull(sensitiveConfig, "sensitiveConfig can't be null!");
 
         //---------------------------------------------------------------
-        //since 1.13.3
+        //since 1.14.0
         String type = sensitiveConfig.getType();
         Validate.notBlank(type, "type can't be blank!");
 
@@ -106,7 +106,7 @@ public final class SensitiveUtil{
      * @param maskChar
      *            the mask char
      * @return the string
-     * @since 1.13.3
+     * @since 1.14.0
      */
     private static String parseWithEnum(String value,SensitiveConfig sensitiveConfig,String type,char maskChar){
         SensitiveType sensitiveType = SensitiveType.toSensitiveType(type);
@@ -135,7 +135,7 @@ public final class SensitiveUtil{
      * @param maskChar
      *            the mask char
      * @return the string
-     * @since 1.13.3
+     * @since 1.14.0
      */
     private static String parse(String value,Integer[] leftAndRightNoMaskLengths,char maskChar){
         //左边不需要mask的长度
@@ -161,7 +161,7 @@ public final class SensitiveUtil{
      * @param rightNoMaskLength
      *            the right no mask length
      * @return the string
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static String parse(String value,char maskChar,int leftNoMaskLength,int rightNoMaskLength){
         if (LOGGER.isDebugEnabled()){
