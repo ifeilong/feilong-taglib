@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:mobile="http://www.baidu.com/schemas/sitemap-mobile/1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+	#*
+	<url>
+		<loc>http://www.converse.com.cn/men.htm</loc>
+		<lastmod>2014-05-07</lastmod>
+		<changefreq>weekly</changefreq>
+		<priority>1.0</priority>
+	</url>
+	*#
+
+	#foreach($siteMapURL in $siteMapURLList)
+	#if(${siteMapURL})
+	<url>
+		#if("$!{siteMapURL.formatLoc}"!="")
+		<loc>${siteMapURL.formatLoc}</loc>
+		#end
+
+		#* 必填,用来告诉搜索引擎这是一个自适应页面 *#
+		<mobile:mobile type="pc,mobile" />
+
+		## 用来指定该链接的最后更新时间
+		#if("$!{siteMapURL.formatLastmod}"!="")
+		<lastmod>${siteMapURL.formatLastmod}</lastmod>
+		#end
+
+		## 用来指定此链接相对于其他链接的优先权比值，此值定于0.0-1.0之间
+		#if("$!{siteMapURL.changefreq}"!="")
+		<changefreq>${siteMapURL.changefreq}</changefreq>
+		#end
+
+		## 用这个标签告诉此链接可能会出现的更新频率
+		#if("$!{siteMapURL.priority}"!="")
+		<priority>${siteMapURL.priority}</priority>
+		#end
+	</url>
+	#end
+	#end
+</urlset>

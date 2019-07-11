@@ -28,8 +28,11 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.date.DateUtil;
 
 /**
- * robots.txt 里面定义的 sitemap.xml url list部分 <br>
+ * robots.txt 里面定义的 sitemap.xml url list部分.
+ * 
+ * <p>
  * 示例参考:
+ * </p>
  * 
  * <pre class="code">
  * {@code
@@ -106,29 +109,41 @@ import com.feilong.core.date.DateUtil;
  * @see org.apache.commons.lang3.text.translate.EntityArrays
  * @since 1.0.7
  */
-public class SiteMapURL implements Serializable{
+public class SiteMapEntity implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 288232184048495608L;
 
+    //---------------------------------------------------------------
+
     /**
-     * (required)页面的url<br>
-     * 这个url必须以协议 protocol (比如 http) 开头,并且 以 斜杆 a trailing slash 结尾<br>
-     * 这个值必须< 2,048 个字符. <br>
+     * (required)页面的url.
+     * 
+     * <p>
+     * 这个url必须以协议 protocol (比如 http) 开头,并且以斜杆 a trailing slash 结尾<br>
+     * 这个值必须小于 2,048 个字符.
+     * </p>
      */
     private String            loc;
 
     /**
-     * (optional)The date of last modification of the file,文件的最后修改时间<br>
+     * (optional)The date of last modification of the file,文件的最后修改时间.
+     * 
+     * <p>
      * 应该使用 W3C Datetime 格式<br>
      * 使用YYYY-MM-DD格式<br>
      * 注意,这个tag和服务器端返回的header里面的If-Modified-Since (304)参数是不同的, 并且搜索引擎可能使用不同的信息.
+     * </p>
      */
     private Date              lastmod;
 
     /**
-     * (optional)这个页面变更的频率情况 <br>
+     * (optional)这个页面变更的频率情况.
+     * 
+     * <p>
      * 这个值提供基本信息给搜索引擎 ,并且搜索引擎可能不准确的按照这个参数走.<br>
+     * </p>
+     * 
      * 有效值:
      * <ul>
      * <li>always(每次访问都不一样,使用这个参数 describe documents that change each time they are accessed)</li>
@@ -152,10 +167,12 @@ public class SiteMapURL implements Serializable{
     private ChangeFreq        changefreq;
 
     /**
-     * (optional)相对于你其他的页面,这个页面的权重<br>
+     * (optional)相对于你其他的页面,这个页面的权重.
      * 
+     * <p>
      * 有效值范围 0.0 to 1.0 <br>
      * 页面默认的权重是 0.5<br>
+     * </p>
      * 
      * <p>
      * 这个值不会影响你的页面和其他站点的比较-它只是让搜索引擎哪些页面的抓取你认为是最重要的.<br>
@@ -182,8 +199,11 @@ public class SiteMapURL implements Serializable{
     public String getFormatLoc() throws IllegalArgumentException{
         Validate.notBlank(loc, "loc can't be blank!");
         String formatLoc = StringEscapeUtils.escapeXml(loc);
+
+        //---------------------------------------------------------------
+
         int length = formatLoc.length();
-        Validate.isTrue(length < 2048, "formatLoc's length:" + length + " can't >= 2048!");
+        Validate.isTrue(length < 2048, "formatLoc's length:[%s] can't >= 2048!,loc:%s", length, loc);
         return formatLoc;
     }
 

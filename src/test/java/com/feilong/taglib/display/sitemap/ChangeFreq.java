@@ -16,8 +16,12 @@
 package com.feilong.taglib.display.sitemap;
 
 /**
- * 这个页面变更的频率情况 <br>
+ * 这个页面变更的频率情况.
+ * 
+ * <p>
  * 这个值提供基本信息给搜索引擎 ,并且搜索引擎可能不准确的按照这个参数走.<br>
+ * </p>
+ * 
  * 有效值:
  * <ul>
  * <li>always(每次访问都不一样,使用这个参数 describe documents that change each time they are accessed)</li>
@@ -41,23 +45,23 @@ package com.feilong.taglib.display.sitemap;
 public enum ChangeFreq{
 
     /** 每次访问都不一样,使用这个参数 describe documents that change each time they are accessed. */
-    always,
+    ALWAYS,
 
     /** The hourly. */
-    hourly,
+    HOURLY,
 
     /** The daily. */
-    daily,
+    DAILY,
 
     /** The weekly. */
-    weekly,
+    WEEKLY,
 
     /** The monthly. */
-    monthly,
+    MONTHLY,
 
     /** The yearly. */
-    yearly,
+    YEARLY,
 
     /** 用来形容 archived URLs 归档url/历史url. */
-    never
+    NEVER
 }
