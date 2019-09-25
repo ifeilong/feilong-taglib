@@ -44,7 +44,7 @@ taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-pl
 
 	....
 	<properties>
-		<version.feilong-platform>2.0.0</version.feilong-platform>
+		<version.feilong-platform>2.0.1</version.feilong-platform>
 		....
 	</properties>
 	
@@ -83,7 +83,7 @@ taglib jar你可以直接在 [仓库]( https://github.com/venusdrogon/feilong-pl
 
 	....
 	<properties>
-		<version.feilong-platform>2.0.0</version.feilong-platform>
+		<version.feilong-platform>2.0.1</version.feilong-platform>
 		....
 	</properties>
 
