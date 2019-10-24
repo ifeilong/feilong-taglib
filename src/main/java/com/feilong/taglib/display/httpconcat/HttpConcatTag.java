@@ -140,7 +140,8 @@ public class HttpConcatTag extends AbstractEndWriteContentTag implements CacheTa
      */
     @Override
     public String buildCacheTagKey(){
-        return StringUtils.join(type, rebuildDomain, root, rebuildVersion, httpConcatSupport, bodyContent.getString());
+        //since 2.0.2 fix https://github.com/venusdrogon/feilong-taglib/issues/71
+        return StringUtils.join(type, domain, root, version, httpConcatSupport, bodyContent.getString());
     }
 
     //---------------------------------------------------------------
