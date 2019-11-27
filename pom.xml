@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.feilong.platform</groupId>
 		<artifactId>parent</artifactId>
-		<version>2.0.2</version>
+		<version>2.0.3</version>
 	</parent>
 
 	<artifactId>feilong-taglib</artifactId>
