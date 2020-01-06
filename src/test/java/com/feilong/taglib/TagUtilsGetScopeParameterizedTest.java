@@ -21,9 +21,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
-public class TagUtilsGetScopeParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, Integer>{
+public class TagUtilsGetScopeParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, Integer>{
 
     @Parameters(name = "index:{index}: TagUtils.getScope({0})={1}")
     public static Iterable<Object[]> data(){

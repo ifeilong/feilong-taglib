@@ -21,9 +21,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractTwoParamsAndOneResultParameterizedTest;
+import com.feilong.test.Abstract2ParamsAndResultParameterizedTest;
 
-public class ItemSrcExtractorParameterizedTest extends AbstractTwoParamsAndOneResultParameterizedTest<String, String, String>{
+public class ItemSrcExtractorParameterizedTest extends Abstract2ParamsAndResultParameterizedTest<String, String, String>{
 
     @Parameters(name = "index:{index}: ItemSrcExtractor.extract({0},{1})={2}")
     public static Iterable<Object[]> data(){

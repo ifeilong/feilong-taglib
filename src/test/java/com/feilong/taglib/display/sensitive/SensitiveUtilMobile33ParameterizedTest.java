@@ -22,14 +22,14 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.1
  */
-public class SensitiveUtilMobile33ParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class SensitiveUtilMobile33ParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     private static final SensitiveConfig SENSITIVECONFIG = new SensitiveConfig("mobile33");
 

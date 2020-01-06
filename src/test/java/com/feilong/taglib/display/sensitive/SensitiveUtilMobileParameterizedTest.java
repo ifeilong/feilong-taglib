@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 import static com.feilong.core.bean.ConvertUtil.toList;
 
@@ -30,7 +30,7 @@ import static com.feilong.core.bean.ConvertUtil.toList;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.1
  */
-public class SensitiveUtilMobileParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class SensitiveUtilMobileParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     private static final SensitiveConfig SENSITIVECONFIG = new SensitiveConfig(SensitiveType.MOBILE);
 

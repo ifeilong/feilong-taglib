@@ -24,14 +24,14 @@ import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
 /**
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.10.5
  */
-public class DomainFormatterParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class DomainFormatterParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DomainFormatterParameterizedTest.class);
 
