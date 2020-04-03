@@ -128,9 +128,7 @@ public class BarcodeServlet extends HttpServlet{
             ServletOutputStream outputStream = response.getOutputStream();
             BarcodeEncodeUtil.encode(barcodeContentsAndConfig.getContents(), outputStream, barcodeContentsAndConfig.getBarcodeConfig());
         }catch (IOException e){
-            String message = Slf4jUtil.format("barcodeContentsAndConfig:{}", JsonUtil.format(barcodeContentsAndConfig));
-            LOGGER.error(message, e);
-            throw new UncheckedIOException(message, e);
+            throw new UncheckedIOException(Slf4jUtil.format("barcodeContentsAndConfig:{}", JsonUtil.format(barcodeContentsAndConfig)), e);
         }
     }
 }
